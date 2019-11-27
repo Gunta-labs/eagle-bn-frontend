@@ -9,7 +9,7 @@ class App extends React.Component {
 				<Switch>
 					<Route exact path='/login' component={Login} />
 					<Route path='/'>
-						<p> hellow world </p>
+						<p className='text-center'> hellow world </p>
 					</Route>
 				</Switch>
 			</Router>
