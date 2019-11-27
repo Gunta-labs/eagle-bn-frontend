@@ -1,5 +1,7 @@
-import { combineReducers } from './node_modules/redux';
+import { combineReducers } from 'redux';
 
-const allReducers = combineReducers();
+const allReducers = combineReducers({
+	initialState: [],
+});
 
 export default allReducers;
