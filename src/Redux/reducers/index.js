@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 const allReducers = combineReducers({
-	initialState: [],
+	initial: [],
 });
 
 export default allReducers;
