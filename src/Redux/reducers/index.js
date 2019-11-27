@@ -1,5 +1,8 @@
-import { combineReducers } from './node_modules/redux';
+import { combineReducers } from 'redux';
+import LoginReducer from './loginReducer';
 
-const allReducers = combineReducers();
+const allReducers = combineReducers({
+	login: LoginReducer,
+});
 
 export default allReducers;
