@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "serve -s ./build",
+    "test":"jest --watchAll",
     "build": "webpack --mode=production --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode=development --config webpack.config.dev.js --hot",
     "dev:open": "webpack-dev-server --mode=development --config  webpack.config.dev.js --open --hot",
@@ -43,6 +44,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.9.0",
     "preset-react": "^1.0.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.0",
