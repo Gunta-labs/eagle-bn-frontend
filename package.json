@@ -8,7 +8,9 @@
     "build": "webpack --mode=production --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode=development --config webpack.config.dev.js --hot",
     "dev:open": "webpack-dev-server --mode=development --config  webpack.config.dev.js --open --hot",
-    "eslint-check": "eslint --print-config src/* | eslint-config-prettier-check"
+    "eslint-check": "eslint --print-config src/* | eslint-config-prettier-check",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,10 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-links": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6",
     "babel": "^6.23.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
