@@ -1,27 +1,15 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "extends": ["react-app", "prettier"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2018
-    },
-    "plugins": [
-        "react", "prettier"
-    ],
-    "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "printWidth": 80,
-                "trailingComma": "es5",
-                "semi": true,
-                "jsxSingleQuote": true,
-                "singleQuote": true,
-                "useTabs": true
-            }
-        ]
-    }
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"extends": ["react-app", "prettier", "prettier/react"],
+	"parserOptions": {
+		"ecmaVersion": 2018
+	},
+	"plugins": ["react", "prettier"],
+	"rules": {
+		"prettier/prettier": "error"
+	},
+	"parser": "babel-eslint"
 }
