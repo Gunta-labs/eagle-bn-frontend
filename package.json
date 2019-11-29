@@ -32,6 +32,7 @@
   "scripts": {
     "start": "serve -s ./build",
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "build": "webpack --mode=production --config webpack.config.prod.js",
     "dev": "webpack-dev-server --mode=development --config webpack.config.dev.js --hot",
     "dev:open": "webpack-dev-server --mode=development --config  webpack.config.dev.js --open --hot",
