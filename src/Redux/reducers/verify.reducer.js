@@ -2,7 +2,7 @@ import constants from '../constants';
 
 const initialState = {
 	pending: false,
-	verifyResult: null,
+	payload: null,
 	error: null,
 };
 
@@ -11,19 +11,19 @@ const VerifyReducer = (state = initialState, action) => {
 		case constants.VERIFY_PENDING:
 			return Object.assign({}, state, {
 				pending: true,
-				verifyResult: null,
+				payload: null,
 				error: null,
 			});
 		case constants.VERIFY_SUCCESS:
 			return Object.assign({}, state, {
 				pending: false,
-				verifyResult: action.verifyResult,
+				payload: action.payload,
 				error: null,
 			});
 		case constants.VERIFY_ERROR:
 			return Object.assign({}, state, {
 				pending: false,
-				verifyResult: null,
+				payload: null,
 				error: action.error,
 			});
 		default:

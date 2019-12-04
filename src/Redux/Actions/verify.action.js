@@ -1,26 +1,19 @@
 import constants from '../constants';
 import apis from '../../Api';
 
-const VerifyUser = token => {
-	return async dispatch => {
-		dispatch({
-			type: constants.VERIFY_PENDING,
-			pending: true,
-		});
+const VerifyUser = async token => {
+	try {
 		const result = await apis.verifyUser(token);
-		if (result.status === 200) {
-			return dispatch({
-				type: constants.VERIFY_SUCCESS,
-				verifyResult: result,
-			});
-		}
-		if (result.status === 401) {
-			return dispatch({
-				type: constants.VERIFY_ERROR,
-				error: result,
-			});
-		}
-	};
+		return {
+			type: constants.VERIFY_SUCCESS,
+			payload: result,
+		};
+	} catch (err) {
+		return {
+			type: constants.VERIFY_ERROR,
+			error: err.response.data,
+		};
+	}
 };
 
 export default VerifyUser;

@@ -1,15 +1,10 @@
+import BASE_URL from './config';
 import axios from 'axios';
 
 const apis = {
-	verifyUser(token) {
-		return axios
-			.get(`http://eagle-bn-backend-staging.herokuapp.com/api/v1/users/verify/${token}`)
-			.then(result => {
-				return result.data;
-			})
-			.catch(err => {
-				return err.response;
-			});
+	async verifyUser(token) {
+		const result = await axios.get(`${BASE_URL}users/verify/${token}`);
+		return result.data;
 	},
 };
 
