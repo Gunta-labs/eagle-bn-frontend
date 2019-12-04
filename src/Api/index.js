@@ -10,6 +10,9 @@ const apis = {
 		const login = await axios.post(`${BASE_URL}users/login`, data);
 		return login;
 	},
+	signup(user) {
+		return axios.post(`${BASE_URL}users/signup`, user);
+	},
 };
 
 export default apis;

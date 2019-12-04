@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import VerifyUser from './Pages/VerifyUser.page';
@@ -8,6 +9,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
+import { SignUp } from './Pages/signup.page';
 
 const isAuth = checkToken();
 export class App extends React.Component {
@@ -27,6 +29,7 @@ export class App extends React.Component {
 						path='/login'
 						render={props => (!isAuth ? <Login /> : <Redirect to='/dashboard' />)}
 					/>
+					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />
 				</Switch>
 				<Footer />
