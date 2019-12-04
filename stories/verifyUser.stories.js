@@ -11,7 +11,7 @@ import BASE_URL from '../src/Api/config';
 
 // 2. create the mock
 const mock = new MockAdapter(axios);
-const store = configureStrore({});
+const store = configureStrore;
 
 const withProvider = story => <Provider store={store}> {story()} </Provider>;
 const token = 'pppepepepepppe';
