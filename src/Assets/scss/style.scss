@@ -1,6 +1,4 @@
 // import scss bootstrap module
 @import './node_modules/bootstrap-scss/bootstrap.scss';
-
-h1 {
-    background-color: brown; 
-}
+@import './custom/verify';
+@import './custom/global'

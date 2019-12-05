@@ -11,19 +11,26 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 module.exports = {
 	mode: 'development',
 	target: 'web',
-	entry: path.resolve(SRC_DIR, 'index.js'),
+	entry: {
+		main: ['@babel/polyfill', `${path.resolve(SRC_DIR, 'index.js')}`],
+	},
 	output: {
 		path: DIST_DIR,
 		filename: 'bundle.js',
+		publicPath: '/',
 	},
 	devServer: {
 		contentBase: __dirname + '/public/',
 		stats: 'minimal',
-		historyApiFallback: true,
 		disableHostCheck: true,
-		headers: { 'Access-Control-Allow-Origin': '*' },
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+		},
 		https: false,
 		port: 8000,
+		historyApiFallback: {
+			disableDotRule: true,
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
