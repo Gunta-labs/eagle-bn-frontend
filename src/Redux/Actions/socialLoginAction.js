@@ -1,5 +1,5 @@
+import { toast } from 'react-toastify';
 import constants from '../constants';
-import apis from '../../App/API/index';
 
 export const socialLoginSucess = payload => ({
 	type: constants.SOCIAL_LOGIN_SUCCESS,
@@ -11,13 +11,11 @@ export const socialLoginFailure = error => ({
 	error,
 });
 
-export const socialLoginAction = (accessToken, accessType) => dispatch => {
+export const socialLoginAction = () => dispatch => {
 	try {
-		const res = apis.SocialaLoginAPI(accessToken, accessType);
-		dispatch(socialLoginSucess(res.data));
-		localStorage.setItem('barefoot_token', res.data.token);
+		localStorage.setItem('barefoot_token', '');
 	} catch (err) {
-		console.log(err);
+		toast.error(err.response.data.message);
 		dispatch(socialLoginFailure(err.response.data.message));
 	}
 };

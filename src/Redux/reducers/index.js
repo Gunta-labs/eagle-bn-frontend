@@ -20,6 +20,7 @@ const allReducers = combineReducers({
 	destSats: destinations,
 	accomodations,
 	social: SocialLoginReducer,
+	onSocialLogin: SocialLoginReducer,
 });
 
 export default allReducers;
