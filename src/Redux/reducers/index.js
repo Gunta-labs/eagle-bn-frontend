@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import LoginReducer from './loginReducer';
 import VerifyReducer from './verify.reducer';
+import ResetPasswordReducer from './reset.password.reducer';
 
 const allReducers = combineReducers({
-	login: LoginReducer,
+	ResetPasswordReducer,
 	Verify: VerifyReducer,
 });
 
