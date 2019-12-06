@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import authentication from '../../redux/Actions/login.actions';
+import authentication from '../../Redux/Actions/login.actions';
 import bckimg from '../../Assets/images/login.svg';
 
 export class Login extends React.Component {
@@ -88,13 +88,13 @@ Login.propTypes = {
 	user: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
 	return {
 		authentication: async data => dispatch(await authentication(data)),
 	};
 };
 
-const mapStateToProps = ({ loginProp }) => ({
+export const mapStateToProps = ({ loginProp }) => ({
 	user: loginProp,
 });
 
