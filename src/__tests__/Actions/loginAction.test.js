@@ -3,7 +3,7 @@ import mockAxios from 'axios';
 import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import authentication from '../../redux/Actions/login.actions';
+import authentication from '../../Redux/Actions/login.actions';
 
 const mockStore = configureMockStore([thunk]);
 applyMiddleware(promiseMiddleware);
