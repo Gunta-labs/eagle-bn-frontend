@@ -9,17 +9,18 @@ const DIST_DIR = path.resolve(__dirname, 'build');
 const SRC_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {
-	mode: 'development',
-	target: 'web',
 	entry: {
 		main: ['@babel/polyfill', `${path.resolve(SRC_DIR, 'index.js')}`],
 	},
+	mode: 'development',
+	target: 'web',
 	output: {
 		path: DIST_DIR,
 		filename: 'bundle.js',
 		publicPath: '/',
 	},
 	devServer: {
+		hot: true,
 		contentBase: __dirname + '/public/',
 		stats: 'minimal',
 		disableHostCheck: true,
@@ -39,6 +40,8 @@ module.exports = {
 		}),
 		new Dotenv({
 			path: path.resolve(__dirname, './.env'),
+			safe: true,
+			systemvars: true,
 		}),
 	],
 	module: {

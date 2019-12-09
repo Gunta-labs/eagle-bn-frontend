@@ -1,4 +1,9 @@
 // import scss bootstrap module
 @import './node_modules/bootstrap-scss/bootstrap.scss';
+
+// import css for verify token
 @import './custom/verify';
+
+
+// global variabales
 @import './custom/global';
