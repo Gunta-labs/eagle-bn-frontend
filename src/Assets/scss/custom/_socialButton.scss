@@ -1,5 +1,5 @@
 .btn {
-    height: 40px;
+    height: 35px;
     width: 140px;
     margin: 10px;
     text-transform: capitalize;
@@ -15,24 +15,29 @@
       background-color: silver;
     }
   }
-  
-  .social {
-    position: absolute;
-    margin-top: 100px;
+  .Face {
+    width: 45%;
     float: left;
-    color:white;
+    margin: 30px 0 30px 0;
   }
-  .socialFace {
-    background-color:blue;
+  .Goo {
+    width: 45%;
+    float: right;
+    margin: 30px 0 30px 0;
   }
-  .socialGoo {
-    background-color:red;
-   
+  .btn-google {
+    background-color: $google !important;
+    color:white !important;
+  }
+  .btn-face {
+    background-color: $facebook !important;
+    color:white !important;
+  
   }
   .socialButtonImg{
       float: left;
-      margin: 2px 0 0 2px;
-      width: 25px;
+      margin: 0 0 0 2px;
+      width: 20px;
       height: auto;
     }
     

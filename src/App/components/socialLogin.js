@@ -1,23 +1,29 @@
 import React from 'react';
-import faceIcon from '../../Assets/images/icon_facebook.png';
-import googleIcon from '../../Assets/images/icon_google.png';
+import googleIcon from '../../Assets/images/icon_google.svg';
 import Button from './socialButton';
+import BaseUrl from '../../Api/config';
+import LoginFacebook from './facebookLogin';
 
-const SocialLogin = () => {
-	const FaceboobLogin = () => {
-		window.location.assign('http://localhost:3000/api/v1/users/auth/facebook');
+class SocialLogin extends React.Component {
+	GoogleLogin = () => {
+		window.location.assign(`${BaseUrl}/users/google`);
 	};
-
-	const GoogleLogin = () => {
-		window.location.assign('http://localhost:3000/api/v1/users/google');
-	};
-
-	return (
-		<div className='social'>
-			<Button name='Facebook' logo={faceIcon} styleClass='btn-face btn' onClick={FaceboobLogin} />
-			<Button name='Google' logo={googleIcon} styleClass='btn-google btn' onClick={GoogleLogin} />
-		</div>
-	);
-};
-
+	render() {
+		return (
+			<div className='social'>
+				<div>
+					<LoginFacebook />
+				</div>
+				<div>
+					<Button
+						name='Google'
+						logo={googleIcon}
+						styleClass='btn btn-google Goo'
+						onClick={this.GoogleLogin}
+					/>
+				</div>
+			</div>
+		);
+	}
+}
 export default SocialLogin;

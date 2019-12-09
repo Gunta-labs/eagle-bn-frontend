@@ -19,4 +19,11 @@ const authentication = async payload => {
 	}
 };
 
+export const socialLog = () => {
+	return {
+		type: constants.LOGIN_SUCCESS,
+		payload: 'Logged in successfully',
+	};
+};
+
 export default authentication;
