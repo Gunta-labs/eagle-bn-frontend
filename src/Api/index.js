@@ -22,6 +22,12 @@ const apis = {
 	getUserProfile(userId) {
 		return axios.get(`${BASE_URL}users/${userId}/profile`);
 	},
+	destinationStats() {
+		return axios.get(`${BASE_URL}statistics/traveled-destinations`);
+	},
+	accomodations() {
+		return axios.get(`${BASE_URL}accommodations`);
+	},
 };
 
 export default apis;
