@@ -12,7 +12,7 @@ const SRC_DIR = path.resolve(__dirname, 'src');
 module.exports = {
 	mode: 'production',
 	target: 'web',
-	entry: path.resolve(SRC_DIR, 'index.js'),
+	entry: ['@babel/polyfill', path.resolve(SRC_DIR, 'index.js')],
 	output: {
 		path: DIST_DIR,
 		filename: 'bundle.js',

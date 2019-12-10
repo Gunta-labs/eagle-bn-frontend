@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../../Assets/scss/style.scss';
 import constants from '../../Redux/constants';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 const mapStateToProps = state => ({
 	payload: state.Verify.payload,
@@ -50,24 +52,30 @@ class VerifyUser extends React.Component {
 		const { payload, error, pending } = this.props;
 		const { title, description } = this.getTextToDisplay(payload, error, pending);
 		return (
-			<div className='d-flex flex-wrap align-content-center justify-content-center w-100 mainContainer'>
-				<div>
-					<h2 className={`${!error ? 'text-secondary' : 'text-danger error'} d-block text-center`}>
-						{title}
-					</h2>
-					<p className='text-secondary d-block mx-2'>{description}</p>
-					{payload && (
+			<div>
+				<Header />
+				<div className='d-flex flex-wrap align-content-center justify-content-center w-100 mainContainer'>
+					<div>
+						<h2
+							className={`${!error ? 'text-secondary' : 'text-danger error'} d-block text-center`}
+						>
+							{title}
+						</h2>
+						<p className='text-secondary d-block mx-2 text-center'>{description}</p>
+						{payload && (
+							<div className='col text-center'>
+								<Link to='/login' className='btn btn-primary px-5 '>
+									{' '}
+									Go to login{' '}
+								</Link>
+							</div>
+						)}
 						<div className='col text-center'>
-							<Link to='/login' className='btn btn-primary px-5 '>
-								{' '}
-								Go to login{' '}
-							</Link>
+							{pending && <div className='spinner-border text-primary '> </div>}
 						</div>
-					)}
-					<div className='col text-center'>
-						{pending && <div className='spinner-border text-primary '> </div>}
 					</div>
 				</div>
+				<Footer />
 			</div>
 		);
 	}
