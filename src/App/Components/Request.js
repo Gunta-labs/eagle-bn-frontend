@@ -18,12 +18,14 @@ const getAdditionnalTrip = trips => {
 function Request(props) {
 	const { request } = props;
 	let trip = request.Trips[0];
-	if (!trip)
+	if (!trip) {
 		trip = {
 			city: 'none',
 			country: 'none',
 			departureTime: undefined,
 		};
+		request.Trips[0] = trip;
+	}
 	return (
 		<div className='col-12 col-sm-12 col-md-6 col-lg-4'>
 			<div className='card  mt-1 ml-1 mr-1'>

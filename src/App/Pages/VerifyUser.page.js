@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import verifyUser from '../../Redux/Actions/verify.action';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import '../../Assets/scss/style.scss';
 import constants from '../../Redux/constants';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';

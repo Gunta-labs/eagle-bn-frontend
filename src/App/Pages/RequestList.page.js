@@ -26,9 +26,8 @@ const mapDispatchToProps = dispatch => {
 class RequestList extends React.Component {
 	componentDidMount() {
 		this.props.initialize();
-		this.props.getRequests(
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoicmVxdWVzdGVyQGdtYWlsLmNvbSIsInZlcmlmaWVkIjp0cnVlLCJyb2xlIjoicmVxdWVzdGVyIiwicmVtZW1iZXJNZSI6ZmFsc2UsImZ1bGxuYW1lIjoicmVxdWVzdGVyIiwiaWF0IjoxNTc1OTYyMjI4LCJleHAiOjE1NzYwNDg2Mjh9.YzJOE20CqaQ4J6xhWoSH5WoXbjpfjpEpL6-LATPWFUQ',
-		);
+		const token = localStorage.getItem('barefoot_token');
+		this.props.getRequests(token);
 	}
 	render() {
 		let { payload, pending, error } = this.props;
@@ -37,8 +36,7 @@ class RequestList extends React.Component {
 		return (
 			<div>
 				<div className='row mainContainer'>
-					<Sidebar />
-					<div className='row p-1 col-12 col-sm-12 col-md-9 col-lg-9 m-5 '>
+					<div className='row col-12 col-sm-12 col-md-9 col-lg-9 p-4 '>
 						{(pending || error) && (
 							<div className='d-flex flex-wrap align-content-center justify-content-center col-12'>
 								{error && (
