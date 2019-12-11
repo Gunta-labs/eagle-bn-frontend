@@ -10,6 +10,7 @@ import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
 import { SignUp } from './Pages/signup.page';
+import CreateAccommodation from '../App/Pages/create.accommodation.page';
 
 const isAuth = checkToken();
 export class App extends React.Component {
@@ -31,6 +32,7 @@ export class App extends React.Component {
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />
+					<Route exact path='/accommodation/create' component={CreateAccommodation} />
 				</Switch>
 				<Footer />
 			</Router>
