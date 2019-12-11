@@ -35,7 +35,7 @@ describe('Verify User page', () => {
 		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
-		expect(wrapper.find('.card.mt-1.ml-1.mr-1')).toExist();
+		expect(wrapper.find('.card.mt-1.ml-lg-1.ml-md-1.mr-lg-1.mr-md-1.ml-4')).toExist();
 		expect(axios.calledOnce);
 		expect(axiosSpy.calledOnce);
 		const axiosPayload = await axios.get.getCall(0).returnValue;

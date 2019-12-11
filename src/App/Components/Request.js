@@ -28,7 +28,7 @@ function Request(props) {
 	}
 	return (
 		<div className='col-12 col-sm-12 col-md-6 col-lg-4'>
-			<div className='card  mt-1 ml-1 mr-1'>
+			<div className='card  mt-1 ml-lg-1 ml-md-1 mr-lg-1 mr-md-1 ml-4'>
 				<div className='list-group list-group-flush'>
 					<div className='list-group-item'>
 						<div className='d-flex justify-content-between ml-1 mr-1 mt-2'>

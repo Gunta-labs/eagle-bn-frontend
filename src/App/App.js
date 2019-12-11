@@ -6,7 +6,6 @@ import Request from './Pages/RequestList.page';
 import Login from './Pages/login.page.js';
 import checkToken from '../helper/helper';
 import Dashboard from '../App/Pages/dashboard';
-import Header from './Components/Header';
 import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';

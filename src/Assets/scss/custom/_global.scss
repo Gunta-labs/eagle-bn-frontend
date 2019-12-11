@@ -1,67 +1,126 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
 body * {
-  font-weight: 100 !important;
+	font-weight: 100 !important;
 }
 
 main {
-  height: 100vh;
-  align-items: center !important;
-
+	height: 100vh;
+	align-items: center !important;
 }
 
 .nav-link {
-  text-transform: lowercase;
-  font-weight: 100;
-  color: $primary !important;
+	text-transform: lowercase;
+	font-weight: 100;
+	color: $primary !important;
 }
 
 .btn-primary {
-  color: white !important;
+	color: white !important;
 }
 
 .active {
-  .nav-link {
-    color: $primary !important;
-  }
+	.nav-link {
+		color: $primary !important;	
+	}
 }
+.menu-active{
+	background-color: #A7D1FF;
 
-footer {
-  font-weight: 100;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-
-  p {
-    margin-top: 1rem;
-  }
 }
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	background-color: #ccc;
+  }
 
 .bg-img {
-  position: absolute;
-  margin-left: 18rem;
+	position: absolute;
+	margin-left: 18rem;
 }
 
 .signup {
-  margin-top: 9%;
+	margin-top: 9%;
 }
 
 .form-control {
-  border: 1px solid #ced4da;
+	border: 1px solid #ced4da;
 }
 
 ::placeholder {
-  font-weight: 100;
-  color: gainsboro !important;
+	font-weight: 100;
+	color: gainsboro !important;
 }
 
 label {
-  font-size: .8rem;
+	font-size: 0.8rem;
 }
 
 .logo-txt {
-  font-weight: bold !important;
+	font-weight: bold !important;
 }
 
 .mt-20 {
-  margin-top:10% !important;
+	margin-top: 10% !important;
+}
+.avatar {
+	width: 75px;
+	height: 75px;
+	border-radius: 100%;
+}
+.logo {
+  transform: rotate(-90deg);
+  width:30px;
+  margin-right: 1rem;
+}
+.request-list {
+	margin-top: 90px;
+}
+@media (min-width: 992px) {
+	.sidenav {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 200px;
+		height: calc(100vh - 3.5rem);
+		margin-top: 3.5rem;
+		background: white;
+		box-sizing: border-box;
+		border-top: 1px solid rgba(197, 197, 197, 0.3);
+		box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+	}
+
+	.navbar-expand-lg .sidenav {
+		flex-direction: column;
+	}
+
+	.content-wrapper {
+		margin-left: 230px;
+	}
+
+	.footer {
+		width: 100%
+	}
+	.user-nav {
+		height: 130px;
+	}
+}
+
+@media (max-width: 992px) {
+	.user-nav {
+		display: none;
+	}
+	.signup {
+		margin-top: 20%;
+	}
+	.fixed-top {
+		.shadow-sm {
+			box-shadow: 0 0.125rem 0.25rem rgba(252, 252, 252, 0.075) !important;
+		}
+	}
 }

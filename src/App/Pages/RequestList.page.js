@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import '../../Assets/scss/style.scss';
 import constants from '../../Redux/constants';
 import Request from '../Components/Request';
-import Sidebar from '../Components/Sidebar';
+import Header from '../Components/Header';
 import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => ({
@@ -35,8 +35,9 @@ class RequestList extends React.Component {
 		const listItems = data.map(req => <Request request={req} />);
 		return (
 			<div>
+				<Header active_menu={1} showSideNav={true} />
 				<div className='row mainContainer'>
-					<div className='row col-12 col-sm-12 col-md-9 col-lg-9 p-4 '>
+					<div className='row col-12 col-sm-12 col-md-10 col-lg-10 content-wrapper request-list'>
 						{(pending || error) && (
 							<div className='d-flex flex-wrap align-content-center justify-content-center col-12'>
 								{error && (

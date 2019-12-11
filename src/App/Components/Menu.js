@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Menu(props) {
 	return (
-		<div className=''>
-			<label className={`${props.active ? 'active-' : ''}menu mb-0 p-2 w-100 text-primary`}>
-				<FontAwesomeIcon icon={props.icon} className='mr-3 textprimary' /> {props.name}{' '}
-			</label>{' '}
-			<hr className='divider mt-0 mb-0' />
-		</div>
+		<li className={`${props.active ? 'menu-active' : ''} nav-item m-2`} id='menu-item'>
+			<a className='nav-link text-secondary' href='/'>
+				<FontAwesomeIcon icon={props.icon} />
+				<span className='ml-3'>{props.name}</span>
+			</a>
+		</li>
 	);
 }
 export default Menu;
