@@ -13,6 +13,11 @@ const apis = {
 	signup(user) {
 		return axios.post(`${BASE_URL}users/signup`, user);
 	},
+	createAccommodation(data, token) {
+		return axios.post(`${BASE_URL}accommodations`, data, {
+			headers: { Authorization: token, contentType: 'application/x-www-form-urlencoded' },
+		});
+	},
 };
 
 export default apis;

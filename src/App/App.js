@@ -11,6 +11,7 @@ import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
 import { SignUp } from './Pages/signup.page';
 import CreateAccommodation from '../App/Pages/create.accommodation.page';
+import { checkSupplierOrtAdmin } from '../helper/checkRole';
 
 const isAuth = checkToken();
 export class App extends React.Component {
@@ -21,6 +22,21 @@ export class App extends React.Component {
 				<Switch>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
+					<Route
+						exact
+						path='/accommodation/create'
+						render={props =>
+							isAuth ? (
+								checkSupplierOrtAdmin() ? (
+									<CreateAccommodation />
+								) : (
+									<Redirect to='/dashboard' />
+								)
+							) : (
+								<Redirect to='/login' />
+							)
+						}
+					/>
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
 					<Route exact path='/'>
 						<p className='text-center'> hellow world </p>
@@ -32,7 +48,6 @@ export class App extends React.Component {
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />
-					<Route exact path='/accommodation/create' component={CreateAccommodation} />
 				</Switch>
 				<Footer />
 			</Router>

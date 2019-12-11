@@ -1,45 +1,100 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import authentication from '../../Redux/Actions/login.actions';
+import createAcc from '../../Redux/Actions/create.accommodation.action';
+import constants from '../../Redux/constants';
 
 export class CreateAccommodation extends React.Component {
 	state = {
-		email: '',
-		password: '',
-		images: '',
+		name: '',
+		description: '',
+		images: {},
+		address: '',
+		cost: '',
+		availableSpace: '',
+		services: '',
+		amenities: '',
+		imageNumber: '',
 	};
-
 	handleInput = e => {
-		if (e.target.id === 'customFile')
-			this.setState({ images: `${e.target.files.length} file(s) selected` });
-		this.setState({
-			[e.target.name]: e.target.value,
-		});
+		if (e.target.id === 'images') {
+			this.setState({
+				imageNumber: `${e.target.files.length} file(s) selected`,
+				images: e.target.files,
+			});
+		} else {
+			this.setState({
+				[e.target.name]: e.target.value,
+			});
+		}
 	};
 
 	handleSubmit = e => {
 		e.preventDefault();
-		const { authentication } = this.props;
-		const { email, password } = this.state;
+		this.props.initialize();
+		const { create } = this.props;
+		const form = new FormData();
+		const {
+			name,
+			description,
+			services,
+			images,
+			cost,
+			availableSpace,
+			amenities,
+			address,
+		} = this.state;
 		const data = {
-			email,
-			password,
+			name,
+			description,
+			services,
+			cost,
+			availableSpace,
+			amenities,
+			address,
 		};
-		authentication(data);
-	};
+		console.log('here', data);
+		Object.values(images).forEach(element => {
+			form.append('images', element);
+		});
 
+		for (let key in data) {
+			if (data.hasOwnProperty(key)) {
+				form.append(key, data[key]);
+			}
+		}
+
+		const token = localStorage.getItem('barefoot-token');
+		create(form, token);
+	};
+	getError(error) {
+		return error.data
+			? error.data.msg
+			: 'We could not upload your data. Check if you are connected to a valid network then try again.';
+	}
 	render() {
-		const { password, email, images } = this.state;
-		const { error, isLoggedIn } = this.props.user;
+		const {
+			name,
+			description,
+			services,
+			cost,
+			availableSpace,
+			amenities,
+			address,
+			imageNumber,
+		} = this.state;
+		const { error, payload, pending } = this.props.accommodation;
 		const display = (
 			<div className='d-flex'>
 				<div className='container signup'>
 					<div className='row'>
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
-							{error && <p className='alert alert-danger'>{error}</p>}
 							<form onSubmit={this.handleSubmit} className='row'>
 								<div className='col-md-6 col-lg-6'>
+									{error && (
+										<p className='alert alert-danger text-center'>{this.getError(error)}</p>
+									)}
+									{payload && <p className='alert alert-success'>uploaded successfully</p>}
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
 											<span className='input-group-text'>@</span>
@@ -51,7 +106,9 @@ export class CreateAccommodation extends React.Component {
 											onChange={this.handleInput}
 											placeholder='Accommodation name'
 											required={true}
-											value={password}
+											value={name}
+											pattern='.{4,}'
+											onInvalid='name should have a minimum of 4 characters'
 										/>
 									</div>
 									<div className='input-group mb-3'>
@@ -60,24 +117,26 @@ export class CreateAccommodation extends React.Component {
 										</div>
 										<input
 											type='text'
-											name='name'
+											name='availableSpace'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='Accommodation name'
+											placeholder='Available space, ex: 5 rooms'
 											required={true}
-											value={password}
+											value={availableSpace}
+											pattern='.{5,}'
 										/>
 										<div className='input-group-prepend ml-2'>
 											<span className='input-group-text'>@</span>
 										</div>
 										<input
-											type='text'
-											name='name'
+											type='number'
+											name='cost'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='Accommodation name'
+											placeholder='space cost'
 											required={true}
-											value={password}
+											value={cost}
+											pattern='[0-9]{1,}'
 										/>
 									</div>
 									<div className='input-group mb-3'>
@@ -86,34 +145,26 @@ export class CreateAccommodation extends React.Component {
 										</div>
 										<input
 											type='text'
-											name='name'
+											name='address'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='Accommodation name'
+											placeholder='address'
 											required={true}
-											value={password}
-										/>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='input-group-prepend'>
-											<span className='input-group-text'>@</span>
-										</div>
-										<input
-											type='text'
-											name='name'
-											className='form-control'
-											onChange={this.handleInput}
-											placeholder='Accommodation name'
-											required={true}
-											value={password}
+											value={address}
+											pattern='.{5,}'
 										/>
 									</div>
 									<div className='form-group'>
 										<textarea
 											className='form-control'
 											placeholder='Services'
-											rows='2'
+											rows='3'
 											id='comment'
+											name='services'
+											onChange={this.handleInput}
+											value={services}
+											required={true}
+											pattern='.{5,}'
 										></textarea>
 									</div>
 									<div className='custom-file'>
@@ -121,11 +172,13 @@ export class CreateAccommodation extends React.Component {
 											type='file'
 											className='custom-file-input'
 											onChange={this.handleInput}
-											id='customFile'
+											id='images'
 											multiple={true}
+											name='images'
+											required={true}
 										/>
-										<label className='custom-file-label' for='customFile'>
-											{images || 'Choose files'}
+										<label className='custom-file-label' for='images'>
+											{imageNumber || 'Choose files'}
 										</label>
 									</div>
 								</div>
@@ -135,7 +188,12 @@ export class CreateAccommodation extends React.Component {
 											className='form-control'
 											placeholder='Descriptions'
 											rows='4'
-											id='comment'
+											id='description'
+											name='description'
+											onChange={this.handleInput}
+											value={description}
+											required={true}
+											pattern='.{5,}'
 										></textarea>
 									</div>
 									<div className='form-group'>
@@ -143,10 +201,20 @@ export class CreateAccommodation extends React.Component {
 											className='form-control mt-4'
 											placeholder='Amenities'
 											rows='4'
-											id='comment'
+											id='amenities'
+											name='amenities'
+											onChange={this.handleInput}
+											value={amenities}
+											required={true}
+											pattern='.{5,}'
 										></textarea>
 									</div>
-									<button className='btn btn-primary btn-block my-3 mt-5' type='submit'>
+									<button
+										className='btn btn-primary btn-block my-3 mt-4 submit-btn'
+										type='submit'
+										disabled={pending}
+									>
+										{pending && <span className='spinner-grow spinner-grow-sm'></span>}
 										Create accommodation
 									</button>
 								</div>
@@ -161,17 +229,22 @@ export class CreateAccommodation extends React.Component {
 }
 
 CreateAccommodation.propTypes = {
-	user: PropTypes.object.isRequired,
+	accommodation: PropTypes.object.isRequired,
 };
 
 export const mapDispatchToProps = dispatch => {
 	return {
-		authentication: async data => dispatch(await authentication(data)),
+		initialize: () =>
+			dispatch({
+				type: constants.ADD_ACCOMMODATION_PENDING,
+				pending: true,
+			}),
+		create: async (data, token) => dispatch(await createAcc(data, token)),
 	};
 };
 
-export const mapStateToProps = ({ loginProp }) => ({
-	user: loginProp,
+export const mapStateToProps = ({ accommodation }) => ({
+	accommodation,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateAccommodation);
