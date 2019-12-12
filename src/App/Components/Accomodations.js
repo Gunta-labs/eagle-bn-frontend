@@ -32,6 +32,27 @@ function Accomodations({ data }) {
 							</div>
 						</div>
 					</Link>
+					<div className='card-body p-0'>
+						<img
+							src={
+								e.AccommodationImages.length === 0 ? AccomImg : e.AccommodationImages[0].imageurl
+							}
+							alt='accomodation'
+							className='card-img'
+						/>
+					</div>
+					<div className='d-flex flex-column card-footer text-center p-0'>
+						<span className='bg-white mt-n3 shadow-sm mx-5'>{e.name}</span>
+						<span className='my-2'>{e.address}</span>
+						<div className='d-flex justify-content-between card-foot'>
+							<span className='text-secondary my-2 mx-3' style={{ width: '100%' }}>
+								<FontAwesomeIcon icon={faHeart} /> 512
+							</span>
+							<span className='text-primary my-2 mx-3'>
+								<FontAwesomeIcon icon={faBookmark} />
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

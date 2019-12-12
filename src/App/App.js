@@ -6,6 +6,7 @@ import { Requests } from './Pages/RequestList.page';
 import Login from './Pages/login.page.js';
 import { token } from '../helper/helper';
 import Dashboard from '../App/Pages/dashboard';
+import Header from './Components/Header';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
 import GetAllAccomodations from '../App/Pages/accomodations';
@@ -64,6 +65,8 @@ export class App extends React.Component {
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 					<Route path='*' component={NotFound} />
+					<Route exact path='/accomodations' component={GetAllAccomodations} />
+					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 				</Switch>
 			</Router>
 		);
