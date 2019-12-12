@@ -36,6 +36,16 @@ const apis = {
 	facebookLoginAPI(accessToken) {
 		return axios.post(`${BASE_URL}/users/auth/facebook`, { access_token: accessToken });
 	},
+	async getAllAccomodations() {
+		const accommodations = await axios.get(`${BASE_URL}accommodations`);
+		return accommodations;
+	},
+	async singleAccomodation(id) {
+		return await axios.get(`${BASE_URL}accommodations/${id}`);
+	},
+	async GetFeeback(id) {
+		return await axios.get(`${BASE_URL}accommodations/${id}/rating`);
+	},
 };
 
 export default apis;

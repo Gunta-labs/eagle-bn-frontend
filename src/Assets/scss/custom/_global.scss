@@ -183,3 +183,54 @@ label {
 		overflow: hidden;
 	}
 }
+.my-search {
+  min-height: 40vh;
+  width: 100vw;
+  background-color: $primary;
+  margin-top: 63px;
+}
+
+.card-img{
+	height: 165px !important;
+	overflow: hidden;
+	img{
+		width: 100% !important;
+		background-size: cover;
+	}
+}
+.acc-container{
+	 margin:6rem 4rem 0  4rem;
+	 
+}
+.gallery-card {
+	height: 660px;
+}
+
+.img-card-display {
+	height: 290px;
+}
+.img-scroll-display {
+	height: 150px;
+	overflow-y: scroll;
+	float: left;
+}
+
+.img-feedback{
+	width: 60px;
+	height: 60px;
+	border-radius: 100px;
+}
+
+.target-img {
+	height: 100%;
+	width: 100%;
+
+}
+
+.detail-card{
+	height: 100px;
+}
+
+.bold-text {
+	font-weight: 400 !important;
+}
