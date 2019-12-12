@@ -6,6 +6,12 @@ const apis = {
 		const result = await axios.get(`${BASE_URL}users/verify/${token}`);
 		return result.data;
 	},
+	async getRequest(token) {
+		const result = await axios.get(`${BASE_URL}requests`, {
+			headers: { Authorization: token },
+		});
+		return result.data;
+	},
 	async loginUser(data) {
 		const login = await axios.post(`${BASE_URL}users/login`, data);
 		return login;

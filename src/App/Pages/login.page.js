@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import authentication from '../../Redux/Actions/login.actions';
 import bckimg from '../../Assets/images/login.svg';
+import Header from '../Components/Header';
 
 export class Login extends React.Component {
 	state = {
@@ -33,6 +34,7 @@ export class Login extends React.Component {
 		const { error, isLoggedIn } = this.props.user;
 		const loginDisplay = (
 			<div className='d-flex'>
+				<Header />
 				<img className='vh-100 vw-100 bg-img' src={bckimg} alt='bg' />
 				<div className='container signup'>
 					<div className='row'>

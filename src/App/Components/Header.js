@@ -11,9 +11,9 @@ class Header extends React.Component {
 		this.setState({ show: !currentState });
 	};
 	render() {
+		const { showSideNav } = this.props;
 		return (
 			<>
-				<html lang='en' />
 				<head>
 					<meta charset='UTF-8' />
 					<meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -46,29 +46,31 @@ class Header extends React.Component {
 						}
 						id='navbarCollapse'
 					>
-						<SideNav />
-						<ul className='navbar-nav ml-auto'>
-							<li className='nav-item active'>
-								<a className='nav-link mx-3 ' href='/'>
-									Home <span className='sr-only'>(current)</span>
-								</a>
-							</li>
-							<li className='nav-item mx-3'>
-								<a className='nav-link' href='/'>
-									Acommodations
-								</a>
-							</li>
-							<li className='nav-item mx-3'>
-								<a className='nav-link mx-3' href='/signup'>
-									Signup
-								</a>
-							</li>
-							<li className='nav-item mx-3'>
-								<a className='nav-link btn btn-primary btn-sm px-5' href='/login'>
-									Login
-								</a>
-							</li>
-						</ul>
+						{showSideNav && <SideNav active={this.props.active_menu} />}
+						{!showSideNav && (
+							<ul className='navbar-nav ml-auto'>
+								<li className='nav-item active'>
+									<a className='nav-link mx-3 ' href='/'>
+										Home <span className='sr-only'>(current)</span>
+									</a>
+								</li>
+								<li className='nav-item mx-3'>
+									<a className='nav-link' href='/'>
+										Accommodations
+									</a>
+								</li>
+								<li className='nav-item mx-3'>
+									<a className='nav-link mx-3' href='/signup'>
+										Signup
+									</a>
+								</li>
+								<li className='nav-item mx-3'>
+									<a className='nav-link btn btn-primary btn-sm px-5' href='/login'>
+										Login
+									</a>
+								</li>
+							</ul>
+						)}
 					</div>
 				</nav>
 			</>
