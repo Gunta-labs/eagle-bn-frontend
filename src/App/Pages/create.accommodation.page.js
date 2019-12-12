@@ -3,7 +3,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import createAcc from '../../Redux/Actions/create.accommodation.action';
 import constants from '../../Redux/constants';
+import Header from '../Components/Header';
 
+const newState = {
+	name: '',
+	description: '',
+	images: {},
+	address: '',
+	cost: '',
+	availableSpace: '',
+	services: '',
+	amenities: '',
+	imageNumber: '',
+};
 export class CreateAccommodation extends React.Component {
 	state = {
 		name: '',
@@ -16,6 +28,12 @@ export class CreateAccommodation extends React.Component {
 		amenities: '',
 		imageNumber: '',
 	};
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log(nextProps.accommodation.payload);
+		if (nextProps.accommodation.payload) {
+			return { ...newState };
+		} else return null;
+	}
 	handleInput = e => {
 		if (e.target.id === 'images') {
 			this.setState({
@@ -53,7 +71,6 @@ export class CreateAccommodation extends React.Component {
 			amenities,
 			address,
 		};
-		console.log('here', data);
 		Object.values(images).forEach(element => {
 			form.append('images', element);
 		});
@@ -64,7 +81,7 @@ export class CreateAccommodation extends React.Component {
 			}
 		}
 
-		const token = localStorage.getItem('barefoot-token');
+		const token = localStorage.getItem('barefoot_token');
 		create(form, token);
 	};
 	getError(error) {
@@ -86,7 +103,9 @@ export class CreateAccommodation extends React.Component {
 		const { error, payload, pending } = this.props.accommodation;
 		const display = (
 			<div className='d-flex'>
-				<div className='container signup'>
+				<Header active_menu={1} showSideNav={true} />
+				<div className='container content-wrapper create-accommodation'>
+					<h5 className='text-primary mb-4'> Create accommodation </h5>
 					<div className='row'>
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
 							<form onSubmit={this.handleSubmit} className='row'>

@@ -37,7 +37,7 @@ describe('Verify User page', () => {
 		expect(wrapper.find('.alert.alert-danger')).toExist();
 		done();
 	});
-	it('should submit data on click submit', async done => {
+	it('should submit data and get data from actions', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockSuccess({ name: 'seriously' });
 		store = config.mockStore(Data.initialState);
@@ -56,7 +56,7 @@ describe('Verify User page', () => {
 		axios.post.restore();
 		done();
 	});
-	it('should submit data on click submit', async done => {
+	it('should submit data and get an error message', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockFailure({ name: 'seriously' });
 		store = config.mockStore(Data.initialState);
@@ -73,7 +73,7 @@ describe('Verify User page', () => {
 		axios.post.restore();
 		done();
 	});
-	it('should submit data on click submit', async done => {
+	it('should submit data and get a network error', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockNetworkFailure({ name: 'seriously' });
 		store = config.mockStore(Data.initialState);
