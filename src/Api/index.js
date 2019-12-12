@@ -19,6 +19,9 @@ const apis = {
 	signup(user) {
 		return axios.post(`${BASE_URL}users/signup`, user);
 	},
+	getUserProfile(userId) {
+		return axios.get(`${BASE_URL}users/${userId}/profile`);
+	},
 };
 
 export default apis;

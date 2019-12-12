@@ -43,7 +43,7 @@ class ResetPassword extends React.Component {
 			);
 		}
 		if (resetPasswordStatus === 'pending') {
-			return <div className='spinner-border text-primary '> </div>;
+			return <div className='spinner-border text-primary'> </div>;
 		}
 		if (resetPasswordStatus === 'success') {
 			return (

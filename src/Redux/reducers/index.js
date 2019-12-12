@@ -4,6 +4,7 @@ import RequestReducer from './request.reducer';
 import ResetPasswordReducer from './reset.password.reducer';
 import LoginReducer from './loginReducer';
 import { signupReducer } from './signup.reducer';
+import MakeTripRequest from './trip.request.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -11,6 +12,7 @@ const allReducers = combineReducers({
 	Request: RequestReducer,
 	loginProp: LoginReducer,
 	signup: signupReducer,
+	MakeTripRequest,
 });
 
 export default allReducers;
