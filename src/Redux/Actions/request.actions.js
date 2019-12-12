@@ -4,6 +4,7 @@ import apis from '../../Api';
 const VerifyUser = async token => {
 	try {
 		const result = await apis.getRequest(token);
+		console.log(result);
 		return {
 			type: constants.GETREQUEST_SUCCESS,
 			payload: result,

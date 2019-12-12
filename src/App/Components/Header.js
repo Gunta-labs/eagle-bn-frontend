@@ -56,7 +56,7 @@ class Header extends React.Component {
 								</li>
 								<li className='nav-item mx-3'>
 									<a className='nav-link' href='/'>
-										Acommodations
+										Accommodations
 									</a>
 								</li>
 								<li className='nav-item mx-3'>

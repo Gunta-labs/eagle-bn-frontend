@@ -18,16 +18,14 @@ export class App extends React.Component {
 			<Router>
 				<Switch>
 					<Route path='/users/verify/:token' component={VerifyUser} />{' '}
-					<Route exact path='/requests' component={isAuth ? Request : Login} />
-					<Route path='/'>
-						<p className='text-center'> hellow world </p>{' '}
-					</Route>{' '}
+					<Route
+						exact
+						path='/requests'
+						render={props => (isAuth ? <Request /> : <Redirect to='/login' />)}
+					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
-					<Route exact path='/'>
-						<p className='text-center'> hellow world </p>
-					</Route>
 					<Route
 						exact
 						path='/login'
@@ -35,6 +33,9 @@ export class App extends React.Component {
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />
+					<Route path='/'>
+						<p className='text-center'> hellow world </p>{' '}
+					</Route>{' '}
 				</Switch>
 				<Footer />
 			</Router>

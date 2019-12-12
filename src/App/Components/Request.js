@@ -27,7 +27,7 @@ function Request(props) {
 		request.Trips[0] = trip;
 	}
 	return (
-		<div className='col-12 col-sm-12 col-md-6 col-lg-4'>
+		<div className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4'>
 			<div className='card  mt-1 ml-lg-1 ml-md-1 mr-lg-1 mr-md-1 ml-4'>
 				<div className='list-group list-group-flush'>
 					<div className='list-group-item'>

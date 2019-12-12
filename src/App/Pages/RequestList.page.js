@@ -31,21 +31,21 @@ class RequestList extends React.Component {
 	}
 	render() {
 		let { payload, pending, error } = this.props;
-		const data = payload ? payload.data : [];
+		const data = payload && payload.data ? payload.data : [];
 		const listItems = data.map(req => <Request request={req} />);
+		const errorOrEmpty = (!pending && data.length === 0) || error;
 		return (
 			<div>
 				<Header active_menu={1} showSideNav={true} />
 				<div className='row mainContainer'>
 					<div className='row col-12 col-sm-12 col-md-10 col-lg-10 content-wrapper request-list'>
-						{(pending || error) && (
+						{(pending || error || data.length < 1) && (
 							<div className='d-flex flex-wrap align-content-center justify-content-center col-12'>
-								{error && (
+								{errorOrEmpty && (
 									<div>
 										<h3 className='text-secondary d-block text-center m-4 error'>
 											No request found
 										</h3>
-
 										<div className='col text-center'>
 											<Link to='/request' className='btn btn-primary px-5 '>
 												Create a new request
