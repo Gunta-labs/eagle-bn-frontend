@@ -16,6 +16,7 @@ import { checkSupplierOrtAdmin } from '../helper/checkRole';
 import TripRequest from './Pages/trip.request.page';
 import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
+import UserProfile from './Pages/userProfile.page';
 
 export class App extends React.Component {
 	render() {
@@ -66,6 +67,9 @@ export class App extends React.Component {
 					<Route path='*' component={NotFound} />
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
+					/>
+					<Route exact path='/userprofile' component={UserProfile} />
+					render={props => (token ? <UserProfile /> : <Redirect to='/login' />)}
 				</Switch>
 			</Router>
 		);
