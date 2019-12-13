@@ -1,0 +1,22 @@
+@media screen and (max-width: 992px) {
+    .row {
+      display: block;
+    }
+    .user-container {
+      margin-left: 0 !important;
+    }
+    textarea.form-control {
+      margin-top: 3vw !important;
+    }
+  }
+  
+  .user-container {
+    padding-top: 70px;
+    width:100%;
+    top: 0;
+    bottom:0;
+    position: fixed;
+    margin-left: 220px;
+    margin-bottom: 100px !important;
+    overflow-y: scroll;
+  }

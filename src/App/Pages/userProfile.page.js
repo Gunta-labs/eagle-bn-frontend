@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Joi from 'joi-browser';
 import _ from 'lodash';
 import moment from 'moment';
+import Header from '../Components/Header';
 import { retrieveUserData, updateUserProfile } from '../../Redux/Actions/userProfile.action';
 //import { } from '@fortawesome/react-fontawesome';
 
@@ -161,202 +162,242 @@ export class UserProfile extends React.Component {
 			errors,
 		} = this.state;
 		return (
-			<div className='request-container bg-light rounded border mb-5'>
-				<div className='mt-5 pl-4 mb-5'>
-					<h5 className=' request-container text-primary border mybody pt-3 pl-3 bg-white'>
-						{' '}
-						My account{' '}
-					</h5>
-					<div className='container'>
-						<div className='container mt-5 ml-5'>
-							<input
-								type='submit'
-								className='btn btn-link col-xs-3 border rounded-0'
-								value='Account info'
-								onClick={this.changeEditMode}
-							/>
-							<input
-								type='submit'
-								className='btn btn-link col-xs-3 border rounded-0 ml-2'
-								value='Edit account'
-								onClick={this.changeEditMode}
-							/>
-							<div className='container border bg-white'>
-								<form
-									id='userDataForm'
-									onSubmit={this.handleUpdate}
-									className='container mt-5 width70'
-								>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>User ID</span>
+			<div>
+				<Header showSideNav={true} active_menu={1} />
+				<div className=' bg-light rounded border mb-5'>
+					<div className='mt-5 pl-4 mb-5'>
+						<h5 className=' text-primary border mybody pt-3 pl-3 bg-white'> My account </h5>
+						<div className='container'>
+							<div className='container mt-5 ml-5'>
+								<input
+									type='submit'
+									className='btn btn-link col-xs-3 border rounded-0'
+									value='Account info'
+									onClick={this.changeEditMode}
+								/>
+								<input
+									type='submit'
+									className='btn btn-link col-xs-3 border rounded-0 ml-2'
+									value='Edit account'
+									onClick={this.changeEditMode}
+								/>
+								<div className='container border bg-white'>
+									<form
+										id='userDataForm'
+										onSubmit={this.handleUpdate}
+										className='container mt-5 width70'
+									>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text text-primary' id='basic-addon3'>
+													User ID
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control width70'
+												aria-describedby='basic-addon3'
+												id='id'
+												onChange={this.handleInput}
+												value={id}
+												access={this.isEdit}
+												error={errors.id}
+											/>
 										</div>
-										<input
-											type='number'
-											className='width70'
-											placeholder='User Id'
-											id='id'
-											onChange={this.handleInput}
-											value={id}
-											access={this.isEdit}
-											error={errors.id}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Full name</span>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Full name
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control width70'
+												aria-describedby='basic-addon3'
+												id='fullname'
+												onChange={this.handleInput}
+												value={fullname}
+												access={this.isEdit}
+												error={errors.fullname}
+											/>
 										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='Full name'
-											id='fullname'
-											onChange={this.handleInput}
-											value={fullname}
-											access={this.isEdit}
-											error={errors.fullname}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Email</span>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Email
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control width70'
+												aria-describedby='basic-addon3'
+												id='email'
+												onChange={this.handleInput}
+												value={email}
+												access={this.isEdit}
+												error={errors.emal}
+											/>
 										</div>
-										<input
-											type='email'
-											className='width70'
-											placeholder='Email'
-											id='email'
-											onChange={this.handleInput}
-											value={email}
-											access={this.isEdit}
-											error={errors.emal}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Gender</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='Gender'
-											id='gender'
-											onChange={this.handleInput}
-											value={gender}
-											access={this.isEdit}
-											error={errors.gender}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Date of birth</span>
-										</div>
-										<input
-											type='date'
-											className='width70 text-muted'
-											placeholder={moment}
-											id='dob'
-											value={dob}
-											access={this.isEdit}
-											error={errors.dob}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Address</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='Address'
-											id='address'
-											onChange={this.handleInput}
-											value={address}
-											access={this.isEdit}
-											error={errors.address}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>City</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='City'
-											id='city'
-											onChange={this.handleInput}
-											value={city}
-											access={this.isEdit}
-											error={errors.city}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>State</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='State'
-											id='state'
-											onChange={this.handleInput}
-											value={state}
-											access={this.isEdit}
-											error={errors.state}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Department</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='Department'
-											id='department'
-											onChange={this.handleInput}
-											value={department}
-											error={errors.department}
-										></input>
-									</div>
-									<div className='input-group mb-3'>
-										<div className='form-control input-group-prepend'>
-											<span className='rounded-0 text-primary'>Line manager</span>
-										</div>
-										<input
-											type='text'
-											className='width70'
-											placeholder='Line manager'
-											id='line_manger'
-											onChange={this.handleInput}
-											value={line_manager}
-											error={errors.line_manager}
-										></input>
-									</div>
-									<div>
-										{/* {this.isEdit ? ( */}
-										<div className='mt-5 mb-5'>
-											<span
-												className='btn btn-primary mr-5'
-												onClick={this.changeEditMode}
-												role='button'
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<label class='input-group-text' for='gender'>
+													Gender
+												</label>
+											</div>
+											<select
+												class='custom-select'
+												id='gender'
+												onChange={this.handleInput}
+												value={gender}
+												access={this.isEdit}
+												error={errors.gender}
 											>
-												Cancel
-											</span>
-											<span
-												className='btn btn-primary ml-5'
-												id='btn_update'
-												onClick={this.handleEdit}
-												role='button'
-											>
-												Update profile
-												{(this.isUpdate = true)}
-											</span>
+												<option selected>Select...</option>
+												<option value='1'>Male</option>
+												<option value='2'>Female</option>
+											</select>
 										</div>
-										{/* ) : null} */}
-									</div>
-								</form>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Date of birth
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='dob'
+												value={dob}
+												access={this.isEdit}
+												error={errors.dob}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Address
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='address'
+												onChange={this.handleInput}
+												value={address}
+												access={this.isEdit}
+												error={errors.address}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													City
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='city'
+												onChange={this.handleInput}
+												value={city}
+												access={this.isEdit}
+												error={errors.city}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													State
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='state'
+												onChange={this.handleInput}
+												value={state}
+												access={this.isEdit}
+												error={errors.state}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Department
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='department'
+												onChange={this.handleInput}
+												value={department}
+												error={errors.department}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text' id='basic-addon3'>
+													Line Manager
+												</span>
+											</div>
+											<input
+												type='text'
+												class='form-control'
+												aria-describedby='basic-addon3'
+												id='line_manger'
+												onChange={this.handleInput}
+												value={line_manager}
+												error={errors.line_manager}
+											/>
+										</div>
+										<div class='input-group mb-3'>
+											<div class='input-group-prepend'>
+												<span class='input-group-text'>Upload image</span>
+											</div>
+											<div class='custom-file'>
+												<input
+													type='file'
+													class='custom-file-input'
+													id='avatar'
+													onChange={this.handleInput}
+													value={avatar}
+													error={errors.avatar}
+												/>
+												<label class='custom-file-label' for='avatar'>
+													Choose file
+												</label>
+											</div>
+										</div>
+										<div>
+											{/* {this.isEdit ? ( */}
+											<div className='mt-5 mb-5'>
+												<span
+													className='btn btn-primary mr-5'
+													onClick={this.changeEditMode}
+													role='button'
+												>
+													Cancel
+												</span>
+												<span
+													className='btn btn-primary ml-5'
+													id='btn_update'
+													onClick={this.handleEdit}
+													role='button'
+												>
+													Update profile
+													{(this.isUpdate = true)}
+												</span>
+											</div>
+											{/* ) : null} */}
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
