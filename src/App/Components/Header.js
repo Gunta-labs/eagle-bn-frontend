@@ -41,7 +41,7 @@ class Header extends React.Component {
 					className={this.state.show ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'}
 					id='navbarCollapse'
 				>
-					{showSideNav && <SideNav active={this.props.active_menu} />}
+					{showSideNav && <SideNav active={this.props.active_menu} avatar={this.props.avatar} />}
 					{!showSideNav && !validToken && (
 						<ul className='navbar-nav ml-auto'>
 							<li className='nav-item active'>

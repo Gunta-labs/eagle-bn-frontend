@@ -1,22 +1,56 @@
+
 @media screen and (max-width: 992px) {
     .row {
       display: block;
     }
     .user-container {
       margin-left: 0 !important;
+      width: 100% !important;
+      position: absolute;
+    }
+    .sub-container {
+        width:100% !important;
+        margin-left: 0 !important;
+       
     }
     textarea.form-control {
       margin-top: 3vw !important;
     }
+    .formData {
+        width:100% !important;
+        margin-left: 0 !important;
+    }
+    .container {
+        width:100% !important;
+    }
+    .inputlabel {
+        width:70px;
+    
+    }
   }
   
   .user-container {
-    padding-top: 70px;
-    width:100%;
+    padding-top: 60px;
     top: 0;
     bottom:0;
     position: fixed;
-    margin-left: 220px;
-    margin-bottom: 100px !important;
+    margin-left: 188px;
+    margin-bottom: 90px !important;
     overflow-y: scroll;
   }
+  .containerbody {
+	height: 40px;
+}
+  .sub-container {
+    margin-left:70px;
+  }
+  .inputlabel {
+	width:150px;
+	color:$primary;
+	background-color: white;
+
+}
+.formData {
+    width: 70%;
+   margin-left: 14%;
+}
