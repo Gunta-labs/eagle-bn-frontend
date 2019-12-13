@@ -14,6 +14,7 @@ import CreateAccommodation from '../App/Pages/create.accommodation.page';
 import { checkSupplierOrtAdmin } from '../helper/checkRole';
 import TripRequest from './Pages/trip.request.page';
 import NotFound from './Pages/not.found.page';
+import LandingPage from './Pages/landing.page';
 
 export class App extends React.Component {
 	render() {
@@ -44,9 +45,7 @@ export class App extends React.Component {
 						}
 					/>
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
-					<Route exact path='/'>
-						<p className='text-center'> hello world </p>
-					</Route>
+					<Route exact path='/' component={LandingPage} />
 					<Route
 						exact
 						path='/login'

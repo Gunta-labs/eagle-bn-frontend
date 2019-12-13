@@ -2,6 +2,7 @@ html {
 	position: relative;
 	min-height: 100%;
 }
+
 body * {
 	font-weight: 100 !important;
 }
@@ -30,6 +31,7 @@ main {
 	background-color: #A7D1FF;
 
 }
+
 .footer {
 	position: fixed;
 	display: none;
@@ -41,9 +43,18 @@ main {
 	min-width: 100%;
   }
 
+.text-secondary{
+	color: #9e9e9e;
+}
+
+
 .bg-img {
 	position: absolute;
 	margin-left: 18rem;
+}
+
+.card {
+	margin-bottom: 2rem;
 }
 
 .signup {
@@ -73,19 +84,35 @@ label {
 .mt-20 {
 	margin-top: 10% !important;
 }
+
 .avatar {
 	width: 75px;
 	height: 75px;
 	border-radius: 100%;
 }
+
 .logo {
-  transform: rotate(-90deg);
-  width:30px;
-  margin-right: 1rem;
+	transform: rotate(-90deg);
+	width: 30px;
+	margin-right: 1rem;
+}
+
+.card-img {
+	height: 165px !important;
+	overflow: hidden;
+
+	img {
+		width: 100% !important;
+		background-size: cover;
+	}
 }
 .request-list {
 	margin-top: 90px;
 }
+.more{
+	right:3rem;
+}
+
 @media (min-width: 992px) {
 	.sidenav {
 		position: absolute;
@@ -111,6 +138,7 @@ label {
 	.footer {
 		width: 100%
 	}
+
 	.user-nav {
 		height: 130px;
 	}
@@ -120,12 +148,25 @@ label {
 	.user-nav {
 		display: none;
 	}
+
 	.signup {
 		margin-top: 20%;
 	}
+
+	.main.navbar-nav {
+		text-align: center;
+	}
+
 	.fixed-top {
 		.shadow-sm {
 			box-shadow: 0 0.125rem 0.25rem rgba(252, 252, 252, 0.075) !important;
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.card-img {
+		height: 122px !important;
+		overflow: hidden;
 	}
 }
