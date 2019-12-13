@@ -10,6 +10,8 @@ import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
 import { SignUp } from './Pages/signup.page';
+import CreateAccommodation from '../App/Pages/create.accommodation.page';
+import { checkSupplierOrtAdmin } from '../helper/checkRole';
 import TripRequest from './Pages/trip.request.page';
 import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
@@ -27,6 +29,21 @@ export class App extends React.Component {
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
+					<Route
+						exact
+						path='/accommodation/create'
+						render={props =>
+							token ? (
+								checkSupplierOrtAdmin() ? (
+									<CreateAccommodation />
+								) : (
+									<Redirect to='/dashboard' />
+								)
+							) : (
+								<Redirect to='/login' />
+							)
+						}
+					/>
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
 					<Route exact path='/' component={LandingPage} />
 					<Route

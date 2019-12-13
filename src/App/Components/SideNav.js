@@ -12,10 +12,19 @@ const requestMenu = [
 	{ name: 'accommodations', icon: faBed, active: false },
 	{ name: 'history', icon: faFileAlt, active: false },
 ];
+const supplierMenu = [
+	{ name: 'my account', icon: faUser, active: true },
+	{ name: 'accommodations', icon: faBed, active: false },
+	{ name: 'booking', icon: faFileAlt, active: false },
+];
 function getMenus(role, active) {
 	switch (role || 'requester') {
 		case 'requester':
 			return requestMenu.map((menu, index) => (
+				<Menu name={menu.name} active={index === active} icon={menu.icon} />
+			));
+		case 'host':
+			return supplierMenu.map((menu, index) => (
 				<Menu name={menu.name} active={index === active} icon={menu.icon} />
 			));
 		default:
@@ -32,7 +41,7 @@ function SideNav(props) {
 					<h6 className='py-2 pl-1'>{fullname}</h6>
 				</div>
 			</li>
-			{getMenus(role, props.active || 'My account')}
+			{getMenus(role, props.active || 0)}
 		</ul>
 	);
 }
