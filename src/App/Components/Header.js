@@ -14,7 +14,6 @@ class Header extends React.Component {
 		const { showSideNav } = this.props;
 		return (
 			<>
-				<html lang='en' />
 				<head>
 					<meta charset='UTF-8' />
 					<meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -57,7 +56,7 @@ class Header extends React.Component {
 								</li>
 								<li className='nav-item mx-3'>
 									<a className='nav-link' href='/'>
-										Acommodations
+										Accommodations
 									</a>
 								</li>
 								<li className='nav-item mx-3'>

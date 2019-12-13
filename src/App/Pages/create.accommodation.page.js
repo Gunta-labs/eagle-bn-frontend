@@ -4,6 +4,15 @@ import PropTypes from 'prop-types';
 import createAcc from '../../Redux/Actions/create.accommodation.action';
 import constants from '../../Redux/constants';
 import Header from '../Components/Header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faBed,
+	faDoorOpen,
+	faMoneyBill,
+	faMapMarker,
+	faDollarSign,
+} from '@fortawesome/free-solid-svg-icons';
+import { getCurrencies, currencies } from '../../helper/currencies';
 
 const newState = {
 	name: '',
@@ -15,6 +24,7 @@ const newState = {
 	services: '',
 	amenities: '',
 	imageNumber: '',
+	currency: '',
 };
 export class CreateAccommodation extends React.Component {
 	state = {
@@ -27,6 +37,7 @@ export class CreateAccommodation extends React.Component {
 		services: '',
 		amenities: '',
 		imageNumber: '',
+		currency: '',
 	};
 	static getDerivedStateFromProps(nextProps, prevState) {
 		console.log(nextProps.accommodation.payload);
@@ -61,6 +72,7 @@ export class CreateAccommodation extends React.Component {
 			availableSpace,
 			amenities,
 			address,
+			currency,
 		} = this.state;
 		const data = {
 			name,
@@ -70,6 +82,7 @@ export class CreateAccommodation extends React.Component {
 			availableSpace,
 			amenities,
 			address,
+			currency,
 		};
 		Object.values(images).forEach(element => {
 			form.append('images', element);
@@ -99,8 +112,12 @@ export class CreateAccommodation extends React.Component {
 			amenities,
 			address,
 			imageNumber,
+			currency,
 		} = this.state;
 		const { error, payload, pending } = this.props.accommodation;
+		const currencyList = getCurrencies().map(element => (
+			<option value={element}>{currencies[element]}</option>
+		));
 		const display = (
 			<div className='d-flex'>
 				<Header active_menu={1} showSideNav={true} />
@@ -116,7 +133,9 @@ export class CreateAccommodation extends React.Component {
 									{payload && <p className='alert alert-success'>uploaded successfully</p>}
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text'>@</span>
+											<span className='input-group-text text-secondary bg-white'>
+												<FontAwesomeIcon icon={faBed} />
+											</span>
 										</div>
 										<input
 											type='text'
@@ -132,7 +151,9 @@ export class CreateAccommodation extends React.Component {
 									</div>
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text'>@</span>
+											<span className='input-group-text text-secondary bg-white'>
+												<FontAwesomeIcon icon={faDoorOpen} />
+											</span>
 										</div>
 										<input
 											type='text'
@@ -144,35 +165,58 @@ export class CreateAccommodation extends React.Component {
 											value={availableSpace}
 											pattern='.{5,}'
 										/>
-										<div className='input-group-prepend ml-2'>
-											<span className='input-group-text'>@</span>
+									</div>
+									<div className='input-group mb-3'>
+										<div className='input-group-prepend'>
+											<span className='input-group-text text-secondary bg-white'>
+												<FontAwesomeIcon icon={faMoneyBill} />
+											</span>
 										</div>
 										<input
 											type='number'
 											name='cost'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='space cost'
+											placeholder='Space cost'
 											required={true}
 											value={cost}
 											pattern='[0-9]{1,}'
 										/>
+										<div className='input-group-prepend ml-2'>
+											<span className='input-group-text text-secondary bg-white'>
+												<FontAwesomeIcon icon={faDollarSign} />
+											</span>
+										</div>
+										<input
+											list='currencyData'
+											type='text'
+											name='currency'
+											className='form-control'
+											onChange={this.handleInput}
+											placeholder='Currency'
+											required={true}
+											value={currency}
+										/>
+										<datalist id='currencyData'>{currencyList}</datalist>
 									</div>
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text'>@</span>
+											<span className='input-group-text text-secondary bg-white'>
+												<FontAwesomeIcon icon={faMapMarker} />
+											</span>
 										</div>
 										<input
 											type='text'
 											name='address'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='address'
+											placeholder='Address'
 											required={true}
 											value={address}
 											pattern='.{5,}'
 										/>
 									</div>
+
 									<div className='form-group'>
 										<textarea
 											className='form-control'
@@ -206,7 +250,7 @@ export class CreateAccommodation extends React.Component {
 										<textarea
 											className='form-control'
 											placeholder='Descriptions'
-											rows='4'
+											rows='5'
 											id='description'
 											name='description'
 											onChange={this.handleInput}
@@ -219,7 +263,7 @@ export class CreateAccommodation extends React.Component {
 										<textarea
 											className='form-control mt-4'
 											placeholder='Amenities'
-											rows='4'
+											rows='5'
 											id='amenities'
 											name='amenities'
 											onChange={this.handleInput}

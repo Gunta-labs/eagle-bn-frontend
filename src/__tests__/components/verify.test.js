@@ -44,13 +44,14 @@ describe('Verify User page', () => {
 	});
 	it('Should have a button to go to login', async done => {
 		Data.mockSuccess({ verified: true });
-		sinon.spy(axios, 'get');
+		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(wrapper.find('h2')).toExist();
 		expect(wrapper.find('h2')).toIncludeText('Account verified!');
-		expect(wrapper.find('.btn-primary').first()).toIncludeText('Go to login');
+		expect(wrapper.find('.btn-primary').at(2)).toIncludeText('Go to login');
 		expect(axios.calledOnce);
+		expect(axiosSpy.calledOnce);
 		const axiosPayload = await axios.get.getCall(0).returnValue;
 		expect(axiosPayload.data.payload.verified).toEqual(true);
 		axios.get.restore();

@@ -4,8 +4,6 @@ import { faUser, faFileAlt, faClipboard, faBed } from '@fortawesome/free-solid-s
 import checkToken from '../../helper/helper';
 import Menu from '../Components/Menu';
 
-const role = checkToken().role;
-
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true },
 	{ name: 'trip requests', icon: faClipboard, active: false },
@@ -41,7 +39,7 @@ function SideNav(props) {
 					<h6 className='py-2 pl-1'>{checkToken().fullname}</h6>
 				</div>
 			</li>
-			{getMenus(role, props.active || 'My account')}
+			{getMenus(checkToken().role, props.active || 0)}
 		</ul>
 	);
 }
