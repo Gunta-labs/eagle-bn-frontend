@@ -5,6 +5,7 @@ import ResetPasswordReducer from './reset.password.reducer';
 import LoginReducer from './loginReducer';
 import { signupReducer } from './signup.reducer';
 import MakeTripRequest from './trip.request.reducer';
+import destinations, { accomodations } from './destinations.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -13,6 +14,8 @@ const allReducers = combineReducers({
 	loginProp: LoginReducer,
 	signup: signupReducer,
 	MakeTripRequest,
+	destSats: destinations,
+	accomodations,
 });
 
 export default allReducers;

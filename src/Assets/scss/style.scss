@@ -1,8 +1,11 @@
 // import scss bootstrap module
 @import './node_modules/bootstrap-scss/bootstrap.scss';
+@import './variables';
+
 
 // import css for verify token
 @import './custom/verify';
+@import './custom/landing';
 
 
 // global variabales
