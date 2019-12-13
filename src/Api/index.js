@@ -24,6 +24,9 @@ const apis = {
 			headers: { Authorization: token, contentType: 'application/x-www-form-urlencoded' },
 		});
 	},
+	getUserProfile(userId) {
+		return axios.get(`${BASE_URL}users/${userId}/profile`);
+	},
 };
 
 export default apis;

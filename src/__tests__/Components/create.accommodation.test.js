@@ -51,8 +51,7 @@ describe('Verify User page', () => {
 		wrapper.find('form').simulate('submit');
 
 		expect(axios.calledOnce);
-		const axiosPayload = await axios.post.getCall(0).returnValue;
-		console.log(axiosPayload);
+		await axios.post.getCall(0).returnValue;
 		axios.post.restore();
 		done();
 	});
@@ -66,9 +65,7 @@ describe('Verify User page', () => {
 		expect(axios.calledOnce);
 		try {
 			await axios.post.getCall(0).returnValue;
-		} catch (err) {
-			console.log(err.response);
-		}
+		} catch (err) {}
 
 		axios.post.restore();
 		done();
@@ -83,9 +80,7 @@ describe('Verify User page', () => {
 		expect(axios.calledOnce);
 		try {
 			await axios.post.getCall(0).returnValue;
-		} catch (err) {
-			console.log(err.response);
-		}
+		} catch (err) {}
 
 		axios.post.restore();
 		done();

@@ -40,7 +40,6 @@ export class CreateAccommodation extends React.Component {
 		currency: '',
 	};
 	static getDerivedStateFromProps(nextProps, prevState) {
-		console.log(nextProps.accommodation.payload);
 		if (nextProps.accommodation.payload) {
 			return { ...newState };
 		} else return null;

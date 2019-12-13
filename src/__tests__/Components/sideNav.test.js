@@ -10,7 +10,7 @@ Enzyme.configure({
 	adapter: new Adapter(),
 });
 describe('single request', () => {
-	it('', done => {
+	it('Should return request sideNav menu', done => {
 		checkToken.default = jest.fn();
 		checkToken.default
 			.mockReturnValueOnce({
@@ -18,6 +18,19 @@ describe('single request', () => {
 			})
 			.mockReturnValueOnce({
 				role: 'requester',
+			});
+		const wrapper = shallow(<SidNav />);
+		expect(wrapper.find(Menu)).toExist();
+		done();
+	});
+	it('Should return host side nav menu', done => {
+		checkToken.default = jest.fn();
+		checkToken.default
+			.mockReturnValueOnce({
+				fullname: 'lemoisson',
+			})
+			.mockReturnValueOnce({
+				role: 'host',
 			});
 		const wrapper = shallow(<SidNav />);
 		expect(wrapper.find(Menu)).toExist();

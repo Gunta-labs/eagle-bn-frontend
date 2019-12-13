@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import VerifyUser from './Pages/VerifyUser.page';
 import Request from './Pages/RequestList.page';
 import Login from './Pages/login.page.js';
-import checkToken from '../helper/helper';
+import { token } from '../helper/helper';
 import Dashboard from '../App/Pages/dashboard';
 import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
@@ -12,8 +12,9 @@ import RequestResetPassword from './Pages/request.reset.password.page';
 import { SignUp } from './Pages/signup.page';
 import CreateAccommodation from '../App/Pages/create.accommodation.page';
 import { checkSupplierOrtAdmin } from '../helper/checkRole';
+import TripRequest from './Pages/trip.request.page';
+import NotFound from './Pages/not.found.page';
 
-const isAuth = checkToken();
 export class App extends React.Component {
 	render() {
 		return (
@@ -23,7 +24,7 @@ export class App extends React.Component {
 					<Route
 						exact
 						path='/requests'
-						render={props => (isAuth ? <Request /> : <Redirect to='/login' />)}
+						render={props => (token ? <Request /> : <Redirect to='/login' />)}
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
@@ -31,7 +32,7 @@ export class App extends React.Component {
 						exact
 						path='/accommodation/create'
 						render={props =>
-							isAuth ? (
+							token ? (
 								checkSupplierOrtAdmin() ? (
 									<CreateAccommodation />
 								) : (
@@ -43,16 +44,22 @@ export class App extends React.Component {
 						}
 					/>
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
+					<Route exact path='/'>
+						<p className='text-center'> hello world </p>
+					</Route>
 					<Route
 						exact
 						path='/login'
-						render={props => (!isAuth ? <Login /> : <Redirect to='/dashboard' />)}
+						render={props => (!token ? <Login /> : <Redirect to='/dashboard' />)}
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />
-					<Route path='/'>
-						<p className='text-center'> hellow world </p>{' '}
-					</Route>{' '}
+					<Route
+						exact
+						path='/request/create'
+						render={props => (token ? <TripRequest /> : <Redirect to='/login' />)}
+					/>
+					<Route path='*' component={NotFound} />
 				</Switch>
 				<Footer />
 			</Router>
