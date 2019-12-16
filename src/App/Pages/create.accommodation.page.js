@@ -6,11 +6,11 @@ import constants from '../../Redux/constants';
 import Header from '../Components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-	faBed,
 	faDoorOpen,
 	faMoneyBill,
 	faMapMarker,
 	faDollarSign,
+	faHotel,
 } from '@fortawesome/free-solid-svg-icons';
 import { getCurrencies, currencies } from '../../helper/currencies';
 
@@ -133,7 +133,7 @@ export class CreateAccommodation extends React.Component {
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
 											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faBed} />
+												<FontAwesomeIcon icon={faHotel} />
 											</span>
 										</div>
 										<input
@@ -248,7 +248,7 @@ export class CreateAccommodation extends React.Component {
 									<div className='form-group'>
 										<textarea
 											className='form-control'
-											placeholder='Descriptions'
+											placeholder='Description'
 											rows='5'
 											id='description'
 											name='description'

@@ -6,6 +6,7 @@ import destinationForm from '../Components/destination.form';
 import requestForm from '../Components/request.form';
 import sendTripRequest from '../../Redux/Actions/trip.request.action';
 import formData from '../../helper/trip.request.form.data';
+import { Redirect } from '@reach/router';
 
 class TripRequest extends React.Component {
 	constructor(props) {
@@ -46,29 +47,27 @@ class TripRequest extends React.Component {
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={1} />
+				{this.props.tripRequestStatus === 'success' && <Redirect to='requests' />}
 				<div className='request-container mb-3 container'>
 					<div className={this.props.messageClass}> {this.props.message} </div> <br />
 					<form onSubmit={this.handleSubmit}>
 						{requestForm(this.handleValueChange)}
 						{this.showDestinationsForm()}
 						<br></br>
-						{this.props.tripRequestStatus !== 'success' ? (
-							<div className='row'>
-								<button
-									className='btn btn-primary col-xs-3 rounded-0 ml-2'
-									onClick={this.addDestination}
-								>
-									Add more Trips
-								</button>
-								<input
-									type='submit'
-									className='btn btn-link col-xs-3 border rounded-0 ml-2'
-									value='Submit request'
-								/>
-							</div>
-						) : (
-							''
-						)}
+
+						<div className='row'>
+							<button
+								className='btn btn-primary col-xs-3 rounded-0 ml-2'
+								onClick={this.addDestination}
+							>
+								Add more Trips
+							</button>
+							<input
+								type='submit'
+								className='btn btn-link col-xs-3 border rounded-0 ml-2'
+								value='Submit request'
+							/>
+						</div>
 					</form>
 				</div>
 			</div>

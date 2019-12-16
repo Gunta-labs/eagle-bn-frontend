@@ -84,7 +84,16 @@ label {
   margin-right: 1rem;
 }
 .request-list {
+	margin-top: 0px;
+}
+.request-button{
+	height: 40px;
+	padding-bottom: 0px;
 	margin-top: 90px;
+}
+.img-not-found{
+	width: 100px;
+	height: 100px;
 }
 @media (min-width: 992px) {
 	.sidenav {
@@ -103,11 +112,16 @@ label {
 	.navbar-expand-lg .sidenav {
 		flex-direction: column;
 	}
-
+	.request-button{
+		margin-left: 265px;
+	}
+	.pagination {
+		margin-left: 265px;
+	}
 	.content-wrapper {
 		margin-left: 230px;
 	}
-
+	
 	.footer {
 		width: 100%
 	}
@@ -119,6 +133,9 @@ label {
 @media (max-width: 992px) {
 	.user-nav {
 		display: none;
+	}
+	.request-button{
+		margin-left: 2.5rem;
 	}
 	.signup {
 		margin-top: 20%;

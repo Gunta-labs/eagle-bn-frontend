@@ -12,28 +12,32 @@ Enzyme.configure({
 describe('single request', () => {
 	it('Should return request sideNav menu', done => {
 		checkToken.default = jest.fn();
-		checkToken.default
-			.mockReturnValueOnce({
-				fullname: 'lemoisson',
-			})
-			.mockReturnValueOnce({
-				role: 'requester',
-			});
+		checkToken.default.mockReturnValue({
+			fullname: 'lemoisson',
+			role: 'requester',
+		});
 		const wrapper = shallow(<SidNav />);
 		expect(wrapper.find(Menu)).toExist();
 		done();
 	});
 	it('Should return host side nav menu', done => {
 		checkToken.default = jest.fn();
-		checkToken.default
-			.mockReturnValueOnce({
-				fullname: 'lemoisson',
-			})
-			.mockReturnValueOnce({
-				role: 'host',
-			});
+		checkToken.default.mockReturnValueOnce({
+			fullname: 'lemoisson',
+			role: 'host',
+		});
 		const wrapper = shallow(<SidNav />);
 		expect(wrapper.find(Menu)).toExist();
+		done();
+	});
+	it('Should return  empty menu', done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValueOnce({
+			fullname: 'lemoisson',
+			role: 'kekeke',
+		});
+		const wrapper = shallow(<SidNav />);
+		expect(wrapper.find(Menu)).not.toExist();
 		done();
 	});
 });

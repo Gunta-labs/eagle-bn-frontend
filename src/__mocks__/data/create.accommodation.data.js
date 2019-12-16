@@ -55,13 +55,6 @@ const verifyData = {
 		axios.post.mockImplementationOnce(() => Promise.reject(data));
 	},
 	mockNetworkFailure: (payload = null) => {
-		const data = {
-			response: {
-				msg: 'msg',
-				status: 401,
-				payload,
-			},
-		};
 		axios.post.mockImplementationOnce(() =>
 			Promise.reject({
 				message: 'network failure',

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import Requests from '../../App/Pages/RequestList.page';
+import { RequestList, Requests } from '../../App/Pages/RequestList.page';
 import Data from '../../__mocks__/data/request.list.data';
 import config from '../../helper/test.helper';
 import Enzyme from 'enzyme';
@@ -51,6 +51,30 @@ describe('Verify User page', () => {
 		expect(wrapper.find('h3.error')).toExist();
 		expect(wrapper.find('h3.error')).toIncludeText('No request found');
 		expect(axios.calledOnce);
+		try {
+			await axios.get.getCall(0).returnValue;
+		} catch (err) {
+			expect(err.response.status).toEqual(404);
+		}
+		axios.get.restore();
+		done();
+	});
+	it('Should simulate click on paginations ', async done => {
+		Data.mockData.mockSuccess();
+		sinon.spy(axios, 'get');
+		store = config.mockStore(Data.mockData.successState);
+		wrapper = config.mountNewWrapper(store, component);
+		expect(axios.calledOnce);
+		wrapper.find('#next-nav').simulate('click');
+		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(2);
+		wrapper.find('#next-nav').simulate('click');
+		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(2);
+		const previous = wrapper.find('#previous-nav');
+		previous.simulate('click');
+		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(1);
+		const nav_link = wrapper.find('.page-item').last();
+		nav_link.simulate('click');
+		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(2);
 		try {
 			await axios.get.getCall(0).returnValue;
 		} catch (err) {
