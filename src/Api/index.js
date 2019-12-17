@@ -40,11 +40,11 @@ const apis = {
 		const accommodations = await axios.get(`${BASE_URL}accommodations`);
 		return accommodations;
 	},
-	async singleAccomodation(id) {
-		return await axios.get(`${BASE_URL}accommodations/${id}`);
+	singleAccomodation(id) {
+		return axios.get(`${BASE_URL}accommodations/${id}`);
 	},
-	async GetFeeback(id) {
-		return await axios.get(`${BASE_URL}accommodations/${id}/rating`);
+	GetFeeback(id) {
+		return axios.get(`${BASE_URL}accommodations/${id}/rating`);
 	},
 };
 

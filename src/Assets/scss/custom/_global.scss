@@ -1,3 +1,4 @@
+  
 html {
 	position: relative;
 	min-height: 100%;
@@ -200,17 +201,12 @@ label {
 }
 .acc-container{
 	 width: 90%;
-	 margin-top: 6rem;
-	 margin-left: 5%;
+	 margin-top: 4rem;
+	 margin-left: 3%;
 	 
 }
 .gallery-card {
 	height: auto;
-	 margin:6rem 4rem 0  4rem;
-	 
-}
-.gallery-card {
-	height: 660px;
 }
 
 .img-card-display {
@@ -220,6 +216,7 @@ label {
 	height: 150px;
 	overflow-y: scroll;
 	float: left;
+	z-index: 567;
 }
 
 .img-feedback{
@@ -240,4 +237,15 @@ label {
 
 .bold-text {
 	font-weight: 400 !important;
+}
+
+
+
+.error-msg{
+	margin-top: 45vh;
+}
+
+.spinner-load{
+	height: 100px;
+	width: 100px;
 }

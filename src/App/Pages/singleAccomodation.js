@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import img from '../../Assets/images/acc.jpg';
 import Header from '../Components/Header';
 import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
+import StarRatings from 'react-star-ratings';
 
 export class singleAccomodations extends Component {
 	state = {
@@ -92,7 +92,7 @@ export class singleAccomodations extends Component {
 				<div className='acc-container'>
 					<h4 className='mt-5 mb-3 text-primary '> Single Accomodation</h4>
 					<div className='row gallery-card'>
-						<div className='col-md-6 p-3'>
+						<div className='col-md-6 shadow-sm'>
 							{images.length !== 0 ? (
 								<>
 									<div className='col-md-12 img-card-display'>
@@ -103,7 +103,7 @@ export class singleAccomodations extends Component {
 											alt=''
 										/>
 									</div>
-									<div className='col-md-12 img-scroll-display'>{imgs}</div>
+									<div className='col-md-12 pt-2 img-scroll-display'>{imgs}</div>
 								</>
 							) : (
 								<>
@@ -112,19 +112,19 @@ export class singleAccomodations extends Component {
 								</>
 							)}
 						</div>
-						<div className='col-md-6 p-5 gallery-card'>
+						<div className='col-md-6 p-5 gallery-card shadow-sm'>
 							<div className='row '>
 								<h3 className='text-primary bold-text'>{name}</h3>
 								<button className='btn btn-sm shadow-sm ml-auto text-primary bold-text'>
 									{`${cost} ${currency}`}/NIGHT
 								</button>
 							</div>
-							<h4 className='text-bold pt-3 pb-3'>{address}</h4>
-							<h5 className=''>description</h5>
+							<h4 className='bold-text pt-3 pb-3'>{address}</h4>
+							<h5 className='bold-text'>description</h5>
 							<p>{description}</p>
-							<h5 className='pt-3'>amenities</h5>
+							<h5 className='pt-3 bold-text'>amenities</h5>
 							<p>{amenities}</p>
-							<div className='d-flex'>
+							<div className='row'>
 								<h1 className='text-primary'>{availableSpace.split(' ')[0]}</h1>
 								<h5 className='mx-2 mt-3 text-primary'>{availableSpace.split(' ')[1]} available</h5>
 								{feedback_error !== null && (
@@ -134,7 +134,19 @@ export class singleAccomodations extends Component {
 								)}
 								{feedback_error === null && (
 									<div className='ml-auto'>
-										<span className='mx-2'>jddddhdshdsh</span>
+										<span className='mx-2'>
+											{
+												<StarRatings
+													rating={JSON.parse(avg)}
+													starRatedColor='#e99434'
+													numberOfStars={5}
+													name='rating'
+													starEmptyColor='F5F1F1'
+													starDimension='25px'
+													starBorder='#e99434'
+												/>
+											}
+										</span>
 										<button className='btn btn-sm shadow-sm '>{avg}</button>
 									</div>
 								)}
@@ -148,6 +160,7 @@ export class singleAccomodations extends Component {
 						</div>
 						<div className='col-12 flex-column acc-container border'>
 							<h5 className='pl-n3 text-primary'>Recent Feedback</h5>
+							<span className='draw draw-light'></span>
 							{feedback_error !== null && (
 								<p className='ml-md-2'>{`${feedback_error} and no feedback for this accomodations`}</p>
 							)}
@@ -167,20 +180,25 @@ export class singleAccomodations extends Component {
 		return (
 			<>
 				{pending && (
-					<div className='col-md-12 p-5' style={{ height: '800px', width: '600px' }}>
-						<center>
-							<div
-								className='spinner-grow text-info m-auto'
-								style={{ height: '300px', width: '300px' }}
-							/>
-						</center>
-					</div>
+					<>
+						<Header />
+						<div className='w-100 p-5'>
+							<div className='error-msg text-center w-100'>
+								<span className=' spinner-load spinner-border text-info text-secondary d-block text-center mx-auto error' />
+							</div>
+						</div>
+					</>
 				)}
 				{error && (
-					<div className='col-md-12 p-5' style={{ height: '800px', width: '600px' }}>
-						<h3 className='text-secondary d-block text-center m-4 error'>{error}</h3>
-						<div className='col text-center'></div>
-					</div>
+					<>
+						<Header />
+						<div className='w-100 p-5'>
+							<div className='error-msg'>
+								{' '}
+								<h3 className='text-secondary d-block text-center my-auto error'>{error}</h3>
+							</div>
+						</div>
+					</>
 				)}
 				{!pending && payload && this.display(payload, feedback, feedback_error)}
 			</>

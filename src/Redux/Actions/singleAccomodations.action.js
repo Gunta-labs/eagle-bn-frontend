@@ -1,4 +1,5 @@
 import apis from '../../Api/index';
+import constants from '../constants/index';
 
 export const singleAccomodation = async id => {
 	try {
@@ -6,19 +7,19 @@ export const singleAccomodation = async id => {
 		const { data } = result.data;
 		if (data !== null) {
 			return {
-				type: 'SINGLE_ACCOMODATION_SUCCESS',
+				type: constants.SINGLE_ACCOMODATION_SUCCESS,
 				payload: data,
 			};
 		} else {
 			return {
-				type: 'SINGLE_ACCOMODATION_ERROR',
+				type: constants.SINGLE_ACCOMODATION_ERROR,
 				payload: 'No Accomodation with id',
 			};
 		}
 	} catch (error) {
 		const message = error.response ? error.response.data.msg : 'No internet access';
 		return {
-			type: 'SINGLE_ACCOMODATION_ERROR',
+			type: constants.SINGLE_ACCOMODATION_ERROR,
 			payload: message,
 		};
 	}
@@ -29,13 +30,13 @@ export const GetFeedback = async id => {
 		const feedback = await apis.GetFeeback(id);
 		const { data } = feedback.data;
 		return {
-			type: 'SINGLE_ACCOMODATION_FEEDBACK_SUCCESS',
+			type: constants.SINGLE_ACCOMODATION_FEEDBACK_SUCCESS,
 			payload: data,
 		};
 	} catch (error) {
 		const message = error.response ? error.response.data.msg : 'No internet access';
 		return {
-			type: 'SINGLE_ACCOMODATION_FEEDBACK_ERROR',
+			type: constants.SINGLE_ACCOMODATION_FEEDBACK_ERROR,
 			payload: message,
 		};
 	}
