@@ -2,11 +2,25 @@ import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import authentication from '../../Redux/Actions/login.actions';
+import QueryString from 'querystring';
+import authentication, { socialLog } from '../../Redux/Actions/login.actions';
 import bckimg from '../../Assets/images/login.svg';
 import Header from '../Components/Header';
+import SocialLogin from '../Components/socialLogin';
 
 export class Login extends React.Component {
+	constructor(props) {
+		super(props);
+		const { location } = this.props;
+		if (location) {
+			const values = QueryString.parse(location.search);
+			values.token = values['?token'];
+			if (values.token) {
+				localStorage.setItem('barefoot_token', values.token);
+				this.props.socialLog();
+			}
+		}
+	}
 	state = {
 		email: '',
 		password: '',
@@ -40,6 +54,9 @@ export class Login extends React.Component {
 					<div className='row'>
 						<div className='col-md-6 col-lg-6 bg-sm-white rounded'>
 							<h3 className='text-center mb-4'> Login </h3>
+							<div>
+								<SocialLogin />
+							</div>
 							<hr />
 							{error && <p className='alert alert-danger'>{error}</p>}
 							<form onSubmit={this.handleSubmit}>
@@ -49,7 +66,7 @@ export class Login extends React.Component {
 										name='email'
 										className='form-control'
 										onChange={this.handleInput}
-										placeholder='Email'
+										placeholder='Email address'
 										required={true}
 										value={email}
 									/>
@@ -72,9 +89,14 @@ export class Login extends React.Component {
 										Forgot Password{' '}
 									</Link>{' '}
 								</p>
-								<button className='btn btn-primary btn-block my-3' type='submit'>
-									{'Sign in'}
+								<button className='btn-primary btn-block my-3 form-control' type='submit'>
+									{'Login'}
 								</button>
+								New to Barefoot?
+								<Link to={`/signup`} activeClassName='active'>
+									{' '}
+									signup{' '}
+								</Link>{' '}
 							</form>
 						</div>
 					</div>
@@ -93,6 +115,7 @@ Login.propTypes = {
 export const mapDispatchToProps = dispatch => {
 	return {
 		authentication: async data => dispatch(await authentication(data)),
+		socialLog: async data => dispatch(await socialLog()),
 	};
 };
 

@@ -33,6 +33,9 @@ const apis = {
 	accomodations() {
 		return axios.get(`${BASE_URL}accommodations`);
 	},
+	facebookLoginAPI(accessToken) {
+		return axios.post(`${BASE_URL}/users/auth/facebook`, { access_token: accessToken });
+	},
 };
 
 export default apis;

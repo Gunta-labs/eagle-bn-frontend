@@ -49,7 +49,9 @@ export class App extends React.Component {
 					<Route
 						exact
 						path='/login'
-						render={props => (!token ? <Login /> : <Redirect to='/dashboard' />)}
+						render={props =>
+							!token ? <Login location={props.location} /> : <Redirect to='/dashboard' />
+						}
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route exact path='/dashboard' component={Dashboard} />

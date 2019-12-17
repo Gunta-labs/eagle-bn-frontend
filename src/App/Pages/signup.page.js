@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../Redux/Actions';
 import BgImg from '../assets/imgs/login.svg';
+import Header from '../Components/Header';
 
 export class Signup extends React.Component {
 	state = {
@@ -34,6 +36,7 @@ export class Signup extends React.Component {
 		const { user, error, signing } = this.props.props_.signup;
 		return (
 			<div className='d-flex'>
+				<Header />
 				<img className='vh-100 vw-100 bg-img' src={BgImg} alt='bg' />
 				<div className='container signup'>
 					<div className={user && user.status === 201 ? 'row mt-20' : 'row'}>
@@ -111,6 +114,11 @@ export class Signup extends React.Component {
 								<button className='btn btn-primary btn-block my-3' type='submit'>
 									{signing ? 'signing......' : 'Sign up'}
 								</button>
+								If you have a Barefoot account,
+								<Link to={`/login`} activeClassName='active'>
+									{' '}
+									login here{' '}
+								</Link>{' '}
 							</form>
 						</div>
 					</div>
