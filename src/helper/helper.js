@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-export const user = localStorage.getItem('user');
 export const token = localStorage.getItem('barefoot_token');
 
 export default () => {

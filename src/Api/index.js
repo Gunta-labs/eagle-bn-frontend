@@ -49,7 +49,21 @@ const apis = {
 	logout(token) {
 		return axios.patch(`${BASE_URL}users/logout`, null, {
 			headers: {
+				Authorization: token,
 				'Content-Type': 'application/json',
+			},
+		});
+	},
+	getManagerRequest(managerId, token) {
+		return axios.get(`${BASE_URL}requests/managers/${managerId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getSingleRequest(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}`, {
+			headers: {
 				Authorization: token,
 			},
 		});
