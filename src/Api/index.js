@@ -46,6 +46,14 @@ const apis = {
 	GetFeeback(id) {
 		return axios.get(`${BASE_URL}accommodations/${id}/rating`);
 	},
+	logout(token) {
+		return axios.patch(`${BASE_URL}users/logout`, null, {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: token,
+			},
+		});
+	},
 };
 
 export default apis;
