@@ -10,9 +10,10 @@ export const facebookLoginFailure = error => ({
 	error,
 });
 
-export const facebookLoginAction = payload => dispatch => {
+export const facebookLoginAction = payload => async dispatch => {
 	try {
-		const res = apis.facebookLoginAPI(payload);
+		const res = await apis.facebookLoginAPI(payload);
+		localStorage.setItem('barefoot_token', res.data.data.token);
 		dispatch(facebookLoginSucess(res.data));
 	} catch (err) {
 		dispatch(facebookLoginFailure(err.response.data.message));

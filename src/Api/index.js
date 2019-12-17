@@ -34,12 +34,7 @@ const apis = {
 		return axios.get(`${BASE_URL}accommodations`);
 	},
 	facebookLoginAPI(accessToken) {
-		return (
-			axios
-				//.post('http://localhost:3000/api/v1/users/auth/facebook', user)
-				.post(`${BASE_URL}/users/auth/facebook`, { access_token: accessToken })
-				.then(res => localStorage.setItem('barefoot_token', res.data.data.token))
-		);
+		return axios.post(`${BASE_URL}/users/auth/facebook`, { access_token: accessToken });
 	},
 };
 
