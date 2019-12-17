@@ -32,11 +32,34 @@ const data = {
 		},
 	],
 };
+const data2 = {
+	id: 1,
+	returnTime: '2019-12-06 08:57:21.133 +00:00',
+	country: 'Ugandaganda',
+	city: 'kampala',
+	status: 'rejected',
+	timeZone: 'africa/kigali',
+	createdAt: '2019-12-06T08:57:21.133Z',
+	updatedAt: '2019-12-06T08:57:21.133Z',
+	UserId: 3,
+	Trips: [
+		{
+			id: 1,
+			departureTime: '2019-12-06 08:57:21.179 +00:00',
+			country: 'Uganda',
+			city: 'Kampala',
+			reason: 'I just like that place',
+			accommodationId: null,
+			createdAt: '2019-12-06T08:57:21.179Z',
+			updatedAt: '2019-12-06T08:57:21.179Z',
+		},
+	],
+};
 const mockData = {
 	successState: {
 		Request: {
 			pending: false,
-			payload: { data: [data] },
+			payload: { data: [data, data, data, data, data, data, data, data, data2] },
 			error: null,
 		},
 	},
@@ -67,7 +90,7 @@ const mockData = {
 		axios.get.mockResolvedValue({
 			msg: 'msg',
 			status: 200,
-			data: [data],
+			data: [data, data, data, data, data, data, data, data],
 		});
 	},
 	mockFailure: (payload = null) => {
