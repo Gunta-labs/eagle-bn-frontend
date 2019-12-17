@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import img from '../../Assets/images/acc.jpg';
+import Header from '../Components/Header';
 import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
 
 export class singleAccomodations extends Component {
@@ -87,8 +88,9 @@ export class singleAccomodations extends Component {
 
 		return (
 			<>
+				<Header />
 				<div className='acc-container'>
-					<h4 className='mt-5 mb-3 text-primary'> Single Accomodation</h4>
+					<h4 className='mt-5 mb-3 text-primary '> Single Accomodation</h4>
 					<div className='row gallery-card'>
 						<div className='col-md-6 p-3'>
 							{images.length !== 0 ? (
@@ -111,7 +113,7 @@ export class singleAccomodations extends Component {
 							)}
 						</div>
 						<div className='col-md-6 p-5 gallery-card'>
-							<div className='d-flex'>
+							<div className='row '>
 								<h3 className='text-primary bold-text'>{name}</h3>
 								<button className='btn btn-sm shadow-sm ml-auto text-primary bold-text'>
 									{`${cost} ${currency}`}/NIGHT
@@ -144,7 +146,7 @@ export class singleAccomodations extends Component {
 								<button className='borger border-dark btn ml-auto btn-lg'>bookmark</button>
 							</div>
 						</div>
-						<div className='col-12 flex-column acc-container'>
+						<div className='col-12 flex-column acc-container border'>
 							<h5 className='pl-n3 text-primary'>Recent Feedback</h5>
 							{feedback_error !== null && (
 								<p className='ml-md-2'>{`${feedback_error} and no feedback for this accomodations`}</p>

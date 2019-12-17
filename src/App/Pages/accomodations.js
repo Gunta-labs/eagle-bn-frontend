@@ -4,16 +4,17 @@ import { faSearch, faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getAccomodations from '../../Redux/Actions/getAllAccomodations.action.js';
 import Accomodations from '../Components/Accomodations';
+import Header from '../Components/Header';
 
 export class GetAllAccomodations extends React.Component {
 	componentDidMount() {
 		this.props.getAccomodations();
 	}
 	render() {
-		console.log(this.props.accomodation.data);
 		const { data } = this.props.accomodation;
 		return (
 			<>
+				<Header />
 				<div className='my-search shadow-lg border-0'>
 					<div className='container d-flex justify-content-center align-items-center'>
 						<form>
