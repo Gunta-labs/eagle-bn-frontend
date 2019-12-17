@@ -1,13 +1,9 @@
 import React from 'react';
-import Enzyme, { render, mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import config from '../../helper/test.helper';
-import promiseMiddleware from 'redux-promise-middleware';
-import thunk from 'redux-thunk';
-import configureMockStore from 'redux-mock-store';
 import LoginFacebook from '../../App/Components/facebookLogin';
 import { Provider } from 'react-redux';
-import Button from '../../App/Components/socialButton';
 import ReactDOM from 'react-dom';
 import FacebookLogin from 'react-facebook-login';
 import { facebookLoginAction } from '../../Redux/Actions/facebookLoginAction';
@@ -52,7 +48,7 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		expect(wrapper.find('.kep-login-facebook')).toExist();
+		expect(wrapper.find('.btn-face.btn.Face')).toExist();
 		done();
 	});
 	it('Should return 200 status when logged in successfully', async () => {
@@ -68,7 +64,7 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		wrapper.find('.kep-login-facebook').simulate('click');
+		wrapper.find('.btn-face.btn.Face').simulate('click');
 		console.log(wrapper.find(LoginFacebook).props());
 		wrapper
 			.find(FacebookLogin)
@@ -96,16 +92,13 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		wrapper.find('.kep-login-facebook').simulate('click');
+		wrapper.find('.btn-face.btn.Face').simulate('click');
 		console.log(wrapper.find(LoginFacebook).props());
 		wrapper
 			.find(FacebookLogin)
 			.props()
 			.callback({ response: { accessToken: 'krkrkrkrkkr' }, provider: 'facebook' });
-		wrapper
-			.find(FacebookLogin)
-			.props()
-			.render({ renderProps: {} });
+		wrapper.find(FacebookLogin).props();
 		expect(axios.calledOnce);
 		try {
 			await axios.post.getCall(0).returnValue;

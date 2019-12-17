@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import FacebookLogin from 'react-facebook-login';
 import { facebookLoginAction } from '../../Redux/Actions/facebookLoginAction';
-import Button from './socialButton';
 import faceIcon from '../../Assets/images/icon_facebook.svg';
 
 export class LoginFacebook extends React.Component {
@@ -22,14 +21,9 @@ export class LoginFacebook extends React.Component {
 					<FacebookLogin
 						appId='2618632188182397'
 						callback={response => this.facebookLog({ response, provider: 'facebook' })}
-						render={renderProps => (
-							<Button
-								name='Facebook'
-								logo={faceIcon}
-								styleClass='btn-face btn Face'
-								onClick={renderProps.onClick}
-							/>
-						)}
+						cssClass='btn-face btn Face'
+						icon={<img className='socialButtonImg' src={faceIcon} alt='social logo' />}
+						textButton='Facebook'
 					/>
 				</React.Fragment>
 			</div>
