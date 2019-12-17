@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import updateAcc from '../../Redux/Actions/update.accomodation.action';
 import constants from '../../Redux/constants';
 import Header from '../Components/Header';
+import { Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faDoorOpen,
@@ -19,7 +20,7 @@ export class UpdateAccommodation extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: '',
+			name: undefined,
 			description: '',
 			images: {},
 			address: '',
@@ -35,21 +36,27 @@ export class UpdateAccommodation extends React.Component {
 		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
-	handleInputChange(event) {
-		const target = event.target;
+	handleInputChange(e) {
+		const target = e.target;
 		const value = target.value;
 		const name = target.name;
-
-		this.setState({
-			[name]: value,
-		});
+		if (e.target.id === 'images') {
+			this.setState({
+				imageNumber: `${e.target.files.length} file(s) selected`,
+				images: e.target.files,
+			});
+		} else {
+			this.setState({
+				[name]: value,
+			});
+		}
 	}
 
 	async componentDidMount() {
 		const { id } = this.props.match.params;
 		this.props.loading();
+		this.props.get(id);
 		const accomodation = await singleAccomodation(id);
-		console.log(accomodation);
 		this.setState(accomodation.payload);
 	}
 	handleSubmit = e => {
@@ -94,19 +101,22 @@ export class UpdateAccommodation extends React.Component {
 	};
 
 	render() {
-		const { payload, pending } = this.props.UpdateAccomodation;
+		const { payload, pending, error } = this.props.UpdateAccomodation;
 		const currencyList = getCurrencies().map(element => (
 			<option value={element}>{currencies[element]}</option>
 		));
+
 		return (
 			<div className='d-flex'>
 				<Header active_menu={1} showSideNav={true} />
+				{!pending && this.props.getOneAcc.error && <Redirect to='/notfound' />}; */}
 				<div className='container content-wrapper create-accommodation'>
 					<h5 className='text-primary mb-4'> Update accommodation </h5>
 					<div className='row'>
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
 							<form className='row' onSubmit={this.handleSubmit}>
 								<div className='col-md-6 col-lg-6'>
+									{error && <p className='alert alert-warning'>you have no permissions</p>}
 									{payload && <p className='alert alert-success'>Update successfully</p>}
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
@@ -210,21 +220,21 @@ export class UpdateAccommodation extends React.Component {
 											id='images'
 											multiple={true}
 											name='images'
+											required={true}
 										/>
-										<label className='custom-file-label' for='images'></label>
+										<label className='custom-file-label' for='images'>
+											{'Choose files'}
+										</label>
 									</div>
 									{/* images */}
 									<div className='row mt-2'>
-										{/* {console.log('======>', this.state.AccommodationImages.length > 0)} */}
-										{/* {this.state.AccommodationImages.length &&
+										{this.state.AccommodationImages &&
 											this.state.AccommodationImages.length > 0 &&
 											this.state.AccommodationImages.map(img => (
 												<div className='col-2'>
-													<div className='card p-5 bg-secondary'>
-														<img src={img.link} alt='hello' />
-													</div>
+													<img className='img-sm' src={img.imageurl} alt='hello' />
 												</div>
-											))} */}
+											))}
 									</div>
 								</div>
 								<div className='col-md-6 col-lg-6'>
@@ -282,6 +292,7 @@ const mapDispatchToProps = dispatch => {
 				pending: true,
 			}),
 		update: async (data, token, id) => dispatch(await updateAcc(data, token, id)),
+		get: async id => dispatch(await singleAccomodation(id)),
 	};
 };
 

@@ -31,30 +31,6 @@ describe('Verify User page', () => {
 		expect(wrapper.find('.alert.alert-success')).toIncludeText('Update successfully');
 		done();
 	});
-	// it('should have an alert containing error message', done => {
-	// 	store = config.mockStore(Data.errorState);
-	// 	wrapper = config.mountNewWrapper(store, component);
-	// 	expect(wrapper.find('.alert.alert-danger')).toExist();
-	// 	done();
-	// });
-	// it('should submit data and get data from actions', async done => {
-	// 	sinon.spy(axios, 'patch');
-	// 	Data.mockSuccess({ name: 'seriously' });
-	// 	store = config.mockStore(Data.initialState);
-	// 	wrapper = config.mountNewWrapper(store, component);
-	// 	const event = { target: { name: 'name', value: 'seriously' } };
-	// 	const eventFile = { target: { id: 'images', value: 'seriously', files: [{ myfile: {} }] } };
-	// 	wrapper.find('input[name="name"]').simulate('change', event);
-	// 	wrapper.find('input[name="images"]').simulate('change', eventFile);
-	// 	expect(wrapper.find('input[name="name"]')).toHaveValue('seriously');
-	// 	expect(wrapper.find('.custom-file-label')).toIncludeText('1 file(s) selected');
-	// 	wrapper.find('form').simulate('submit');
-
-	// 	expect(axios.calledOnce);
-	// 	await axios.patch.getCall(0).returnValue;
-	// 	axios.patch.restore();
-	// 	done();
-	// });
 	it('should submit data and get an error message', async done => {
 		sinon.spy(axios, 'patch');
 		Data.mockFailure({ name: 'seriously' });

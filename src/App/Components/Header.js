@@ -96,13 +96,6 @@ class Header extends React.Component {
 							</li>
 						</ul>
 					)}
-					{showSideNav && validToken && (
-						<ul className='navbar-nav ml-auto'>
-							<li className='nav-item mx-3'>
-								<LogoutButton />
-							</li>
-						</ul>
-					)}
 				</div>
 			</nav>
 		);
