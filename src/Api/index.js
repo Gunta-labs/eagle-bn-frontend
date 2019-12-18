@@ -36,6 +36,11 @@ const apis = {
 	facebookLoginAPI(accessToken) {
 		return axios.post(`${BASE_URL}/users/auth/facebook`, { access_token: accessToken });
 	},
+	bookAccommodation(data, token) {
+		return axios.post(`${BASE_URL}bookings`, data, {
+			headers: { Authorization: token },
+		});
+	},
 };
 
 export default apis;
