@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import Booking from '../../App/Pages/book.accommodation.page';
+import Booking, { CreateBooking } from '../../App/Pages/book.accommodation.page';
 import Data from '../../__mocks__/data/book.accommodation.data';
 import config from '../../helper/test.helper';
 import Enzyme from 'enzyme';
@@ -58,6 +58,32 @@ describe('Verify User page', () => {
 		expect(axios.calledOnce);
 		await axios.post.getCall(0).returnValue;
 		axios.post.restore();
+		done();
+	});
+	it('should validate dates', async done => {
+		Data.mockSuccess({ name: 'seriously' });
+		store = config.mockStore(Data.initialState);
+		wrapper = config.mountNewWrapper(store, component);
+		const event = { target: { name: 'start', value: '2019-12-11' } };
+		wrapper.find('input[name="start"]').simulate('change', event);
+		wrapper.find('form').simulate('submit');
+		expect(wrapper.find(CreateBooking).instance().state.error.data.msg).toEqual(
+			'The starting date should be greated than today',
+		);
+		done();
+	});
+	it('should validate dates', async done => {
+		Data.mockSuccess({ name: 'seriously' });
+		store = config.mockStore(Data.initialState);
+		wrapper = config.mountNewWrapper(store, component);
+		const event = { target: { name: 'start', value: '2030-12-11' } };
+		const event1 = { target: { name: 'end', value: '2030-12-10' } };
+		wrapper.find('input[name="start"]').simulate('change', event);
+		wrapper.find('input[name="end"]').simulate('change', event1);
+		wrapper.find('form').simulate('submit');
+		expect(wrapper.find(CreateBooking).instance().state.error.data.msg).toEqual(
+			'The starting date should not be greater than ending date',
+		);
 		done();
 	});
 	it('should submit data and get an error message', async done => {

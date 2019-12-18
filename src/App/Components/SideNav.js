@@ -7,6 +7,7 @@ import {
 	faFileInvoice,
 	faHotel,
 } from '@fortawesome/free-solid-svg-icons';
+
 import checkToken from '../../helper/helper';
 import Menu from '../Components/Menu';
 
@@ -41,7 +42,7 @@ function SideNav(props) {
 		<ul className='navbar-nav mr-auto sidenav shadow-sm' id='navAccordion'>
 			<li className='nav-item user-nav shadow-sm'>
 				<div className='d-flex flex-column ml-5 mt-3'>
-					<img className='avatar' src={avatar} alt='user' />
+					<img className='avatar' src={props.avatar} alt='user' />
 					<h6 className='py-2 pl-1'>{fullname}</h6>
 				</div>
 			</li>

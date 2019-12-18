@@ -14,6 +14,7 @@ export class CreateBooking extends React.Component {
 		start: '',
 		end: '',
 		numberOfSpace: 1,
+		error: null,
 	};
 	componentDidMount() {
 		const { id } = this.props.match.params;
@@ -31,7 +32,6 @@ export class CreateBooking extends React.Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.initialize();
 		const { create } = this.props;
 		const { start, end, numberOfSpace } = this.state;
 		const data = {
@@ -41,8 +41,27 @@ export class CreateBooking extends React.Component {
 			accommodationId: this.props.match.params.id,
 		};
 		const token = localStorage.getItem('barefoot_token');
-		create(data, token);
+		if (this.validate(start, end)) {
+			this.props.initialize();
+			create(data, token);
+		}
 	};
+	validate(start, end) {
+		const startingDate = new Date(start);
+		const endingDate = new Date(end);
+
+		if (startingDate < new Date()) {
+			this.setState({ error: { data: { msg: 'The starting date should be greated than today' } } });
+			return false;
+		} else if (startingDate > endingDate) {
+			this.setState({
+				error: { data: { msg: 'The starting date should not be greater than ending date' } },
+			});
+			return false;
+		}
+		this.setState({ error: null });
+		return true;
+	}
 	getError = error => {
 		return error.data
 			? error.data.msg
@@ -51,6 +70,7 @@ export class CreateBooking extends React.Component {
 	render() {
 		const { start, end, numberOfSpace } = this.state;
 		const { error, payload, pending } = this.props.bookings;
+		const err = this.state.error || error;
 		const { data } = this.props.SingleAccomodations;
 		const image =
 			data && data.AccommodationImages.length > 0 ? data.AccommodationImages[0].imageurl : img;
@@ -58,14 +78,22 @@ export class CreateBooking extends React.Component {
 			<div className='d-flex'>
 				<Header active_menu={2} showSideNav={true} />
 				<div className='container content-wrapper create-accommodation'>
-					<h5 className='text-primary mb-4'> Book accommodation</h5>
+					<h5 className='text-secondary mb-5 ml-lg-5 ml-md-5 text-center'> Book accommodation</h5>
 					<div className='row'>
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
 							<form onSubmit={this.handleSubmit} className='row'>
-								<div className='col-md-6 col-lg-6'>
-									{error && (
-										<p className='alert alert-danger text-center'>{this.getError(error)}</p>
+								<div className='col-md-5 ml-lg-5 ml-md-3 col-lg-4 text-center d-flex flex-wrap align-content-center justify-content-center'>
+									{data && (
+										<div class='card mx-4' mx-auto>
+											<img className='card-img-top' src={image} alt='accommodation' />
+											<div class='card-body'>
+												<h5 class='card-title'>{data.name}</h5>
+											</div>
+										</div>
 									)}
+								</div>
+								<div className='col-md-7 col-lg-7'>
+									{err && <p className='alert alert-danger text-center'>{this.getError(err)}</p>}
 									{payload && (
 										<div>
 											<p className='alert alert-success'>uploaded successfully</p>
@@ -132,16 +160,6 @@ export class CreateBooking extends React.Component {
 										{pending && <span className='spinner-grow spinner-grow-sm'></span>}
 										Submit
 									</button>
-								</div>
-								<div className='col-md-6 col-lg-6 text-center d-flex flex-wrap align-content-center justify-content-center'>
-									{data && (
-										<div class='card' style={{ width: 18 + 'rem' }} mx-auto>
-											<img className='card-img-top' src={image} alt='accommodation' />
-											<div class='card-body'>
-												<h5 class='card-title'>{data.name}</h5>
-											</div>
-										</div>
-									)}
 								</div>
 							</form>
 						</div>
