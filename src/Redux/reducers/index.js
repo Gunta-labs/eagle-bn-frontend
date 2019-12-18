@@ -8,6 +8,9 @@ import accommodationReducer from './accommodation.reducer';
 import MakeTripRequest from './trip.request.reducer';
 import destinations, { accomodations } from './destinations.reducer';
 import FacebookReducer from './facebookReducer';
+import AllAcommodation from './allAccomodation';
+import SingleAccomodations from './singleAccomodation.reducer';
+import AccomodationFeedback from './accomodatiosFeedback.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -20,6 +23,9 @@ const allReducers = combineReducers({
 	destSats: destinations,
 	accomodations,
 	facebook: FacebookReducer,
+	accomodation: AllAcommodation,
+	SingleAccomodations,
+	AccomodationFeedback,
 });
 
 export default allReducers;
