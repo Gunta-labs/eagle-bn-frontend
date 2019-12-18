@@ -1,14 +1,10 @@
-import jwtDecode from 'jwt-decode';
+import * as checkToken from '../../helper/helper';
 import axios from 'axios';
 import baserUrl from '../../Api/config';
 
-const token = localStorage.getItem('barefoot_token');
-let loggedUser = '';
-if (token) loggedUser = jwtDecode(token);
-
 export const retrieveUserData = () => async dispatch => {
 	try {
-		const res = await axios.get(`${baserUrl}/users/${loggedUser.userId}/profile`);
+		const res = await axios.get(`${baserUrl}/users/${checkToken.default().userId}/profile`);
 		dispatch({
 			type: 'retrieve_success',
 			payload: res.data.data,
@@ -25,7 +21,7 @@ export const updateUserProfile = payload => async dispatch => {
 	try {
 		const res = await axios.patch(`${baserUrl}/users/profile`, payload, {
 			headers: {
-				Authorization: token,
+				Authorization: checkToken.token,
 				contentType: 'application/x-www-form-urlencoded',
 			},
 		});

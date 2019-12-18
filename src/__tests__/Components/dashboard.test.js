@@ -139,7 +139,6 @@ describe('should test dashboard component', () => {
 		const wrapper = renderDashboard(initialProps);
 		const state = { isUpdate: true, isReadOnly: false, fullname: 'ale' };
 		wrapper.setState(state);
-		console.log(state);
 		wrapper.find('#btn_update').simulate('click');
 		expect(wrapper.instance().state.fullname).toBe('ale');
 		wrapper.setProps({ status: 'retrieve_success' });

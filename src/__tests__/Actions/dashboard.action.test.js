@@ -38,25 +38,6 @@ describe('Dashbord data retrieve actions', () => {
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('retrieve_fail');
 	});
-	it('dispatches profile and return data', async () => {
-		mockAxios.get.mockResolvedValue({
-			data: {
-				status: 200,
-				msg: 'Account profile',
-				data: {
-					userid: 1,
-					fullname: 'ale',
-					email: 'ale@gmail.com',
-					isverified: true,
-					token: '5tsaMaYPkBf3hv_8evtwI8ubr19BpbnN41soODH4umg',
-				},
-			},
-		});
-
-		await store.dispatch(await retrieveUserData(payload));
-		const actions = store.getActions();
-		expect(actions[0].type).toEqual('retrieve_success');
-	});
 });
 describe('Dashbord data rupdate actions', () => {
 	let store;
