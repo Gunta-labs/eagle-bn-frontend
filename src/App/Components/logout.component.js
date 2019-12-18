@@ -5,7 +5,7 @@ import constants from '../../Redux/constants';
 import LogoutAction from '../../Redux/Actions/logout.action';
 import { connect } from 'react-redux';
 
-class Logout extends React.Component {
+export class Logout extends React.Component {
 	logout = () => {
 		let token = localStorage.getItem('barefoot_token');
 		this.props.inits();
@@ -34,11 +34,11 @@ class Logout extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
 	payload: state.Logout.payload,
 	pending: state.Logout.pending,
 });
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
 	return {
 		inits: () =>
 			dispatch({

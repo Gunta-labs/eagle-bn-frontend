@@ -12,6 +12,7 @@ import AllAcommodation from './allAccomodation';
 import SingleAccomodations from './singleAccomodation.reducer';
 import AccomodationFeedback from './accomodatiosFeedback.reducer';
 import DashbordReducer from './/dashboard.reducer';
+import Logout from './logout.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -28,6 +29,7 @@ const allReducers = combineReducers({
 	SingleAccomodations,
 	AccomodationFeedback,
 	profile: DashbordReducer,
+	Logout,
 });
 
 export default allReducers;
