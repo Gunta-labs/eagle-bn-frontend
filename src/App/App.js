@@ -67,9 +67,6 @@ export class App extends React.Component {
 						path='/dashboard'
 						render={props => (token ? <Dashboard /> : <Redirect to='/login' />)}
 					/>
-					<Route exact path='/'>
-						<p className='text-center'> hello world </p>
-					</Route>
 					<Route path='*' component={NotFound} />
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
