@@ -256,6 +256,7 @@ export class UserProfile extends React.Component {
 										id='address'
 										onChange={this.handleInput}
 										value={address}
+										readOnly={isReadOnly}
 									/>
 								</div>
 								<div className='input-group mb-3'>
@@ -271,6 +272,7 @@ export class UserProfile extends React.Component {
 										id='city'
 										onChange={this.handleInput}
 										value={city}
+										readOnly={isReadOnly}
 									/>
 								</div>
 								<div className='input-group mb-3'>
