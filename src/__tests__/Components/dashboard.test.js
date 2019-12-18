@@ -1,11 +1,9 @@
 import React from 'react';
-import sinon from 'sinon';
 import { UserProfile, mapDispatchToProps } from '../../App/Pages/dashboard';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
-let wrapper;
 
 const renderDashboard = args => {
 	const props = { ...args };
@@ -123,7 +121,6 @@ describe('should test dashboard component', () => {
 		});
 	});
 	it('simulate update action', () => {
-		const event = { preventDefault: jest.fn() };
 		const initialProps = {
 			preventDefault: jest.fn(),
 			state: {
