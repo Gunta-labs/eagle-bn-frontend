@@ -1,0 +1,21 @@
+{
+    "id": 5,
+    "email": "manager@gmail.com",
+    "fullname": "manager",
+    "isverified": true,
+    "phone": null,
+    "gender": null,
+    "dob": null,
+    "address": null,
+    "city": null,
+    "state": null,
+    "avatar": null,
+    "department": null,
+    "lineManager": 5,
+    "RoleId": 4,
+    "rememberMe": false,
+    "lastSeen": null,
+    "recieveEmails": true,
+    "createdAt": "2019-12-04T11:32:55.968Z",
+    "updatedAt": "2019-12-04T11:32:55.968Z"
+}

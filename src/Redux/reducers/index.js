@@ -11,6 +11,7 @@ import FacebookReducer from './facebookReducer';
 import AllAcommodation from './allAccomodation';
 import SingleAccomodations from './singleAccomodation.reducer';
 import AccomodationFeedback from './accomodatiosFeedback.reducer';
+import DashbordReducer from './/dashboard.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -26,6 +27,7 @@ const allReducers = combineReducers({
 	accomodation: AllAcommodation,
 	SingleAccomodations,
 	AccomodationFeedback,
+	profile: DashbordReducer,
 });
 
 export default allReducers;

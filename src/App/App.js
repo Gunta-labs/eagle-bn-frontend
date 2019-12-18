@@ -55,7 +55,6 @@ export class App extends React.Component {
 						}
 					/>
 					<Route path='/signup' exact component={SignUp} />
-					<Route exact path='/dashboard' component={Dashboard} />
 					<Route
 						exact
 						path='/request/create'
@@ -63,9 +62,15 @@ export class App extends React.Component {
 					/>
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
+					<Route
+						exact
+						path='/dashboard'
+						render={props => (token ? <Dashboard /> : <Redirect to='/login' />)}
+					/>
 					<Route path='*' component={NotFound} />
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
+					/>
 				</Switch>
 			</Router>
 		);

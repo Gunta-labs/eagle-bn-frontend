@@ -1,6 +1,5 @@
 import React from 'react';
 import { Login, mapDispatchToProps } from '../../App/Pages/login.page';
-import Dashboard from '../../App/Pages/dashboard';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -11,10 +10,6 @@ const renderLogin = args => {
 	return shallow(<Login {...props} />);
 };
 
-const renderDash = arg => {
-	const data = { ...arg };
-	return shallow(<Dashboard {...data} />);
-};
 describe('should find two inputs', () => {
 	it('Should render', () => {
 		const initialProps = {
@@ -71,12 +66,5 @@ describe('should find two inputs', () => {
 
 		const wrapper = renderLogin(initialProps);
 		expect(wrapper).toHaveLength(1);
-	});
-});
-
-describe('Render Dashboard page', () => {
-	it('Should load dashboard page', () => {
-		const dash = renderDash({});
-		expect(dash).toHaveLength(1);
 	});
 });
