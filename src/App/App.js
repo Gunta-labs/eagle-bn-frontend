@@ -6,9 +6,10 @@ import { Requests } from './Pages/RequestList.page';
 import Login from './Pages/login.page.js';
 import { token } from '../helper/helper';
 import Dashboard from '../App/Pages/dashboard';
-import Footer from './Components/Footer';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
+import GetAllAccomodations from '../App/Pages/accomodations';
+import singleAccomodations from './Pages/singleAccomodation';
 import { SignUp } from './Pages/signup.page';
 import CreateAccommodation from '../App/Pages/create.accommodation.page';
 import { checkSupplierOrtAdmin } from '../helper/checkRole';
@@ -68,9 +69,12 @@ export class App extends React.Component {
 						path='/request/create'
 						render={props => (token ? <TripRequest /> : <Redirect to='/login' />)}
 					/>
+					<Route exact path='/accomodations' component={GetAllAccomodations} />
+					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 					<Route path='*' component={NotFound} />
+					<Route exact path='/accomodations' component={GetAllAccomodations} />
+					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 				</Switch>
-				<Footer />
 			</Router>
 		);
 	}

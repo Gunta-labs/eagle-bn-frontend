@@ -1,0 +1,46 @@
+.card-body {
+    img {
+        width: 100%;
+        border-radius: 15px 15px 0 0;
+    }
+}
+.btn-req {
+    background: lighten($primary, 30%) !important;
+}
+.card-foot {
+    border-top: solid 1px lighten($secondary, 30%);
+}
+.draw {
+    &:before {
+        position: absolute;
+        content: "";
+        width: 5rem;
+        margin-top: .5rem;
+        transform: translateY(-1rem);
+    }
+    &:after {
+        position: absolute;
+        content: "";
+        width: 1.5rem;
+        margin-top: -.25rem;
+        margin-left: 4.95rem;
+        transform: translateY(-1rem);
+        transform: rotate(20deg);
+    }
+}
+.draw-dark {
+    &:before {
+        border-top: .2rem solid $primary;
+    }
+    &:after {
+        border-top: .2rem solid $primary;
+    }
+}
+.draw-light {
+    &:before {
+        border-top: .2rem solid white;
+    }
+    &:after {
+        border-top: .2rem solid white;
+    }
+}

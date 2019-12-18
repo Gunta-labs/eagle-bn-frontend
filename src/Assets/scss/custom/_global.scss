@@ -1,3 +1,4 @@
+  
 html {
 	position: relative;
 	min-height: 100%;
@@ -182,4 +183,69 @@ label {
 		height: 122px !important;
 		overflow: hidden;
 	}
+}
+.my-search {
+  min-height: 40vh;
+  width: 100vw;
+  background-color: $primary;
+  margin-top: 63px;
+}
+
+.card-img{
+	height: 165px !important;
+	overflow: hidden;
+	img{
+		width: 100% !important;
+		background-size: cover;
+	}
+}
+.acc-container{
+	 width: 90%;
+	 margin-top: 4rem;
+	 margin-left: 3%;
+	 
+}
+.gallery-card {
+	height: auto;
+}
+
+.img-card-display {
+	height: 290px;
+}
+.img-scroll-display {
+	height: 150px;
+	overflow-y: scroll;
+	float: left;
+	z-index: 567;
+}
+
+.img-feedback{
+	width: 60px;
+	height: 60px;
+	border-radius: 100px;
+}
+
+.target-img {
+	height: 100%;
+	width: 100%;
+
+}
+
+.detail-card{
+	height: 100px;
+}
+
+.bold-text {
+	font-weight: 400 !important;
+}
+
+
+
+.error-msg{
+	margin-top: 45vh;
+}
+
+.spinner-load{
+	height: 100px;
+	width: 100px;
 }

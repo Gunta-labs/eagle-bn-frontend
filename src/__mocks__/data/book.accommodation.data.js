@@ -10,12 +10,20 @@ const bookingData = {
 			},
 			error: null,
 		},
+		SingleAccomodations: {
+			data: {
+				AccommodationImages: [{ imageUrl: 'lelele' }],
+			},
+		},
 	},
 	initialState: {
 		bookings: {
 			pending: false,
 			payload: null,
 			error: null,
+		},
+		SingleAccomodations: {
+			data: undefined,
 		},
 	},
 	pendingState: {
@@ -24,6 +32,9 @@ const bookingData = {
 			payload: null,
 			error: null,
 		},
+		SingleAccomodations: {
+			data: undefined,
+		},
 	},
 	errorState: {
 		bookings: {
@@ -31,6 +42,11 @@ const bookingData = {
 			payload: null,
 			error: {
 				error: 'error',
+			},
+		},
+		SingleAccomodations: {
+			data: {
+				AccommodationImages: [],
 			},
 		},
 	},

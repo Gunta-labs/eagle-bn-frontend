@@ -41,6 +41,16 @@ const apis = {
 			headers: { Authorization: token },
 		});
 	},
+	async getAllAccomodations() {
+		const accommodations = await axios.get(`${BASE_URL}accommodations`);
+		return accommodations;
+	},
+	singleAccomodation(id) {
+		return axios.get(`${BASE_URL}accommodations/${id}`);
+	},
+	GetFeeback(id) {
+		return axios.get(`${BASE_URL}accommodations/${id}/rating`);
+	},
 };
 
 export default apis;

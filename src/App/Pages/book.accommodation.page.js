@@ -6,8 +6,8 @@ import constants from '../../Redux/constants';
 import Header from '../Components/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import img from '../../Assets/images/background2.svg';
-import { faDoorOpen, faClock, faCalendarTimes } from '@fortawesome/free-solid-svg-icons';
-import BaseUrl from '../../Api/config';
+import { faDoorOpen, faClock } from '@fortawesome/free-solid-svg-icons';
+import { singleAccomodation } from '../../Redux/Actions/singleAccomodations.action';
 
 export class CreateBooking extends React.Component {
 	state = {
@@ -15,17 +15,20 @@ export class CreateBooking extends React.Component {
 		end: '',
 		numberOfSpace: 1,
 	};
-	static getDerivedStateFromProps(nextProps, prevState) {
-		if (nextProps.bookings.payload) {
-			window.location.assign(`${BaseUrl}/bookings/${nextProps.bookings.payload.id}`);
-		} else return null;
+	componentDidMount() {
+		const { id } = this.props.match.params;
+		this.props.getAccommodation(id);
 	}
 	handleInput = e => {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
 	};
-
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.bookings.payload) {
+			window.location.href = '/bookings';
+		}
+	}
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.initialize();
@@ -48,11 +51,14 @@ export class CreateBooking extends React.Component {
 	render() {
 		const { start, end, numberOfSpace } = this.state;
 		const { error, payload, pending } = this.props.bookings;
+		const { data } = this.props.SingleAccomodations;
+		const image =
+			data && data.AccommodationImages.length > 0 ? data.AccommodationImages[0].imageurl : img;
 		const display = (
 			<div className='d-flex'>
-				<Header active_menu={1} showSideNav={true} />
+				<Header active_menu={2} showSideNav={true} />
 				<div className='container content-wrapper create-accommodation'>
-					<h5 className='text-primary mb-4'> Booking</h5>
+					<h5 className='text-primary mb-4'> Book accommodation</h5>
 					<div className='row'>
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
 							<form onSubmit={this.handleSubmit} className='row'>
@@ -60,7 +66,11 @@ export class CreateBooking extends React.Component {
 									{error && (
 										<p className='alert alert-danger text-center'>{this.getError(error)}</p>
 									)}
-									{payload && <p className='alert alert-success'>uploaded successfully</p>}
+									{payload && (
+										<div>
+											<p className='alert alert-success'>uploaded successfully</p>
+										</div>
+									)}
 									<div className='input-group mb-4 mt-1'>
 										<div className='input-group-prepend'>
 											<span className='input-group-text text-secondary bg-white'>
@@ -76,14 +86,13 @@ export class CreateBooking extends React.Component {
 											placeholder='Starting date'
 											required={true}
 											value={start}
-											pattern='.{4,}'
 											onInvalid='name should have a minimum of 4 characters'
 										/>
 									</div>
 									<div className='input-group mb-4'>
 										<div className='input-group-prepend'>
 											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faCalendarTimes} className='mr-4' />
+												<FontAwesomeIcon icon={faClock} className='mr-4' />
 												Ending date
 											</span>
 										</div>
@@ -95,7 +104,6 @@ export class CreateBooking extends React.Component {
 											placeholder='Ending date'
 											required={true}
 											value={end}
-											pattern='.{5,}'
 										/>
 									</div>
 									<div className='input-group mb-4'>
@@ -107,13 +115,13 @@ export class CreateBooking extends React.Component {
 										</div>
 										<input
 											type='number'
+											min={1}
 											name='numberOfSpace'
 											className='form-control'
 											onChange={this.handleInput}
 											placeholder='Number of space'
 											required={true}
 											value={numberOfSpace}
-											pattern='.{5,}'
 										/>
 									</div>
 									<button
@@ -122,16 +130,18 @@ export class CreateBooking extends React.Component {
 										disabled={pending}
 									>
 										{pending && <span className='spinner-grow spinner-grow-sm'></span>}
-										Book this accommodation
+										Submit
 									</button>
 								</div>
 								<div className='col-md-6 col-lg-6 text-center d-flex flex-wrap align-content-center justify-content-center'>
-									<div class='card' style={{ width: 18 + 'rem' }} mx-auto>
-										<img className='card-img-top' src={img} alt='accommodation' />
-										<div class='card-body'>
-											<h5 class='card-title'>House of hapiness</h5>
+									{data && (
+										<div class='card' style={{ width: 18 + 'rem' }} mx-auto>
+											<img className='card-img-top' src={image} alt='accommodation' />
+											<div class='card-body'>
+												<h5 class='card-title'>{data.name}</h5>
+											</div>
 										</div>
-									</div>
+									)}
 								</div>
 							</form>
 						</div>
@@ -155,11 +165,13 @@ export const mapDispatchToProps = dispatch => {
 				pending: true,
 			}),
 		create: async (data, token) => dispatch(await createBookingAction(data, token)),
+		getAccommodation: async id => dispatch(await singleAccomodation(id)),
 	};
 };
 
-export const mapStateToProps = ({ bookings }) => ({
+export const mapStateToProps = ({ bookings, SingleAccomodations }) => ({
 	bookings,
+	SingleAccomodations,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateBooking);

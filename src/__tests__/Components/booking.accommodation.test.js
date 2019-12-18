@@ -56,8 +56,7 @@ describe('Verify User page', () => {
 		wrapper.find('form').simulate('submit');
 
 		expect(axios.calledOnce);
-		const result = await axios.post.getCall(0).returnValue;
-		console.log(result);
+		await axios.post.getCall(0).returnValue;
 		axios.post.restore();
 		done();
 	});
