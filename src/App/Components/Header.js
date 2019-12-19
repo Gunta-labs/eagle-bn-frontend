@@ -4,6 +4,7 @@ import logo from '../../Assets/images/eagle-logo.svg';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Token from '../../helper/helper';
+import LogoutButton from './logout.component';
 
 class Header extends React.Component {
 	state = {
@@ -50,7 +51,7 @@ class Header extends React.Component {
 								</a>
 							</li>
 							<li className='nav-item mx-3'>
-								<a className='nav-link' href='/'>
+								<a className='nav-link' href='/accomodations'>
 									Accommodations
 								</a>
 							</li>
@@ -93,12 +94,10 @@ class Header extends React.Component {
 										</span>
 										{validToken && validToken.fullname}
 									</button>
-									<div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-										<a className='dropdown-item' href='/'>
-											Action
-										</a>
-									</div>
 								</div>
+							</li>
+							<li className='nav-item mx-3'>
+								<LogoutButton />
 							</li>
 						</ul>
 					)}
