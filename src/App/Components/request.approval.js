@@ -12,7 +12,7 @@ const getStatus = status => {
 };
 
 export default props => {
-	const { request, index, showModel } = props;
+	const { request, index, showModel, showARModel } = props;
 	return (
 		<div className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4'>
 			<div className='card  mt-1 ml-lg-1 ml-md-1 mr-lg-1 mr-md-1 ml-4'>
@@ -62,8 +62,24 @@ export default props => {
 							/>
 							{request.status === 'pending' && (
 								<React.Fragment>
-									<FontAwesomeIcon icon={faCheck} className='text-primary' title='approve' />
-									<FontAwesomeIcon icon={faTimes} className='text-danger' title='reject' />
+									<FontAwesomeIcon
+										icon={faCheck}
+										className='text-primary'
+										title='approve'
+										onClick={e => {
+											e.preventDefault();
+											showARModel('approve', index);
+										}}
+									/>
+									<FontAwesomeIcon
+										icon={faTimes}
+										className='text-danger'
+										title='reject'
+										onClick={e => {
+											e.preventDefault();
+											showARModel('reject', index);
+										}}
+									/>
 								</React.Fragment>
 							)}
 						</div>

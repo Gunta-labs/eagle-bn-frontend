@@ -9,6 +9,7 @@ const initialState = {
 	filter: 'pending',
 	PreviewedHTML: '',
 	pager: 0,
+	aRStatus: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -70,6 +71,11 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				pager: payload,
+			};
+		case constants.MANAGER_PREVIEW_ARSTATUS:
+			return {
+				...state,
+				aRStatus: payload,
 			};
 		default:
 			return state;

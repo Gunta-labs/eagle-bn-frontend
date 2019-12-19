@@ -48,7 +48,6 @@ describe('Actions', () => {
 
 		await store.dispatch(await singleAccomodation(id));
 		const actions = store.getActions();
-		console.log(actions);
 		expect(actions[0].type).toEqual('SINGLE_ACCOMODATION_ERROR');
 	});
 	it('dispatches singleAccomodation action and returns true', async () => {

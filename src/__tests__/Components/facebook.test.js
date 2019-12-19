@@ -65,7 +65,6 @@ describe('Render Facebook login component', () => {
 		);
 		sinon.spy(facebookLoginAction);
 		wrapper.find('.btn-face.btn.Face').simulate('click');
-		console.log(wrapper.find(LoginFacebook).props());
 		wrapper
 			.find(FacebookLogin)
 			.props()
@@ -93,7 +92,6 @@ describe('Render Facebook login component', () => {
 		);
 		sinon.spy(facebookLoginAction);
 		wrapper.find('.btn-face.btn.Face').simulate('click');
-		console.log(wrapper.find(LoginFacebook).props());
 		wrapper
 			.find(FacebookLogin)
 			.props()
