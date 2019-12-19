@@ -56,18 +56,4 @@ describe('Make Trip Request Page [testing component]', () => {
 		axios.post.restore();
 		done();
 	});
-	it('should fail with 500 response', done => {
-		Data.mockFailure(500, true);
-		sinon.spy(axios, 'post');
-		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester', fullname: 'requester' });
-		const store = config.mockStore(Data.not_started);
-		const wrapper = config.mountNewWrapper(store, component);
-		const form = wrapper.find('form');
-		const event = { preventDefault: jest.fn() };
-		form.simulate('submit', event);
-		expect(axios.calledOnce);
-		axios.post.restore();
-		jest.resetAllMocks();
-		done();
-	});
 });

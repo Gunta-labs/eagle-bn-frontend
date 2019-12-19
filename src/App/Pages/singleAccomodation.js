@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
 import StarRatings from 'react-star-ratings';
+import { Link } from 'react-router-dom';
 
 export class singleAccomodations extends Component {
 	state = {
@@ -55,7 +56,7 @@ export class singleAccomodations extends Component {
 		return recent_feedback;
 	};
 
-	display = (payload, feedback, feedback_error) => {
+	display = (payload, feedback, feedback_error, id) => {
 		let avg =
 			feedback_error === null && feedback && feedback.averageRating !== undefined
 				? feedback.averageRating
@@ -152,9 +153,9 @@ export class singleAccomodations extends Component {
 								)}
 							</div>
 							<div className='d-flex pt-5'>
-								<button className='btn btn-primary btn-lg'>
+								<Link to={`/accommodations/${id}/book`} className='btn btn-primary btn-lg'>
 									<span> </span> Book it<span> </span>
-								</button>
+								</Link>
 								<button className='borger border-dark btn ml-auto btn-lg'>bookmark</button>
 							</div>
 						</div>
@@ -176,6 +177,7 @@ export class singleAccomodations extends Component {
 
 	render() {
 		const { payload, error, pending, feedback, feedback_error } = this.props;
+		const { id } = this.props.match.params;
 
 		return (
 			<>
@@ -200,7 +202,7 @@ export class singleAccomodations extends Component {
 						</div>
 					</>
 				)}
-				{!pending && payload && this.display(payload, feedback, feedback_error)}
+				{!pending && payload && this.display(payload, feedback, feedback_error, id)}
 			</>
 		);
 	}

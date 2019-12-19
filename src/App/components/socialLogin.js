@@ -18,7 +18,7 @@ class SocialLogin extends React.Component {
 					<Button
 						name='Google'
 						logo={googleIcon}
-						styleClass='btn btn-google Goo'
+						styleClass='btn2 btn-google Goo'
 						onClick={this.GoogleLogin}
 					/>
 				</div>

@@ -21,7 +21,7 @@ export class LoginFacebook extends React.Component {
 					<FacebookLogin
 						appId='2618632188182397'
 						callback={response => this.facebookLog({ response, provider: 'facebook' })}
-						cssClass='btn-face btn Face'
+						cssClass='btn-face btn2 Face'
 						icon={<img className='socialButtonImg' src={faceIcon} alt='social logo' />}
 						textButton='Facebook'
 					/>

@@ -58,7 +58,6 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
-		await axiosSpy.getCalls();
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {
@@ -73,7 +72,6 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
-		await axiosSpy.getCalls();
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {
