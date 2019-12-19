@@ -29,7 +29,6 @@ describe('Verify User page', () => {
 		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
-		console.log(wrapper.html());
 		expect(wrapper.find('.acc-container')).toExist();
 		expect(wrapper.find('.mt-5.mb-3.text-primary')).toExist();
 		wrapper
@@ -37,8 +36,7 @@ describe('Verify User page', () => {
 			.first()
 			.simulate('click');
 		expect(axiosSpy.calledOnce);
-		const axiosPayload = await axios.get.getCall(0).returnValue;
-		console.log(axiosPayload);
+		await axios.get.getCall(0).returnValue;
 		axios.get.restore();
 		done();
 	});
@@ -47,12 +45,10 @@ describe('Verify User page', () => {
 		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
-		console.log(wrapper.html());
 		expect(wrapper.find('.acc-container')).toExist();
 		expect(wrapper.find('.mt-5.mb-3.text-primary')).toExist();
 		expect(axiosSpy.calledOnce);
-		const axiosPayload = await axios.get.getCall(0).returnValue;
-		console.log(axiosPayload);
+		await axios.get.getCall(0).returnValue;
 		axios.get.restore();
 		done();
 	});
@@ -62,7 +58,6 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
-		console.log(await axiosSpy.getCalls());
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {
@@ -77,7 +72,6 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
-		console.log(await axiosSpy.getCalls());
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {

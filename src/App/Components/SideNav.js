@@ -4,20 +4,22 @@ import {
 	faUser,
 	faFileAlt,
 	faClipboard,
-	faBed,
+	faFileInvoice,
+	faHotel,
 	faClipboardCheck,
 } from '@fortawesome/free-solid-svg-icons';
+
 import checkToken from '../../helper/helper';
 import Menu from '../Components/Menu';
 
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'trip requests', icon: faClipboard, active: false, link: '/requests' },
-	{ name: 'accommodations', icon: faBed, active: false, link: '/accommodations' },
+	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
-	{ name: 'accommodations', icon: faBed, active: false, link: '/accommodations' },
+	{ name: 'accommodations', icon: faHotel, active: false, link: '/accommodations' },
 	{ name: 'booking', icon: faFileAlt, active: false, link: '/booking' },
 ];
 const managerMenu = [

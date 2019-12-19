@@ -16,6 +16,7 @@ import { checkSupplierOrtAdmin } from '../helper/checkRole';
 import TripRequest from './Pages/trip.request.page';
 import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
+import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
 
 export class App extends React.Component {
@@ -31,6 +32,13 @@ export class App extends React.Component {
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
+					<Route
+						exact
+						path='/accommodations/:id/book'
+						render={props =>
+							token ? <BookAccommodation match={props.match} /> : <Redirect to='/login' />
+						}
+					/>
 					<Route
 						exact
 						path='/accommodation/create'
@@ -51,9 +59,7 @@ export class App extends React.Component {
 					<Route
 						exact
 						path='/login'
-						render={props =>
-							!token ? <Login location={props.location} /> : <Redirect to='/dashboard' />
-						}
+						render={props => (!token ? <Login /> : <Redirect to='/dashboard' />)}
 					/>
 					<Route path='/signup' exact component={SignUp} />
 					<Route

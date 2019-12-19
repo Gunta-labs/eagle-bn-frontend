@@ -48,7 +48,7 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		expect(wrapper.find('.btn-face.btn.Face')).toExist();
+		expect(wrapper.find('.btn-face.btn2.Face')).toExist();
 		done();
 	});
 	it('Should return 200 status when logged in successfully', async () => {
@@ -64,8 +64,7 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		wrapper.find('.btn-face.btn.Face').simulate('click');
-		console.log(wrapper.find(LoginFacebook).props());
+		wrapper.find('.btn-face.btn2.Face').simulate('click');
 		wrapper
 			.find(FacebookLogin)
 			.props()
@@ -92,8 +91,7 @@ describe('Render Facebook login component', () => {
 			</Provider>,
 		);
 		sinon.spy(facebookLoginAction);
-		wrapper.find('.btn-face.btn.Face').simulate('click');
-		console.log(wrapper.find(LoginFacebook).props());
+		wrapper.find('.btn-face.btn2.Face').simulate('click');
 		wrapper
 			.find(FacebookLogin)
 			.props()

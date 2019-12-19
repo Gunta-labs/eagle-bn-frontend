@@ -21,7 +21,7 @@ describe('Header', () => {
 			});
 		const wrapper = shallow(<Header showSideNav={true} />);
 		expect(wrapper.find(SideNav)).toExist();
-		expect(wrapper.find('.navbar-nav.ml-auto')).not.toExist();
+		expect(wrapper.find('#main-menu')).not.toExist();
 		done();
 	});
 	it('should have menu-active class', done => {
@@ -39,7 +39,6 @@ describe('Header', () => {
 			.first()
 			.simulate('click');
 		expect(wrapper.find(SideNav)).not.toExist();
-		expect(wrapper.find('.navbar-nav.ml-auto')).toExist();
 		done();
 	});
 });

@@ -44,7 +44,7 @@ class Header extends React.Component {
 				>
 					{showSideNav && <SideNav active={this.props.active_menu} avatar={this.props.avatar} />}
 					{!showSideNav && !validToken && (
-						<ul className='navbar-nav ml-auto'>
+						<ul className='navbar-nav ml-auto' id='main-menu'>
 							<li className='nav-item active'>
 								<a className='nav-link mx-3 ' href='/'>
 									Home <span className='sr-only'>(current)</span>
@@ -96,6 +96,13 @@ class Header extends React.Component {
 									</button>
 								</div>
 							</li>
+							<li className='nav-item mx-3'>
+								<LogoutButton />
+							</li>
+						</ul>
+					)}
+					{showSideNav && validToken && (
+						<ul className='navbar-nav ml-auto'>
 							<li className='nav-item mx-3'>
 								<LogoutButton />
 							</li>
