@@ -51,6 +51,28 @@ const apis = {
 	GetFeeback(id) {
 		return axios.get(`${BASE_URL}accommodations/${id}/rating`);
 	},
+	logout(token) {
+		return axios.patch(`${BASE_URL}users/logout`, null, {
+			headers: {
+				Authorization: token,
+				'Content-Type': 'application/json',
+			},
+		});
+	},
+	getManagerRequest(managerId, token) {
+		return axios.get(`${BASE_URL}requests/managers/${managerId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getSingleRequest(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 };
 
 export default apis;

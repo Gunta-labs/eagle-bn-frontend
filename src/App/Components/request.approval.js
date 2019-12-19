@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarker, faClock, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faClock, faEye, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import dateHelper from '../../helper/date.helper';
 
 const getStatus = status => {
@@ -11,21 +11,8 @@ const getStatus = status => {
 	return statusClass;
 };
 
-const getAdditionnalTrip = trips => {
-	return `${trips.length - 1} more destination(s)`;
-};
-
-function Request(props) {
-	const { request } = props;
-	let trip = request.Trips[0];
-	if (!trip) {
-		trip = {
-			city: 'none',
-			country: 'none',
-			departureTime: undefined,
-		};
-		request.Trips[0] = trip;
-	}
+export default props => {
+	const { request, index, showModel } = props;
 	return (
 		<div className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4'>
 			<div className='card  mt-1 ml-lg-1 ml-md-1 mr-lg-1 mr-md-1 ml-4'>
@@ -49,7 +36,7 @@ function Request(props) {
 							>
 								{request.status}
 							</label>
-						</div>{' '}
+						</div>
 						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
 							<p className='mb-0'>
 								<FontAwesomeIcon icon={faClock} className='mr-2 text-primary' />
@@ -60,47 +47,29 @@ function Request(props) {
 									{dateHelper(new Date(request.returnTime || undefined))}
 								</label>
 							</p>
-						</div>{' '}
+						</div>
 					</div>
 					<div className='list-group-item'>
 						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-							<p className='mb-0'>
-								<FontAwesomeIcon icon={faMapMarker} className='mr-2 text-secondary' />
-								<label className='text-secondary font-weight-bold label'>Destination 1 :</label>
-							</p>
-							<label
-								className='text-secondary ml-2'
-								id='destination'
-							>{`${trip.city}, ${trip.country}`}</label>
-						</div>{' '}
-						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-							<p className='mb-0'>
-								<FontAwesomeIcon icon={faClock} className='mr-2 text-secondary' />
-								<label className='text-secondary font-weight-bold' style={{ fontSize: '.8em' }}>
-									Departure Time :
-								</label>
-							</p>
-							<label className='text-secondary ml-2'>
-								{dateHelper(new Date(trip.departureTime))}
-							</label>
-						</div>{' '}
-						<p
-							className='text-secondary text-center mb-1'
-							style={{ fontSize: '.9em', marginTop: '7px' }}
-						>
-							{getAdditionnalTrip(request.Trips)}
-						</p>
-					</div>
-					<div className='list-group-item'>
-						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-							<FontAwesomeIcon icon={faEye} className='text-primary' />
-							<FontAwesomeIcon icon={faEdit} className='text-primary' />
-							<FontAwesomeIcon icon={faTrash} className='text-danger' />
+							<FontAwesomeIcon
+								icon={faEye}
+								className='text-primary'
+								title='view'
+								onClick={e => {
+									e.target = { id: `view-${index}` };
+									showModel(e);
+								}}
+							/>
+							{request.status === 'pending' && (
+								<React.Fragment>
+									<FontAwesomeIcon icon={faCheck} className='text-primary' title='approve' />
+									<FontAwesomeIcon icon={faTimes} className='text-danger' title='reject' />
+								</React.Fragment>
+							)}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	);
-}
-export default Request;
+};

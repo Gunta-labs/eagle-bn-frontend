@@ -4,6 +4,7 @@ import logo from '../../Assets/images/eagle-logo.svg';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Token from '../../helper/helper';
+import LogoutButton from './logout.component';
 
 class Header extends React.Component {
 	state = {
@@ -43,14 +44,14 @@ class Header extends React.Component {
 				>
 					{showSideNav && <SideNav active={this.props.active_menu} avatar={this.props.avatar} />}
 					{!showSideNav && !validToken && (
-						<ul className='navbar-nav ml-auto'>
+						<ul className='navbar-nav ml-auto' id='main-menu'>
 							<li className='nav-item active'>
 								<a className='nav-link mx-3 ' href='/'>
 									Home <span className='sr-only'>(current)</span>
 								</a>
 							</li>
 							<li className='nav-item mx-3'>
-								<a className='nav-link' href='/'>
+								<a className='nav-link' href='/accomodations'>
 									Accommodations
 								</a>
 							</li>
@@ -93,12 +94,17 @@ class Header extends React.Component {
 										</span>
 										{validToken && validToken.fullname}
 									</button>
-									<div className='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-										<a className='dropdown-item' href='/'>
-											Action
-										</a>
-									</div>
 								</div>
+							</li>
+							<li className='nav-item mx-3'>
+								<LogoutButton />
+							</li>
+						</ul>
+					)}
+					{showSideNav && validToken && (
+						<ul className='navbar-nav ml-auto'>
+							<li className='nav-item mx-3'>
+								<LogoutButton />
 							</li>
 						</ul>
 					)}

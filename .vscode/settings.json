@@ -1,5 +1,7 @@
 {
-	"eslint.autoFixOnSave": true,
 	"window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
-	"workbench.editor.enablePreviewFromQuickOpen": false
+	"workbench.editor.enablePreviewFromQuickOpen": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	}
 }

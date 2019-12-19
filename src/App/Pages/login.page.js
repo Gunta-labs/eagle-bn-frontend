@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QueryString from 'querystring';
@@ -103,7 +103,7 @@ export class Login extends React.Component {
 				</div>
 			</div>
 		);
-		const display = !isLoggedIn ? loginDisplay : <Redirect to='/dashboard'></Redirect>;
+		const display = !isLoggedIn ? loginDisplay : (window.location = '/dashboard');
 		return display;
 	}
 }

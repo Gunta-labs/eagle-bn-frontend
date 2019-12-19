@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import VerifyUser from './Pages/VerifyUser.page';
 import { Requests } from './Pages/RequestList.page';
 import Login from './Pages/login.page.js';
-import { token } from '../helper/helper';
+import checkToken, { token } from '../helper/helper';
 import Dashboard from '../App/Pages/dashboard';
 import ResetPassword from './Pages/reset.password.page';
 import RequestResetPassword from './Pages/request.reset.password.page';
@@ -17,6 +17,7 @@ import TripRequest from './Pages/trip.request.page';
 import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
 import BookAccommodation from '../App/Pages/book.accommodation.page';
+import ManagerApproval from './Pages/manager.approval.page';
 
 export class App extends React.Component {
 	render() {
@@ -73,10 +74,20 @@ export class App extends React.Component {
 						path='/dashboard'
 						render={props => (token ? <Dashboard /> : <Redirect to='/login' />)}
 					/>
+					<Route
+						exact
+						path='/manager'
+						render={props =>
+							token && checkToken().role === 'manager' ? (
+								<ManagerApproval />
+							) : (
+								<Redirect to='/login' />
+							)
+						}
+					/>
 					<Route path='*' component={NotFound} />
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
-					/>
 				</Switch>
 			</Router>
 		);

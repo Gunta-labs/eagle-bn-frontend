@@ -68,7 +68,7 @@ describe('Verify User page', () => {
 		wrapper.find('input[name="start"]').simulate('change', event);
 		wrapper.find('form').simulate('submit');
 		expect(wrapper.find(CreateBooking).instance().state.error.data.msg).toEqual(
-			'The starting date should be greated than today',
+			'The starting date should be greater than today',
 		);
 		done();
 	});

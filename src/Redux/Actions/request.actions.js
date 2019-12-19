@@ -4,6 +4,7 @@ import apis from '../../Api';
 const VerifyUser = async token => {
 	try {
 		const result = await apis.getRequest(token);
+		result.data = result.data.reverse();
 		return {
 			type: constants.GETREQUEST_SUCCESS,
 			payload: result,
