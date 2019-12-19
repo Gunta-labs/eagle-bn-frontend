@@ -54,8 +54,7 @@ export class UserProfile extends React.Component {
 		const { value, maxLength } = event.target;
 		value.slice(0, maxLength);
 
-		const { id, type } = target;
-		let value2 = type === 'select' ? target.selected : target.value;
+		const { id } = target;
 		if (id === 'avatar') {
 			this.setState({
 				avatar: event.target.files[0],

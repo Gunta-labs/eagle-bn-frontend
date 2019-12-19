@@ -8,6 +8,16 @@
   textarea.form-control {
     margin-top: 3vw !important;
   }
+  .approval-spinner {
+    width: 10vw !important;
+    height: 10vw !important;
+  }
+  .preview-selector {
+    width: 50% !important;
+  }
+  .dialog .inside {
+    margin: 0 !important;
+  }
 }
 
 .request-container {
@@ -18,4 +28,47 @@
   margin-left: 220px;
   margin-bottom: 100px !important;
   overflow-y: scroll;
+}
+
+.approval-spinner {
+  margin: 15vw auto auto 35vw;
+  width: 5vw;
+  height: 5vw;
+}
+.approval-message {
+  margin: 15vw auto auto 35vw;
+}
+
+.dialog .approval-spinner {
+  margin: 120px auto 120px 160px !important;
+}
+.dialog .inside {
+  margin: auto auto auto 120px;
+}
+
+.dialog {
+  position: fixed;
+  z-index: 4000;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding-top: 2vw;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dialog-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-family: Arial Black;
+  cursor: pointer;
+  border: none;
+  margin-top: -0.5vw;
+  margin-right: 0.4vw; 
+}
+
+.dialog-close:hover, .dialog-close:focus {
+  color: black;
 }

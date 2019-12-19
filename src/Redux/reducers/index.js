@@ -13,6 +13,7 @@ import SingleAccomodations from './singleAccomodation.reducer';
 import AccomodationFeedback from './accomodatiosFeedback.reducer';
 import DashbordReducer from './/dashboard.reducer';
 import Logout from './logout.reducer';
+import ManagerApprovalReducer from './manager.approval.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -30,6 +31,7 @@ const allReducers = combineReducers({
 	AccomodationFeedback,
 	profile: DashbordReducer,
 	Logout,
+	ManagerApprovalReducer,
 });
 
 export default allReducers;

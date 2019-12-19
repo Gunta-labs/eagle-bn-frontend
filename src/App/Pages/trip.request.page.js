@@ -6,7 +6,6 @@ import destinationForm from '../Components/destination.form';
 import requestForm from '../Components/request.form';
 import sendTripRequest from '../../Redux/Actions/trip.request.action';
 import formData from '../../helper/trip.request.form.data';
-import { Redirect } from '@reach/router';
 
 class TripRequest extends React.Component {
 	constructor(props) {
@@ -47,7 +46,7 @@ class TripRequest extends React.Component {
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={1} />
-				{this.props.tripRequestStatus === 'success' && <Redirect to='requests' />}
+				{this.props.tripRequestStatus === 'success' && (window.location = '/requests')}
 				<div className='request-container mb-3 container'>
 					<div className={this.props.messageClass}> {this.props.message} </div> <br />
 					<form onSubmit={this.handleSubmit}>
