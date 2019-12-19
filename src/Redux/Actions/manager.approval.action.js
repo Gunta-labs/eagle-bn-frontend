@@ -35,3 +35,16 @@ export const requestPreviewPending = () => dispatch =>
 
 export const changePager = payload => dispatch =>
 	dispatch({ type: constants.MANAGER_PREVIEW_PAGERS, payload });
+
+export const changeaRStatus = payload => dispatch =>
+	dispatch({ type: constants.MANAGER_PREVIEW_ARSTATUS, payload });
+
+export const changeReqStatus = (request, status, token) => async dispatch => {
+	try {
+		dispatch({ type: constants.MANAGER_PREVIEW_ARSTATUS, payload: { status: 'pending' } });
+		await apis.changeRequestStatus(request, status, token);
+		dispatch({ type: constants.MANAGER_PREVIEW_ARSTATUS, payload: { status: 'success' } });
+	} catch (err) {
+		dispatch({ type: constants.MANAGER_PREVIEW_ARSTATUS, payload: { status: 'success' } });
+	}
+};

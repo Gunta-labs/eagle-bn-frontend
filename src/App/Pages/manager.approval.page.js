@@ -8,6 +8,8 @@ import {
 	changeFilter,
 	requestPreviewPending,
 	changePager,
+	changeReqStatus,
+	changeaRStatus,
 } from '../../Redux/Actions/manager.approval.action';
 import Header from '../Components/Header';
 import checkToken, { token } from '../../helper/helper';
@@ -16,6 +18,7 @@ import getSingleRequest from '../../helper/request.helper';
 import Request from '../Components/request.approval';
 import previewTrip from '../Components/preview.trip';
 import previewPending from '../Components/preview.pending';
+import previewARModel from '../Components/approve.reject';
 
 class ManagerApproval extends React.Component {
 	constructor(props) {
@@ -27,15 +30,17 @@ class ManagerApproval extends React.Component {
 		this.showFilter = this.showFilter.bind(this);
 		this.showPagers = this.showPagers.bind(this);
 		this.changePaging = this.changePaging.bind(this);
+		this.apprOrRej = this.apprOrRej.bind(this);
+		this.showARModel = this.showARModel.bind(this);
 		this.props.managerPreview(checkToken().userId, token);
 	}
 
 	async loadRequest(index) {
 		const { approvalRequests } = this.props;
-		const { id, UserId } = approvalRequests[index];
+		const { UserId } = approvalRequests.filter(element => element.id === parseInt(index))[0];
 		this.props.requestPreviewPending();
 		const user = await getUserProfile(UserId);
-		const request = await getSingleRequest(id, token);
+		const request = await getSingleRequest(index, token);
 		return { user, request };
 	}
 	showMessage() {
@@ -45,7 +50,12 @@ class ManagerApproval extends React.Component {
 				.filter(element => element.status === filter)
 				.filter((element, index) => index < pager * 6 && index >= (pager - 1) * 6)
 				.map((element, index) => (
-					<Request request={element} index={index} showModel={this.showModal} />
+					<Request
+						request={element}
+						index={element.id}
+						showModel={this.showModal}
+						showARModel={this.showARModel}
+					/>
 				));
 		}
 		return;
@@ -57,6 +67,7 @@ class ManagerApproval extends React.Component {
 	closeModel(event) {
 		event.preventDefault();
 		this.props.requestPreviewOneStop();
+		this.props.changeaRStatus({ status: 'not_started' });
 	}
 	showFilter() {
 		const { filter } = this.props;
@@ -76,6 +87,14 @@ class ManagerApproval extends React.Component {
 	changePaging(event) {
 		event.preventDefault();
 		this.props.changePager(event.target[0].innerHTML);
+	}
+	showARModel(type, index) {
+		const { changeaRStatus } = this.props;
+		changeaRStatus({ status: 'started', type, index });
+	}
+	apprOrRej(type, index) {
+		const { changeReqStatus } = this.props;
+		changeReqStatus(index, type, token);
 	}
 	showPagers() {
 		const { approvalRequests, pager, filter, changePager } = this.props;
@@ -106,6 +125,7 @@ class ManagerApproval extends React.Component {
 			pager,
 			filter,
 			approvalRequests,
+			aRStatus,
 		} = this.props;
 		return (
 			<div>
@@ -154,6 +174,10 @@ class ManagerApproval extends React.Component {
 						</nav>
 					</div>
 				</div>
+				{aRStatus.status === 'success' && (window.location = '/manager')}
+				{aRStatus.status === 'started' || aRStatus.status === 'pending'
+					? previewARModel(aRStatus, this.closeModel, this.apprOrRej)
+					: ''}
 				{previewedRequest === 'pending' ? previewPending(this.closeModel) : ''}
 				{previewedRequest === 'started' ? previewTrip(PreviewedHTML, this.closeModel) : ''}
 			</div>
@@ -170,6 +194,7 @@ ManagerApproval.propTypes = {
 	pager: propTypes.number,
 	message: propTypes.string,
 	messageClass: propTypes.string,
+	aRStatus: propTypes.string,
 };
 
 const mapStateToProps = ({ ManagerApprovalReducer }) => ({
@@ -181,6 +206,7 @@ const mapStateToProps = ({ ManagerApprovalReducer }) => ({
 	message: ManagerApprovalReducer.message,
 	messageClass: ManagerApprovalReducer.messageClass,
 	pager: ManagerApprovalReducer.pager,
+	aRStatus: ManagerApprovalReducer.aRStatus,
 });
 
 export default connect(mapStateToProps, {
@@ -190,4 +216,6 @@ export default connect(mapStateToProps, {
 	changeFilter,
 	requestPreviewPending,
 	changePager,
+	changeaRStatus,
+	changeReqStatus,
 })(ManagerApproval);

@@ -73,6 +73,13 @@ const apis = {
 			},
 		});
 	},
+	changeRequestStatus(requestId, status, token) {
+		return axios.patch(`${BASE_URL}requests/${requestId}/${status}`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 };
 
 export default apis;
