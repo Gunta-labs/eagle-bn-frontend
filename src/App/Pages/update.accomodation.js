@@ -51,7 +51,6 @@ export class UpdateAccommodation extends React.Component {
 		const accomodation = await singleAccomodation(id);
 		console.log(accomodation);
 		this.setState(accomodation.payload);
-		this.props.get(id);
 	}
 	handleSubmit = e => {
 		e.preventDefault();
