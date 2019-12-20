@@ -59,6 +59,14 @@ const apis = {
 			},
 		});
 	},
+	async filterRequest(payload, token) {
+		return await axios.get(`${BASE_URL}requests/search?${payload}`, {
+			headers: {
+				Authorization: token,
+				'Content-Type': 'application/json',
+			},
+		});
+	},
 	getManagerRequest(managerId, token) {
 		return axios.get(`${BASE_URL}requests/managers/${managerId}`, {
 			headers: {

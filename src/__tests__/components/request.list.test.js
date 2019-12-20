@@ -67,6 +67,12 @@ describe('Verify User page', () => {
 		expect(axios.calledOnce);
 		wrapper.find('#next-nav').simulate('click');
 		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(2);
+		const search = wrapper.find('#search_modal');
+		search.simulate('click');
+		const btn = wrapper.find('form');
+		btn.simulate('submit', e => {
+			e.preventDefault();
+		});
 		wrapper.find('#next-nav').simulate('click');
 		expect(wrapper.find(RequestList).instance().state.currentPage).toEqual(2);
 		const previous = wrapper.find('#previous-nav');

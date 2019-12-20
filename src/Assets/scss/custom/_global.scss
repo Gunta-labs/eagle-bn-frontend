@@ -248,3 +248,25 @@ label {
 	height: 100px;
 	width: 100px;
 }
+
+.searchModal{
+	width: fit-content;
+	z-index: 99999;
+	background-color: white;
+	height: fit-content;
+	position: absolute;
+	right: 2rem;
+	top: 8.5rem;
+}
+	
+@media (max-width: 441px) {
+	.searchModal {
+		width: 100%;
+		margin:0;
+		position: absolute;
+	    right: 0;
+	    top: 8.4rem;
+	}
+}
+
+
