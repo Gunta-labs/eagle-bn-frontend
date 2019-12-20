@@ -62,6 +62,10 @@ const mockData = {
 			payload: { data: [data, data, data, data, data, data, data, data, data2] },
 			error: null,
 		},
+		filterRequest: {
+			filtered_data: { data: [data, data, data, data, data, data, data, data, data2] },
+			error: null,
+		},
 	},
 	initialState: {
 		Request: {
@@ -69,11 +73,19 @@ const mockData = {
 			payload: null,
 			error: null,
 		},
+		filterRequest: {
+			filtered_data: null,
+			error: null,
+		},
 	},
 	pendingState: {
 		Request: {
 			pending: true,
 			payload: null,
+			error: null,
+		},
+		filterRequest: {
+			filtered_data: null,
 			error: null,
 		},
 	},
@@ -84,6 +96,10 @@ const mockData = {
 			error: {
 				error: 'error',
 			},
+		},
+		filterRequest: {
+			filtered_data: null,
+			error: 'Oooh no data found',
 		},
 	},
 	mockSuccess: () => {

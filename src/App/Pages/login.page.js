@@ -46,19 +46,18 @@ export class Login extends React.Component {
 	render() {
 		const { password, email } = this.state;
 		const { error, isLoggedIn } = this.props.user;
+		console.log(error);
 		const loginDisplay = (
 			<div className='d-flex'>
 				<Header />
 				<img className='vh-100 vw-100 bg-img' src={bckimg} alt='bg' />
 				<div className='container signup'>
 					<div className='row'>
-						<div className='col-md-6 col-lg-6 bg-sm-white rounded'>
+						<div className='col-md-6 col-lg-6 text-center bg-sm-white rounded'>
 							<h3 className='text-center mb-4'> Login </h3>
-							<div>
-								<SocialLogin />
-							</div>
+							{error && <span className=' d-block alert alert-danger'>{error}</span>}
+							<SocialLogin />
 							<hr />
-							{error && <p className='alert alert-danger'>{error}</p>}
 							<form onSubmit={this.handleSubmit}>
 								<div className='form-label-group mt-4'>
 									<input
