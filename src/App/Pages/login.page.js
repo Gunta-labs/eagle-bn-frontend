@@ -46,7 +46,6 @@ export class Login extends React.Component {
 	render() {
 		const { password, email } = this.state;
 		const { error, isLoggedIn } = this.props.user;
-		console.log(error);
 		const loginDisplay = (
 			<div className='d-flex'>
 				<Header />

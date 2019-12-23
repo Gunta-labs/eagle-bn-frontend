@@ -28,8 +28,8 @@ const managerMenu = [
 	{ name: 'My Approvals', icon: faClipboardCheck, active: false, link: '/manager' },
 ];
 const adminMenu = [
-	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
-	{ name: 'users', icon: faUser, active: false, link: '/admin' },
+	{ name: 'my account', icon: faUser, active: false, link: '/dashboard' },
+	{ name: 'users', icon: faUser, active: true, link: '/admin' },
 	{ name: 'comments', icon: faFileAlt, active: false, link: '/comments' },
 ];
 function getMenus(role, active) {

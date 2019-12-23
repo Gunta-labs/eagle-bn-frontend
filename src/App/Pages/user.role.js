@@ -57,7 +57,7 @@ class UserRole extends React.Component {
 		return (
 			<div>
 				<div className='user-container container'>
-					<Header showSideNav={true} active_menu={1} />
+					<Header active_menu={1} showSideNav={true} />
 
 					<h5 className=' text-primary border containerbody pl-3 pt-1 bg-white'> Users </h5>
 					<div className='row mt-5'>
