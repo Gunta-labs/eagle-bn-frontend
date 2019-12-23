@@ -6,8 +6,8 @@ export default (closeModel, changeRoleStatus, email, Role, error, changeRole) =>
 		<div className='dialog'>
 			<div className='modal-dialog' role='document'>
 				<div className='modal-content'>
-					<div className='modal-header'>
-						<h5>Are you sure you need to change a user role?</h5>
+					<div className='modal-header text-center'>
+						<h5 className='text-primary'>Change a user role</h5>
 					</div>
 					<div className='modal-body'>
 						{changeRoleStatus === 'failed' && (
@@ -17,7 +17,7 @@ export default (closeModel, changeRoleStatus, email, Role, error, changeRole) =>
 						<h6 className='modal-title'>Select new role</h6>
 						<select
 							type='select'
-							className='custom-select'
+							className='form-control'
 							id='role'
 							onChange={e => {
 								e.preventDefault();
@@ -37,6 +37,7 @@ export default (closeModel, changeRoleStatus, email, Role, error, changeRole) =>
 							Cancel
 						</button>
 						<button
+							id='changeRo'
 							type='button'
 							class='btn btn-primary'
 							onClick={e => {

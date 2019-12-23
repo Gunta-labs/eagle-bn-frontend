@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import UserCard from '../Components/UserCard';
 import Header from '../Components/Header';
@@ -70,6 +71,9 @@ class UserRole extends React.Component {
 		);
 	}
 }
+UserRole.propTypes = {
+	userRole: PropTypes.object,
+};
 export const mapStateToProps = ({ userRole }) => ({
 	userRole,
 });

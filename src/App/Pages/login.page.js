@@ -6,7 +6,7 @@ import QueryString from 'querystring';
 import authentication, { socialLog } from '../../Redux/Actions/login.actions';
 import bckimg from '../../Assets/images/login.svg';
 import Header from '../Components/Header';
-import SocialLogin from '../Components/socialLogin';
+import SocialLogin from '../Components/social.login';
 
 export class Login extends React.Component {
 	constructor(props) {

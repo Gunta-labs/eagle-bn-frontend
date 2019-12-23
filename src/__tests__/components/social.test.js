@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import SocialLogin from '../../App/Components/socialLogin';
+import SocialLogin from '../../App/Components/social.login';
 import LoginFacebook from '../../App/Components/facebookLogin';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
