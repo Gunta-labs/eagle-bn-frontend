@@ -72,3 +72,12 @@
 .dialog-close:hover, .dialog-close:focus {
   color: black;
 }
+
+.like-card {
+  font-size: 20px;
+  font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.like-card:hover {
+  cursor: pointer;
+  font-size: 23px !important;
+}

@@ -18,8 +18,10 @@ describe('test make trip request helpers', () => {
 		done();
 	});
 	it('test get user profile', async done => {
-		expect(typeof (await userProfile(1))).toEqual('object');
-		expect(await userProfile(1000)).toEqual(false);
+		let user = await userProfile(1);
+		expect(typeof user).toEqual('object');
+		user = await userProfile(1000);
+		expect(user).toEqual(false);
 		done();
 	});
 });

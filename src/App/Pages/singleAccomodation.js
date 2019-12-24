@@ -4,6 +4,7 @@ import Header from '../Components/Header';
 import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
+import LikeAndBookMark from '../Components/like.accommodation';
 
 export class singleAccomodations extends Component {
 	state = {
@@ -156,8 +157,8 @@ export class singleAccomodations extends Component {
 								<Link to={`/accommodations/${id}/book`} className='btn btn-primary btn-lg'>
 									<span> </span> Book it<span> </span>
 								</Link>
-								<button className='borger border-dark btn ml-auto btn-lg'>bookmark</button>
 							</div>
+							<LikeAndBookMark id={id} />
 						</div>
 						<div className='col-12 flex-column acc-container border'>
 							<h5 className='pl-n3 text-primary'>Recent Feedback</h5>

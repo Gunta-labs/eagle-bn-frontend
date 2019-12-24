@@ -98,6 +98,16 @@ const apis = {
 			},
 		});
 	},
+	getLikesOfAccommodation(accommodationId) {
+		return axios.get(`${BASE_URL}accommodations/${accommodationId}/like`);
+	},
+	likeAccommodation(accommodationId, token) {
+		return axios.post(`${BASE_URL}accommodations/${accommodationId}/like`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 };
 
 export default apis;

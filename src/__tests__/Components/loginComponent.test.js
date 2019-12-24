@@ -37,6 +37,7 @@ describe('should find two inputs', () => {
 			authentication: jest.fn(),
 			handleSubmit: jest.fn(),
 			handleInput: jest.fn(),
+			authPending: jest.fn(),
 		};
 		const wrapper = renderLogin(initialProps);
 		const form = wrapper.find('form');
