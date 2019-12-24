@@ -3,7 +3,6 @@ import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import axios from 'axios';
 import sinon from 'sinon';
-import jwt from 'jsonwebtoken';
 import config from '../../helper/test.helper';
 import TripRequestComponent from '../../App/Pages/trip.request.page';
 import Data from '../../__mocks__/data/trip.request';

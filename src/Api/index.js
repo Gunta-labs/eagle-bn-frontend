@@ -19,6 +19,18 @@ const apis = {
 	signup(user) {
 		return axios.post(`${BASE_URL}users/signup`, user);
 	},
+	async changeRole(token, data) {
+		const role = await axios.put(`${BASE_URL}users/role`, data, {
+			headers: { Authorization: token },
+		});
+		return role;
+	},
+	async getUsersRoles(token) {
+		const roles = await axios.get(`${BASE_URL}users/roles`, {
+			headers: { Authorization: token },
+		});
+		return roles;
+	},
 	createAccommodation(data, token) {
 		return axios.post(`${BASE_URL}accommodations`, data, {
 			headers: { Authorization: token, contentType: 'application/x-www-form-urlencoded' },
@@ -74,11 +86,9 @@ const apis = {
 			},
 		});
 	},
-	getSingleRequest(requestId, token) {
-		return axios.get(`${BASE_URL}requests/${requestId}`, {
-			headers: {
-				Authorization: token,
-			},
+	updateAccommodation(data, token, id) {
+		return axios.patch(`${BASE_URL}accommodations/${id}`, data, {
+			headers: { Authorization: token },
 		});
 	},
 	changeRequestStatus(requestId, status, token) {

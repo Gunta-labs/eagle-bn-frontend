@@ -18,6 +18,8 @@ import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
 import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
+import UserRole from './Pages/user.role';
+import UpdateAccs from './Pages/update.accomodation';
 
 export class App extends React.Component {
 	render() {
@@ -67,8 +69,8 @@ export class App extends React.Component {
 						path='/request/create'
 						render={props => (token ? <TripRequest /> : <Redirect to='/login' />)}
 					/>
-					<Route exact path='/accomodations' component={GetAllAccomodations} />
-					<Route exact path='/accomodations/:id' component={singleAccomodations} />
+					<Route exact path='/accommodations' component={GetAllAccomodations} />
+					<Route exact path='/accommodations/:id' component={singleAccomodations} />
 					<Route
 						exact
 						path='/dashboard'
@@ -85,9 +87,12 @@ export class App extends React.Component {
 							)
 						}
 					/>
-					<Route path='*' component={NotFound} />
 					<Route exact path='/accomodations' component={GetAllAccomodations} />
 					<Route exact path='/accomodations/:id' component={singleAccomodations} />
+					<Route exact path='/admin' component={UserRole} />
+					<Route exact path='/accommodations/:id' component={singleAccomodations} />
+					<Route exact path='/accommodations/:id/edit' component={UpdateAccs} />
+					<Route path='*' component={NotFound} />
 				</Switch>
 			</Router>
 		);
