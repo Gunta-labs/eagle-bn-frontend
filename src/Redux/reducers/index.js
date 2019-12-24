@@ -16,6 +16,7 @@ import DashbordReducer from './/dashboard.reducer';
 import Logout from './logout.reducer';
 import ManagerApprovalReducer from './manager.approval.reducer';
 import filterRequest from './filter.requester.reducer';
+import UserRoleReducer from './user.role.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -36,6 +37,7 @@ const allReducers = combineReducers({
 	Logout,
 	ManagerApprovalReducer,
 	filterRequest,
+	userRole: UserRoleReducer,
 });
 
 export default allReducers;
