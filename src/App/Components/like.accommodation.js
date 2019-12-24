@@ -37,10 +37,9 @@ class LikeAndBookMark extends React.Component {
 		} catch (error) {
 			const { response } = error;
 			if (response && response.status === 400) {
-				toast.error(`accommodation with id ${id} was not found!`);
-			} else {
-				toast.error('Something went wrong!, check your internet connection');
+				return toast.error(`accommodation with id ${id} was not found!`);
 			}
+			toast.error('Something went wrong!, check your internet connection');
 		}
 	}
 	async like() {

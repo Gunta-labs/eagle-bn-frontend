@@ -3,7 +3,7 @@ import mockAxios from 'axios';
 import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import authentication from '../../Redux/Actions/login.actions';
+import authentication, { socialLog } from '../../Redux/Actions/login.actions';
 
 const mockStore = configureMockStore([thunk]);
 applyMiddleware(promiseMiddleware);
@@ -68,6 +68,25 @@ describe('Actions', () => {
 		});
 
 		await store.dispatch(await authentication(payload));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('LOGIN_SUCCESS');
+	});
+	it('dispatches social authentication action and returns true', async () => {
+		mockAxios.post.mockResolvedValue({
+			data: {
+				status: 201,
+				msg: 'User logged successfully',
+				data: {
+					userid: 5,
+					fullname: 'manager',
+					email: 'manager@gmail.com',
+					isverified: true,
+					token: '5tsaMaYPkBf3hv_8evtwI8ubr19BpbnN41soODH4umg',
+				},
+			},
+		});
+
+		await store.dispatch(await socialLog(payload));
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('LOGIN_SUCCESS');
 	});

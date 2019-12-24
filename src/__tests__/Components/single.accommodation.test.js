@@ -1,5 +1,5 @@
 import React from 'react';
-import Accommodations from '../../App/Pages/singleAccomodation';
+import Accommodations, { mapDispatchToProps } from '../../App/Pages/singleAccomodation';
 import Data from '../../__mocks__/data/accommodation.data';
 import config from '../../helper/test.helper';
 import Enzyme from 'enzyme';
@@ -23,7 +23,7 @@ const component = (
 	/>
 );
 
-describe('Verify User page', () => {
+describe('Verify accommodation page', () => {
 	it('Should have a request card request are successfully fetched', async done => {
 		Data.mockData.mockSuccess();
 		const axiosSpy = sinon.spy(axios, 'get');
@@ -83,4 +83,10 @@ describe('Verify User page', () => {
 
 		done();
 	});
+	it('should map the state to props', () => {
+		mapDispatchToProps(jest.fn()).getFeedback({ id: '1' });
+		mapDispatchToProps(jest.fn()).singleAccomodation({ id: '1' });
+		mapDispatchToProps(jest.fn()).deleteAccommo({ token: 'aaaa', id: '1' });
+	});
+	afterEach(() => jest.resetAllMocks());
 });

@@ -1,5 +1,6 @@
 import apis from '../../Api/index';
 import constants from '../constants/index';
+import { toast } from 'react-toastify';
 
 export const singleAccomodation = async id => {
 	try {
@@ -13,11 +14,12 @@ export const singleAccomodation = async id => {
 		} else {
 			return {
 				type: constants.SINGLE_ACCOMODATION_ERROR,
-				payload: 'No Accomodation with id',
+				payload: `No accommodation with id ${id}`,
 			};
 		}
 	} catch (error) {
 		const message = error.response ? error.response.data.msg : 'No internet access';
+		toast.error(message);
 		return {
 			type: constants.SINGLE_ACCOMODATION_ERROR,
 			payload: message,
@@ -37,6 +39,24 @@ export const GetFeedback = async id => {
 		const message = error.response ? error.response.data.msg : 'No internet access';
 		return {
 			type: constants.SINGLE_ACCOMODATION_FEEDBACK_ERROR,
+			payload: message,
+		};
+	}
+};
+
+export const deleteAccommodation = async (token, id) => {
+	try {
+		const res = await apis.DeleteAccommodation(token, id);
+		const { data } = res.data;
+		return {
+			type: 'ACCOMMODATION_DELETE_SUCCESS',
+			payload: data,
+		};
+	} catch (error) {
+		const message = error.response ? error.response.data.msg : 'No internet access';
+		toast.error(message);
+		return {
+			type: 'ACCOMMODATION_DELETE_ERROR',
 			payload: message,
 		};
 	}
