@@ -1,5 +1,6 @@
 import BASE_URL from './config';
 import axios from 'axios';
+import socketClient from 'socket.io-client';
 
 const apis = {
 	async verifyUser(token) {
@@ -83,6 +84,27 @@ const apis = {
 	},
 	changeRequestStatus(requestId, status, token) {
 		return axios.patch(`${BASE_URL}requests/${requestId}/${status}`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getNotifications(token) {
+		return axios.get(`${BASE_URL}notifications/`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	markNotificationAsRead(notificationId, token) {
+		return axios.patch(`${BASE_URL}notifications/${notificationId}/status`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	markAllNotificationAsRead(token) {
+		return axios.patch(`${BASE_URL}notifications/readAll`, null, {
 			headers: {
 				Authorization: token,
 			},

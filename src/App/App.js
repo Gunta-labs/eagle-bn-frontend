@@ -18,8 +18,14 @@ import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
 import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
+import { initializeSocketIo } from '../helper/socketIo';
+import { toast } from 'react-toastify';
 
+toast.configure();
 export class App extends React.Component {
+	componentDidMount() {
+		initializeSocketIo(token);
+	}
 	render() {
 		return (
 			<Router>
