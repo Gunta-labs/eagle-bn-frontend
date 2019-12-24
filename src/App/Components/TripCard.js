@@ -7,7 +7,6 @@ import AccomImg from '../../Assets/images/acc.jpg';
 function Card({ data }) {
 	const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 	const places = sorted.slice(0, 4);
-
 	return places.map((e, i) => {
 		return (
 			<div className='col-md-3 col-sm-6' key={i}>

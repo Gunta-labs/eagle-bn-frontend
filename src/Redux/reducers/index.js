@@ -17,6 +17,8 @@ import Logout from './logout.reducer';
 import ManagerApprovalReducer from './manager.approval.reducer';
 import filterRequest from './filter.requester.reducer';
 import UserRoleReducer from './user.role.reducer';
+import UpdateAccomodation from './update.accomodation.reducer';
+import getOneAcc from './singleAccomodation.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -38,6 +40,8 @@ const allReducers = combineReducers({
 	ManagerApprovalReducer,
 	filterRequest,
 	userRole: UserRoleReducer,
+	UpdateAccomodation,
+	getOneAcc,
 });
 
 export default allReducers;

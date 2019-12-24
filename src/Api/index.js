@@ -86,11 +86,9 @@ const apis = {
 			},
 		});
 	},
-	getSingleRequest(requestId, token) {
-		return axios.get(`${BASE_URL}requests/${requestId}`, {
-			headers: {
-				Authorization: token,
-			},
+	updateAccommodation(data, token, id) {
+		return axios.patch(`${BASE_URL}accommodations/${id}`, data, {
+			headers: { Authorization: token },
 		});
 	},
 	changeRequestStatus(requestId, status, token) {

@@ -102,6 +102,7 @@ describe('should test user role component', () => {
 		initialProps.state.eamil = data.email;
 		const update = wrapper.find('#changeRo');
 		update.simulate('click', event);
+		// eslint-disable-next-line no-unused-vars
 		const { changeRole } = wrapper.instance().props;
 	});
 	it('should map the state to props', () => {
