@@ -33,7 +33,7 @@ class Header extends React.Component {
 		const showNotification = this.state.showNotification ? 'visible' : 'invisible';
 		return (
 			<div>
-				{showSideNav && <NotificationList visibility={`${showNotification}`} />}
+				<NotificationList visibility={`${showNotification}`} />
 				<nav className='navbar navbar-expand-lg bg-light navbar-light fixed-top'>
 					<a className='navbar-brand text-primary' href='/'>
 						<div>
@@ -41,7 +41,7 @@ class Header extends React.Component {
 							<span className='font-weight-bold'>Barefoot</span>
 						</div>
 					</a>
-					<div className='d-lg-none' onClick={this.handleClickNotification}>
+					<div className='d-lg-none float-right' onClick={this.handleClickNotification}>
 						<span className='profile text-primary notificationImg'>
 							<FontAwesomeIcon icon={faBell} />
 						</span>
@@ -122,6 +122,21 @@ class Header extends React.Component {
 										</button>
 									</div>
 								</li>
+								{Token && (
+									<li
+										className='nav-item mx-5 d-none d-lg-block d-xl-block'
+										onClick={this.handleClickNotification}
+									>
+										<div>
+											<span className='profile text-primary notificationImg'>
+												<FontAwesomeIcon icon={faBell} />
+											</span>
+											<p className='badge badge-primary small-text'>
+												{this.getUnreadNotifications(notifications)}
+											</p>
+										</div>
+									</li>
+								)}
 								<li className='nav-item mx-3'>
 									<LogoutButton />
 								</li>

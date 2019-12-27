@@ -1,5 +1,5 @@
 import constants from '../constants';
-import apis from '../../Api';
+import apis from '../../Api/notification.api';
 import { toast } from 'react-toastify';
 
 export const getNotifications = async token => {
@@ -7,7 +7,7 @@ export const getNotifications = async token => {
 		const result = await apis.getNotifications(token);
 		return {
 			type: constants.NOTIFICATION_SUCCESS,
-			payload: result.data.data.reverse(),
+			payload: result.data.data,
 		};
 	} catch (err) {
 		return {
@@ -39,7 +39,7 @@ export const markAllAsRead = async token => {
 	try {
 		const result = await apis.markAllNotificationAsRead(token);
 		return {
-			type: constants.GETREQUEST_SUCCESS,
+			type: constants.MARK_NOTIFICATION_SUCCESS_ALL,
 			payload: result,
 		};
 	} catch (err) {
@@ -48,7 +48,7 @@ export const markAllAsRead = async token => {
 			: 'An error occured when executing this action. Make sure you are connected to a valid network';
 		toast.error(error);
 		return {
-			type: constants.MARK_NOTIFICATION_ERROR,
+			type: constants.MARK_NOTIFICATION_ERROR_ALL,
 		};
 	}
 };

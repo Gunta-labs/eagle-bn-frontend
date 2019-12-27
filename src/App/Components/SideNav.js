@@ -14,7 +14,8 @@ import Menu from '../Components/Menu';
 
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
-	{ name: 'trip requests', icon: faClipboard, active: false, link: '/requests' },
+	{ name: 'my requests', icon: faUser, active: true, link: '/requests' },
+	{ name: 'trip requests', icon: faClipboard, active: false, link: '/requests/create' },
 	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [
@@ -26,6 +27,11 @@ const managerMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'My Approvals', icon: faClipboardCheck, active: false, link: '/manager' },
 ];
+const adminMenu = [
+	{ name: 'my account', icon: faUser, active: false, link: '/dashboard' },
+	{ name: 'users', icon: faUser, active: true, link: '/admin' },
+	{ name: 'comments', icon: faFileAlt, active: false, link: '/comments' },
+];
 function getMenus(role, active) {
 	switch (role || 'requester') {
 		case 'requester':
@@ -36,8 +42,16 @@ function getMenus(role, active) {
 			return supplierMenu.map((menu, index) => (
 				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
 			));
+		case 'Tadmin':
+			return supplierMenu.map((menu, index) => (
+				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+			));
 		case 'manager':
 			return managerMenu.map((menu, index) => (
+				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+			));
+		case 'admin':
+			return adminMenu.map((menu, index) => (
 				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
 			));
 		default:

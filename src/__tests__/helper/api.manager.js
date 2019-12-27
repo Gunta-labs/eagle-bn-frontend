@@ -24,7 +24,6 @@ describe('Test Manager End point', () => {
 			});
 		})();
 		apis.getManagerRequest(1, 'fefd');
-		apis.getSingleRequest(1, 'sed');
 		axios.get.restore();
 		done();
 	});

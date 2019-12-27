@@ -95,7 +95,7 @@ const mockData = {
 		axios.patch.mockImplementation(() => Promise.reject(data));
 	},
 	mockFailureNetwork: (payload = null) => {
-		axios.get.mockImplementation(() => Promise.reject({ error: 'failed' }));
+		axios.patch.mockImplementation(() => Promise.reject({ error: 'failed' }));
 	},
 };
 export default {

@@ -45,6 +45,7 @@ describe('Verify User page', () => {
 		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
+		wrapper.html();
 		expect(wrapper.find('.acc-container')).toExist();
 		expect(wrapper.find('.mt-5.mb-3.text-primary')).toExist();
 		expect(axiosSpy.calledOnce);
@@ -58,6 +59,7 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
+		await axiosSpy.getCalls();
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {
@@ -72,6 +74,7 @@ describe('Verify User page', () => {
 		store = config.mockStore(Data.mockData.successState);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(axios.calledOnce);
+		await axiosSpy.getCalls();
 		try {
 			await axiosSpy.getCall(0).returnValue;
 		} catch (err) {

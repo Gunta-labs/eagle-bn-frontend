@@ -55,4 +55,27 @@ describe('Header', () => {
 			.simulate('click');
 		done();
 	});
+	it('should have a side-nav-bar', done => {
+		checkToken.default = jest.fn();
+		checkToken.default
+			.mockReturnValueOnce({
+				fullname: 'lemoisson',
+			})
+			.mockReturnValueOnce({
+				role: 'requester',
+			});
+		data.mockData.mockFailureNetwork();
+		const store = helper.mockStore(data.mockData.successState);
+		const wrapper = helper.mountNewWrapper(store, <Notification />);
+		expect(wrapper.find('#singleNot')).toExist();
+		wrapper
+			.find('#singleNot')
+			.first()
+			.simulate('click');
+		wrapper
+			.find('#markAll')
+			.first()
+			.simulate('click');
+		done();
+	});
 });

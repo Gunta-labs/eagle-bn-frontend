@@ -24,7 +24,7 @@ describe('Header', () => {
 		const store = helper.mockStore(data.mockData.successState);
 		const wrapper = helper.mountNewWrapper(store, <Header showSideNav={true} />);
 		expect(wrapper.find(SideNav)).toExist();
-		expect(wrapper.find('#main-menu')).not.toExist();
+		expect(wrapper.find('.navbar-nav.ml-auto')).toExist();
 		done();
 	});
 	it('should have menu-active class', done => {

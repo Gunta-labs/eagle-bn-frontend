@@ -1,7 +1,6 @@
 import React from 'react';
 import { faCheckDouble, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import constants from '../../Redux/constants';
 import {
 	getNotifications,
 	markAllAsRead,
@@ -39,7 +38,7 @@ export class Notification extends React.Component {
 		if (data) {
 			return data.map(notification => {
 				return (
-					<div className='pl-2 border-bottom'>
+					<div className={`pl-2 border-bottom ${!notification.isRead ? 'bg-active' : ''}`}>
 						<div className='d-flex justify-content-between pt-2 pl-2 pr-2'>
 							<h6 className='text-dark '>{this.getTitle(notification.type)}</h6>
 							<span
@@ -53,8 +52,8 @@ export class Notification extends React.Component {
 							</span>
 						</div>
 						<div className='d-flex justify-content-between pt-1 pl-2 pr-2 '>
-							<label className='text-secondary '>
-								{notification.descripion || notification.type}
+							<label className='text-secondary  mr-4 pr-1'>
+								{notification.description || notification.type}
 							</label>
 							<label className='text-black-50'>
 								{dateHelper(new Date(notification.createdAt))}
@@ -68,18 +67,21 @@ export class Notification extends React.Component {
 	render() {
 		const { payload, visibility } = this.props;
 		return (
-			<div className={`notificationPanel shadow-sm ${visibility}`}>
-				<div className='d-flex justify-content-between pt-3 pl-3 pr-2 pb-2 shadow-sm'>
-					<h5 className='text-primary'>Notifications</h5>
-					<span
-						className='text-primary markAllAsRead shadow-sm'
-						id='markAll'
-						onClick={e => this.SetAllAsRead(e)}
-					>
-						<FontAwesomeIcon icon={faCheckDouble} size='sm' />
-					</span>
+			<div>
+				<div className={`blurPanel ${visibility}`}></div>
+				<div className={`notificationPanel shadow-sm ${visibility}`}>
+					<div className='d-flex justify-content-between pt-3 pl-3 pr-2 pb-2 shadow-sm'>
+						<h5 className='text-primary'>Notifications</h5>
+						<span
+							className='text-primary markAllAsRead shadow-sm'
+							id='markAll'
+							onClick={e => this.SetAllAsRead(e)}
+						>
+							<FontAwesomeIcon icon={faCheckDouble} size='sm' />
+						</span>
+					</div>
+					<div className='pl-0 border-bottom'>{this.getNotificationsDetail(payload)}</div>
 				</div>
-				<div className='pl-2 border-bottom'>{this.getNotificationsDetail(payload)}</div>
 			</div>
 		);
 	}
