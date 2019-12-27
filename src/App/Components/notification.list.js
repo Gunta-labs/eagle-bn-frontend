@@ -9,8 +9,9 @@ import {
 } from '../../Redux/Actions/notification.action';
 import { connect } from 'react-redux';
 import { token } from '../../helper/helper';
+import dateHelper from '../../helper/date.helper';
 
-export class Logout extends React.Component {
+export class Notification extends React.Component {
 	componentDidMount() {
 		this.props.getAll(token);
 	}
@@ -29,8 +30,10 @@ export class Logout extends React.Component {
 		}
 	}
 	SetAsRead(notificationId) {
-		console.log('here');
 		this.props.markOne(token, notificationId);
+	}
+	SetAllAsRead() {
+		this.props.markAll(token);
 	}
 	getNotificationsDetail(data) {
 		if (data) {
@@ -40,6 +43,7 @@ export class Logout extends React.Component {
 						<div className='d-flex justify-content-between pt-2 pl-2 pr-2'>
 							<h6 className='text-dark '>{this.getTitle(notification.type)}</h6>
 							<span
+								id='singleNot'
 								className={`${
 									!notification.isRead ? 'text-black-50' : 'text-primary'
 								} markOneAsRead`}
@@ -49,8 +53,12 @@ export class Logout extends React.Component {
 							</span>
 						</div>
 						<div className='d-flex justify-content-between pt-1 pl-2 pr-2 '>
-							<label className='text-secondary '>Your request to kampala has been approved</label>
-							<label className='text-black-50'>4d ago</label>
+							<label className='text-secondary '>
+								{notification.descripion || notification.type}
+							</label>
+							<label className='text-black-50'>
+								{dateHelper(new Date(notification.createdAt))}
+							</label>
 						</div>
 					</div>
 				);
@@ -63,7 +71,11 @@ export class Logout extends React.Component {
 			<div className={`notificationPanel shadow-sm ${visibility}`}>
 				<div className='d-flex justify-content-between pt-3 pl-3 pr-2 pb-2 shadow-sm'>
 					<h5 className='text-primary'>Notifications</h5>
-					<span className='text-primary markAllAsRead shadow-sm'>
+					<span
+						className='text-primary markAllAsRead shadow-sm'
+						id='markAll'
+						onClick={e => this.SetAllAsRead(e)}
+					>
 						<FontAwesomeIcon icon={faCheckDouble} size='sm' />
 					</span>
 				</div>
@@ -82,15 +94,10 @@ export const mapStateToProps = state => ({
 });
 export const mapDispatchToProps = dispatch => {
 	return {
-		inits: () =>
-			dispatch({
-				type: constants.NOTIFICATION_PENDING,
-				pending: true,
-			}),
 		getAll: async token => dispatch(await getNotifications(token)),
 		markOne: async (token, notificationId) => dispatch(await markAsRead(token, notificationId)),
 		markAll: async token => dispatch(await markAllAsRead(token)),
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(mapStateToProps, mapDispatchToProps)(Notification);

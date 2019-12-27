@@ -1,7 +1,10 @@
 import compHelper from '../../helper/trip.request.form.data';
 import userProfile from '../../helper/user.helper';
+import { mockSuccess } from '../../__mocks__/data/profile.mock.data';
+import sinon from 'sinon';
+import axios from 'axios';
 
-jest.unmock('axios');
+jest.mock('axios');
 describe('test make trip request helpers', () => {
 	it('test component helpers', done => {
 		const res = compHelper({
@@ -18,8 +21,11 @@ describe('test make trip request helpers', () => {
 		done();
 	});
 	it('test get user profile', async done => {
-		expect(typeof (await userProfile(1))).toEqual('object');
-		expect(await userProfile(1000)).toEqual(false);
+		mockSuccess();
+		sinon.spy(axios, 'get');
+		userProfile(1);
+		const result = await axios.get.getCall(0).returnValue;
+		expect(typeof result).toEqual('object');
 		done();
 	});
 });

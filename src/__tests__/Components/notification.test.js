@@ -1,10 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import * as checkToken from '../../helper/helper';
-import Header from '../../App/Components/Header';
-import SideNav from '../../App/Components/SideNav';
+import Notification from '../../App/Components/notification.list';
 import helper from '../../helper/test.helper';
 import data from '../../__mocks__/data/header.data';
 
@@ -22,12 +20,19 @@ describe('Header', () => {
 				role: 'requester',
 			});
 		const store = helper.mockStore(data.mockData.successState);
-		const wrapper = helper.mountNewWrapper(store, <Header showSideNav={true} />);
-		expect(wrapper.find(SideNav)).toExist();
-		expect(wrapper.find('#main-menu')).not.toExist();
+		const wrapper = helper.mountNewWrapper(store, <Notification />);
+		expect(wrapper.find('#singleNot')).toExist();
+		wrapper
+			.find('#singleNot')
+			.first()
+			.simulate('click');
+		wrapper
+			.find('#markAll')
+			.first()
+			.simulate('click');
 		done();
 	});
-	it('should have menu-active class', done => {
+	it('should have a side-nav-bar', done => {
 		checkToken.default = jest.fn();
 		checkToken.default
 			.mockReturnValueOnce({
@@ -36,13 +41,18 @@ describe('Header', () => {
 			.mockReturnValueOnce({
 				role: 'requester',
 			});
+		data.mockData.mockFailure();
 		const store = helper.mockStore(data.mockData.successState);
-		const wrapper = helper.mountNewWrapper(store, <Header showSideNav={false} />);
+		const wrapper = helper.mountNewWrapper(store, <Notification />);
+		expect(wrapper.find('#singleNot')).toExist();
 		wrapper
-			.find('.navbar-toggler')
+			.find('#singleNot')
 			.first()
 			.simulate('click');
-		expect(wrapper.find(SideNav)).not.toExist();
+		wrapper
+			.find('#markAll')
+			.first()
+			.simulate('click');
 		done();
 	});
 });

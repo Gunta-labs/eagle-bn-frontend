@@ -6,13 +6,8 @@ import { toast } from 'react-toastify';
 
 export const initializeSocketIo = token => {
 	const socket = socketClient(url, { query: { token } });
-	socket.on('new_message', data => {
-		console.log(data);
-	});
 	socket.on('new_request', data => {
-		console.log(data);
-		const t = toast.success('You have a new notification');
-		console.log(t);
+		toast.success('You have a new notification');
 		store.dispatch({
 			type: constant.NEW_NOTIFCATION,
 			notification: data,

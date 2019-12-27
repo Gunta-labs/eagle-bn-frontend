@@ -11,6 +11,11 @@ export default {
 		handleValueChange: jest.fn(),
 		showDestinationsForm: jest.fn(),
 		handleSubmit: jest.fn(),
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	not_started: {
 		MakeTripRequest: {
@@ -22,6 +27,11 @@ export default {
 		handleValueChange: jest.fn(),
 		showDestinationsForm: jest.fn(),
 		handleSubmit: jest.fn(),
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	mockSuccess: status => {
 		const data = {

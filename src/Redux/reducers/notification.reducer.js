@@ -19,9 +19,16 @@ const updateNotification = (data, action) => {
 		};
 	});
 };
+const updateNotificationAll = data => {
+	return data.map(item => {
+		return {
+			...item,
+			isRead: true,
+		};
+	});
+};
 
 const NotificationReducer = (state = initialState, action) => {
-	let index = 0;
 	switch (action.type) {
 		case constants.NOTIFICATION_PENDING:
 			return Object.assign({}, state, {
@@ -46,6 +53,12 @@ const NotificationReducer = (state = initialState, action) => {
 				markSuccess: action.payload,
 				markError: null,
 				payload: updateNotification(state.payload, action),
+			});
+		case constants.MARK_NOTIFICATION_SUCCESS_ALL:
+			return Object.assign({}, state, {
+				markSuccess: action.payload,
+				markError: null,
+				payload: updateNotificationAll(state.payload),
 			});
 		case constants.MARK_NOTIFICATION_ERROR:
 			return Object.assign({}, state, {

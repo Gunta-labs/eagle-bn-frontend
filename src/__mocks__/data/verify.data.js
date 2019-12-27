@@ -10,6 +10,11 @@ const verifyData = {
 			},
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	initialState: {
 		Verify: {
@@ -17,12 +22,22 @@ const verifyData = {
 			payload: null,
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	pendingState: {
 		Verify: {
 			pending: true,
 			payload: null,
 			error: null,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	errorState: {
@@ -32,6 +47,11 @@ const verifyData = {
 			error: {
 				error: 'error',
 			},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	mockSuccess: (payload = null) => {

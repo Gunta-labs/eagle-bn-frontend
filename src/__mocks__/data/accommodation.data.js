@@ -37,6 +37,11 @@ const mockData = {
 			},
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	initialState: {
 		SingleAccomodations: {
@@ -50,6 +55,11 @@ const mockData = {
 		AccomodationFeedback: {
 			data: {},
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	pendingState: {
 		SingleAccomodations: {
@@ -59,6 +69,11 @@ const mockData = {
 		},
 		AccomodationFeedback: {
 			data: {},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	errorState: {
@@ -77,6 +92,11 @@ const mockData = {
 				feedbackList: { avatar: 'lellelle', author: 'christian' },
 				averageRating: 3,
 			},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	mockSuccess: () => {
