@@ -22,7 +22,7 @@ import { initializeSocketIo } from '../helper/socketIo';
 import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
-//import UserRole from './Pages/user.role';
+import SingleRequest from './Pages/single.request.page';
 
 toast.configure();
 export class App extends React.Component {
@@ -38,6 +38,17 @@ export class App extends React.Component {
 						exact
 						path='/requests'
 						render={props => (token ? <Requests /> : <Redirect to='/login' />)}
+					/>
+					<Route
+						exact
+						path='/requests/:id'
+						render={props =>
+							token ? (
+								<SingleRequest userId={checkToken().userId} match={props.match} />
+							) : (
+								<Redirect to='/login' />
+							)
+						}
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />

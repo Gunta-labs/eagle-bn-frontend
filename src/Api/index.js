@@ -113,6 +113,27 @@ const apis = {
 			},
 		});
 	},
+	getSingleRequest(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getRequestComment(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}/comments`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	sendCommentReply(requestId, token, payload) {
+		return axios.post(`${BASE_URL}requests/${requestId}/comments`, payload, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 };
 
 export default apis;
