@@ -20,6 +20,7 @@ import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
+import { Bookings } from './Pages/booking.list';
 
 export class App extends React.Component {
 	render() {
@@ -31,6 +32,11 @@ export class App extends React.Component {
 						exact
 						path='/requests'
 						render={props => (token ? <Requests /> : <Redirect to='/login' />)}
+					/>
+					<Route
+						exact
+						path='/bookings'
+						render={props => (token ? <Bookings /> : <Redirect to='/login' />)}
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
