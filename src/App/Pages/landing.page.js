@@ -92,7 +92,7 @@ export class Landing extends React.Component {
 						<div className='d-flex'>
 							<h5 className='title mb-3 text-primary'>Recent Accomodations</h5>
 							<a
-								href='/accomodations'
+								href='/accommodations'
 								className='ml-auto btn btn-sm btn-primary mt-3 position-absolute more'
 							>
 								view more

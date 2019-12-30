@@ -13,7 +13,7 @@ export class GetAllAccomodations extends React.Component {
 	render() {
 		const { data } = this.props.accomodation;
 		return (
-			<>
+			<div>
 				<Header />
 				<div className='my-search shadow-lg border-0'>
 					<div className='container d-flex justify-content-center align-items-center'>
@@ -35,7 +35,6 @@ export class GetAllAccomodations extends React.Component {
 										className='input-group-text border bg-transparent text-light'
 										style={{ borderRadius: '20px' }}
 									>
-										{' '}
 										<FontAwesomeIcon icon={faFilter} /> More option
 									</span>
 								</div>
@@ -48,7 +47,7 @@ export class GetAllAccomodations extends React.Component {
 					<span className='draw draw-dark'></span>
 					<div className='row mt-4'>{data && <Accomodations data={data} />}</div>
 				</div>
-			</>
+			</div>
 		);
 	}
 }

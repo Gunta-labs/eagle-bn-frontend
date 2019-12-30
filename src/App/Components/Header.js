@@ -46,22 +46,22 @@ class Header extends React.Component {
 					{!showSideNav && !validToken && (
 						<ul className='navbar-nav ml-auto' id='main-menu'>
 							<li className='nav-item active'>
-								<a className='nav-link mx-3 ' href='/'>
+								<a className='nav-link mx-3 text-capitalize' href='/'>
 									Home <span className='sr-only'>(current)</span>
 								</a>
 							</li>
 							<li className='nav-item mx-3'>
-								<a className='nav-link' href='/accomodations'>
+								<a className='nav-link text-capitalize' href='/accommodations'>
 									Accommodations
 								</a>
 							</li>
-							<li className='nav-item mx-3'>
-								<a className='nav-link mx-3' href='/signup'>
+							<li className='nav-item mr-3'>
+								<a className='nav-link mr-3 text-capitalize' href='/signup'>
 									Signup
 								</a>
 							</li>
-							<li className='nav-item mx-3'>
-								<a className='nav-link btn btn-primary btn-sm px-5' href='/login'>
+							<li className='nav-item mr-3'>
+								<a className='nav-link btn btn-primary btn-sm px-5 text-capitalize' href='/login'>
 									Login
 								</a>
 							</li>
@@ -70,11 +70,16 @@ class Header extends React.Component {
 					{validToken && (
 						<ul className='navbar-nav ml-auto'>
 							<li className='nav-item active'>
-								<a className='nav-link mx-3 ' href='/'>
+								<a className='nav-link mx-3 text-capitalize' href='/'>
 									Home <span className='sr-only'>(current)</span>
 								</a>
 							</li>
-							<li className='nav-item mx-3'>
+							<li className='nav-item mr-3'>
+								<a className='nav-link text-capitalize' href='/accommodations'>
+									Accommodations
+								</a>
+							</li>
+							<li className='nav-item mr-3'>
 								<div className='dropdown'>
 									<button
 										className='btn dropdown-toggle text-secondary'

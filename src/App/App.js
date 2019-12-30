@@ -18,9 +18,11 @@ import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
 import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
+import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
 
+toast.configure();
 export class App extends React.Component {
 	render() {
 		return (

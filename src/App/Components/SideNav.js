@@ -33,27 +33,56 @@ const adminMenu = [
 	{ name: 'comments', icon: faFileAlt, active: false, link: '/comments' },
 ];
 function getMenus(role, active) {
-	console.log(role);
 	switch (role || 'requester') {
 		case 'requester':
 			return requestMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'host':
 			return supplierMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'Tadmin':
 			return supplierMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'manager':
 			return managerMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'admin':
 			return adminMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		default:
 			return '';

@@ -43,4 +43,20 @@ describe('Test Manager End point', () => {
 		axios.patch.restore();
 		done();
 	});
+	it('test post like accommodation', done => {
+		sinon.spy(axios, 'post');
+		(() => {
+			const data = {
+				msg: 'msg',
+				status: 201,
+				data: [],
+			};
+			axios.post.mockResolvedValue({
+				data,
+			});
+		})();
+		apis.likeAccommodation(1, 'fefd');
+		axios.post.restore();
+		done();
+	});
 });
