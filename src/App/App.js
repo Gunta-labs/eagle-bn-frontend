@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
 import SingleRequest from './Pages/single.request.page';
+import Chat from './Components/chat';
 
 toast.configure();
 export class App extends React.Component {
@@ -107,6 +108,7 @@ export class App extends React.Component {
 					<Route path='*' component={NotFound} />
 					/>
 				</Switch>
+				{token && <Chat />}
 			</Router>
 		);
 	}
