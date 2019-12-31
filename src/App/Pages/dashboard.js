@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import { retrieveUserData, updateUserProfile } from '../../Redux/Actions/dashboard.action';
+import TripStats from '../Components/trip.stats';
+import userData from '../../helper/helper';
 
 export class UserProfile extends React.Component {
 	constructor(props) {
@@ -138,6 +140,7 @@ export class UserProfile extends React.Component {
 				<h5 className=' text-primary border containerbody pl-3 pt-1 bg-white'> My account </h5>
 				<div className=''>
 					<div className='sub-container mt-5'>
+						{userData().role === 'requester' && <TripStats />}
 						<input
 							type='submit'
 							id='myinfo'
@@ -161,7 +164,7 @@ export class UserProfile extends React.Component {
 									</p>
 								)}
 								<br />
-								<div className='input-group mb-3' hidden='true'>
+								<div className='input-group mb-3' hidden={true}>
 									<div className='input-group-prepend'>
 										<span className='input-group-text text-primary inputlabel' id='lid'>
 											User ID
@@ -337,7 +340,7 @@ export class UserProfile extends React.Component {
 											multiple={false}
 											onChange={this.handleInput}
 										/>
-										<label className='custom-file-label upload' for='avatar'>
+										<label className='custom-file-label upload' htmlFor='avatar'>
 											{uploadedPic || 'choose picture'}
 										</label>
 									</div>

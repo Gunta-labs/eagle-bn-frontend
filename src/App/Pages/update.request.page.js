@@ -72,7 +72,6 @@ export class UpdateRequest extends React.Component {
 		const citiesList = cities.map(element => {
 			return <option value={element.name}></option>;
 		});
-		console.log(this.state);
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={2} />
