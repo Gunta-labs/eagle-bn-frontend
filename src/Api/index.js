@@ -57,6 +57,11 @@ const apis = {
 		const accommodations = await axios.get(`${BASE_URL}accommodations`);
 		return accommodations;
 	},
+	async getAllAccomodationsByFilter(filter) {
+		console.log(filter);
+		const accommodations = await axios.get(`${BASE_URL}accommodations/search?${filter}`);
+		return accommodations;
+	},
 	singleAccomodation(id) {
 		return axios.get(`${BASE_URL}accommodations/${id}`);
 	},
