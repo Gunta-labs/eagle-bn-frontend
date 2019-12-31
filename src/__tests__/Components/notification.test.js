@@ -32,6 +32,12 @@ describe('Header', () => {
 			.simulate('click');
 		done();
 	});
+	it('should have empty notification pane', done => {
+		const store = helper.mockStore(data.mockData.initialState);
+		const wrapper = helper.mountNewWrapper(store, <Notification />);
+		expect(wrapper.find('#singleNot')).not.toExist();
+		done();
+	});
 	it('should have a side-nav-bar', done => {
 		checkToken.default = jest.fn();
 		checkToken.default

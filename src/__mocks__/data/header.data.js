@@ -70,6 +70,26 @@ const mockData = {
 			},
 		},
 	},
+	initialState: {
+		Notification: {
+			payload: null,
+			error: null,
+			pending: null,
+		},
+		Logout: {
+			payload: {},
+		},
+		destSats: {
+			payload: {
+				data: [{}],
+			},
+		},
+		accommodations: {
+			payload: {
+				data: [{}],
+			},
+		},
+	},
 	mockSuccess: () => {
 		axios.get.mockResolvedValue({
 			msg: 'msg',

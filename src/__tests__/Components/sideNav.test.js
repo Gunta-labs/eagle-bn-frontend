@@ -30,6 +30,36 @@ describe('single request', () => {
 		expect(wrapper.find(Menu)).toExist();
 		done();
 	});
+	it('Should return host side nav menu', done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValueOnce({
+			fullname: 'admin',
+			role: 'admin',
+		});
+		const wrapper = shallow(<SidNav />);
+		expect(wrapper.find(Menu)).toExist();
+		done();
+	});
+	it('Should return host side nav menu', done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValueOnce({
+			fullname: 'Tadmin',
+			role: 'Tadmin',
+		});
+		const wrapper = shallow(<SidNav />);
+		expect(wrapper.find(Menu)).toExist();
+		done();
+	});
+	it('Should return host side nav menu', done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValueOnce({
+			fullname: 'manager',
+			role: 'manager',
+		});
+		const wrapper = shallow(<SidNav />);
+		expect(wrapper.find(Menu)).toExist();
+		done();
+	});
 	it('Should return  empty menu', done => {
 		checkToken.default = jest.fn();
 		checkToken.default.mockReturnValueOnce({

@@ -34,18 +34,19 @@ export class Login extends React.Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		const { authentication } = this.props;
+		const { authentication, authPending } = this.props;
 		const { email, password } = this.state;
 		const data = {
 			email,
 			password,
 		};
+		authPending();
 		authentication(data);
 	};
 
 	render() {
 		const { password, email } = this.state;
-		const { error, isLoggedIn } = this.props.user;
+		const { error, isLoggedIn, logPending } = this.props.user;
 		const loginDisplay = (
 			<div className='d-flex'>
 				<Header />
@@ -88,7 +89,7 @@ export class Login extends React.Component {
 									</Link>{' '}
 								</p>
 								<button className='btn-primary btn-block my-3 form-control' type='submit'>
-									{'Login'}
+									{logPending ? '...' : 'Login'}
 								</button>
 								New to Barefoot?
 								<Link to={`/signup`} activeClassName='active'>
@@ -114,6 +115,7 @@ export const mapDispatchToProps = dispatch => {
 	return {
 		authentication: async data => dispatch(await authentication(data)),
 		socialLog: async data => dispatch(await socialLog()),
+		authPending: () => dispatch({ type: 'login_pending', payload: {} }),
 	};
 };
 

@@ -52,10 +52,13 @@ export class Notification extends React.Component {
 							</span>
 						</div>
 						<div className='d-flex justify-content-between pt-1 pl-2 pr-2 '>
-							<label className='text-secondary  mr-4 pr-1'>
+							<label className='text-secondary  mr-2 pr-1'>
 								{notification.description || notification.type}
 							</label>
-							<label className='text-black-50'>
+							<label
+								className='text-black-50'
+								style={{ fontSize: 10 + 'px', width: 120 + 'px', textAlign: 'right' }}
+							>
 								{dateHelper(new Date(notification.createdAt))}
 							</label>
 						</div>
@@ -63,6 +66,7 @@ export class Notification extends React.Component {
 				);
 			});
 		}
+		return '';
 	}
 	render() {
 		const { payload, visibility } = this.props;

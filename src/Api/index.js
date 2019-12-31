@@ -1,6 +1,5 @@
 import BASE_URL from './config';
 import axios from 'axios';
-import socketClient from 'socket.io-client';
 
 const apis = {
 	async verifyUser(token) {
@@ -92,8 +91,23 @@ const apis = {
 			headers: { Authorization: token },
 		});
 	},
+	DeleteAccommodation(token, id) {
+		return axios.delete(`${BASE_URL}accommodations/${id}`, {
+			headers: { Authorization: token },
+		});
+	},
 	changeRequestStatus(requestId, status, token) {
 		return axios.patch(`${BASE_URL}requests/${requestId}/${status}`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getLikesOfAccommodation(accommodationId) {
+		return axios.get(`${BASE_URL}accommodations/${accommodationId}/like`);
+	},
+	likeAccommodation(accommodationId, token) {
+		return axios.post(`${BASE_URL}accommodations/${accommodationId}/like`, null, {
 			headers: {
 				Authorization: token,
 			},

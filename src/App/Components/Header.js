@@ -61,7 +61,6 @@ class Header extends React.Component {
 					>
 						<span className='navbar-toggler-icon'></span>
 					</button>
-
 					<div
 						className={
 							this.state.show ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'

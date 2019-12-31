@@ -42,6 +42,11 @@ const mockData = {
 			error: null,
 			pending: null,
 		},
+		DeleteAccommodations: {
+			data,
+			delete_error: null,
+			deleted: true,
+		},
 	},
 	initialState: {
 		SingleAccomodations: {
@@ -59,6 +64,11 @@ const mockData = {
 			payload: [],
 			error: null,
 			pending: null,
+		},
+		DeleteAccommodations: {
+			data: null,
+			error: null,
+			deleted: false,
 		},
 	},
 	pendingState: {
@@ -97,6 +107,11 @@ const mockData = {
 			payload: [],
 			error: null,
 			pending: null,
+		},
+		DeleteAccommodations: {
+			data: null,
+			error: '',
+			deleted: false,
 		},
 	},
 	mockSuccess: () => {

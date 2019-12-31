@@ -20,6 +20,7 @@ import Notification from './notification.reducer';
 import UserRoleReducer from './user.role.reducer';
 import UpdateAccomodation from './update.accomodation.reducer';
 import getOneAcc from './singleAccomodation.reducer';
+import DeleteAccommodations from './deleteAccommodation.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -44,6 +45,7 @@ const allReducers = combineReducers({
 	userRole: UserRoleReducer,
 	UpdateAccomodation,
 	getOneAcc,
+	DeleteAccommodations,
 });
 
 export default allReducers;
