@@ -26,6 +26,7 @@ import getComment from './get.request.comment.reducer';
 import { replyComment, sendComment } from './ comment.reducer';
 import ChatReducer from './chat.reducer';
 import UpdateRequest from './update.trip.reducer';
+import getStats from './stats.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -57,6 +58,7 @@ const allReducers = combineReducers({
 	sendComment,
 	ChatReducer,
 	UpdateRequest,
+	getStats,
 });
 
 export default allReducers;

@@ -1,7 +1,7 @@
 import React from 'react';
 import AccomImg from '../../Assets/images/acc.jpg';
 import Rater from 'react-rating';
-import { faUser, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getDate from '../../helper/date.helper';
 

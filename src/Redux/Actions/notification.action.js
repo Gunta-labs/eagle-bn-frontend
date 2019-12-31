@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 export const getNotifications = async token => {
 	try {
 		const result = await apis.getNotifications(token);
-		result.data.data = result.data.data.sort((a, b) => {
+		result.data.data = (result.data.data || []).sort((a, b) => {
 			return b.id - a.id;
 		});
 		return {
@@ -15,7 +15,7 @@ export const getNotifications = async token => {
 	} catch (err) {
 		return {
 			type: constants.NOTIFICATION_ERROR,
-			error: err.response.data,
+			error: err.message,
 		};
 	}
 };
