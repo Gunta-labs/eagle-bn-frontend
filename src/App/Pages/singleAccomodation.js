@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
-import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
+import {
+	singleAccomodation,
+	GetFeedback,
+	deleteAccommodation,
+} from '../../Redux/Actions/singleAccomodations.action';
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 import LikeAndBookMark from '../Components/like.accommodation';
+import * as checkTock from '../../helper/helper';
 
 export class singleAccomodations extends Component {
 	state = {
@@ -22,6 +27,13 @@ export class singleAccomodations extends Component {
 			img: link,
 		});
 	};
+
+	async handleDelete(accId) {
+		await this.props.deleteAccommo(accId);
+		if (this.props.deleted) {
+			window.location.assign('/accommodations');
+		}
+	}
 
 	componentDidUpdate(prevState) {
 		if (prevState.pending !== this.props.pending) {
@@ -92,7 +104,7 @@ export class singleAccomodations extends Component {
 			<>
 				<Header />
 				<div className='acc-container'>
-					<h4 className='mt-5 mb-3 text-primary '> Single Accomodation</h4>
+					<h4 className='mt-5 mb-3 text-primary '> Single Accomomdation</h4>
 					<div className='row gallery-card'>
 						<div className='col-md-6 shadow-sm'>
 							{images.length !== 0 ? (
@@ -153,10 +165,23 @@ export class singleAccomodations extends Component {
 									</div>
 								)}
 							</div>
-							<div className='d-flex pt-5'>
+							<div className='d-flex pt-5 mb-3'>
 								<Link to={`/accommodations/${id}/book`} className='btn btn-primary btn-lg'>
-									<span> </span> Book it<span> </span>
+									<span> Book it </span>
 								</Link>
+								{checkTock.token && (
+									<button
+										id='deleteAcc'
+										type='button'
+										className='btn btn-danger btn-lg ml-5'
+										onClick={e => {
+											e.preventDefault();
+											this.handleDelete(id);
+										}}
+									>
+										<span> Delete it </span>
+									</button>
+								)}
 							</div>
 							<LikeAndBookMark id={id} />
 						</div>
@@ -209,18 +234,22 @@ export class singleAccomodations extends Component {
 	}
 }
 
-const mapStateToPros = state => ({
+export const mapStateToPros = state => ({
 	payload: state.SingleAccomodations.data,
 	error: state.SingleAccomodations.error,
 	pending: state.SingleAccomodations.pending,
 	feedback: state.AccomodationFeedback.data,
 	feedback_error: state.AccomodationFeedback.error,
+	deleted: state.DeleteAccommodations.deleted,
+	data: state.DeleteAccommodations.data,
+	delete_error: state.DeleteAccommodations.delete_error,
 });
 
-const mapDispatchToProps = dispatch => {
+export const mapDispatchToProps = dispatch => {
 	return {
 		getFeedback: async id => dispatch(await GetFeedback(id)),
 		singleAccomodation: async id => dispatch(await singleAccomodation(id)),
+		deleteAccommo: async id => dispatch(await deleteAccommodation(checkTock.token, id)),
 		inits: () =>
 			dispatch({
 				type: 'SINGLE_ACCOMODATION_PENDING',

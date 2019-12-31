@@ -9,7 +9,6 @@ const renderLogin = args => {
 	const props = { ...args };
 	return shallow(<Login {...props} />);
 };
-
 describe('should find two inputs', () => {
 	it('Should render', () => {
 		const initialProps = {
@@ -21,6 +20,7 @@ describe('should find two inputs', () => {
 			authentication: jest.fn(),
 			handleSubmit: jest.fn(),
 			handleInput: jest.fn(),
+			socialLog: jest.fn(),
 		};
 
 		const wrapper = renderLogin(initialProps);
@@ -52,6 +52,8 @@ describe('should find two inputs', () => {
 	});
 	it('should map the state to props', () => {
 		mapDispatchToProps(jest.fn()).authentication({ email: 'dhjv', password: 'dskxfbjhk' });
+		mapDispatchToProps(jest.fn()).socialLog();
+		mapDispatchToProps(jest.fn()).authPending();
 	});
 	it('Should render the page with error message', () => {
 		const initialProps = {

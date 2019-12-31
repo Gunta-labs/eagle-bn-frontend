@@ -37,6 +37,11 @@ const mockData = {
 			},
 			error: null,
 		},
+		DeleteAccommodations: {
+			data,
+			delete_error: null,
+			deleted: true,
+		},
 	},
 	initialState: {
 		SingleAccomodations: {
@@ -49,6 +54,11 @@ const mockData = {
 		},
 		AccomodationFeedback: {
 			data: {},
+		},
+		DeleteAccommodations: {
+			data: null,
+			error: null,
+			deleted: false,
 		},
 	},
 	pendingState: {
@@ -77,6 +87,11 @@ const mockData = {
 				feedbackList: { avatar: 'lellelle', author: 'christian' },
 				averageRating: 3,
 			},
+		},
+		DeleteAccommodations: {
+			data: null,
+			error: '',
+			deleted: false,
 		},
 	},
 	mockSuccess: () => {

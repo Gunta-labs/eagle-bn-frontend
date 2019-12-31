@@ -1,5 +1,5 @@
 import React from 'react';
-import UserCard, { mapDispatchToProps } from '../../App/Components/UserCard';
+import UserCard from '../../App/Components/UserCard';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

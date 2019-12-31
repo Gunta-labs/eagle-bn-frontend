@@ -21,6 +21,7 @@ import ManagerApproval from './Pages/manager.approval.page';
 import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
+//import UserRole from './Pages/user.role';
 
 toast.configure();
 export class App extends React.Component {
@@ -89,12 +90,11 @@ export class App extends React.Component {
 							)
 						}
 					/>
-					<Route exact path='/accomodations' component={GetAllAccomodations} />
-					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 					<Route exact path='/admin' component={UserRole} />
-					<Route exact path='/accommodations/:id' component={singleAccomodations} />
 					<Route exact path='/accommodations/:id/edit' component={UpdateAccs} />
+					<Route exact path='/changeRole' component={UserRole} />
 					<Route path='*' component={NotFound} />
+					/>
 				</Switch>
 			</Router>
 		);

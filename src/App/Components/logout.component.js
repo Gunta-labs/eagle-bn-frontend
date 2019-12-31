@@ -34,10 +34,17 @@ export class Logout extends React.Component {
 	}
 }
 
-export const mapStateToProps = state => ({
-	payload: state.Logout.payload,
-	pending: state.Logout.pending,
-});
+// export const mapStateToProps = state => ({
+// 	payload: state.Logout.payload,
+// 	pending: state.Logout.pending,
+// });
+
+export function mapStateToProps(state) {
+	return {
+		payload: state.Logout.payload,
+		pending: state.Logout.pending,
+	};
+}
 export const mapDispatchToProps = dispatch => {
 	return {
 		inits: () =>
