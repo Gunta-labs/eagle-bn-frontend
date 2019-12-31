@@ -33,7 +33,6 @@ const adminMenu = [
 	{ name: 'comments', icon: faFileAlt, active: false, link: '/comments' },
 ];
 function getMenus(role, active) {
-	console.log(role);
 	switch (role || 'requester') {
 		case 'requester':
 			return requestMenu.map((menu, index) => (

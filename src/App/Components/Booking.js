@@ -38,11 +38,10 @@ class Booking extends React.Component {
 								}
 								onClick={e => {
 									bk.rating = e;
-									this.setState({ rating: e });
 									this.props.handleClick(this.props.booking, e);
 								}}
-								initialRating={bk.Rating ? bk.Rating.rating : this.state.rating}
-								readonly={bk.Rating ? true : false}
+								id='singleBooking'
+								initialRating={bk.Rating ? bk.Rating.rating : 0}
 							/>
 						</div>
 					</div>

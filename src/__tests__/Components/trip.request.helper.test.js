@@ -3,7 +3,7 @@ import userProfile from '../../helper/user.helper';
 
 jest.unmock('axios');
 describe('test make trip request helpers', () => {
-	it('test component helpers', done => {
+	it.only('test component helpers', done => {
 		const res = compHelper({
 			city: 'city',
 			country: 'country',

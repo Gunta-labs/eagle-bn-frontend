@@ -33,6 +33,10 @@ const mapDispatchToProps = dispatch => {
 				type: constants.RATE_BOOKING_PENDING,
 				pending: true,
 			}),
+		resetRating: () =>
+			dispatch({
+				type: constants.RATE_BOOKING_RESET,
+			}),
 		getBookings: async token => dispatch(await getBookings(token)),
 		rateBookings: async (data, token, bookingId) =>
 			dispatch(await rateBooking(data, token, bookingId)),
@@ -52,12 +56,6 @@ export class BookingList extends React.Component {
 		currentBooking: null,
 		feedback: '',
 	};
-	searchModal = e => {
-		e.preventDefault();
-		this.setState({
-			searchModal: true,
-		});
-	};
 	handleSubmit = e => {
 		e.preventDefault();
 		const { feedback, currentBooking } = this.state;
@@ -65,8 +63,7 @@ export class BookingList extends React.Component {
 		const data = { feedback, rating: currentBooking.rating };
 		this.props.rateBookings(data, token, currentBooking.id);
 	};
-	handleClick = e => {
-		e.preventDefault();
+	handleInput = e => {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
@@ -82,6 +79,7 @@ export class BookingList extends React.Component {
 		this.getPagination(data);
 	}
 	rate = e => {
+		this.props.resetRating();
 		this.setState({
 			showModal: true,
 			currentBooking: e,
@@ -101,6 +99,11 @@ export class BookingList extends React.Component {
 			</li>
 		));
 	}
+	getError = error => {
+		return error.data
+			? error.data.msg
+			: 'We could not upload your rating. Check if you are connected to a valid network then try again.';
+	};
 	navigatePagination(add, substract, data) {
 		const Npage = Math.ceil(data.length / 6);
 		const { currentPage } = this.state;
@@ -109,28 +112,41 @@ export class BookingList extends React.Component {
 			this.setPage(nextPage, data);
 		}
 	}
-	static getDerivedStateFromProps(nextProps, prevState) {
-		console.log(nextProps);
-		if (nextProps.ratingPayload) {
-			return { currentBooking: null };
-		} else return null;
-	}
+	closeRating = e => {
+		e.preventDefault();
+		this.setState({
+			showModal: false,
+			currentBooking: null,
+			feedback: '',
+		});
+	};
 	render() {
 		let { payload, pending, error, ratingError, ratingPayload, ratingPending } = this.props;
 		const data = payload && payload.data ? payload.data : [];
-		const errorOrEmpty = !pending && data.length === 0;
+		const errorOrEmpty = error || (!pending && data.length === 0);
 		const current = this.state.currentPage;
+		const { showModal } = this.state;
 		return (
 			<>
 				<div>
-					<Header active_menu={1} showSideNav={true} />
+					<Header active_menu={3} showSideNav={true} />
+					<div
+						className={`blurPanel ${showModal ? 'visible' : 'invisible'} `}
+						onClick={this.closeRating}
+					></div>
 					<div className='row mainContainer bookingList'>
-						{this.state.showModal && (
-							<div className='d-flex flex-wrap align-content-center justify-content-center col-12'>
+						{this.state.showModal && this.state.currentBooking && (
+							<div className='form-rating d-flex flex-wrap align-content-center justify-content-center col-12'>
 								<div
 									className='rate-modal shadow-sm p-3 rounded'
 									style={{ background: '#fff', height: 'fit-content', width: 50 + 'vh' }}
 								>
+									{ratingError && (
+										<p className='alert alert-danger text-center'>{this.getError(ratingError)}</p>
+									)}
+									{ratingPayload && (
+										<p className='alert alert-success'>Ratings recorded successfully</p>
+									)}
 									<img
 										src={
 											this.state.currentBooking.Accommodation.AccommodationImages.length === 0
@@ -152,21 +168,13 @@ export class BookingList extends React.Component {
 											}
 											onClick={e => {
 												this.setState({ rating: e });
-												this.props.handleClick(this.props.booking, e);
 											}}
+											id='ratingsView'
 											initialRating={this.state.currentBooking.rating}
 										/>
 									</div>
 									<form onSubmit={this.handleSubmit} className='row'>
 										<div className='col-md-12 col-lg-12'>
-											{ratingError && (
-												<p className='alert alert-danger text-center'>
-													{this.getError(ratingError)}
-												</p>
-											)}
-											{ratingPayload && (
-												<p className='alert alert-success'>Ratings recorded successfully</p>
-											)}
 											<div className='form-group'>
 												<textarea
 													className='form-control mt-4'
