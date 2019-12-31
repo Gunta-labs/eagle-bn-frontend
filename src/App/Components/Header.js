@@ -76,7 +76,7 @@ class Header extends React.Component {
 									</a>
 								</li>
 								<li className='nav-item mx-3'>
-									<a className='nav-link' href='/accomodations'>
+									<a className='nav-link' href='/accommodations'>
 										Accommodations
 									</a>
 								</li>
@@ -100,7 +100,7 @@ class Header extends React.Component {
 									</a>
 								</li>
 								<li className='nav-item mx-3'>
-									<a className='nav-link' href='/'>
+									<a className='nav-link' href='/accommodations'>
 										Accommodations
 									</a>
 								</li>

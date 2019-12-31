@@ -92,6 +92,7 @@ export class GetAllAccomodations extends React.Component {
 									</select>
 								</div>
 								<input
+									id='filterVal'
 									hidden={hide}
 									type={inputType}
 									className='form-control bg-transparent border border-top-0 border-right-0 border-left-0 text-white'
@@ -101,6 +102,7 @@ export class GetAllAccomodations extends React.Component {
 								/>
 								<div hidden={hide}>
 									<button
+										id='search'
 										type='button'
 										className=' bg-transparent border-0 text-light mt-3 ml-4'
 										onClick={this.searchData}
