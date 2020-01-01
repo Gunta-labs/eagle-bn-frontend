@@ -16,6 +16,7 @@ import DashbordReducer from './/dashboard.reducer';
 import Logout from './logout.reducer';
 import ManagerApprovalReducer from './manager.approval.reducer';
 import filterRequest from './filter.requester.reducer';
+import Notification from './notification.reducer';
 import UserRoleReducer from './user.role.reducer';
 import UpdateAccomodation from './update.accomodation.reducer';
 import getOneAcc from './singleAccomodation.reducer';
@@ -40,6 +41,7 @@ const allReducers = combineReducers({
 	Logout,
 	ManagerApprovalReducer,
 	filterRequest,
+	Notification,
 	userRole: UserRoleReducer,
 	UpdateAccomodation,
 	getOneAcc,

@@ -37,6 +37,11 @@ const mockData = {
 			},
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 		DeleteAccommodations: {
 			data,
 			delete_error: null,
@@ -55,6 +60,11 @@ const mockData = {
 		AccomodationFeedback: {
 			data: {},
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 		DeleteAccommodations: {
 			data: null,
 			error: null,
@@ -69,6 +79,11 @@ const mockData = {
 		},
 		AccomodationFeedback: {
 			data: {},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	errorState: {
@@ -87,6 +102,11 @@ const mockData = {
 				feedbackList: { avatar: 'lellelle', author: 'christian' },
 				averageRating: 3,
 			},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 		DeleteAccommodations: {
 			data: null,

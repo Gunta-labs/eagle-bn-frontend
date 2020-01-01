@@ -4,6 +4,8 @@ import { shallow, mount } from '../__mocks__/enzyme/enzymes';
 import LandingComponent, { Landing } from '../App/Pages/landing.page';
 import mockStore from '../__mocks__/mockStore';
 import { data, accData } from '../__mocks__/data/landing.mock';
+import helper from '../helper/test.helper';
+import headerData from '../__mocks__/data/header.data';
 
 const props = {
 	stats: {
@@ -18,12 +20,9 @@ const props = {
 	statsData: jest.fn(),
 	accomodations: jest.fn(),
 };
+const store = helper.mockStore(headerData.mockData.successState);
+const wrapper = helper.mountNewWrapper(store, <LandingComponent {...props} />);
 
-const wrapper = mount(
-	<Provider store={mockStore}>
-		<LandingComponent {...props} />
-	</Provider>,
-);
 const wrapperComponent = shallow(<Landing {...props} />);
 
 describe('Landing page wrapper', () => {
