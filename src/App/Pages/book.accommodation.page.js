@@ -84,12 +84,14 @@ export class CreateBooking extends React.Component {
 							<form onSubmit={this.handleSubmit} className='row'>
 								<div className='col-md-5 ml-lg-5 ml-md-3 col-lg-4 text-center d-flex flex-wrap align-content-center justify-content-center'>
 									{data && (
-										<div class='card mx-4' mx-auto>
-											<img className='card-img-top' src={image} alt='accommodation' />
-											<div class='card-body'>
-												<h5 class='card-title'>{data.name}</h5>
+										<a className='nav-link' href={`/accommodations/${data.id}`}>
+											<div class='card mx-4' mx-auto>
+												<img className='card-img-top' src={image} alt='accommodation' />
+												<div class='card-body'>
+													<h5 class='card-title'>{data.name}</h5>
+												</div>
 											</div>
-										</div>
+										</a>
 									)}
 								</div>
 								<div className='col-md-7 col-lg-7'>

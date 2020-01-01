@@ -102,7 +102,7 @@ export class Login extends React.Component {
 				</div>
 			</div>
 		);
-		const display = !isLoggedIn ? loginDisplay : (window.location = '/dashboard');
+		const display = !isLoggedIn ? loginDisplay : (window.location = '/');
 		return display;
 	}
 }

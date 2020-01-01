@@ -45,7 +45,7 @@ class TripRequest extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header showSideNav={true} active_menu={1} />
+				<Header showSideNav={true} active_menu={2} />
 				{this.props.tripRequestStatus === 'success' && (window.location = '/requests')}
 				<div className='request-container mb-3 container'>
 					<div className={this.props.messageClass}> {this.props.message} </div> <br />
