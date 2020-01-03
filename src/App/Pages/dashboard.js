@@ -16,7 +16,7 @@ export class UserProfile extends React.Component {
 			id: '',
 			fullname: '',
 			email: '',
-			phone: undefined,
+			phone: '',
 			role: 1,
 			gender: '',
 			address: ' ',
@@ -109,7 +109,8 @@ export class UserProfile extends React.Component {
 		userDataForm.append('avatar', avatar);
 		if (fullname === '') return this.setState({ error: 'Fullname is required' });
 		if (gender === '') return this.setState({ error: 'Select gender' });
-		if (phone === '' || phone.length < 10) return this.setState({ error: 'Invalid phone number' });
+		if (phone === '' || phone === null || phone.length < 10)
+			return this.setState({ error: 'Invalid phone number' });
 		UdateUserInfo(userDataForm);
 	}
 	render() {
@@ -159,7 +160,7 @@ export class UserProfile extends React.Component {
 									</p>
 								)}
 								<br />
-								<div className='input-group mb-3'>
+								<div className='input-group mb-3' hidden='true'>
 									<div className='input-group-prepend'>
 										<span className='input-group-text text-primary inputlabel' id='lid'>
 											User ID
@@ -177,14 +178,14 @@ export class UserProfile extends React.Component {
 								</div>
 								<div className='input-group mb-3'>
 									<div className='input-group-prepend'>
-										<span className='input-group-text inputlabel' id='fn'>
+										<span className='input-group-text inputlabel' id='fname'>
 											Full name
 										</span>
 									</div>
 									<input
 										type='text'
 										className='form-control'
-										aria-describedby='fn'
+										aria-describedby='fname'
 										id='fullname'
 										onChange={this.handleInput}
 										value={fullname}
@@ -192,7 +193,7 @@ export class UserProfile extends React.Component {
 										required={true}
 									/>
 								</div>
-								<div className='input-group mb-3'>
+								<div className='input-group mb-3' hidden={!isReadOnly}>
 									<div className='input-group-prepend'>
 										<span className='input-group-text inputlabel' id='em'>
 											Email
@@ -231,13 +232,14 @@ export class UserProfile extends React.Component {
 									</div>
 									<select
 										type='select'
-										className='custom-select'
+										className='form-control'
+										data-toggle='dropup'
 										id='gender'
 										onChange={this.handleInput}
 										value={gender}
 										readOnly={isReadOnly}
 									>
-										<option defaultValue=' '></option>
+										<option defaultValue={gender}></option>
 										<option value='Male'>Male</option>
 										<option value='Female'>Female</option>
 									</select>
@@ -290,7 +292,7 @@ export class UserProfile extends React.Component {
 										readOnly={isReadOnly}
 									/>
 								</div>
-								<div className='input-group mb-3'>
+								<div className='input-group mb-3' hidden={!isReadOnly}>
 									<div className='input-group-prepend'>
 										<span className='input-group-text inputlabel' id='dep'>
 											Department
@@ -306,7 +308,7 @@ export class UserProfile extends React.Component {
 										readOnly={true}
 									/>
 								</div>
-								<div className='input-group mb-3'>
+								<div className='input-group mb-3' hidden={!isReadOnly}>
 									<div className='input-group-prepend'>
 										<span className='input-group-text inputlabel' id='lm'>
 											Line Manager
