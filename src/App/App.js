@@ -18,11 +18,17 @@ import NotFound from './Pages/not.found.page';
 import LandingPage from './Pages/landing.page';
 import BookAccommodation from '../App/Pages/book.accommodation.page';
 import ManagerApproval from './Pages/manager.approval.page';
+import { initializeSocketIo } from '../helper/socketIo';
+import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
 import { Bookings } from './Pages/booking.list';
 
+toast.configure();
 export class App extends React.Component {
+	componentDidMount() {
+		initializeSocketIo(token);
+	}
 	render() {
 		return (
 			<Router>
@@ -93,12 +99,11 @@ export class App extends React.Component {
 							)
 						}
 					/>
-					<Route exact path='/accomodations' component={GetAllAccomodations} />
-					<Route exact path='/accomodations/:id' component={singleAccomodations} />
 					<Route exact path='/admin' component={UserRole} />
-					<Route exact path='/accommodations/:id' component={singleAccomodations} />
 					<Route exact path='/accommodations/:id/edit' component={UpdateAccs} />
+					<Route exact path='/changeRole' component={UserRole} />
 					<Route path='*' component={NotFound} />
+					/>
 				</Switch>
 			</Router>
 		);

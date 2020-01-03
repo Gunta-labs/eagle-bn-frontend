@@ -5,6 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import * as checkToken from '../../helper/helper';
 import Header from '../../App/Components/Header';
 import SideNav from '../../App/Components/SideNav';
+import helper from '../../helper/test.helper';
+import data from '../../__mocks__/data/header.data';
 
 Enzyme.configure({
 	adapter: new Adapter(),
@@ -19,7 +21,8 @@ describe('Header', () => {
 			.mockReturnValueOnce({
 				role: 'requester',
 			});
-		const wrapper = shallow(<Header showSideNav={true} />);
+		const store = helper.mockStore(data.mockData.successState);
+		const wrapper = helper.mountNewWrapper(store, <Header showSideNav={true} />);
 		expect(wrapper.find(SideNav)).toExist();
 		expect(wrapper.find('.navbar-nav.ml-auto')).toExist();
 		done();
@@ -33,7 +36,8 @@ describe('Header', () => {
 			.mockReturnValueOnce({
 				role: 'requester',
 			});
-		const wrapper = shallow(<Header showSideNav={false} />);
+		const store = helper.mockStore(data.mockData.successState);
+		const wrapper = helper.mountNewWrapper(store, <Header showSideNav={false} />);
 		wrapper
 			.find('.navbar-toggler')
 			.first()

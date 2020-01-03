@@ -4,6 +4,7 @@ const initialState = {
 	isLoggedIn: false,
 	message: null,
 	error: null,
+	logPending: false,
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ const LoginReducer = (state = initialState, action) => {
 				isLoggedIn: true,
 				message: payload,
 				error: null,
+				logPending: false,
 			};
 		case constants.LOGIN_FAILURE:
 			return {
@@ -22,7 +24,10 @@ const LoginReducer = (state = initialState, action) => {
 				isLoggedIn: false,
 				message: null,
 				error: payload,
+				logPending: false,
 			};
+		case 'login_pending':
+			return { ...state, logPending: true };
 		default:
 			return state;
 	}

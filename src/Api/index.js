@@ -57,6 +57,10 @@ const apis = {
 		const accommodations = await axios.get(`${BASE_URL}accommodations`);
 		return accommodations;
 	},
+	async getAllAccomodationsByFilter(filter) {
+		const accommodations = await axios.get(`${BASE_URL}accommodations/search?${filter}`);
+		return accommodations;
+	},
 	singleAccomodation(id) {
 		return axios.get(`${BASE_URL}accommodations/${id}`);
 	},
@@ -91,8 +95,23 @@ const apis = {
 			headers: { Authorization: token },
 		});
 	},
+	DeleteAccommodation(token, id) {
+		return axios.delete(`${BASE_URL}accommodations/${id}`, {
+			headers: { Authorization: token },
+		});
+	},
 	changeRequestStatus(requestId, status, token) {
 		return axios.patch(`${BASE_URL}requests/${requestId}/${status}`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getLikesOfAccommodation(accommodationId) {
+		return axios.get(`${BASE_URL}accommodations/${accommodationId}/like`);
+	},
+	likeAccommodation(accommodationId, token) {
+		return axios.post(`${BASE_URL}accommodations/${accommodationId}/like`, null, {
 			headers: {
 				Authorization: token,
 			},

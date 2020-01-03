@@ -119,7 +119,7 @@ export class CreateAccommodation extends React.Component {
 		));
 		const display = (
 			<div className='d-flex'>
-				<Header active_menu={1} showSideNav={true} />
+				<Header active_menu={2} showSideNav={true} />
 				<div className='container content-wrapper create-accommodation'>
 					<h5 className='text-primary mb-4'> Create accommodation </h5>
 					<div className='row'>

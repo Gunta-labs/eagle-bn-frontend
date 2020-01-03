@@ -15,6 +15,11 @@ const bookingData = {
 				AccommodationImages: [{ imageUrl: 'lelele' }],
 			},
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	initialState: {
 		bookings: {
@@ -25,6 +30,11 @@ const bookingData = {
 		SingleAccomodations: {
 			data: undefined,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	pendingState: {
 		bookings: {
@@ -34,6 +44,11 @@ const bookingData = {
 		},
 		SingleAccomodations: {
 			data: undefined,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	errorState: {
@@ -48,6 +63,11 @@ const bookingData = {
 			data: {
 				AccommodationImages: [],
 			},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	mockSuccess: (payload = null) => {

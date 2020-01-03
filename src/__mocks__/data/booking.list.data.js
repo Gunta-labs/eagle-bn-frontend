@@ -59,14 +59,42 @@ const data2 = {
 		AccommodationImages: [],
 	},
 };
+const data3 = {
+	id: 1,
+	AccommodationId: 1,
+	numberOfSpace: 1,
+	UserId: 3,
+	start: '2020-09-01T22:00:00.000Z',
+	end: '2020-09-01T22:00:00.000Z',
+	createdAt: '2019-11-13T08:58:38.971Z',
+	updatedAt: '2019-11-13T08:58:38.971Z',
+	Accommodation: {
+		userid: 1,
+		name: 'hotel karisimbi',
+		description: 'Vellllllll',
+		address: 'Kampala, Uganda',
+		availableSpace: '2 rooms ',
+		cost: 45000,
+		services: 'sauna, theater',
+		amenities: 'free wifi, TV',
+		isAvailable: true,
+		currency: 'USD',
+		AccommodationImages: [],
+	},
+};
 
 const mockData = {
 	successState: {
 		Booking: {
 			pending: false,
-			payload: { data: [data, data2, data, data, data, data, data, data2] },
+			payload: { data: [data, data2, data3, data, data, data, data, data2, data3] },
 			error: null,
 			ratingPayload: { msg: 'successfully rated' },
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	initialState: {
@@ -75,12 +103,22 @@ const mockData = {
 			payload: null,
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	pendingState: {
 		Booking: {
 			pending: true,
 			payload: null,
 			error: null,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	errorState: {
@@ -93,6 +131,11 @@ const mockData = {
 			ratingError: { data: 'error' },
 			ratingPending: true,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	errorState2: {
 		Booking: {
@@ -102,6 +145,11 @@ const mockData = {
 				error: 'error',
 			},
 			ratingError: { message: 'network failure' },
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 	},
 	mockSuccess: () => {

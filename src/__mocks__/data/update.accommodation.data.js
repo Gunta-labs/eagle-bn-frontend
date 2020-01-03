@@ -10,6 +10,11 @@ const verifyData = {
 			},
 			error: null,
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 		getOneAcc: {
 			pending: false,
 			payload: null,
@@ -37,6 +42,11 @@ const verifyData = {
 			payload: null,
 			error: 'hello',
 		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 		SingleAccomodations: {
 			pending: false,
 			data: null,
@@ -53,6 +63,11 @@ const verifyData = {
 			pending: true,
 			payload: null,
 			error: null,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 		SingleAccomodations: {
 			pending: false,
@@ -72,6 +87,11 @@ const verifyData = {
 			error: {
 				error: 'error',
 			},
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
 		},
 		getOneAcc: {
 			pending: false,

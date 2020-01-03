@@ -158,12 +158,18 @@ export class BookingList extends React.Component {
 									/>
 									<div className='d-flex justify-content-center card-foot mt-2'>
 										<Rater
-											fullSymbol={<FontAwesomeIcon icon={faStar} className='mx-2 text-primary' />}
+											fullSymbol={
+												<FontAwesomeIcon
+													icon={faStar}
+													className='mx-2'
+													style={{ color: '#ffd700' }}
+												/>
+											}
 											emptySymbol={
 												<FontAwesomeIcon
 													icon={faStar}
 													className='mx-2'
-													style={{ color: '#82beff' }}
+													style={{ color: '#C0C0C0' }}
 												/>
 											}
 											onClick={e => {
@@ -184,7 +190,7 @@ export class BookingList extends React.Component {
 													name='feedback'
 													onChange={this.handleInput}
 													required={true}
-													pattern='.{5,}'
+													minLength={5}
 												>
 													{this.state.feedback}
 												</textarea>

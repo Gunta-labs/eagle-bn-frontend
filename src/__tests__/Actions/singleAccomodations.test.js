@@ -3,7 +3,11 @@ import mockAxios from 'axios';
 import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import { singleAccomodation, GetFeedback } from '../../Redux/Actions/singleAccomodations.action';
+import {
+	singleAccomodation,
+	GetFeedback,
+	deleteAccommodation,
+} from '../../Redux/Actions/singleAccomodations.action';
 
 const mockStore = configureMockStore([thunk]);
 applyMiddleware(promiseMiddleware);
@@ -38,6 +42,28 @@ describe('Actions', () => {
 		await store.dispatch(await singleAccomodation(id));
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('SINGLE_ACCOMODATION_SUCCESS');
+	});
+	it('deletes an ccomodation and returns success', async () => {
+		mockAxios.delete.mockResolvedValue({
+			data: {},
+		});
+
+		await store.dispatch(await deleteAccommodation(id));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('ACCOMMODATION_DELETE_SUCCESS');
+	});
+	it('dispatches singleAccomodation action and returns false', async () => {
+		mockAxios.delete.mockImplementationOnce(() =>
+			Promise.reject({
+				response: {
+					data: { status: 404, msg: 'nooo' },
+				},
+			}),
+		);
+
+		await store.dispatch(await deleteAccommodation(id));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('ACCOMMODATION_DELETE_ERROR');
 	});
 	it('dispatches singleAccomodation action and returns false', async () => {
 		mockAxios.get.mockResolvedValue({

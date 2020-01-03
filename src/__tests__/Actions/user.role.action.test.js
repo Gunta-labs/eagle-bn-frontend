@@ -4,8 +4,6 @@ import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import { getAllUsers } from '../../Redux/Actions/user.role.action';
-import Apis from '../../Api/';
-import * as checkTock from '../../helper/helper';
 
 const mockStore = configureMockStore([thunk]);
 applyMiddleware(promiseMiddleware);
@@ -40,22 +38,5 @@ describe('users data retrieve actions', () => {
 		await store.dispatch(await getAllUsers(payload));
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('get_users_error');
-	});
-});
-describe('Dashbord data rupdate actions', () => {
-	let store;
-	const payload = {
-		id: 1,
-		email: 'ale@gmail.com',
-		fullname: 'ale',
-		Role: {
-			roleName: 'manager',
-			roleValue: 'manager',
-		},
-		new_role: 'host',
-	};
-
-	beforeEach(() => {
-		store = mockStore({});
 	});
 });

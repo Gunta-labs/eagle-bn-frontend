@@ -7,6 +7,7 @@ import {
 	faFileInvoice,
 	faHotel,
 	faClipboardCheck,
+	faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 import checkToken from '../../helper/helper';
@@ -21,6 +22,7 @@ const requestMenu = [
 const supplierMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'accommodations', icon: faHotel, active: false, link: '/accommodations' },
+	{ name: 'accommodation', icon: faPlus, active: true, link: '/accommodation/create' },
 	{ name: 'booking', icon: faFileAlt, active: false, link: '/booking' },
 ];
 const managerMenu = [
@@ -36,23 +38,53 @@ function getMenus(role, active) {
 	switch (role || 'requester') {
 		case 'requester':
 			return requestMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'host':
 			return supplierMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'Tadmin':
 			return supplierMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'manager':
 			return managerMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		case 'admin':
 			return adminMenu.map((menu, index) => (
-				<Menu name={menu.name} active={index === active} icon={menu.icon} link={menu.link} />
+				<Menu
+					name={menu.name}
+					active={index === active}
+					icon={menu.icon}
+					link={menu.link}
+					key={index}
+				/>
 			));
 		default:
 			return '';
