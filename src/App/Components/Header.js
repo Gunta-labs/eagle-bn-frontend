@@ -124,7 +124,7 @@ class Header extends React.Component {
 											<span className='profile text-primary notificationImg'>
 												<FontAwesomeIcon icon={faBell} />
 											</span>
-											<p className='badge badge-primary small-text'>
+											<p className='badge badge-primary font-weight-bold small-text'>
 												{this.getUnreadNotifications(notifications)}
 											</p>
 										</div>
@@ -145,7 +145,7 @@ class Header extends React.Component {
 										<span className='profile text-primary notificationImg'>
 											<FontAwesomeIcon icon={faBell} />
 										</span>
-										<p className='badge badge-primary small-text'>
+										<p className='badge badge-primary font-weight-bold small-text'>
 											{this.getUnreadNotifications(notifications)}
 										</p>
 									</div>

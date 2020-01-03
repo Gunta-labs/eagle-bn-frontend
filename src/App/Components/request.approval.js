@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker, faClock, faEye, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import dateHelper from '../../helper/date.helper';
+import { Link } from 'react-router-dom';
 
 const getStatus = status => {
 	let statusClass = '';
@@ -12,7 +13,7 @@ const getStatus = status => {
 };
 
 export default props => {
-	const { request, index, showModel, showARModel } = props;
+	const { request, index, showARModel } = props;
 	return (
 		<div className='col-12 col-sm-12 col-md-6 col-lg-4 mt-4'>
 			<div className='card  mt-1 ml-lg-1 ml-md-1 mr-lg-1 mr-md-1 ml-4'>
@@ -51,15 +52,9 @@ export default props => {
 					</div>
 					<div className='list-group-item'>
 						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-							<FontAwesomeIcon
-								icon={faEye}
-								className='text-primary'
-								title='view'
-								onClick={e => {
-									e.target = { id: `view-${index}` };
-									showModel(e);
-								}}
-							/>
+							<Link to={`/requests/${index}`}>
+								<FontAwesomeIcon icon={faEye} className='text-primary' title='view' />
+							</Link>
 							{request.status === 'pending' && (
 								<React.Fragment>
 									<FontAwesomeIcon

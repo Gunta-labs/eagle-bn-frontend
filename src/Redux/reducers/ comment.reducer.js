@@ -6,6 +6,18 @@ const initialState = {
 	error: null,
 };
 
+const initialState3 = {
+	trash: null,
+	error: null,
+	pending: false,
+};
+
+const initialState4 = {
+	edited: null,
+	error: null,
+	pending: false,
+};
+
 export const replyComment = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case constants.SEND_REQUEST_COMMENT_REPLY_SUCCESS:
@@ -62,6 +74,70 @@ export const sendComment = (state = initialState, { type, payload }) => {
 				send: null,
 				error: null,
 				pending: true,
+			};
+	}
+};
+
+export const trashComment = (state = initialState3, { type, payload }) => {
+	switch (type) {
+		case constants.TRASH_REQUEST_COMMENT_SUCCESS:
+			return {
+				...state,
+				trash: true,
+				error: null,
+				pending: false,
+			};
+		case constants.TRASH_REQUEST_COMMENT_ERROR:
+			return {
+				...state,
+				trash: null,
+				error: payload,
+				pending: false,
+			};
+		case constants.TRASH_REQUEST_COMMENT_PENDING:
+			return {
+				...state,
+				trash: null,
+				error: null,
+				pending: true,
+			};
+		default:
+			return {
+				trash: null,
+				error: null,
+				pending: false,
+			};
+	}
+};
+
+export const editComment = (state = initialState4, { type, payload }) => {
+	switch (type) {
+		case constants.EDIT_REQUEST_COMMENT_SUCCESS:
+			return {
+				...state,
+				edited: true,
+				error: null,
+				pending: false,
+			};
+		case constants.EDIT_REQUEST_COMMENT_ERROR:
+			return {
+				...state,
+				edited: null,
+				error: payload,
+				pending: false,
+			};
+		case constants.EDIT_REQUEST_COMMENT_PENDING:
+			return {
+				...state,
+				edited: null,
+				error: null,
+				pending: true,
+			};
+		default:
+			return {
+				edited: null,
+				error: null,
+				pending: false,
 			};
 	}
 };

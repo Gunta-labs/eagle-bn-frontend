@@ -10,7 +10,7 @@ const renderAccommodation = args => {
 	return shallow(<GetAllAccomodations {...props} />);
 };
 
-describe.only('should find retrieved accommodations', () => {
+describe('should find retrieved accommodations', () => {
 	it('Should render', () => {
 		const initialProps = {
 			accomodation: {

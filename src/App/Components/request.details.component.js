@@ -9,6 +9,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import getStatus from '../../helper/status.helper';
 import dateHelper from '../../helper/date.helper';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
 
 export default function RequestDetails({ data }) {
 	const { returnTime, country, city, status, timeZone } = data;
@@ -21,16 +26,19 @@ export default function RequestDetails({ data }) {
 						<label className='text-secondary font-weight-bold label'>
 							Destination {`${i + 1}`} :
 						</label>
-						<label className='text-secondary ml-2' id='destination'>{`Nairobi, Kenya`}</label>
+						<label
+							className='text-secondary ml-2'
+							id='destination'
+						>{`${e.city}, ${e.country}`}</label>
 					</p>
 					<p className='mb-0'>
 						<FontAwesomeIcon icon={faClock} className='mr-2 text-secondary' />
 						<label className='text-secondary font-weight-bold' style={{ fontSize: '.8em' }}>
 							Departure Time :
 						</label>
-						<label className='text-secondary ml-2'>{`${dateHelper(
-							new Date(e.departureTime) || undefined,
-						)}`}</label>
+						<label className='text-secondary ml-2'>
+							{timeAgo.format(new Date(e.departureTime), 'ago')}
+						</label>
 					</p>
 				</div>{' '}
 				<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
@@ -48,7 +56,7 @@ export default function RequestDetails({ data }) {
 	});
 	return (
 		<>
-			<div className='list-group list-group-flush'>
+			<div className='card-body overflow-auto'>
 				<div className='list-group-item'>
 					<div className='d-flex justify-content-between ml-1 mr-1 mt-2 pt-3 pb-3'>
 						<p className='mb-0 mt-0'>
@@ -90,22 +98,20 @@ export default function RequestDetails({ data }) {
 						</p>
 					</div>{' '}
 				</div>
-				<div className='list-group-item ' style={{ minHeight: '450px' }}>
-					{trips}
-				</div>
-				<div className='list-group-item'>
-					<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-						<FontAwesomeIcon
-							icon={faEdit}
-							className='text-primary'
-							style={{ height: '25px', width: '25px' }}
-						/>
-						<FontAwesomeIcon
-							icon={faTrash}
-							className='text-danger'
-							style={{ height: '25px', width: '25px' }}
-						/>
-					</div>
+				<div className='list-group-item'>{trips}</div>
+			</div>
+			<div className='card-footer bg-white'>
+				<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
+					<FontAwesomeIcon
+						icon={faEdit}
+						className='text-primary'
+						style={{ height: '25px', width: '25px' }}
+					/>
+					<FontAwesomeIcon
+						icon={faTrash}
+						className='text-danger'
+						style={{ height: '25px', width: '25px' }}
+					/>
 				</div>
 			</div>
 		</>
