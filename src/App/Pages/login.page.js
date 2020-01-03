@@ -83,7 +83,7 @@ export class Login extends React.Component {
 								</div>
 								<br />
 								<p>
-									<Link to={`/password/reset`} activeClassName='active'>
+									<Link to={`/password/reset`} activeclassname='active'>
 										{' '}
 										Forgot Password{' '}
 									</Link>{' '}
@@ -92,7 +92,7 @@ export class Login extends React.Component {
 									{logPending ? '...' : 'Login'}
 								</button>
 								New to Barefoot?
-								<Link to={`/signup`} activeClassName='active'>
+								<Link to={`/signup`} activeclassname='active'>
 									{' '}
 									signup{' '}
 								</Link>{' '}
