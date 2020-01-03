@@ -5,7 +5,9 @@ import { toast } from 'react-toastify';
 export const getNotifications = async token => {
 	try {
 		const result = await apis.getNotifications(token);
-		result.data.data = result.data.data.reverse();
+		result.data.data = result.data.data.sort((a, b) => {
+			return b.id - a.id;
+		});
 		return {
 			type: constants.NOTIFICATION_SUCCESS,
 			payload: result.data.data,

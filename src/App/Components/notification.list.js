@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCheckDouble, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheckDouble, faCheck, faClipboard, faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	getNotifications,
@@ -9,6 +9,8 @@ import {
 import { connect } from 'react-redux';
 import { token } from '../../helper/helper';
 import dateHelper from '../../helper/date.helper';
+import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
 
 export class Notification extends React.Component {
 	componentDidMount() {
@@ -17,13 +19,13 @@ export class Notification extends React.Component {
 	getTitle(type) {
 		switch (type) {
 			case 'new_request':
-				return 'New request created';
+				return { title: 'New request created', icon: faClipboard };
 			case 'request_approved':
-				return 'Request approved';
+				return { title: 'Request approved', icon: faClipboard };
 			case 'request_rejected':
-				return 'Request rejected';
+				return { title: 'Request rejected', icon: faClipboard };
 			case 'new_comment':
-				return 'New comment';
+				return { title: 'New comment', icon: faComment };
 			default:
 				return 'New notification';
 		}
@@ -38,31 +40,49 @@ export class Notification extends React.Component {
 		if (data) {
 			return data.map(notification => {
 				return (
-					<div className={`pl-2 border-bottom ${!notification.isRead ? 'bg-active' : ''}`}>
-						<div className='d-flex justify-content-between pt-2 pl-2 pr-2'>
-							<h6 className='text-dark '>{this.getTitle(notification.type)}</h6>
-							<span
-								id='singleNot'
-								className={`${
-									!notification.isRead ? 'text-black-50' : 'text-primary'
-								} markOneAsRead`}
-								onClick={e => this.SetAsRead(notification.id, e)}
-							>
-								<FontAwesomeIcon icon={faCheck} size='sm' />
-							</span>
+					<Link to={`/${notification.modelName.toLowerCase()}/${notification.modelId}`}>
+						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>
+							<span>Mark as read</span>
+						</ReactTooltip>
+						<ReactTooltip place='top' type='dark' effect='float' id='markAll'>
+							<span>Mark all as read</span>
+						</ReactTooltip>
+						<div className={`pl-2 border-bottom ${!notification.isRead ? 'bg-active' : ''}`}>
+							<div className='d-flex justify-content-between pt-2 pl-2 pr-2'>
+								<h6 className='text-dark '>
+									<span className='text-black-50 mr-2'>
+										<FontAwesomeIcon icon={this.getTitle(notification.type).icon} size='sm' />
+									</span>
+									{this.getTitle(notification.type).title}
+								</h6>
+								<span
+									id='singleNot'
+									className={`${
+										notification.isRead ? 'text-black-50' : 'text-primary'
+									} markOneAsRead`}
+									data-tip
+									data-for='markOne'
+									onClick={e => this.SetAsRead(notification.id, e)}
+								>
+									<FontAwesomeIcon icon={faCheck} size='sm' />
+								</span>
+							</div>
+							<div className='d-flex justify-content-between pt-1 pl-2 pr-1 '>
+								<label
+									className='text-secondary  mr-2 pr-1'
+									style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+								>
+									{notification.description || notification.type}
+								</label>
+								<label
+									className='text-black-50'
+									style={{ fontSize: 10 + 'px', width: 120 + 'px', textAlign: 'right' }}
+								>
+									{dateHelper(new Date(notification.createdAt))}
+								</label>
+							</div>
 						</div>
-						<div className='d-flex justify-content-between pt-1 pl-2 pr-2 '>
-							<label className='text-secondary  mr-2 pr-1'>
-								{notification.description || notification.type}
-							</label>
-							<label
-								className='text-black-50'
-								style={{ fontSize: 10 + 'px', width: 120 + 'px', textAlign: 'right' }}
-							>
-								{dateHelper(new Date(notification.createdAt))}
-							</label>
-						</div>
-					</div>
+					</Link>
 				);
 			});
 		}
@@ -79,6 +99,9 @@ export class Notification extends React.Component {
 						<span
 							className='text-primary markAllAsRead shadow-sm'
 							id='markAll'
+							data-tip
+							data-for='markAll'
+							title='Tooltip on bottom'
 							onClick={e => this.SetAllAsRead(e)}
 						>
 							<FontAwesomeIcon icon={faCheckDouble} size='sm' />
