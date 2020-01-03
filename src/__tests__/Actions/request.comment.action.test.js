@@ -3,7 +3,13 @@ import mockAxios from 'axios';
 import thunk from 'redux-thunk';
 import { applyMiddleware } from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
-import { getComments, sendReply, sendComment } from '../../Redux/Actions/request.comments.action';
+import {
+	getComments,
+	sendReply,
+	sendComment,
+	trashComment,
+	editComment,
+} from '../../Redux/Actions/request.comments.action';
 
 const mockStore = configureMockStore([thunk]);
 applyMiddleware(promiseMiddleware);
@@ -180,5 +186,113 @@ describe('send comment Actions', () => {
 		await store.dispatch(await sendComment(1, { comment: 'yes', parent: '2' }));
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('SEND_REQUEST_COMMENT_SUCCESS');
+	});
+});
+
+describe('edit comment Actions', () => {
+	let store;
+
+	beforeEach(() => {
+		store = mockStore({});
+	});
+	it('dispatches editComment action and returns false', async () => {
+		mockAxios.put.mockImplementationOnce(() =>
+			Promise.reject({
+				response: {
+					data: {
+						status: 400,
+						msg: 'The email and/or password is invalid',
+					},
+				},
+			}),
+		);
+
+		await store.dispatch(await editComment(1, { comment: 'yes', parent: '2' }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('EDIT_REQUEST_COMMENT_ERROR');
+	});
+
+	it('dispatches editComment action and returns no internet connection', async () => {
+		mockAxios.put.mockImplementationOnce(() =>
+			Promise.reject({
+				responses: {
+					data: {
+						status: 400,
+						msg: 'The email and/or password is invalid',
+					},
+				},
+			}),
+		);
+
+		await store.dispatch(await editComment(1, { comment: 'yes', parent: '2' }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('EDIT_REQUEST_COMMENT_ERROR');
+	});
+	it('dispatches editComment action and returns true', async () => {
+		mockAxios.put.mockResolvedValue({
+			data: {
+				status: 201,
+				msg: 'User logged successfully',
+				data: {},
+			},
+		});
+
+		await store.dispatch(await editComment(1, { comment: 'yes', parent: '2' }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('EDIT_REQUEST_COMMENT_SUCCESS');
+	});
+});
+
+describe('delete comment Actions', () => {
+	let store;
+
+	beforeEach(() => {
+		store = mockStore({});
+	});
+	it('dispatches trashComment action and returns false', async () => {
+		mockAxios.delete.mockImplementationOnce(() =>
+			Promise.reject({
+				response: {
+					data: {
+						status: 400,
+						msg: 'Not authorized',
+					},
+				},
+			}),
+		);
+
+		await store.dispatch(await trashComment(1, { commentId: 1 }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('TRASH_REQUEST_COMMENT_ERROR');
+	});
+
+	it('dispatches trashComment action and returns no internet connection', async () => {
+		mockAxios.delete.mockImplementationOnce(() =>
+			Promise.reject({
+				responses: {
+					data: {
+						status: 400,
+						msg: 'The email and/or password is invalid',
+					},
+				},
+			}),
+		);
+
+		await store.dispatch(await trashComment(1, { commentId: 1 }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('TRASH_REQUEST_COMMENT_ERROR');
+	});
+	it('dispatches trashComment action and returns true', async () => {
+		mockAxios.delete.mockResolvedValue({
+			data: {
+				status: 201,
+				msg: 'User logged successfully',
+				data: {},
+			},
+		});
+
+		await store.dispatch(await trashComment(1, { commentId: 1 }));
+		const actions = store.getActions();
+		expect(actions[0].type).toEqual('TRASH_REQUEST_COMMENT_SUCCESS');
 	});
 });

@@ -38,7 +38,7 @@ export class Notification extends React.Component {
 	}
 	getNotificationsDetail(data) {
 		if (data) {
-			return data.map(notification => {
+			return data.map((notification, i) => {
 				return (
 					<Link to={`/${notification.modelName.toLowerCase()}/${notification.modelId}`}>
 						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>

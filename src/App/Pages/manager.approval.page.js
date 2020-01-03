@@ -50,12 +50,7 @@ class ManagerApproval extends React.Component {
 				.filter(element => element.status === filter)
 				.filter((element, index) => index < pager * 6 && index >= (pager - 1) * 6)
 				.map((element, index) => (
-					<Request
-						request={element}
-						index={element.id}
-						showModel={this.showModal}
-						showARModel={this.showARModel}
-					/>
+					<Request request={element} index={element.id} showARModel={this.showARModel} />
 				));
 		}
 		return;
