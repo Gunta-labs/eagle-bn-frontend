@@ -4,7 +4,9 @@ import { getBookings, rateAccommodation } from '../../Api/booking.api';
 const Booking = async token => {
 	try {
 		const result = await getBookings(token);
-		result.data.data = result.data.data.reverse();
+		result.data.data = result.data.data.sort((a, b) => {
+			return b.id - a.id;
+		});
 		return {
 			type: constants.GET_BOOKING_SUCCESS,
 			payload: result.data,

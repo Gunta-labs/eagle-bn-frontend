@@ -23,6 +23,7 @@ import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
 import { Bookings } from './Pages/booking.list';
+import SingleRequest from './Pages/single.request.page';
 
 toast.configure();
 export class App extends React.Component {
@@ -43,6 +44,16 @@ export class App extends React.Component {
 						exact
 						path='/bookings'
 						render={props => (token ? <Bookings /> : <Redirect to='/login' />)}
+					/>
+					<Route
+						path='/requests/:id'
+						render={props =>
+							token ? (
+								<SingleRequest userId={checkToken().userId} match={props.match} />
+							) : (
+								<Redirect to='/login' />
+							)
+						}
 					/>
 					<Route path='/users/verify/:token' component={VerifyUser} />
 					<Route exact path='/password/reset' component={RequestResetPassword} />
@@ -70,11 +81,7 @@ export class App extends React.Component {
 					/>
 					<Route exact path='/users/reset-password/:token' component={ResetPassword} />
 					<Route exact path='/' component={LandingPage} />
-					<Route
-						exact
-						path='/login'
-						render={props => (!token ? <Login /> : <Redirect to='/dashboard' />)}
-					/>
+					<Route exact path='/login' render={props => (!token ? <Login /> : <Redirect to='/' />)} />
 					<Route path='/signup' exact component={SignUp} />
 					<Route
 						exact

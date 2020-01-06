@@ -65,7 +65,7 @@ describe('Verify User page', () => {
 	it('should have submit the rating form', async done => {
 		Data.mockData.mockSuccess();
 		sinon.spy(axios, 'patch');
-		store = config.mockStore(Data.mockData.successState);
+		store = config.mockStore(Data.mockData.successState2);
 		wrapper = config.mountNewWrapper(store, component);
 		expect(wrapper.find(Rater)).toExist();
 		wrapper

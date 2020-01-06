@@ -97,6 +97,18 @@ const mockData = {
 			pending: null,
 		},
 	},
+	successState2: {
+		Booking: {
+			pending: false,
+			payload: { data: [data, data2, data3, data, data, data, data, data2, data3] },
+			error: null,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
+	},
 	initialState: {
 		Booking: {
 			pending: false,

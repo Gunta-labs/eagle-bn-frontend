@@ -15,15 +15,15 @@ import Menu from '../Components/Menu';
 
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
-	{ name: 'my requests', icon: faUser, active: true, link: '/requests' },
-	{ name: 'trip requests', icon: faClipboard, active: false, link: '/requests/create' },
+	{ name: 'my requests', icon: faClipboard, active: true, link: '/requests' },
+	{ name: 'trip requests', icon: faClipboard, active: false, link: '/request/create' },
 	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'accommodations', icon: faHotel, active: false, link: '/accommodations' },
 	{ name: 'accommodation', icon: faPlus, active: true, link: '/accommodation/create' },
-	{ name: 'booking', icon: faFileAlt, active: false, link: '/booking' },
+	{ name: 'booking', icon: faFileAlt, active: false, link: '/accommodations' },
 ];
 const managerMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },

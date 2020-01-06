@@ -13,6 +13,7 @@ const bookingData = {
 		SingleAccomodations: {
 			data: {
 				AccommodationImages: [{ imageUrl: 'lelele' }],
+				availableSpace: 2,
 			},
 		},
 		Notification: {
@@ -29,6 +30,24 @@ const bookingData = {
 		},
 		SingleAccomodations: {
 			data: undefined,
+		},
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
+	},
+	initialState2: {
+		bookings: {
+			pending: false,
+			payload: null,
+			error: null,
+		},
+		SingleAccomodations: {
+			data: {
+				availableSpace: 2,
+				AccommodationImages: [{ imageUrl: 'lelele' }],
+			},
 		},
 		Notification: {
 			payload: [],
@@ -62,6 +81,7 @@ const bookingData = {
 		SingleAccomodations: {
 			data: {
 				AccommodationImages: [],
+				availableSpace: 2,
 			},
 		},
 		Notification: {

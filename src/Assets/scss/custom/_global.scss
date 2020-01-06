@@ -116,7 +116,7 @@
   }
 
 .middle { 
-	margin-left: 60px !important;
+	margin-left: 85px !important;
 }
   .request-list {
   	margin-top: 0px;
@@ -335,6 +335,33 @@
   	font-weight: 400 !important;
   }
 
+.breadcomb{
+	margin-top: 70px;
+	margin-left: 200px;
+
+	span{
+		padding-left: 50px;
+	}
+}
+
+.request{
+	margin-left: 300px;
+	height: auto;
+}
+
+@media (max-width: 996px){
+	.breadcomb{
+	  margin-top: 70px;
+	  margin-left: 0px;
+	span{
+		padding-left: 20px;
+	}
+}
+.request{
+	margin-left: 0px;
+}
+}
+
 
 
   .error-msg {
@@ -363,4 +390,49 @@
 	opacity: 0.5;
 	position: absolute;
 	top: 60px;
+  }
+.send-button2 {
+	margin-left: 10px;
+	height: 40px;
+	margin-bottom: 10px;
+	padding: 0px !important;
+	a.bg-success:hover, a.bg-success:focus, button.bg-success:hover, button.bg-success:focus{
+		background-color: white !important;
+	}
+	img{
+		background-color: white !important;
+    &:visited {
+      background-color: white !important;
+    }
+    &:hover {
+      background-color: white !important;   
+    }
+    &:active {
+      background-color: white !important;
+    }
+
+	}
+	&:visited {
+      background-color: white !important;
+    }
+    &:hover {
+      background-color: white !important;   
+    }
+    &:active {
+      background-color: white !important;
+	}
+	
+	.img2{
+		height: 40px;
+		width: 40px;
+		padding: 0px;
+		border: 0px;
+	}
+
+}
+.inp{
+	width: 80%;
+	height: 40px;
+	padding: 0;
+	border: 0px;
 }

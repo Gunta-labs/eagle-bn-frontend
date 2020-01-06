@@ -12,6 +12,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Rater from 'react-rating';
 import { token } from '../../helper/helper';
+import { toast } from 'react-toastify';
 
 const mapStateToProps = state => ({
 	payload: state.Booking.payload,
@@ -79,7 +80,6 @@ export class BookingList extends React.Component {
 		this.getPagination(data);
 	}
 	rate = e => {
-		this.props.resetRating();
 		this.setState({
 			showModal: true,
 			currentBooking: e,
@@ -112,8 +112,16 @@ export class BookingList extends React.Component {
 			this.setPage(nextPage, data);
 		}
 	}
+	static getDerivedStateFromProps(nextProps, prevState) {
+		if (nextProps.ratingPayload) {
+			toast.success('Rating recorded successfully');
+			nextProps.resetRating();
+			return { showModal: false, currentBooking: null, feedback: '' };
+		} else return null;
+	}
 	closeRating = e => {
-		e.preventDefault();
+		//e.preventDefault();
+		this.props.resetRating();
 		this.setState({
 			showModal: false,
 			currentBooking: null,
@@ -121,7 +129,7 @@ export class BookingList extends React.Component {
 		});
 	};
 	render() {
-		let { payload, pending, error, ratingError, ratingPayload, ratingPending } = this.props;
+		let { payload, pending, error, ratingError, ratingPending } = this.props;
 		const data = payload && payload.data ? payload.data : [];
 		const errorOrEmpty = error || (!pending && data.length === 0);
 		const current = this.state.currentPage;
@@ -143,9 +151,6 @@ export class BookingList extends React.Component {
 								>
 									{ratingError && (
 										<p className='alert alert-danger text-center'>{this.getError(ratingError)}</p>
-									)}
-									{ratingPayload && (
-										<p className='alert alert-success'>Ratings recorded successfully</p>
 									)}
 									<img
 										src={
