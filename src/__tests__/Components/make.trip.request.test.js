@@ -22,9 +22,42 @@ describe('Make Trip Request Page [testing component]', () => {
 		const wrapper = config.mountNewWrapper(store, component);
 		const form = wrapper.find('form');
 		const event = { preventDefault: jest.fn() };
-		const value = { target: { id: 'just-id', value: 'just a value' } };
-		form.find('input[id="city"]').simulate('change', value);
+		const value = { target: { id: 'country', value: 'Rwanda' } };
+		form.find('input[id="country"]').simulate('change', value);
+		form
+			.find('input[id="country"]')
+			.props()
+			.onInput({ target: { value: 'Rwanda' }, preventDefault: jest.fn() });
+		form
+			.find('input[id="country-0"]')
+			.props()
+			.onInput({ target: { value: 'Rwanda' }, preventDefault: jest.fn() });
 		form.simulate('submit', event);
+		expect(axios.calledOnce);
+		axios.post.restore();
+		done();
+	});
+	it('should test dates ', done => {
+		Data.mockSuccess(201);
+		sinon.spy(axios, 'post');
+		const store = config.mockStore(Data.success);
+		const wrapper = config.mountNewWrapper(store, component);
+		const form = wrapper.find('form');
+		const event = { preventDefault: jest.fn() };
+		const value = { target: { id: 'returnTime', value: '2019-10-10' } };
+		const value2 = { target: { id: 'returnTime', value: '2020-10-10' } };
+		const value3 = { target: { id: 'departureTime-0', value: '2020-12-12' } };
+		form.find('input[id="returnTime"]').simulate('change', value);
+		form.simulate('submit', event);
+		expect(wrapper.find('.alert.alert-danger').first()).toIncludeText(
+			'Return time should not be in the past',
+		);
+		form.find('input[id="returnTime"]').simulate('change', value2);
+		form.find('input[id="departureTime-0"]').simulate('change', value3);
+		form.simulate('submit', event);
+		expect(wrapper.find('.alert.alert-danger').first()).toIncludeText(
+			'The departure time in destination 1 should not be in the past or go beyond the return time',
+		);
 		expect(axios.calledOnce);
 		axios.post.restore();
 		done();

@@ -2,8 +2,8 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
-import destinationForm from '../Components/destination.form';
-import requestForm from '../Components/request.form';
+import DestinationForm from '../Components/destination.form';
+import RequestForm from '../Components/request.form';
 import sendTripRequest from '../../Redux/Actions/trip.request.action';
 import formData from '../../helper/trip.request.form.data';
 
@@ -13,6 +13,7 @@ class TripRequest extends React.Component {
 		this.state = {
 			numberOfTrips: 1,
 			values: {},
+			error: null,
 		};
 		this.showDestinationsForm = this.showDestinationsForm.bind(this);
 		this.addDestination = this.addDestination.bind(this);
@@ -33,24 +34,49 @@ class TripRequest extends React.Component {
 		const { numberOfTrips, values } = this.state;
 		const forms = new Array(numberOfTrips);
 		for (let dest = 0; dest < numberOfTrips; dest++) {
-			forms.push(destinationForm(dest, this.handleValueChange, values));
+			forms.push(
+				<DestinationForm
+					id={dest}
+					handleInput={this.handleValueChange}
+					values={values}
+					deleteTrip={this.deleteTrip}
+				/>,
+			);
 		}
 		return forms;
 	}
+	checkDates(values, destinationNumber) {
+		const returnT = new Date(values['returnTime']);
+		if (returnT <= new Date()) return 'Return time should not be in the past';
+		for (let i = 0; i < destinationNumber; i++) {
+			const dDate = new Date(values[`departureTime-${i}`]);
+			if (dDate <= new Date() || dDate > returnT)
+				return `The departure time in destination ${i +
+					1} should not be in the past or go beyond the return time`;
+		}
+		return null;
+	}
+
 	handleSubmit(event) {
 		event.preventDefault();
 		const data = formData(this.state.values);
-		this.props.sendTripRequest(data);
+		const dateError = this.checkDates(this.state.values, this.state.numberOfTrips);
+		if (!dateError) {
+			this.setState({ error: null });
+			this.props.sendTripRequest(data);
+		} else this.setState({ error: dateError });
 	}
 	render() {
+		const { error, values } = this.state;
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={1} />
 				{this.props.tripRequestStatus === 'success' && (window.location = '/requests')}
 				<div className='request-container mb-3 container'>
 					<div className={this.props.messageClass}> {this.props.message} </div> <br />
+					{error && <div className='alert alert-danger'> {this.state.error} </div>}
 					<form onSubmit={this.handleSubmit}>
-						{requestForm(this.handleValueChange)}
+						<RequestForm handleInput={this.handleValueChange} values={values} />
 						{this.showDestinationsForm()}
 						<br></br>
 
@@ -59,7 +85,7 @@ class TripRequest extends React.Component {
 								className='btn btn-primary col-xs-3 rounded-0 ml-2'
 								onClick={this.addDestination}
 							>
-								Add more Trips
+								Add more Destinations
 							</button>
 							<input
 								type='submit'
