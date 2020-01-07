@@ -63,7 +63,7 @@ class LikeAndBookMark extends React.Component {
 			}
 		}
 	}
-	componentWillMount() {
+	UNSAFE_componentWillMount() {
 		this.getLikes();
 	}
 
