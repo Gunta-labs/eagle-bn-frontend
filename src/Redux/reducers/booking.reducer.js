@@ -4,6 +4,9 @@ const initialState = {
 	pending: false,
 	payload: null,
 	error: null,
+	ratingError: null,
+	ratingPayload: null,
+	ratingPending: false,
 };
 
 const BookingReducer = (state = initialState, action) => {

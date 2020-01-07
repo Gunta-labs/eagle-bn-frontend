@@ -167,7 +167,7 @@ export class singleAccomodations extends Component {
 							</div>
 							<div className='d-flex pt-5 mb-3'>
 								<Link to={`/accommodations/${id}/book`} className='btn btn-primary btn-lg'>
-									<span> Book it </span>
+									<span> Book</span>
 								</Link>
 								{checkTock.token && (
 									<button
@@ -179,7 +179,7 @@ export class singleAccomodations extends Component {
 											this.handleDelete(id);
 										}}
 									>
-										<span> Delete it </span>
+										<span> Delete </span>
 									</button>
 								)}
 							</div>
