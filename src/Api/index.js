@@ -57,6 +57,10 @@ const apis = {
 		const accommodations = await axios.get(`${BASE_URL}accommodations`);
 		return accommodations;
 	},
+	async getAllAccomodationsByFilter(filter) {
+		const accommodations = await axios.get(`${BASE_URL}accommodations/search?${filter}`);
+		return accommodations;
+	},
 	singleAccomodation(id) {
 		return axios.get(`${BASE_URL}accommodations/${id}`);
 	},
@@ -108,6 +112,27 @@ const apis = {
 	},
 	likeAccommodation(accommodationId, token) {
 		return axios.post(`${BASE_URL}accommodations/${accommodationId}/like`, null, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getSingleRequest(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	getRequestComment(requestId, token) {
+		return axios.get(`${BASE_URL}requests/${requestId}/comments`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	sendCommentReply(requestId, token, payload) {
+		return axios.post(`${BASE_URL}requests/${requestId}/comments`, payload, {
 			headers: {
 				Authorization: token,
 			},

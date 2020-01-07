@@ -76,7 +76,7 @@ class Header extends React.Component {
 									</a>
 								</li>
 								<li className='nav-item mx-3'>
-									<a className='nav-link' href='/accomodations'>
+									<a className='nav-link' href='/accommodations'>
 										Accommodations
 									</a>
 								</li>
@@ -100,26 +100,17 @@ class Header extends React.Component {
 									</a>
 								</li>
 								<li className='nav-item mx-3'>
-									<a className='nav-link' href='/'>
+									<a className='nav-link' href='/accommodations'>
 										Accommodations
 									</a>
 								</li>
 								<li className='nav-item mx-3'>
-									<div className='dropdown'>
-										<button
-											className='btn dropdown-toggle text-secondary'
-											type='button'
-											id='dropdownMenuButton'
-											data-toggle='dropdown'
-											aria-haspopup='true'
-											aria-expanded='false'
-										>
-											<span className='profile pr-3'>
-												<FontAwesomeIcon icon={faUser} />
-											</span>
-											{validToken && validToken.fullname}
-										</button>
-									</div>
+									<a className='nav-link' href='/dashboard'>
+										<span className='profile pr-3'>
+											<FontAwesomeIcon icon={faUser} />
+										</span>
+										{validToken && validToken.fullname}
+									</a>
 								</li>
 								{Token && (
 									<li

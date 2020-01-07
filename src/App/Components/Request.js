@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker, faClock, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import dateHelper from '../../helper/date.helper';
-
+import { Link } from 'react-router-dom';
 const getStatus = status => {
 	let statusClass = '';
 	if (status === 'pending') statusClass = 'btn-warning';
@@ -93,7 +93,10 @@ function Request(props) {
 					</div>
 					<div className='list-group-item'>
 						<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-							<FontAwesomeIcon icon={faEye} className='text-primary' />
+							<Link to={`requests/${request.id}`}>
+								{' '}
+								<FontAwesomeIcon icon={faEye} className='text-primary' />
+							</Link>
 							<FontAwesomeIcon icon={faEdit} className='text-primary' />
 							<FontAwesomeIcon icon={faTrash} className='text-danger' />
 						</div>
