@@ -1,13 +1,8 @@
+import moment from 'moment';
+
 const getFormatedDate = date => {
-	try {
-		const diffTime = new Date().getTime() - date.getTime();
-		const diffDays = Math.round(Math.abs(diffTime) / (1000 * 60 * 60 * 24), 10);
-		if (diffDays === 0) return 'Today';
-		if (isNaN(diffDays)) throw new Error();
-		return diffTime > 0 ? `${diffDays} day(s) ago` : `In ${diffDays} day(s)`;
-	} catch {
-		return 'Not specified';
-	}
+	const time = moment(date, 'YYYYMMDD').fromNow();
+	return time !== 'Invalid date' ? time : 'Not specified';
 };
 
 export default getFormatedDate;

@@ -16,7 +16,7 @@ import Menu from '../Components/Menu';
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'my requests', icon: faClipboard, active: true, link: '/requests' },
-	{ name: 'trip requests', icon: faClipboard, active: false, link: '/request/create' },
+	{ name: 'trip request', icon: faPlus, active: false, link: '/request/create' },
 	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [

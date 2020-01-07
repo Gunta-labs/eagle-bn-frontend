@@ -21,10 +21,8 @@ export default dispatch => ({
 		} catch (err) {
 			const { response } = err;
 			if (response && response.status === 401) {
-				return dispatch({
-					type: constants.CHAT_ERROR,
-					payload: 'Your session has expired, login again',
-				});
+				window.localStorage.removeItem('barefoot_token');
+				return (window.location = '/login');
 			}
 			return dispatch({
 				type: constants.CHAT_ERROR,
