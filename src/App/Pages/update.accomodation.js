@@ -101,6 +101,7 @@ export class UpdateAccommodation extends React.Component {
 	};
 
 	render() {
+		document.title = 'Barefoot || update accommodation';
 		const { payload, pending, error } = this.props.UpdateAccomodation;
 		const currencyList = getCurrencies().map(element => (
 			<option value={element}>{currencies[element]}</option>

@@ -102,6 +102,7 @@ export class CreateAccommodation extends React.Component {
 			: 'We could not upload your data. Check if you are connected to a valid network then try again.';
 	}
 	render() {
+		document.title = 'Barefoot || New Accommodation';
 		const {
 			name,
 			description,

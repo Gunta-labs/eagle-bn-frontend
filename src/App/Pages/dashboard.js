@@ -22,8 +22,8 @@ export class UserProfile extends React.Component {
 			address: ' ',
 			city: '',
 			state: '',
-			department: '',
-			line_manager: '',
+			department: ' ',
+			line_manager: ' ',
 			avatar: '',
 			uploadedPic: '',
 		};
@@ -114,6 +114,7 @@ export class UserProfile extends React.Component {
 		UdateUserInfo(userDataForm);
 	}
 	render() {
+		document.title = 'Barefoot || user account';
 		const {
 			id,
 			fullname,
@@ -147,7 +148,7 @@ export class UserProfile extends React.Component {
 						<input
 							type='submit'
 							id='editinfo'
-							className='btn btn-link col-xs-3 border rounded-0 ml-2'
+							className='btn-link col-xs-3 border rounded-0 ml-2 btn'
 							value='Edit account'
 							onClick={this.changeEditMode}
 						/>
@@ -221,7 +222,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='tel'
 										id='phone'
 										onChange={this.handleInput}
-										value={phone}
+										value={phone !== 'null' ? phone : ''}
 										readOnly={isReadOnly}
 										maxLength='10'
 									/>
@@ -256,7 +257,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='add'
 										id='address'
 										onChange={this.handleInput}
-										value={address}
+										value={address !== 'null' ? address : ''}
 										readOnly={isReadOnly}
 									/>
 								</div>
@@ -272,7 +273,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='ci'
 										id='city'
 										onChange={this.handleInput}
-										value={city}
+										value={city !== 'null' ? city : ''}
 										readOnly={isReadOnly}
 									/>
 								</div>
@@ -288,7 +289,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='st'
 										id='state'
 										onChange={this.handleInput}
-										value={state}
+										value={state !== 'null' ? state : ''}
 										readOnly={isReadOnly}
 									/>
 								</div>
@@ -304,7 +305,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='dep'
 										id='department'
 										onChange={this.handleInput}
-										value={department}
+										value={department !== 'null' ? department : ''}
 										readOnly={true}
 									/>
 								</div>
@@ -320,7 +321,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='lm'
 										id='line_manger'
 										onChange={this.handleInput}
-										value={line_manager}
+										value={line_manager !== 'null' ? line_manager : ''}
 										readOnly={true}
 									/>
 								</div>
@@ -328,15 +329,15 @@ export class UserProfile extends React.Component {
 									<div className='input-group-prepend'>
 										<span className='input-group-text inputlabel'>Upload picture</span>
 									</div>
-									<div className='custom-file'>
+									<div className='custom-file upload'>
 										<input
 											type='file'
-											className='custom-file-input'
+											className='custom-file-input upload'
 											id='avatar'
 											multiple={false}
 											onChange={this.handleInput}
 										/>
-										<label className='custom-file-label' for='avatar'>
+										<label className='custom-file-label upload' for='avatar'>
 											{uploadedPic || 'choose picture'}
 										</label>
 									</div>
@@ -344,7 +345,7 @@ export class UserProfile extends React.Component {
 								<div className='mt-5 mb-5'>
 									<span
 										id='cancel'
-										className='btn btn-primary mr-5'
+										className='btn btn-primary mr-5 smallbtn'
 										onClick={this.changeEditMode}
 										role='button'
 										hidden={isReadOnly}
@@ -352,7 +353,7 @@ export class UserProfile extends React.Component {
 										Discard changes
 									</span>
 									<span
-										className='btn btn-primary'
+										className='btn btn-primary smallbtn'
 										id='btn_update'
 										onClick={this.handleEdit}
 										role='button'

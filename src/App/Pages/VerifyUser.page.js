@@ -48,6 +48,7 @@ class VerifyUser extends React.Component {
 		return { title: '', description: '' };
 	}
 	render() {
+		document.title = 'Barefoot || verify-user';
 		const { payload, error, pending } = this.props;
 		const { title, description } = this.getTextToDisplay(payload, error, pending);
 		return (

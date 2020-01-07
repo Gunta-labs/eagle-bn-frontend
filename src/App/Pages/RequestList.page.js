@@ -107,6 +107,7 @@ export class RequestList extends React.Component {
 		}
 	}
 	render() {
+		document.title = 'Barefoot || requests';
 		let { payload, pending, error, filtered, filter_error } = this.props;
 		const data =
 			filtered && filter_error === null

@@ -15,6 +15,7 @@ export class SingleRequest extends Component {
 	}
 
 	render() {
+		document.title = 'Barefoot || single request';
 		const { details, pending, error } = this.props;
 		const data = !pending && details && !details.data ? details : null;
 		return (

@@ -19,7 +19,7 @@ describe('should test user role card component', () => {
 				filter: 'all',
 				inputType: 'text',
 				filterText: '',
-				hide: false,
+				hide: true,
 			},
 			data: [],
 			getAccomodations: jest.fn(),
@@ -40,7 +40,7 @@ describe('should test user role card component', () => {
 				filter: 'all',
 				inputType: 'text',
 				filterText: '',
-				hide: false,
+				hide: true,
 			},
 			data: [],
 			getAccomodations: jest.fn(),
@@ -121,7 +121,7 @@ describe('should test user role card component', () => {
 			filter: 'costLessOr',
 		});
 		const { hide, filterValue } = wrapper.instance().state;
-		expect(hide).toBe(false);
+		expect(hide).toBe(true);
 		expect(filterValue).toBe(50000);
 	});
 	it('should map the state to props', () => {
