@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QueryString from 'querystring';
 import authentication, { socialLog } from '../../Redux/Actions/login.actions';
-import bckimg from '../../Assets/images/login.svg';
 import Header from '../Components/Header';
 import SocialLogin from '../Components/social.login';
 
@@ -49,10 +48,9 @@ export class Login extends React.Component {
 		const { password, email } = this.state;
 		const { error, isLoggedIn, logPending } = this.props.user;
 		const loginDisplay = (
-			<div className='d-flex'>
+			<div className='d-flex auth-bg'>
 				<Header />
-				<img className='vh-100 vw-100 bg-img' src={bckimg} alt='bg' />
-				<div className='container signup'>
+				<div className='container signup vh-100'>
 					<div className='row'>
 						<div className='col-md-6 col-lg-6 text-center bg-sm-white rounded'>
 							<h3 className='text-center mb-4'> Login </h3>

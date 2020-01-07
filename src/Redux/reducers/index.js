@@ -25,6 +25,7 @@ import DeleteAccommodations from './deleteAccommodation.reducer';
 import getComment from './get.request.comment.reducer';
 import { replyComment, sendComment } from './ comment.reducer';
 import ChatReducer from './chat.reducer';
+import UpdateRequest from './update.trip.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -55,6 +56,7 @@ const allReducers = combineReducers({
 	replyComment,
 	sendComment,
 	ChatReducer,
+	UpdateRequest,
 });
 
 export default allReducers;
