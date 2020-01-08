@@ -1,76 +1,91 @@
 import React from 'react';
-import { faCalendar, faMapMarker, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faGlobe, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import locations from '../../helper/country.helper';
 
-export default handleInput => (
-	<div className='row'>
-		<div className='col'>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='form-control rounded-0'>
-						<FontAwesomeIcon icon={faMapMarker} />
-					</span>
+export default class RequestForm extends React.Component {
+	state = {
+		country: null,
+	};
+	onInput(event) {
+		event.preventDefault();
+		this.setState({ country: event.target.value });
+	}
+	render() {
+		const countryList = locations.getAllCountry().map(element => {
+			return (
+				<option key={element.shortName} value={element.name}>
+					{element.shortName}
+				</option>
+			);
+		});
+		const cities = locations.getCountryCities(this.state.country);
+		const citiesList = cities.map(element => {
+			return <option value={element.name}></option>;
+		});
+		return (
+			<div className='row'>
+				<div className='col'>
+					<div className='input-group mb-3'>
+						<div className='input-group-prepend'>
+							<span className='input-group-text text-secondary bg-white label-input'>
+								<FontAwesomeIcon icon={faGlobe} className='mr-3' />
+								Origin country
+							</span>
+						</div>
+						<input
+							list='countryData'
+							type='text'
+							className='form-control'
+							placeholder='Origin country'
+							aria-label='Origin country'
+							id='country'
+							onInput={e => this.onInput(e)}
+							onChange={this.props.handleInput}
+							required
+						></input>
+						<datalist id='countryData'>{countryList}</datalist>
+					</div>
+					<div className='input-group mb-3'>
+						<div className='input-group-prepend'>
+							<span className='input-group-text text-secondary bg-white label-input'>
+								<FontAwesomeIcon icon={faMapMarker} className='mr-3' />
+								Origin city
+							</span>
+						</div>
+						<input
+							list='cityData'
+							type='text'
+							className='form-control'
+							placeholder='Origin city'
+							aria-label='Origin city'
+							id='city'
+							onChange={this.props.handleInput}
+							required
+						></input>
+						<datalist id='cityData'>{citiesList}</datalist>
+					</div>
 				</div>
-				<input
-					type='text'
-					className='form-control'
-					placeholder='Origin country'
-					aria-label='Origin country'
-					id='country'
-					onChange={handleInput}
-					required
-				></input>
-			</div>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='form-control rounded-0'>
-						<FontAwesomeIcon icon={faMapMarker} />
-					</span>
+				<div className='col'>
+					<div className='input-group mb-3'>
+						<div className='input-group-prepend'>
+							<span className='input-group-text text-secondary bg-white label-input'>
+								<FontAwesomeIcon icon={faCalendar} className='mr-3' />
+								Return date
+							</span>
+						</div>
+						<input
+							type='date'
+							className='form-control'
+							placeholder='Return time'
+							aria-label='Return time'
+							id='returnTime'
+							title='Return Time(optional)'
+							onChange={this.props.handleInput}
+						></input>
+					</div>
 				</div>
-				<input
-					type='text'
-					className='form-control'
-					placeholder='Origin city'
-					aria-label='Origin city'
-					id='city'
-					onChange={handleInput}
-					required
-				></input>
 			</div>
-		</div>
-		<div className='col'>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='form-control rounded-0'>
-						<FontAwesomeIcon icon={faCalendar} />
-					</span>
-				</div>
-				<input
-					type='datetime-local'
-					className='form-control'
-					placeholder='Return time'
-					aria-label='Return time'
-					id='returnTime'
-					title='Return Time(optional)'
-					onChange={handleInput}
-				></input>
-			</div>
-			<div className='input-group mb-3'>
-				<div className='input-group-prepend'>
-					<span className='form-control rounded-0'>
-						<FontAwesomeIcon icon={faStopwatch} />
-					</span>
-				</div>
-				<input
-					type='text'
-					className='form-control'
-					placeholder='Time Zone'
-					aria-label='Time Zone'
-					id='timeZone'
-					required
-					onChange={handleInput}
-				></input>
-			</div>
-		</div>
-	</div>
-);
+		);
+	}
+}

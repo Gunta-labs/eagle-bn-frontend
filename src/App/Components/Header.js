@@ -33,7 +33,10 @@ class Header extends React.Component {
 		const showNotification = this.state.showNotification ? 'visible' : 'invisible';
 		return (
 			<div>
-				<NotificationList visibility={`${showNotification}`} />
+				<NotificationList
+					visibility={`${showNotification}`}
+					closeNotification={this.handleClickNotification}
+				/>
 				<nav className='navbar navbar-expand-lg bg-light navbar-light fixed-top'>
 					<a className='navbar-brand text-primary' href='/'>
 						<div>
