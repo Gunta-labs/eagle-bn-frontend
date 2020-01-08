@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup } from '../../Redux/Actions';
-import BgImg from '../assets/imgs/login.svg';
 import Header from '../Components/Header';
 
 export class Signup extends React.Component {
@@ -36,10 +35,9 @@ export class Signup extends React.Component {
 		const { user, error, signing } = this.props.props_.signup;
 		document.title = 'Barefoot || signup';
 		return (
-			<div className='d-flex'>
+			<div className='d-flex auth-bg'>
 				<Header />
-				<img className='vh-100 vw-100 bg-img' src={BgImg} alt='bg' />
-				<div className='container signup'>
+				<div className='container signup vh-100'>
 					<div className={user && user.status === 201 ? 'row mt-20' : 'row'}>
 						<div className='col-md-6 col-lg-6 bg-sm-white rounded'>
 							<h3 className='text-center mb-4'>
