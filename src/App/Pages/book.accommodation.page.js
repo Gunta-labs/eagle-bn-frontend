@@ -79,11 +79,11 @@ export class CreateBooking extends React.Component {
 			: 'We could not upload your data. Check if you are connected to a valid network then try again.';
 	};
 	render() {
+		document.title = 'Barefoot || book_accommodation';
 		const { start, end, numberOfSpace } = this.state;
 		const { error, payload, pending } = this.props.bookings;
 		const err = this.state.error || error;
 		const { data } = this.props.SingleAccomodations;
-		console.log(data);
 		const image =
 			data && data.AccommodationImages.length > 0 ? data.AccommodationImages[0].imageurl : img;
 		const display = (

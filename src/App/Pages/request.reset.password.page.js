@@ -50,6 +50,7 @@ class RequestResetPassword extends Component {
 		);
 	}
 	render() {
+		document.title = 'Barefoot || reset-password';
 		return (
 			<div className='d-flex flex-wrap align-content-center justify-content-center w-100 mainContainer'>
 				<div className='container'>

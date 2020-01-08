@@ -118,6 +118,7 @@ class ManagerApproval extends React.Component {
 			));
 	}
 	render() {
+		document.title = 'Barefoot || approvals';
 		const {
 			previewedRequest,
 			PreviewedHTML,

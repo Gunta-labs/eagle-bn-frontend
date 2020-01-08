@@ -45,6 +45,7 @@ export class Login extends React.Component {
 	};
 
 	render() {
+		document.title = 'Barefoot || login';
 		const { password, email } = this.state;
 		const { error, isLoggedIn, logPending } = this.props.user;
 		const loginDisplay = (
@@ -102,7 +103,7 @@ export class Login extends React.Component {
 				</div>
 			</div>
 		);
-		const display = !isLoggedIn ? loginDisplay : (window.location = '/');
+		const display = !isLoggedIn ? loginDisplay : (window.location = '/dashboard');
 		return display;
 	}
 }

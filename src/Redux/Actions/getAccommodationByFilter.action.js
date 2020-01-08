@@ -6,7 +6,7 @@ const getAllAccomodationsByFilter = async filter => {
 	try {
 		const AllAccomodation = await apis.getAllAccomodationsByFilter(filter);
 		const { data } = AllAccomodation.data;
-		if (data === undefined) toast.error(`No accommodation(s) with (" ${filter} ") found`);
+		if (data === undefined) toast.error(`No accommodation(s)found`);
 		return {
 			type: constants.ACCOMODATION_SUCCESS,
 			payload: data,

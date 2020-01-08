@@ -18,6 +18,7 @@ export class Landing extends React.Component {
 	}
 
 	render() {
+		document.title = 'Barefoot || home';
 		const { payload, pending } = this.props.stats;
 		return (
 			<div>

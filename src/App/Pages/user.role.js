@@ -52,6 +52,7 @@ class UserRole extends React.Component {
 		changeModelStatus('started');
 	}
 	render() {
+		document.title = 'Barefoot || change role';
 		const { data, email, Role, error } = this.state;
 		const { modelStatus, changeRoleStatus } = this.props.userRole;
 		return (

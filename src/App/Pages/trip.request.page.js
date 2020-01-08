@@ -68,6 +68,7 @@ class TripRequest extends React.Component {
 	}
 	render() {
 		const { error, values } = this.state;
+		document.title = 'Barefoot || new request';
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={2} />

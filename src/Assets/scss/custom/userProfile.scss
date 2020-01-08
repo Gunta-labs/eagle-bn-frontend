@@ -25,6 +25,12 @@
     
     }
   }
+  @media screen and (max-width: 640px) {
+    .smallbtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
   
   .user-container {
     padding-top: 60px;
@@ -48,4 +54,7 @@
 .formData {
     width: 70%;
    margin-left: 14%;
+}
+.upload {
+  height: 38px;
 }

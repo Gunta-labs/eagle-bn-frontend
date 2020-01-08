@@ -14,7 +14,7 @@ export class GetAllAccomodations extends React.Component {
 			filter: 'all',
 			inputType: 'text',
 			filterText: '',
-			hide: false,
+			hide: true,
 		};
 		this.handleSelect = this.handleSelect.bind(this);
 		this.handleText = this.handleText.bind(this);
@@ -59,6 +59,7 @@ export class GetAllAccomodations extends React.Component {
 		this.setState({ filterValue: value });
 	}
 	render() {
+		document.title = 'Barefoot || accommodations';
 		const { data } = this.props.accomodation;
 		const { inputType, filterText, hide } = this.state;
 		return (
@@ -66,8 +67,8 @@ export class GetAllAccomodations extends React.Component {
 				<Header />
 				<div className='my-search shadow-lg border-0'>
 					<div className='container d-flex justify-content-center align-items-center'>
-						<form>
-							<div className='input-group mb-3' style={{ marginTop: '30%', height: '35px' }}>
+						<form onSubmit={this.searchData} style={{ marginTop: '100px' }}>
+							<div className='input-group mb-3'>
 								<div
 									className='input-group-append bg-transparent border'
 									style={{ borderRadius: '10px' }}
