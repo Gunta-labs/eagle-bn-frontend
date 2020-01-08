@@ -34,6 +34,7 @@ export class Signup extends React.Component {
 
 	render() {
 		const { user, error, signing } = this.props.props_.signup;
+		document.title = 'Barefoot || signup';
 		return (
 			<div className='d-flex'>
 				<Header />
@@ -61,16 +62,6 @@ export class Signup extends React.Component {
 								className={user && user.status === 201 && 'd-none'}
 								onSubmit={this.handleSubmit}
 							>
-								<div className='form-label-group mt-4'>
-									<input
-										type='text'
-										name='firstName'
-										className='form-control'
-										onChange={this.handleChange}
-										placeholder='first name'
-										required={true}
-									/>
-								</div>
 								<div className='form-label-group mt-4'>
 									<input
 										type='text'

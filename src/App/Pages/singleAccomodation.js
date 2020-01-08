@@ -169,7 +169,7 @@ export class singleAccomodations extends Component {
 								<Link to={`/accommodations/${id}/book`} className='btn btn-primary btn-lg'>
 									<span> Book</span>
 								</Link>
-								{checkTock.token && (
+								{checkTock.token && checkTock.default().userId === this.props.payload.userid && (
 									<button
 										id='deleteAcc'
 										type='button'
@@ -202,6 +202,7 @@ export class singleAccomodations extends Component {
 	};
 
 	render() {
+		document.title = 'Barefoot || single-accommodation';
 		const { payload, error, pending, feedback, feedback_error } = this.props;
 		const { id } = this.props.match.params;
 
