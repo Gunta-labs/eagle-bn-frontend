@@ -131,8 +131,25 @@ const apis = {
 			},
 		});
 	},
+	getAllUsers() {
+		return axios.get(`${BASE_URL}users`);
+	},
+	getChats(token) {
+		return axios.get(`${BASE_URL}chats?limit=1000`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 	sendCommentReply(requestId, token, payload) {
 		return axios.post(`${BASE_URL}requests/${requestId}/comments`, payload, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	postChat(data, token) {
+		return axios.post(`${BASE_URL}chats`, data, {
 			headers: {
 				Authorization: token,
 			},

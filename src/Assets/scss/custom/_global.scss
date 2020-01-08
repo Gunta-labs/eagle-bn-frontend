@@ -95,7 +95,7 @@
 
   .avatar {
   	width: 75px;
-  	height: 75px;
+  	height: 50px;
   	border-radius: 100%;
   }
 
@@ -380,6 +380,24 @@
 	  font-size: 14px
   }
   
+  .rate-modal {
+	position: absolute;
+	top: 0px;
+	z-index: 999999;
+  }
+
+  .bookingList {
+	  margin-top: 100px;
+  }
+  .blurPanel{
+	width: 110%;
+	height: 100vh;
+	z-index: 99900;
+	background-color: black;
+	opacity: 0.5;
+	position: absolute;
+	top: 60px;
+  }
 .send-button2 {
 	margin-left: 10px;
 	height: 40px;

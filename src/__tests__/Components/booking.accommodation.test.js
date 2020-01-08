@@ -48,7 +48,7 @@ describe('Verify User page', () => {
 	it('should submit data and get data from actions', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockSuccess({ name: 'seriously' });
-		store = config.mockStore(Data.initialState);
+		store = config.mockStore(Data.initialState2);
 		wrapper = config.mountNewWrapper(store, component);
 		const event = { target: { name: 'numberOfSpace', value: '2' } };
 		wrapper.find('input[name="numberOfSpace"]').simulate('change', event);
@@ -82,14 +82,26 @@ describe('Verify User page', () => {
 		wrapper.find('input[name="end"]').simulate('change', event1);
 		wrapper.find('form').simulate('submit');
 		expect(wrapper.find(CreateBooking).instance().state.error.data.msg).toEqual(
-			'The starting date should not be greater than ending date',
+			'The starting date should go beyond the ending date',
+		);
+		done();
+	});
+	it('should check the number of rooms', async done => {
+		Data.mockSuccess({ name: 'seriously' });
+		store = config.mockStore(Data.initialState2);
+		wrapper = config.mountNewWrapper(store, component);
+		const event = { target: { name: 'numberOfSpace', value: '4000' } };
+		wrapper.find('input[name="numberOfSpace"]').simulate('change', event);
+		wrapper.find('form').simulate('submit');
+		expect(wrapper.find(CreateBooking).instance().state.error.data.msg).toEqual(
+			'This accommodation has only 2 rooms avaliable',
 		);
 		done();
 	});
 	it('should submit data and get an error message', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockFailure({ numberOfSpace: '2' });
-		store = config.mockStore(Data.initialState);
+		store = config.mockStore(Data.initialState2);
 		wrapper = config.mountNewWrapper(store, component);
 		wrapper.find('form').simulate('submit');
 
@@ -104,7 +116,7 @@ describe('Verify User page', () => {
 	it('should submit data and get a network error', async done => {
 		sinon.spy(axios, 'post');
 		Data.mockNetworkFailure({ name: '3' });
-		store = config.mockStore(Data.initialState);
+		store = config.mockStore(Data.initialState2);
 		wrapper = config.mountNewWrapper(store, component);
 		wrapper.find('form').simulate('submit');
 

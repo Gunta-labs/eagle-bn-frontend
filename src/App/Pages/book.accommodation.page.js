@@ -31,6 +31,7 @@ export class CreateBooking extends React.Component {
 		}
 	}
 	handleSubmit = e => {
+		const accommodation = this.props.SingleAccomodations.data;
 		e.preventDefault();
 		const { create } = this.props;
 		const { start, end, numberOfSpace } = this.state;
@@ -42,8 +43,18 @@ export class CreateBooking extends React.Component {
 		};
 		const token = localStorage.getItem('barefoot_token');
 		if (this.validate(start, end)) {
-			this.props.initialize();
-			create(data, token);
+			if (numberOfSpace <= accommodation.availableSpace) {
+				this.props.initialize();
+				create(data, token);
+			} else {
+				this.setState({
+					error: {
+						data: {
+							msg: `This accommodation has only ${accommodation.availableSpace} rooms avaliable`,
+						},
+					},
+				});
+			}
 		}
 	};
 	validate(start, end) {
@@ -55,7 +66,7 @@ export class CreateBooking extends React.Component {
 			return false;
 		} else if (startingDate > endingDate) {
 			this.setState({
-				error: { data: { msg: 'The starting date should not be greater than ending date' } },
+				error: { data: { msg: 'The starting date should go beyond the ending date' } },
 			});
 			return false;
 		}
@@ -72,6 +83,7 @@ export class CreateBooking extends React.Component {
 		const { error, payload, pending } = this.props.bookings;
 		const err = this.state.error || error;
 		const { data } = this.props.SingleAccomodations;
+		console.log(data);
 		const image =
 			data && data.AccommodationImages.length > 0 ? data.AccommodationImages[0].imageurl : img;
 		const display = (
@@ -89,6 +101,17 @@ export class CreateBooking extends React.Component {
 												<img className='card-img-top' src={image} alt='accommodation' />
 												<div class='card-body'>
 													<h5 class='card-title'>{data.name}</h5>
+													<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
+														<p className='mb-0'>
+															<FontAwesomeIcon icon={faDoorOpen} className='mr-2 text-primary' />
+															<label className='text-primary small-margin-top'>
+																{`Available space : ${data.availableSpace} rooms`}
+															</label>
+															<label className='text-secondary ml-2'>
+																{`Cost : ${data.cost} ${data.currency} / day`}
+															</label>
+														</p>
+													</div>{' '}
 												</div>
 											</div>
 										</a>

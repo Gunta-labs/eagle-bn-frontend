@@ -20,9 +20,11 @@ import Notification from './notification.reducer';
 import UserRoleReducer from './user.role.reducer';
 import UpdateAccomodation from './update.accomodation.reducer';
 import getOneAcc from './singleAccomodation.reducer';
+import Booking from './bookings.list.reducer';
 import DeleteAccommodations from './deleteAccommodation.reducer';
 import getComment from './get.request.comment.reducer';
 import { replyComment, sendComment } from './ comment.reducer';
+import ChatReducer from './chat.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -47,10 +49,12 @@ const allReducers = combineReducers({
 	userRole: UserRoleReducer,
 	UpdateAccomodation,
 	getOneAcc,
+	Booking,
 	DeleteAccommodations,
 	getComment,
 	replyComment,
 	sendComment,
+	ChatReducer,
 });
 
 export default allReducers;

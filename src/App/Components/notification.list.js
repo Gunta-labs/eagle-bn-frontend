@@ -92,7 +92,7 @@ export class Notification extends React.Component {
 		const { payload, visibility } = this.props;
 		return (
 			<div>
-				<div className={`blurPanel ${visibility}`}></div>
+				<div className={`blurPanel ${visibility}`} onClick={this.props.closeNotification}></div>
 				<div className={`notificationPanel shadow-sm ${visibility}`}>
 					<div className='d-flex justify-content-between pt-3 pl-3 pr-2 pb-2 shadow-sm'>
 						<h5 className='text-primary'>Notifications</h5>

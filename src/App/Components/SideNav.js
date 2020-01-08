@@ -17,7 +17,7 @@ const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'my requests', icon: faClipboard, active: true, link: '/requests' },
 	{ name: 'trip requests', icon: faClipboard, active: false, link: '/request/create' },
-	{ name: 'Booking', icon: faFileInvoice, active: false, link: '/accommodations' },
+	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },

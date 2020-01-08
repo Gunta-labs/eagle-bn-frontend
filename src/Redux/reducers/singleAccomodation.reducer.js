@@ -2,6 +2,7 @@ const initialState = {
 	data: null,
 	error: null,
 	pending: true,
+	accommodation: false,
 };
 
 const SingleAccomodations = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const SingleAccomodations = (state = initialState, action) => {
 				data: payload,
 				error: null,
 				pending: false,
+				accommodation: true,
 			};
 		case 'SINGLE_ACCOMODATION_PENDING':
 			return {

@@ -22,7 +22,9 @@ import { initializeSocketIo } from '../helper/socketIo';
 import { toast } from 'react-toastify';
 import UserRole from './Pages/user.role';
 import UpdateAccs from './Pages/update.accomodation';
+import { Bookings } from './Pages/booking.list';
 import SingleRequest from './Pages/single.request.page';
+import Chat from './Components/chat';
 
 toast.configure();
 export class App extends React.Component {
@@ -41,6 +43,10 @@ export class App extends React.Component {
 					/>
 					<Route
 						exact
+						path='/bookings'
+						render={props => (token ? <Bookings /> : <Redirect to='/login' />)}
+					/>
+					<Route
 						path='/requests/:id'
 						render={props =>
 							token ? (
@@ -107,6 +113,7 @@ export class App extends React.Component {
 					<Route path='*' component={NotFound} />
 					/>
 				</Switch>
+				{token && <Chat />}
 			</Router>
 		);
 	}
