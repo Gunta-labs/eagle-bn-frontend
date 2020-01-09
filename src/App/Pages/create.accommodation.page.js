@@ -156,14 +156,13 @@ export class CreateAccommodation extends React.Component {
 											</span>
 										</div>
 										<input
-											type='text'
+											type='number'
 											name='availableSpace'
 											className='form-control'
 											onChange={this.handleInput}
-											placeholder='Available space, ex: 5 rooms'
+											placeholder='Available space, ex: 5'
 											required={true}
 											value={availableSpace}
-											pattern='.{5,}'
 										/>
 									</div>
 									<div className='input-group mb-3'>

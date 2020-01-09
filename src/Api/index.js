@@ -1,5 +1,6 @@
 import BASE_URL from './config';
 import axios from 'axios';
+import getUser from '../helper/helper';
 
 const apis = {
 	async verifyUser(token) {
@@ -53,9 +54,16 @@ const apis = {
 			headers: { Authorization: token },
 		});
 	},
-	async getAllAccomodations() {
-		const accommodations = await axios.get(`${BASE_URL}accommodations`);
-		return accommodations;
+	async getAllAccomodations(data) {
+		const isHost = data && getUser() && (getUser().role === 'Tadmin' || getUser().role === 'host');
+		if (!isHost) {
+			const accommodations = await axios.get(`${BASE_URL}accommodations`);
+			return accommodations;
+		}
+		const url = `${BASE_URL}accommodations/supplier`;
+		return axios.get(url, {
+			headers: { Authorization: data },
+		});
 	},
 	async getAllAccomodationsByFilter(filter) {
 		const accommodations = await axios.get(`${BASE_URL}accommodations/search?${filter}`);

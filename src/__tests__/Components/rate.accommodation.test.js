@@ -9,7 +9,7 @@ import sinon from 'sinon';
 import axios from 'axios';
 import Booking from '../../App/Components/Booking';
 import Rater from 'react-rating';
-
+import * as checkToken from '../../helper/helper';
 jest.mock('axios');
 let store, wrapper;
 Enzyme.configure({
@@ -33,6 +33,43 @@ describe('Verify User page', () => {
 		done();
 	});
 	it('Should have a booking card are successfully fetched', async done => {
+		Data.mockData.mockSuccess();
+		const axiosSpy = sinon.spy(axios, 'get');
+		store = config.mockStore(Data.mockData.successState);
+		wrapper = config.mountNewWrapper(store, component);
+		expect(wrapper.find(Booking)).toExist();
+		expect(axios.calledOnce);
+		expect(axiosSpy.calledOnce);
+		const axiosPayload = await axios.get.getCall(0).returnValue;
+		expect(JSON.stringify(axiosPayload.data.data[0])).toEqual(JSON.stringify(Data.data));
+		axios.get.restore();
+		done();
+	});
+	it('Should have a booking card are successfully fetched for a tAdmin', async done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValue({
+			fullname: 'host',
+			role: 'TAdmin',
+		});
+		Data.mockData.mockSuccess();
+		const axiosSpy = sinon.spy(axios, 'get');
+		store = config.mockStore(Data.mockData.successState);
+		wrapper = config.mountNewWrapper(store, component);
+		expect(wrapper.find(Booking)).toExist();
+		expect(axios.calledOnce);
+		expect(axiosSpy.calledOnce);
+		const axiosPayload = await axios.get.getCall(0).returnValue;
+		expect(JSON.stringify(axiosPayload.data.data[0])).toEqual(JSON.stringify(Data.data));
+		axios.get.restore();
+		done();
+	});
+	it('Should have a booking card are successfully fetched for a host', async done => {
+		checkToken.default = jest.fn();
+		checkToken.default.mockReturnValue({
+			fullname: 'host',
+			role: 'host',
+		});
+
 		Data.mockData.mockSuccess();
 		const axiosSpy = sinon.spy(axios, 'get');
 		store = config.mockStore(Data.mockData.successState);

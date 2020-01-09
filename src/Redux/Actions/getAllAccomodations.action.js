@@ -1,9 +1,9 @@
 import apis from '../../Api/index';
 import constants from '../constants/index';
 
-const getAllAccomodations = async () => {
+const getAllAccomodations = async token => {
 	try {
-		const AllAccomodation = await apis.getAllAccomodations();
+		const AllAccomodation = await apis.getAllAccomodations(token);
 		const { data } = AllAccomodation.data;
 		return {
 			type: constants.ACCOMODATION_SUCCESS,
