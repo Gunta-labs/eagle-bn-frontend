@@ -21,9 +21,9 @@ const requestMenu = [
 ];
 const supplierMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
-	{ name: 'accommodations', icon: faHotel, active: false, link: '/accommodations' },
+	{ name: 'accommodations', icon: faHotel, active: false, link: '/myaccommodations' },
 	{ name: 'accommodation', icon: faPlus, active: true, link: '/accommodation/create' },
-	{ name: 'booking', icon: faFileAlt, active: false, link: '/accommodations' },
+	{ name: 'bookings', icon: faFileAlt, active: false, link: '/bookings' },
 ];
 const managerMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },

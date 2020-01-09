@@ -4,6 +4,7 @@ import Rater from 'react-rating';
 import { faUser, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getDate from '../../helper/date.helper';
+import getUser from '../../helper/helper';
 
 class Booking extends React.Component {
 	state = {
@@ -12,7 +13,8 @@ class Booking extends React.Component {
 
 	render() {
 		const bk = this.props.booking;
-		const readOnly = new Date(bk.start) > new Date();
+		const isHost = getUser() && (getUser().role === 'TAdmin' || getUser().role === 'host');
+		const readOnly = new Date(bk.start) > new Date() || isHost;
 		return (
 			<div className='col-md-3 mb-4 col-sm-6' key={this.props.booking}>
 				<div className='card '>

@@ -15,7 +15,7 @@ export const getNotifications = async token => {
 	} catch (err) {
 		return {
 			type: constants.NOTIFICATION_ERROR,
-			error: err.response.data,
+			error: err.response ? err.response.data : err.message,
 		};
 	}
 };

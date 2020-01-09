@@ -73,7 +73,7 @@ export class BookingList extends React.Component {
 		const start = (page - 1) * 6;
 		return data
 			.slice(start, page * 6)
-			.map(req => <Booking booking={req} handleClick={this.rate} />);
+			.map((req, i) => <Booking booking={req} handleClick={this.rate} key={i} />);
 	}
 	setPage(current, data) {
 		this.setState({ currentPage: current });

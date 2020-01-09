@@ -43,7 +43,7 @@ export class CreateBooking extends React.Component {
 		};
 		const token = localStorage.getItem('barefoot_token');
 		if (this.validate(start, end)) {
-			if (numberOfSpace <= accommodation.availableSpace) {
+			if (numberOfSpace <= Number.parseInt(accommodation.availableSpace, 10)) {
 				this.props.initialize();
 				create(data, token);
 			} else {

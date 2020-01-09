@@ -9,7 +9,21 @@ import user from './helper';
 export const initializeSocketIo = token => {
 	const socket = socketClient(url, { query: { token } });
 	socket.on('new_request', data => {
-		toast.success('You have a new notification');
+		toast.success(data.description);
+		store.dispatch({
+			type: constant.NEW_NOTIFCATION,
+			notification: data,
+		});
+	});
+	socket.on('request_approved', data => {
+		toast.success(data.description);
+		store.dispatch({
+			type: constant.NEW_NOTIFCATION,
+			notification: data,
+		});
+	});
+	socket.on('request_rejected', data => {
+		toast.error(data.description);
 		store.dispatch({
 			type: constant.NEW_NOTIFCATION,
 			notification: data,

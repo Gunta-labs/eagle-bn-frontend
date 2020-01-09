@@ -14,7 +14,6 @@ applyMiddleware(promiseMiddleware);
 
 describe('Actions', () => {
 	let store;
-
 	let id = 1;
 
 	beforeEach(() => {
@@ -36,7 +35,7 @@ describe('Actions', () => {
 
 	it('dispatches singleAccomodation action and returns success', async () => {
 		mockAxios.get.mockResolvedValue({
-			data: {},
+			data: { data: {} },
 		});
 
 		await store.dispatch(await singleAccomodation(id));
@@ -45,10 +44,10 @@ describe('Actions', () => {
 	});
 	it('deletes an ccomodation and returns success', async () => {
 		mockAxios.delete.mockResolvedValue({
-			data: {},
+			data: { data: {} },
 		});
 
-		await store.dispatch(await deleteAccommodation(id));
+		await store.dispatch(await deleteAccommodation('kkkk', id));
 		const actions = store.getActions();
 		expect(actions[0].type).toEqual('ACCOMMODATION_DELETE_SUCCESS');
 	});

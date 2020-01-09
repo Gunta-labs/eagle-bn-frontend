@@ -96,6 +96,9 @@ const mockData = {
 			error: null,
 			pending: null,
 		},
+		Logout: {
+			payload: {},
+		},
 	},
 	successState2: {
 		Booking: {
@@ -107,6 +110,9 @@ const mockData = {
 			payload: [],
 			error: null,
 			pending: null,
+		},
+		Logout: {
+			payload: {},
 		},
 	},
 	initialState: {
@@ -148,6 +154,9 @@ const mockData = {
 			error: null,
 			pending: null,
 		},
+		Logout: {
+			payload: {},
+		},
 	},
 	errorState2: {
 		Booking: {
@@ -162,6 +171,9 @@ const mockData = {
 			payload: [],
 			error: null,
 			pending: null,
+		},
+		Logout: {
+			payload: {},
 		},
 	},
 	mockSuccess: () => {

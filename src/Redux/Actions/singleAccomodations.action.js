@@ -47,7 +47,9 @@ export const GetFeedback = async id => {
 export const deleteAccommodation = async (token, id) => {
 	try {
 		const res = await apis.DeleteAccommodation(token, id);
-		const { data } = res.data;
+		const { data } = res;
+		data.id = id;
+		toast.success('deleted successfully');
 		return {
 			type: 'ACCOMMODATION_DELETE_SUCCESS',
 			payload: data,
