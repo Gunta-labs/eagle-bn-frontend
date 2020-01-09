@@ -92,7 +92,7 @@ class Chat extends React.Component {
 		return users
 			.filter(
 				element =>
-					element.id !== userData().id &&
+					element.id !== userData().userId &&
 					(element.id === parseInt(search) ||
 						(element.fullname || element.email).toLowerCase().indexOf(search.toLowerCase()) !== -1),
 			)
