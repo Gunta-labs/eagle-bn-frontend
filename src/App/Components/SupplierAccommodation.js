@@ -7,7 +7,6 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 class Accommodations extends React.Component {
 	handleDelete(accId) {
 		const token = localStorage.getItem('barefoot_token');
-		console.log('this is the token', token);
 		this.props.handleClick(token, accId);
 	}
 	render() {
