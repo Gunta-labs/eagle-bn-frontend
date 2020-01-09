@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCalendar, faMapMarker, faGlobe, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import locations from '../../helper/country.helper';
 export default class DestinationForm extends React.Component {
