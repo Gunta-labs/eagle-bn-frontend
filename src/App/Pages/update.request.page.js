@@ -29,9 +29,13 @@ export class UpdateRequest extends React.Component {
 	onInput(event) {
 		event.preventDefault();
 		this.setState({ country: event.target.value });
+		console.log(this.state);
 	}
 
 	handleInputChange(event) {
+		if (event.target.name === 'city') {
+			this.city = event.target.value;
+		}
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
@@ -173,10 +177,10 @@ export class UpdateRequest extends React.Component {
 												<div class='input-group mb-3'>
 													<span className='input-group-text text-secondary bg-white label-input'>
 														<FontAwesomeIcon icon={faGlobe} className='mr-3' />
-														Origin country
+														Destination country
 													</span>
 													<input
-														list='countryData'
+														list={`countryData-${i}`}
 														type='text'
 														className='form-control country-trip'
 														placeholder='Destination country'
@@ -187,17 +191,18 @@ export class UpdateRequest extends React.Component {
 														onChange={this.handleTripChange}
 														required
 													/>
-													<datalist id='countryData'>{countryList}</datalist>
+													<datalist id={`countryData-${i}`}>{countryList}</datalist>
 												</div>
 												<div class='input-group mb-3'>
 													<div className='input-group-prepend'>
 														<span className='input-group-text text-secondary bg-white label-input'>
 															<FontAwesomeIcon icon={faMapMarker} className='mr-3' />
-															Origin city
+															Destination city
 														</span>
 													</div>
 													<input
 														type='text'
+														list={`cityData-${i}`}
 														class='form-control'
 														placeholder='Destination city'
 														aria-label='Destination city'
@@ -206,6 +211,9 @@ export class UpdateRequest extends React.Component {
 														onChange={this.handleTripChange}
 														required
 													/>
+													<datalist id={`cityData-${i}`}>
+														{citiesList.filter(e => e.key !== this.props.city)}
+													</datalist>
 												</div>
 												<div class='input-group'>
 													<div className='input-group-prepend'>

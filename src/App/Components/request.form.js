@@ -60,6 +60,7 @@ export default class RequestForm extends React.Component {
 							placeholder='Origin city'
 							aria-label='Origin city'
 							id='city'
+							name='city'
 							onChange={this.props.handleInput}
 							required
 						></input>
@@ -76,6 +77,7 @@ export default class RequestForm extends React.Component {
 						</div>
 						<input
 							type='date'
+							min={this.props.dep || new Date().toISOString().split('T')[0]}
 							className='form-control'
 							placeholder='Return time'
 							aria-label='Return time'
