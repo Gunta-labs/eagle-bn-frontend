@@ -40,7 +40,7 @@ export class Notification extends React.Component {
 		if (data) {
 			return data.map((notification, i) => {
 				return (
-					<Link to={`/${notification.modelName.toLowerCase()}/${notification.modelId}`}>
+					<Link to={`/requests/${notification.modelId}`}>
 						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>
 							<span>Mark as read</span>
 						</ReactTooltip>
