@@ -110,7 +110,7 @@ export class UpdateAccommodation extends React.Component {
 		return (
 			<div className='d-flex'>
 				<Header active_menu={1} showSideNav={true} />
-				{!pending && this.props.getOneAcc.error && <Redirect to='/notfound' />}; */}
+				{!pending && this.props.getOneAcc.error && <Redirect to='/notfound' />};}
 				<div className='container content-wrapper create-accommodation'>
 					<h5 className='text-primary mb-4'> Update accommodation </h5>
 					<div className='row'>

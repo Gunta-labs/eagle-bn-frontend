@@ -3,6 +3,10 @@
   	min-height: 100%;
   }
 
+  body {
+  	height: 100vh;
+  }
+
   body * {
   	font-weight: 100 !important;
   }
@@ -51,7 +55,12 @@
 
   .bg-img {
   	position: absolute;
-  	margin-left: 18rem;
+  }
+
+  .auth-bg {
+  	background-image: url('../images/login.svg');
+  	background-size: cover;
+  	background-repeat: no-repeat;
   }
 
   .card {
@@ -76,9 +85,9 @@
   }
 
   .img-sm {
-	  width: 5rem;
-	  height: 4rem;
-	  border-radius: .2rem;
+  	width: 5rem;
+  	height: 4rem;
+  	border-radius: .2rem;
   }
 
   label {
@@ -115,9 +124,10 @@
   	}
   }
 
-.middle { 
-	margin-left: 85px !important;
-}
+  .middle {
+  	margin-left: 85px !important;
+  }
+
   .request-list {
   	margin-top: 0px;
   }
@@ -202,80 +212,90 @@
   	}
   }
 
-.searchModal{
-	width: fit-content;
-	z-index: 99999;
-	background-color: white;
-	height: fit-content;
-	position: absolute;
-	right: 2rem;
-	top: 8.5rem;
-}
-.notificationPanel{
-	width: 400px;
-	z-index: 99999;
-	background-color: white;
-	height: 50%;
-	position: absolute;
-	right: 0.5rem;
-	top: 55px;
-	overflow-y: scroll
-}
-.blurPanel{
-	width: 100%;
-	height: 100vh;
-	z-index: 99900;
-	background-color: black;
-	opacity: 0.5;
-	position: absolute;
-	right: 0rem;
-	top: 55px;
-}
-.bg-active {
-	background-color: #e0efff;
-}
-.notificationImg{
-	font-size: 1.5rem;
-	cursor: pointer;
-}
-.markAllAsRead {
-	width: 28px;
-	height: 28px;
-	padding-top: 2px;
-	padding-left: 8px;
-    cursor: pointer;
-}
-.markOneAsRead {
-	width: 28px;
-	height: 28px;
-	padding-top: 0px;
-	padding-left: 6px
-}
-.small-text {
-	font-size: 10px;
-	top: 15px;
-	position: absolute;
-	cursor: pointer;
-}
-@media (max-width: 441px) {
-	.searchModal {
-		width: 100%;
-		margin:0;
-		position: absolute;
-	    right: 0;
-	    top: 8.4rem;
-	}
-	.notificationPanel{
-		width: 100%;
-		z-index: 99999;
-		background-color: white;
-		height: 50%;
-		position: absolute;
-		right: 0rem;
-		top: 55px;
-		overflow-y: scroll
-	}
-}
+  .searchModal {
+  	width: fit-content;
+  	z-index: 99999;
+  	background-color: white;
+  	height: fit-content;
+  	position: absolute;
+  	right: 2rem;
+  	top: 8.5rem;
+  }
+
+  .notificationPanel {
+  	width: 400px;
+  	z-index: 99999;
+  	background-color: white;
+  	height: 50%;
+  	position: absolute;
+  	right: 0.5rem;
+  	top: 55px;
+  	overflow-y: scroll
+  }
+
+  .blurPanel {
+  	width: 100%;
+  	height: 100vh;
+  	z-index: 99900;
+  	background-color: black;
+  	opacity: 0.5;
+  	position: absolute;
+  	right: 0rem;
+  	top: 55px;
+  }
+
+  .bg-active {
+  	background-color: #e0efff;
+  }
+
+  .notificationImg {
+  	font-size: 1.5rem;
+  	cursor: pointer;
+  }
+
+  .markAllAsRead {
+  	width: 28px;
+  	height: 28px;
+  	padding-top: 2px;
+  	padding-left: 8px;
+  	cursor: pointer;
+  }
+
+  .markOneAsRead {
+  	width: 28px;
+  	height: 28px;
+  	padding-top: 0px;
+  	padding-left: 6px
+  }
+
+  .small-text {
+  	font-size: 10px;
+  	top: 15px;
+  	position: absolute;
+  	cursor: pointer;
+  }
+
+  @media (max-width: 441px) {
+  	.searchModal {
+  		width: 100%;
+  		margin: 0;
+  		position: absolute;
+  		right: 0;
+  		top: 8.4rem;
+  	}
+
+  	.notificationPanel {
+  		width: 100%;
+  		z-index: 99999;
+  		background-color: white;
+  		height: 50%;
+  		position: absolute;
+  		right: 0rem;
+  		top: 55px;
+  		overflow-y: scroll
+  	}
+  }
+
   .my-search {
   	min-height: 30vh;
   	width: 100vw;
@@ -335,32 +355,34 @@
   	font-weight: 400 !important;
   }
 
-.breadcomb{
-	margin-top: 70px;
-	margin-left: 200px;
+  .breadcomb {
+  	margin-top: 70px;
+  	margin-left: 200px;
 
-	span{
-		padding-left: 50px;
-	}
-}
+  	span {
+  		padding-left: 50px;
+  	}
+  }
 
-.request{
-	margin-left: 300px;
-	height: auto;
-}
+  .request {
+  	margin-left: 300px;
+  	height: auto;
+  }
 
-@media (max-width: 996px){
-	.breadcomb{
-	  margin-top: 70px;
-	  margin-left: 0px;
-	span{
-		padding-left: 20px;
-	}
-}
-.request{
-	margin-left: 0px;
-}
-}
+  @media (max-width: 996px) {
+  	.breadcomb {
+  		margin-top: 70px;
+  		margin-left: 0px;
+
+  		span {
+  			padding-left: 20px;
+  		}
+  	}
+
+  	.request {
+  		margin-left: 0px;
+  	}
+  }
 
 
 
@@ -381,65 +403,79 @@
   }
   
   .rate-modal {
-	position: absolute;
-	top: 0px;
-	z-index: 999999;
+  	position: absolute;
+  	top: 0px;
+  	z-index: 999999;
   }
 
   .bookingList {
-	  margin-top: 100px;
+  	margin-top: 100px;
   }
-  .blurPanel{
-	width: 110%;
-	height: 100vh;
-	z-index: 99900;
-	background-color: black;
-	opacity: 0.5;
-	position: absolute;
-	top: 60px;
+
+  .blurPanel {
+  	width: 110%;
+  	height: 100vh;
+  	z-index: 99900;
+  	background-color: black;
+  	opacity: 0.5;
+  	position: absolute;
+  	top: 60px;
   }
-.send-button2 {
-	margin-left: 10px;
-	height: 40px;
-	margin-bottom: 10px;
-	padding: 0px !important;
-	a.bg-success:hover, a.bg-success:focus, button.bg-success:hover, button.bg-success:focus{
-		background-color: white !important;
-	}
-	img{
-		background-color: white !important;
-    &:visited {
-      background-color: white !important;
-    }
-    &:hover {
-      background-color: white !important;   
-    }
-    &:active {
-      background-color: white !important;
-    }
 
-	}
-	&:visited {
-      background-color: white !important;
-    }
-    &:hover {
-      background-color: white !important;   
-    }
-    &:active {
-      background-color: white !important;
-	}
-	
-	.img2{
-		height: 40px;
-		width: 40px;
-		padding: 0px;
-		border: 0px;
-	}
+  .send-button2 {
+  	margin-left: 10px;
+  	height: 40px;
+  	margin-bottom: 10px;
+  	padding: 0px !important;
 
-}
-.inp{
-	width: 80%;
-	height: 40px;
-	padding: 0;
-	border: 0px;
-}
+  	a.bg-success:hover,
+  	a.bg-success:focus,
+  	button.bg-success:hover,
+  	button.bg-success:focus {
+  		background-color: white !important;
+  	}
+
+  	img {
+  		background-color: white !important;
+
+  		&:visited {
+  			background-color: white !important;
+  		}
+
+  		&:hover {
+  			background-color: white !important;
+  		}
+
+  		&:active {
+  			background-color: white !important;
+  		}
+
+  	}
+
+  	&:visited {
+  		background-color: white !important;
+  	}
+
+  	&:hover {
+  		background-color: white !important;
+  	}
+
+  	&:active {
+  		background-color: white !important;
+  	}
+
+  	.img2 {
+  		height: 40px;
+  		width: 40px;
+  		padding: 0px;
+  		border: 0px;
+  	}
+
+  }
+
+  .inp {
+  	width: 80%;
+  	height: 40px;
+  	padding: 0;
+  	border: 0px;
+  }

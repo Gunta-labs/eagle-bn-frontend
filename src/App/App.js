@@ -26,6 +26,7 @@ import { Bookings } from './Pages/booking.list';
 import SingleRequest from './Pages/single.request.page';
 import Chat from './Components/chat';
 import AccommodationSupplier from './Pages/supplier.accommodation.page';
+import updateRequest from './Pages/update.request.page';
 
 toast.configure();
 export class App extends React.Component {
@@ -53,6 +54,7 @@ export class App extends React.Component {
 						render={props => (token ? <Bookings /> : <Redirect to='/login' />)}
 					/>
 					<Route
+						exact
 						path='/requests/:id'
 						render={props =>
 							token ? (
@@ -116,6 +118,7 @@ export class App extends React.Component {
 					<Route exact path='/admin' component={UserRole} />
 					<Route exact path='/accommodations/:id/edit' component={UpdateAccs} />
 					<Route exact path='/changeRole' component={UserRole} />
+					<Route exact path='/requests/:reqId/edit' component={updateRequest} />
 					<Route path='*' component={NotFound} />
 					/>
 				</Switch>

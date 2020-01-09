@@ -16,7 +16,7 @@ import Menu from '../Components/Menu';
 const requestMenu = [
 	{ name: 'my account', icon: faUser, active: true, link: '/dashboard' },
 	{ name: 'my requests', icon: faClipboard, active: true, link: '/requests' },
-	{ name: 'trip requests', icon: faClipboard, active: false, link: '/request/create' },
+	{ name: 'trip request', icon: faPlus, active: false, link: '/request/create' },
 	{ name: 'Bookings', icon: faFileInvoice, active: false, link: '/bookings' },
 ];
 const supplierMenu = [
@@ -97,7 +97,13 @@ function SideNav(props) {
 		<ul className='navbar-nav mr-auto sidenav shadow-sm' id='navAccordion'>
 			<li className='nav-item user-nav shadow-sm'>
 				<div className='d-flex flex-column ml-5 mt-3'>
-					<img className='avatar' src={props.avatar || avatar} alt='user' />
+					<img
+						height='100'
+						width='100'
+						className='avatar'
+						src={props.avatar || avatar}
+						alt='user'
+					/>
 					<h6 className='py-2 pl-1'>{fullname}</h6>
 				</div>
 			</li>

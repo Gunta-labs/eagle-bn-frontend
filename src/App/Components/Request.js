@@ -97,7 +97,9 @@ function Request(props) {
 								{' '}
 								<FontAwesomeIcon icon={faEye} className='text-primary' />
 							</Link>
-							<FontAwesomeIcon icon={faEdit} className='text-primary' />
+							<Link to={`requests/${request.id}/edit`}>
+								<FontAwesomeIcon icon={faEdit} className='text-primary' />
+							</Link>
 							<FontAwesomeIcon icon={faTrash} className='text-danger' />
 						</div>
 					</div>

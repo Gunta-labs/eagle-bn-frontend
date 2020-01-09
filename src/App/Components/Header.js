@@ -37,7 +37,7 @@ class Header extends React.Component {
 					visibility={`${showNotification}`}
 					closeNotification={this.handleClickNotification}
 				/>
-				<nav className='navbar navbar-expand-lg bg-light navbar-light fixed-top'>
+				<nav className='navbar navbar-expand-lg bg-light navbar-light fixed-top shadow-sm'>
 					<a className='navbar-brand text-primary' href='/'>
 						<div>
 							<img className='logo' src={logo} alt='logo' />

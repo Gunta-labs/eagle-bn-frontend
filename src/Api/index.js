@@ -163,6 +163,11 @@ const apis = {
 			},
 		});
 	},
+	updateRequest(data, token, reqId) {
+		return axios.put(`${BASE_URL}requests/${reqId}`, data, {
+			headers: { Authorization: token },
+		});
+	},
 };
 
 export default apis;

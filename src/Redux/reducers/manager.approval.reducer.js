@@ -25,7 +25,7 @@ export default (state = initialState, { type, payload }) => {
 			if (payload.data) {
 				return {
 					...state,
-					approvalRequests: payload.data.reverse(),
+					approvalRequests: payload.data.sort((a, b) => (a.id < b.id ? 1 : -1)),
 					message: 'Your Requests',
 					messageClass: 'text-primary font-weight-bolder',
 					previewStatus: 'success',
@@ -66,6 +66,7 @@ export default (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				filter: payload,
+				pager: 1,
 			};
 		case constants.MANAGER_PREVIEW_PAGERS:
 			return {
