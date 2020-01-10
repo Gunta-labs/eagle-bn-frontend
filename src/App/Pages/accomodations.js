@@ -57,7 +57,6 @@ export class GetAllAccomodations extends React.Component {
 		event.preventDefault();
 		const { value } = event.target;
 		this.setState({ filterValue: value });
-		console.log(this.props.error);
 	}
 	render() {
 		document.title = 'Barefoot || accommodations';

@@ -82,7 +82,6 @@ class TripRequest extends React.Component {
 
 	render() {
 		const { error, values } = this.state;
-		console.log('ggxgxgsdgds', this.depart);
 		document.title = 'Barefoot || new request';
 		return (
 			<div>

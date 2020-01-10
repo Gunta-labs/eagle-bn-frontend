@@ -232,3 +232,22 @@
 .chat-acc {
   cursor: pointer;
 }
+
+.comment_transition{
+  background-color: white;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 4s;
+}
+
+@-webkit-keyframes example {
+  from {background-color: #fee0a5;}
+  to {background-color: white;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  from {background-color: #fee0a5;}
+  to {background-color: white;}
+}

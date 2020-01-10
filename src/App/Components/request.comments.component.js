@@ -191,9 +191,14 @@ export class RequestComment extends Component {
 								</span>
 							) : (
 								<>
-									<p className='pl-2'>{e.comment}</p>
+									<p className='pl-2' id={e.id}>
+										{e.comment}
+									</p>
 									<small className='float-right'>
-										{timeAgo.format(new Date(e.createdAt), 'ago')}
+										{`${e.createdAt !== e.updatedAt ? 'edited' : ''}  ${timeAgo.format(
+											new Date(e.createdAt),
+											'ago',
+										)}`}
 									</small>
 								</>
 							)}
@@ -253,6 +258,9 @@ export class RequestComment extends Component {
 			!pending_comment &&
 			!comment_error &&
 			comments.map((e, i) => {
+				const replyId =
+					e.replies.length !== 0 ? e.replies[0].parent : Math.floor(Math.random() * 10000);
+
 				return (
 					<React.Fragment key={i}>
 						<div className='col-12 shadow-sm border'>
@@ -282,9 +290,12 @@ export class RequestComment extends Component {
 										</span>
 									) : (
 										<>
-											<p>{e.comment}</p>
+											<p id={e.id}>{e.comment}</p>
 											<small className='float-right'>
-												{timeAgo.format(new Date(e.createdAt), 'ago')}
+												{`${e.createdAt !== e.updatedAt ? 'edited' : ''}  ${timeAgo.format(
+													new Date(e.createdAt),
+													'ago',
+												)}`}
 											</small>
 										</>
 									)}
@@ -313,7 +324,7 @@ export class RequestComment extends Component {
 
 									<span
 										onClick={e => {
-											e.target.id = i;
+											e.target.id = replyId;
 											this.handleHide(e);
 										}}
 										id='reply-btn'
@@ -344,7 +355,7 @@ export class RequestComment extends Component {
 								</div>
 								<div
 									className='list-group-item replies'
-									id={`reply-${i}`}
+									id={`reply-${replyId}`}
 									style={{ display: 'none' }}
 								>
 									<p className='font-weight-normal text-primary'>Reply</p>

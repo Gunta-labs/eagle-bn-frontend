@@ -20,7 +20,7 @@ describe('Header', () => {
 				role: 'requester',
 			});
 		const store = helper.mockStore(data.mockData.successState);
-		const wrapper = helper.mountNewWrapper(store, <Notification />);
+		const wrapper = helper.mountNewWrapper(store, <Notification closeNotification={jest.fn()} />);
 		expect(wrapper.find('#singleNot')).toExist();
 		wrapper
 			.find('#singleNot')

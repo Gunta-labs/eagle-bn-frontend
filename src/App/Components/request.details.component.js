@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarker, faClock, faEdit, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faClock, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import getStatus from '../../helper/status.helper';
 import dateHelper from '../../helper/date.helper';
 import TimeAgo from 'javascript-time-ago';
@@ -84,9 +84,6 @@ export default function RequestDetails({ data }) {
 					</div>{' '}
 				</div>
 				<div className='list-group-item'>{trips}</div>
-			</div>
-			<div className='card-footer bg-white'>
-				<div className='d-flex justify-content-between ml-1 mr-1 mt-0'></div>
 			</div>
 		</>
 	);
