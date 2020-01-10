@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import FacebookLogin from 'react-facebook-login';
 import { facebookLoginAction } from '../../Redux/Actions/facebookLoginAction';
 import faceIcon from '../../Assets/images/icon_facebook.svg';
+import checkToken from '../../helper/helper';
 
 export class LoginFacebook extends React.Component {
 	facebookLog = ({ response, provider }) => {
@@ -14,7 +15,7 @@ export class LoginFacebook extends React.Component {
 		facebook(accessToken);
 	};
 	render() {
-		const { isLoggedIn } = this.props;
+		if (checkToken()) window.location = '/';
 		const logFacebook = (
 			<div>
 				<React.Fragment>
@@ -28,7 +29,7 @@ export class LoginFacebook extends React.Component {
 				</React.Fragment>
 			</div>
 		);
-		const display = !isLoggedIn ? logFacebook : <Redirect to='/dashboard'></Redirect>;
+		const display = logFacebook;
 		return display;
 	}
 }

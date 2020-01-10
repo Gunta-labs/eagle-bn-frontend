@@ -6,20 +6,9 @@ import QueryString from 'querystring';
 import authentication, { socialLog } from '../../Redux/Actions/login.actions';
 import Header from '../Components/Header';
 import SocialLogin from '../Components/social.login';
+import { Redirect } from 'react-router-dom';
 
 export class Login extends React.Component {
-	constructor(props) {
-		super(props);
-		const { location } = this.props;
-		if (location) {
-			const values = QueryString.parse(location.search);
-			values.token = values['?token'];
-			if (values.token) {
-				localStorage.setItem('barefoot_token', values.token);
-				this.props.socialLog();
-			}
-		}
-	}
 	state = {
 		email: '',
 		password: '',
@@ -47,6 +36,19 @@ export class Login extends React.Component {
 		document.title = 'Barefoot || login';
 		const { password, email } = this.state;
 		const { error, isLoggedIn, logPending } = this.props.user;
+		const { location } = this.props;
+		let socialLogged = false;
+		let token = '';
+		if (location) {
+			const values = QueryString.parse(location.search);
+			values.token = values['?token'];
+			if (values.token) {
+				localStorage.setItem('barefoot_token', values.token);
+				token = values.token;
+				//this.props.socialLog();
+				socialLogged = true;
+			}
+		}
 		const loginDisplay = (
 			<div className='d-flex auth-bg'>
 				<Header />
@@ -55,7 +57,7 @@ export class Login extends React.Component {
 						<div className='col-md-6 col-lg-6 text-center bg-sm-white rounded'>
 							<h3 className='text-center mb-4'> Login </h3>
 							{error && <span className=' d-block alert alert-danger'>{error}</span>}
-							<SocialLogin />
+							<SocialLogin socialLogged={socialLogged} token={token} />
 							<hr />
 							<form onSubmit={this.handleSubmit}>
 								<div className='form-label-group mt-4'>
@@ -101,7 +103,7 @@ export class Login extends React.Component {
 				</div>
 			</div>
 		);
-		const display = !isLoggedIn ? loginDisplay : (window.location = '/dashboard');
+		const display = !isLoggedIn && !socialLogged ? loginDisplay : <Redirect to='/'></Redirect>;
 		return display;
 	}
 }

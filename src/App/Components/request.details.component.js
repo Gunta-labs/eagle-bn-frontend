@@ -11,12 +11,13 @@ import getStatus from '../../helper/status.helper';
 import dateHelper from '../../helper/date.helper';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { Link } from 'react-router-dom';
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export default function RequestDetails({ data }) {
-	const { returnTime, country, city, status, timeZone } = data;
+	const { returnTime, country, city, status, id } = data;
 	const trips = data.Trips.map((e, i) => {
 		return (
 			<React.Fragment key={i}>
@@ -69,15 +70,6 @@ export default function RequestDetails({ data }) {
 								id='origin'
 							>{`${country}, ${city}`}</label>
 						</p>
-						<p className='mb-0 mt-0'>
-							<label className='text-primary font-weight-bold label small-margin-top'>
-								Timezone :
-							</label>
-							<label
-								className='text-secondary ml-2 small-margin-top'
-								id='origin'
-							>{`${timeZone}`}</label>
-						</p>
 						<label
 							className={`btn ${getStatus(status)} font-weight-bold  pt-0 text-white`}
 							id='status'
@@ -102,11 +94,13 @@ export default function RequestDetails({ data }) {
 			</div>
 			<div className='card-footer bg-white'>
 				<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
-					<FontAwesomeIcon
-						icon={faEdit}
-						className='text-primary'
-						style={{ height: '25px', width: '25px' }}
-					/>
+					<Link to={`/requests/${id}/edit`}>
+						<FontAwesomeIcon
+							icon={faEdit}
+							className='text-primary'
+							style={{ height: '25px', width: '25px' }}
+						/>
+					</Link>
 					<FontAwesomeIcon
 						icon={faTrash}
 						className='text-danger'

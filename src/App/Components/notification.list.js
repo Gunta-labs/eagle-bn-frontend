@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 import { token } from '../../helper/helper';
 import dateHelper from '../../helper/date.helper';
-import { Link } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
 export class Notification extends React.Component {
@@ -30,8 +29,12 @@ export class Notification extends React.Component {
 				return 'New notification';
 		}
 	}
-	SetAsRead(notificationId) {
-		this.props.markOne(token, notificationId);
+	SetAsRead(notificationId, link, isread) {
+		if (!isread) {
+			this.props.markOne(token, notificationId, link);
+		} else {
+			window.location = link;
+		}
 	}
 	SetAllAsRead() {
 		this.props.markAll(token);
@@ -40,14 +43,24 @@ export class Notification extends React.Component {
 		if (data) {
 			return data.map((notification, i) => {
 				return (
-					<Link to={`/requests/${notification.modelId}`}>
+					<div style={{ cursor: 'pointer' }}>
 						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>
 							<span>Mark as read</span>
 						</ReactTooltip>
 						<ReactTooltip place='top' type='dark' effect='float' id='markAll'>
 							<span>Mark all as read</span>
 						</ReactTooltip>
-						<div className={`pl-2 border-bottom ${!notification.isRead ? 'bg-active' : ''}`}>
+						<div
+							className={`pl-2 border-bottom ${!notification.isRead ? 'bg-active' : ''}`}
+							onClick={e =>
+								this.SetAsRead(
+									notification.id,
+									`/requests/${notification.modelId}`,
+									notification.isRead,
+									e,
+								)
+							}
+						>
 							<div className='d-flex justify-content-between pt-2 pl-2 pr-2'>
 								<h6 className='text-dark '>
 									<span className='text-black-50 mr-2'>
@@ -61,8 +74,7 @@ export class Notification extends React.Component {
 										notification.isRead ? 'text-black-50' : 'text-primary'
 									} markOneAsRead`}
 									data-tip
-									data-for='markOne'
-									onClick={e => this.SetAsRead(notification.id, e)}
+									data-for={`${notification.isRead ? '' : 'markOne'}`}
 								>
 									<FontAwesomeIcon icon={faCheck} size='sm' />
 								</span>
@@ -82,7 +94,7 @@ export class Notification extends React.Component {
 								</label>
 							</div>
 						</div>
-					</Link>
+					</div>
 				);
 			});
 		}
@@ -124,7 +136,8 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => {
 	return {
 		getAll: async token => dispatch(await getNotifications(token)),
-		markOne: async (token, notificationId) => dispatch(await markAsRead(token, notificationId)),
+		markOne: async (token, notificationId, link) =>
+			dispatch(await markAsRead(token, notificationId, link)),
 		markAll: async token => dispatch(await markAllAsRead(token)),
 	};
 };

@@ -19,10 +19,11 @@ export const getNotifications = async token => {
 		};
 	}
 };
-export const markAsRead = async (token, notificationId) => {
+export const markAsRead = async (token, notificationId, link) => {
 	try {
 		const result = await apis.markNotificationAsRead(notificationId, token);
 		result.id = notificationId;
+		window.location = link;
 		return {
 			type: constants.MARK_NOTIFICATION_SUCCESS,
 			payload: result,
