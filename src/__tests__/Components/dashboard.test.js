@@ -2,6 +2,7 @@ import React from 'react';
 import { UserProfile, mapDispatchToProps } from '../../App/Pages/dashboard';
 import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import jwt from 'jsonwebtoken';
 
 configure({ adapter: new Adapter() });
 
@@ -11,7 +12,9 @@ const renderDashboard = args => {
 };
 
 describe('should test dashboard component', () => {
+	afterEach(() => jest.resetAllMocks());
 	it('Should render', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		const initialProps = {
 			user: {
 				isLoggedIn: true,
@@ -31,6 +34,7 @@ describe('should test dashboard component', () => {
 	});
 
 	it('Should successfully submit a login form', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		const initialProps = {
 			state: {
 				isReadOnly: false,
@@ -54,6 +58,7 @@ describe('should test dashboard component', () => {
 		expect(isReadOnly).toBe(false);
 	});
 	it('Should successfully edit form', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		const initialProps = {
 			state: {
 				isReadOnly: false,
@@ -77,6 +82,7 @@ describe('should test dashboard component', () => {
 		expect(isReadOnly).toBe(true);
 	});
 	it('Should return error submit edit form', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		const initialProps = {
 			state: {
 				isReadOnly: false,
@@ -107,6 +113,7 @@ describe('should test dashboard component', () => {
 		expect(p).toHaveLength(0);
 	});
 	it('should map the state to props', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		mapDispatchToProps(jest.fn()).initialize({
 			type: '',
 			status: 'Account profile',
@@ -121,6 +128,7 @@ describe('should test dashboard component', () => {
 		});
 	});
 	it('simulate update action', () => {
+		jest.spyOn(jwt, 'decode').mockReturnValue({ role: 'requester' });
 		const initialProps = {
 			preventDefault: jest.fn(),
 			state: {

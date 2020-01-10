@@ -27,16 +27,19 @@ export default function RequestDetails({ data }) {
 						<label className='text-secondary font-weight-bold label'>
 							Destination {`${i + 1}`} :
 						</label>
-						<label className='text-secondary ml-2' id='destination'>{`Nairobi, Kenya`}</label>
+						<label
+							className='text-secondary ml-2'
+							id='destination'
+						>{`${e.city}, ${e.country}`}</label>
 					</p>
 					<p className='mb-0'>
 						<FontAwesomeIcon icon={faClock} className='mr-2 text-secondary' />
 						<label className='text-secondary font-weight-bold' style={{ fontSize: '.8em' }}>
 							Departure Time :
 						</label>
-						<label className='text-secondary ml-2'>{`${dateHelper(
-							new Date(e.departureTime) || undefined,
-						)}`}</label>
+						<label className='text-secondary ml-2'>
+							{timeAgo.format(new Date(e.departureTime), 'ago')}
+						</label>
 					</p>
 				</div>{' '}
 				<div className='d-flex justify-content-between ml-1 mr-1 mt-0'>
@@ -54,7 +57,7 @@ export default function RequestDetails({ data }) {
 	});
 	return (
 		<>
-			<div className='list-group list-group-flush'>
+			<div className='card-body overflow-auto'>
 				<div className='list-group-item'>
 					<div className='d-flex justify-content-between ml-1 mr-1 mt-2 pt-3 pb-3'>
 						<p className='mb-0 mt-0'>

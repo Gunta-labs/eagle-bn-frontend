@@ -41,7 +41,7 @@ export class Notification extends React.Component {
 	}
 	getNotificationsDetail(data) {
 		if (data) {
-			return data.map(notification => {
+			return data.map((notification, i) => {
 				return (
 					<div style={{ cursor: 'pointer' }}>
 						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>

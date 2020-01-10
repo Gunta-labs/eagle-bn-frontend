@@ -23,9 +23,10 @@ import getOneAcc from './singleAccomodation.reducer';
 import Booking from './bookings.list.reducer';
 import DeleteAccommodations from './deleteAccommodation.reducer';
 import getComment from './get.request.comment.reducer';
-import { replyComment, sendComment } from './ comment.reducer';
 import ChatReducer from './chat.reducer';
 import UpdateRequest from './update.trip.reducer';
+import getStats from './stats.reducer';
+import { replyComment, sendComment, trashComment, editComment } from './ comment.reducer';
 
 const allReducers = combineReducers({
 	ResetPasswordReducer,
@@ -57,6 +58,9 @@ const allReducers = combineReducers({
 	sendComment,
 	ChatReducer,
 	UpdateRequest,
+	getStats,
+	trashComment,
+	editComment,
 });
 
 export default allReducers;

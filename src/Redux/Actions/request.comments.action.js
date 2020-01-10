@@ -60,3 +60,39 @@ export const sendComment = async (requestId, payload) => {
 		};
 	}
 };
+
+export const trashComment = async (requestId, commentId) => {
+	try {
+		let token = localStorage.getItem('barefoot_token');
+		let result = await apis.trashComment(requestId, commentId, token);
+		const { data } = result.data;
+		return {
+			type: constants.TRASH_REQUEST_COMMENT_SUCCESS,
+			payload: data,
+		};
+	} catch (error) {
+		let message = error.response ? error.response.data.msg : 'No internet access';
+		return {
+			type: constants.TRASH_REQUEST_COMMENT_ERROR,
+			payload: message,
+		};
+	}
+};
+
+export const editComment = async (requestId, commentId, payload) => {
+	try {
+		let token = localStorage.getItem('barefoot_token');
+		let result = await apis.editComment(requestId, commentId, payload, token);
+		const { data } = result.data;
+		return {
+			type: constants.EDIT_REQUEST_COMMENT_SUCCESS,
+			payload: data,
+		};
+	} catch (error) {
+		let message = error.response ? error.response.data.msg : 'No internet access';
+		return {
+			type: constants.EDIT_REQUEST_COMMENT_ERROR,
+			payload: message,
+		};
+	}
+};

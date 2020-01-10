@@ -15,9 +15,11 @@ export class UpdateRequest extends React.Component {
 		super(props);
 		this.state = {
 			Trips: [],
+			countries: {},
 		};
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.handleTripChange = this.handleTripChange.bind(this);
+		this.getCities = this.getCities.bind(this);
 	}
 
 	async componentDidMount() {
@@ -26,12 +28,22 @@ export class UpdateRequest extends React.Component {
 		this.setState(request.payload);
 	}
 
-	onInput(event) {
+	onInput(event, index) {
 		event.preventDefault();
-		this.setState({ country: event.target.value });
+		const { countries, Trips } = this.state;
+		countries[event.target.name] = event.target.value;
+		this.setState({ countries });
+		if (index === null) this.setState({ city: '' });
+		else {
+			Trips[index].city = '';
+			this.setState({ Trips });
+		}
 	}
 
 	handleInputChange(event) {
+		if (event.target.name === 'city') {
+			this.city = event.target.value;
+		}
 		const target = event.target;
 		const value = target.value;
 		const name = target.name;
@@ -59,6 +71,12 @@ export class UpdateRequest extends React.Component {
 		};
 		this.props.update(data, token, reqId);
 	};
+	getCities(name) {
+		const cities = locations.getCountryCities(this.state.countries[name]);
+		return cities.map(element => {
+			return <option value={element.name}></option>;
+		});
+	}
 	render() {
 		const { Trips } = this.state;
 		const countryList = locations.getAllCountry().map(element => {
@@ -68,11 +86,7 @@ export class UpdateRequest extends React.Component {
 				</option>
 			);
 		});
-		const cities = locations.getCountryCities(this.state.country);
-		const citiesList = cities.map(element => {
-			return <option value={element.name}></option>;
-		});
-		console.log(this.state);
+
 		return (
 			<div>
 				<Header showSideNav={true} active_menu={2} />
@@ -109,7 +123,7 @@ export class UpdateRequest extends React.Component {
 										placeholder='Origin country'
 										aria-label='Origin country'
 										name='country'
-										onInput={e => this.onInput(e)}
+										onInput={e => this.onInput(e, null)}
 										onChange={this.handleInputChange}
 										value={this.state.country}
 									></input>
@@ -132,7 +146,7 @@ export class UpdateRequest extends React.Component {
 										onChange={this.handleInputChange}
 										value={this.state.city}
 									></input>
-									<datalist id='cityData'>{citiesList}</datalist>
+									<datalist id='cityData'>{this.getCities('country')}</datalist>
 								</div>
 							</div>
 							<div className='col'>
@@ -174,31 +188,32 @@ export class UpdateRequest extends React.Component {
 												<div class='input-group mb-3'>
 													<span className='input-group-text text-secondary bg-white label-input'>
 														<FontAwesomeIcon icon={faGlobe} className='mr-3' />
-														Origin country
+														Destination country
 													</span>
 													<input
-														list='countryData'
+														list={`countryData-${i}`}
 														type='text'
 														className='form-control country-trip'
 														placeholder='Destination country'
 														aria-label='Destination country'
-														onInput={e => this.onInput(e)}
+														onInput={e => this.onInput(e, i)}
 														name={`country-${i}`}
 														value={e.country}
 														onChange={this.handleTripChange}
 														required
 													/>
-													<datalist id='countryData'>{countryList}</datalist>
+													<datalist id={`countryData-${i}`}>{countryList}</datalist>
 												</div>
 												<div class='input-group mb-3'>
 													<div className='input-group-prepend'>
 														<span className='input-group-text text-secondary bg-white label-input'>
 															<FontAwesomeIcon icon={faMapMarker} className='mr-3' />
-															Origin city
+															Destination city
 														</span>
 													</div>
 													<input
 														type='text'
+														list={`cityData-${i}`}
 														class='form-control'
 														placeholder='Destination city'
 														aria-label='Destination city'
@@ -207,6 +222,9 @@ export class UpdateRequest extends React.Component {
 														onChange={this.handleTripChange}
 														required
 													/>
+													<datalist id={`cityData-${i}`}>
+														{this.getCities(`country-${i}`).filter(e => e.key !== this.props.city)}
+													</datalist>
 												</div>
 												<div class='input-group'>
 													<div className='input-group-prepend'>

@@ -25,6 +25,10 @@ class TripRequest extends React.Component {
 		this.setState(prevState => ({ numberOfTrips: prevState.numberOfTrips + 1 }));
 	}
 	handleValueChange(event) {
+		this.depart = event.target.id.match('departureTime') ? event.target.value : '';
+		if (event.target.name === 'city') {
+			this.city = event.target.value;
+		}
 		const { values } = this.state;
 		const temp = { ...values };
 		temp[`${event.target.id}`] = event.target.value;
@@ -40,6 +44,7 @@ class TripRequest extends React.Component {
 					handleInput={this.handleValueChange}
 					values={values}
 					deleteTrip={this.deleteTrip}
+					city={this.city}
 				/>,
 			);
 		}
@@ -58,6 +63,7 @@ class TripRequest extends React.Component {
 	}
 
 	handleSubmit(event) {
+		this.depart = event.target.id.match('departureTime') ? event.target.value : '';
 		event.preventDefault();
 		const data = formData(this.state.values);
 		const dateError = this.checkDates(this.state.values, this.state.numberOfTrips);
@@ -66,6 +72,7 @@ class TripRequest extends React.Component {
 			this.props.sendTripRequest(data);
 		} else this.setState({ error: dateError });
 	}
+
 	render() {
 		const { error, values } = this.state;
 		document.title = 'Barefoot || new request';
@@ -77,7 +84,7 @@ class TripRequest extends React.Component {
 					<div className={this.props.messageClass}> {this.props.message} </div> <br />
 					{error && <div className='alert alert-danger'> {this.state.error} </div>}
 					<form onSubmit={this.handleSubmit}>
-						<RequestForm handleInput={this.handleValueChange} values={values} />
+						<RequestForm handleInput={this.handleValueChange} values={values} dep={this.depart} />
 						{this.showDestinationsForm()}
 						<br></br>
 

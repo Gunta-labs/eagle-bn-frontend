@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCalendar, faMapMarker, faGlobe, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import locations from '../../helper/country.helper';
 export default class DestinationForm extends React.Component {
@@ -65,9 +65,12 @@ export default class DestinationForm extends React.Component {
 								id={`city-${this.props.id}`}
 								onChange={this.props.handleInput}
 								value={this.props.values[`city-${this.props.id}`] || ''}
+								autocomplete='off'
 								required
 							></input>
-							<datalist id={`cityData-${this.props.id}`}>{citiesList}</datalist>
+							<datalist id={`cityData-${this.props.id}`}>
+								{citiesList.filter(e => e.key !== this.props.city)}
+							</datalist>
 						</div>
 						<div className='input-group'>
 							<div className='input-group-prepend'>
@@ -78,6 +81,7 @@ export default class DestinationForm extends React.Component {
 							</div>
 							<input
 								type='date'
+								min={new Date().toISOString().split('T')[0]}
 								className='form-control'
 								placeholder='Departure time'
 								aria-label='Departure time'

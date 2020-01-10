@@ -29,8 +29,13 @@ export class SingleRequest extends Component {
 				<div className=' request row col-sm-12 col-md-8 col-lg-9 mt-3 '>
 					{!pending && data !== null && (
 						<React.Fragment>
-							<div className='col-md-6 card mt-3 mb-3'>{<RequestDetails data={data} />}</div>
-							<div className='col-md-6 mt-3 mb-3 card'>
+							<div
+								className='col-md-6 card mt-3 mb-3 p-1 overflow-hidden'
+								style={{ height: '40rem' }}
+							>
+								{<RequestDetails data={data} />}
+							</div>
+							<div className='col-md-6 mt-3 px-0'>
 								<RequestComment props={this.props} />
 							</div>
 						</React.Fragment>

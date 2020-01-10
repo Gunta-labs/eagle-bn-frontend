@@ -78,7 +78,7 @@ export class RequestList extends React.Component {
 	};
 	displayRequests(data, page) {
 		const start = (page - 1) * 6;
-		return data.slice(start, page * 6).map(req => <Request request={req} />);
+		return data.slice(start, page * 6).map((req, i) => <Request key={i} request={req} />);
 	}
 	setPage(current, data) {
 		this.setState({ currentPage: current });
@@ -89,10 +89,11 @@ export class RequestList extends React.Component {
 		const pages = Array(Npage)
 			.fill()
 			.map((x, i) => i);
-		return pages.map(p => (
+		return pages.map((p, i) => (
 			<li
 				className={`page-item ${this.state.currentPage - 1 === p ? 'active' : ''}`}
 				onClick={e => this.setPage(p + 1, data, e)}
+				key={i}
 			>
 				<p className='page-link'>{p + 1}</p>
 			</li>

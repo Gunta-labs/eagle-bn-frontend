@@ -156,8 +156,22 @@ const apis = {
 			},
 		});
 	},
+	getStats(token) {
+		return axios.get(`${BASE_URL}requests/stats`, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
 	postChat(data, token) {
 		return axios.post(`${BASE_URL}chats`, data, {
+			headers: {
+				Authorization: token,
+			},
+		});
+	},
+	trashComment(requestId, commentId, token) {
+		return axios.delete(`${BASE_URL}requests/${requestId}/comments/${commentId}`, {
 			headers: {
 				Authorization: token,
 			},
@@ -166,6 +180,13 @@ const apis = {
 	updateRequest(data, token, reqId) {
 		return axios.put(`${BASE_URL}requests/${reqId}`, data, {
 			headers: { Authorization: token },
+		});
+	},
+	editComment(requestId, commentId, data, token) {
+		return axios.put(`${BASE_URL}requests/${requestId}/comments/${commentId}`, data, {
+			headers: {
+				Authorization: token,
+			},
 		});
 	},
 };
