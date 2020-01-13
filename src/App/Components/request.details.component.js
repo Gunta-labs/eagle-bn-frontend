@@ -1,12 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-	faMapMarker,
-	faClock,
-	faEdit,
-	faTrash,
-	faQuestion,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faClock, faEdit, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import getStatus from '../../helper/status.helper';
 import dateHelper from '../../helper/date.helper';
 import TimeAgo from 'javascript-time-ago';
@@ -101,11 +95,6 @@ export default function RequestDetails({ data }) {
 							style={{ height: '25px', width: '25px' }}
 						/>
 					</Link>
-					<FontAwesomeIcon
-						icon={faTrash}
-						className='text-danger'
-						style={{ height: '25px', width: '25px' }}
-					/>
 				</div>
 			</div>
 		</>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faHeart as faHeartO, faBookmark } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartO } from '@fortawesome/free-regular-svg-icons';
 import Apis from '../../Api';
 import checkToken, { token } from '../../helper/helper';
 import { toast } from 'react-toastify';
@@ -84,9 +84,6 @@ class LikeAndBookMark extends React.Component {
 						className={`ml-3 mr-1 ${likeStatus === '1' && 'text-danger'}`}
 					/>
 					{getLikeStatus === '0' ? '' : getLikeStatus}
-				</span>
-				<span className='my-2 mx-3 like-card'>
-					<FontAwesomeIcon icon={faBookmark} className='text-dark' />
 				</span>
 			</div>
 		);
