@@ -1,7 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import FacebookLogin from 'react-facebook-login';
 import { facebookLoginAction } from '../../Redux/Actions/facebookLoginAction';

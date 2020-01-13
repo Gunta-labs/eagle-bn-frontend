@@ -10,7 +10,7 @@ export const chats = {
 	public: [
 		{
 			id: 1,
-			message: 'hello',
+			message: '@hello',
 			createdAt: new Date(),
 			author: { fullname: 'eric' },
 			authorId: 1,

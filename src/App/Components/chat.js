@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	faComment,
-	faUserAlt,
-	faSearch,
-	faUsers,
-	faHotel,
-} from '@fortawesome/free-solid-svg-icons';
+import { faComment, faUserAlt, faSearch, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import mapDispatchToProps from '../../Redux/Actions/chat.action';
 import PropTypes from 'prop-types';
@@ -31,13 +25,12 @@ class Chat extends React.Component {
 	}
 	async handleSubmit(event) {
 		event.preventDefault();
-		const { accommodation } = this.state;
+		const { accommodation } = this.props;
 		const { sendMessage, activeChat } = this.props;
 		const message = document.getElementsByClassName('input-message')[0].value;
-		const AccommodationId =
-			this.props.accommodation && accommodation
-				? window.location.pathname.replace('/accommodations/', '')
-				: null;
+		const AccommodationId = accommodation
+			? window.location.pathname.replace('/accommodations/', '')
+			: null;
 		if (message) {
 			return await sendMessage({
 				message,
@@ -129,7 +122,6 @@ class Chat extends React.Component {
 			));
 	}
 	showUser(user) {
-		const { accommodation } = this.state;
 		return (
 			<table>
 				<thead>
@@ -155,19 +147,6 @@ class Chat extends React.Component {
 								<small className='text-secondary'> {user.email || 'all@barefoot.com'} </small>
 							</div>
 						</td>
-						{this.props.accommodation && (
-							<td>
-								<FontAwesomeIcon
-									icon={faHotel}
-									className={`${accommodation ? 'text-primary' : 'text-secondary'} chat-acc`}
-									title='enable/disable accommodation chat'
-									onClick={e => {
-										e.preventDefault();
-										this.setState({ accommodation: !accommodation });
-									}}
-								/>
-							</td>
-						)}
 					</tr>
 				</thead>
 			</table>
@@ -189,6 +168,7 @@ class Chat extends React.Component {
 			setError,
 			sendChatStatus,
 			users,
+			accommodation,
 		} = this.props;
 		if (error !== '') {
 			toast.error(error);
@@ -243,6 +223,13 @@ class Chat extends React.Component {
 							<div className='input-group'>
 								<input
 									className='form-control input-message'
+									placeholder={
+										accommodation
+											? "you're chatting on an accommodation"
+											: activeChat === -1
+											? 'mention groups e.g: @here, @host...'
+											: 'private chat'
+									}
 									onKeyUp={e => {
 										if (e.keyCode === 13) {
 											this.handleSubmit(e);
@@ -279,6 +266,7 @@ Chat.propTypes = {
 	getMessage: PropTypes.bool,
 	user: PropTypes.object,
 	accommodation: PropTypes.bool,
+	reRender: PropTypes.bool,
 };
 
 const mapStateToProps = ({ ChatReducer, SingleAccomodations }) => ({
@@ -293,6 +281,7 @@ const mapStateToProps = ({ ChatReducer, SingleAccomodations }) => ({
 	user: ChatReducer.user,
 	newMessage: ChatReducer.newMessage,
 	accommodation: SingleAccomodations.accommodation,
+	reRender: ChatReducer.reRender,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

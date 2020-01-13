@@ -139,7 +139,7 @@
 }
 .reciever {
   padding: 1vw;
-  margin: 1vw 50% 1vw 1vw;
+  margin: 1vw 30% 1vw 1vw;
   background-color: #3361FF;
   border-radius: .4em;
   color: white;
@@ -148,7 +148,7 @@
 .author {
   position: relative;
   padding: 1vw;
-  margin: 1vw 1vw 1vw 50%;
+  margin: 1vw 1vw 1vw 30%;
   background-color: #ECF0F1;
   border-radius: .4em;
 }
@@ -189,7 +189,7 @@
   height: auto;
   width: inherit !important;
 }
-.chat-model-m {
+.chat-model-m { 
   height: 30rem;
   width: inherit !important;
   overflow: scroll;
@@ -204,7 +204,7 @@
   margin-left: 100px !important;
 }
 .chat-model-all {
-  width: 30rem;
+  width: 25rem;
   position: fixed;
   bottom: 2.5rem;
   right: 2.5rem;

@@ -10,6 +10,17 @@ const initialState = {
 	search: '',
 	getMessage: true,
 	user: {},
+	reRender: false,
+};
+
+const chats = (all, payload) => {
+	const key = Object.keys(payload)[0];
+	if (Array.isArray(all[key])) {
+		all[key].push(payload[key][0]);
+		return all;
+	}
+	all[key] = payload[key];
+	return all;
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -38,9 +49,14 @@ export default (state = initialState, { type, payload }) => {
 				search: '',
 			};
 		case constants.CHAT_NEW_MESSAGE:
-			return { ...state, getMessage: true };
+			return { ...state, chats: chats(state.chats, payload), reRender: !state.reRender };
 		case constants.CHAT_SEND_SUCESS:
-			return { ...state, getMessage: true };
+			return {
+				...state,
+				chats: chats(state.chats, payload),
+				sendChatStatus: 'not_started',
+				reRender: !state.reRender,
+			};
 		case constants.CHAT_SEND_PENDING:
 			return { ...state, sendChatStatus: 'pending' };
 		default:
