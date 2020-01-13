@@ -52,16 +52,18 @@ export class singleAccomodations extends Component {
 			feedback && feedback.feedbackList
 				? feedback.feedbackList.map((e, i) => {
 						return (
-							<div className='d-flex' key={i}>
-								{' '}
-								<div className='w-15'>
-									<img src={e.avatar} className='img-feedback border border-black' alt=' No' />
-									<p className='m-auto pl-2'>{e.author}</p>{' '}
-								</div>{' '}
-								<div className='w-85'>
-									{' '}
-									<p className='border border-dark rounded mt-2 ml-2'>{e.feedback}</p>{' '}
-								</div>{' '}
+							<div class='media bg-white my-3 shadow-sm p-2 rounded'>
+								<img
+									class='mr-3 rounded-circle'
+									src={e.avatar}
+									alt={e.author}
+									height='50'
+									width='50'
+								/>
+								<div class='media-body'>
+									<h5 class='mt-0 font-weight-bold'>{e.author}</h5>
+									<div className='d-flex flex-colum'>{e.feedback}</div>
+								</div>
 							</div>
 						);
 				  })
@@ -192,7 +194,7 @@ export class singleAccomodations extends Component {
 								<p className='ml-md-2'>{`${feedback_error} and no feedback for this accomodations`}</p>
 							)}
 							{feedback_error === null && (
-								<div className='col-sm-6'>{this.display_feed(feedback)}</div>
+								<div className='col-sm-12'>{this.display_feed(feedback)}</div>
 							)}
 						</div>
 					</div>
