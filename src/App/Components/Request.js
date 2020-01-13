@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarker, faClock, faEye, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import dateHelper from '../../helper/date.helper';
 import { Link } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip';
+
 const getStatus = status => {
 	let statusClass = '';
 	if (status === 'pending') statusClass = 'btn-warning';
@@ -97,8 +99,11 @@ function Request(props) {
 								{' '}
 								<FontAwesomeIcon icon={faEye} className='text-primary' />
 							</Link>
-							<Link to={`requests/${request.id}/edit`}>
-								<FontAwesomeIcon icon={faEdit} className='text-primary' />
+							<Link to={request.status === 'pending' ? `requests/${request.id}/edit` : '#'}>
+								<FontAwesomeIcon
+									icon={faEdit}
+									className={request.status === 'pending' ? 'text-primary' : 'text-muted'}
+								/>
 							</Link>
 							<FontAwesomeIcon icon={faTrash} className='text-danger' />
 						</div>
