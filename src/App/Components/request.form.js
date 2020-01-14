@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCalendar, faMapMarker, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarker, faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import locations from '../../helper/country.helper';
 
@@ -65,26 +65,6 @@ export default class RequestForm extends React.Component {
 							required
 						></input>
 						<datalist id='cityData'>{citiesList}</datalist>
-					</div>
-				</div>
-				<div className='col'>
-					<div className='input-group mb-3'>
-						<div className='input-group-prepend'>
-							<span className='input-group-text text-secondary bg-white label-input'>
-								<FontAwesomeIcon icon={faCalendar} className='mr-3' />
-								Return date
-							</span>
-						</div>
-						<input
-							type='date'
-							min={this.props.dep || new Date().toISOString().split('T')[0]}
-							className='form-control'
-							placeholder='Return time'
-							aria-label='Return time'
-							id='returnTime'
-							title='Return Time(optional)'
-							onChange={this.props.handleInput}
-						></input>
 					</div>
 				</div>
 			</div>
