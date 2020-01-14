@@ -38,9 +38,9 @@ export default dispatch => ({
 	sendMessage: async payload => {
 		try {
 			dispatch({ type: constants.CHAT_SEND_PENDING });
-			await Apis.postChat(payload, token);
+			const res = await Apis.postChat(payload, token);
 			document.getElementsByClassName('input-message')[0].value = '';
-			return dispatch({ type: constants.CHAT_SEND_SUCESS });
+			return dispatch({ type: constants.CHAT_SEND_SUCESS, payload: res.data.data });
 		} catch (err) {
 			const { response } = err;
 			if (response) {
