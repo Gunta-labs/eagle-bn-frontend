@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sendRequestReset } from '../../Redux/Actions/reset.password.action';
+import Header from '../Components/Header';
 
 class RequestResetPassword extends Component {
 	constructor(props) {
