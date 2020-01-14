@@ -1,4 +1,5 @@
 import constants from '../constants';
+import user from '../../helper/helper';
 
 const initialState = {
 	users: [],
@@ -14,9 +15,14 @@ const initialState = {
 };
 
 const chats = (all, payload) => {
-	const key = Object.keys(payload)[0];
+	const { fullname, userId } = user();
+	let key = Object.keys(payload)[0];
+	const value = payload[key][0];
+	if (key === `${userId},${fullname}`) {
+		key = `${value.author.id},${value.author.fullname}`;
+	}
 	if (Array.isArray(all[key])) {
-		all[key].push(payload[key][0]);
+		all[key].push(value);
 		return all;
 	}
 	all[key] = payload[key];

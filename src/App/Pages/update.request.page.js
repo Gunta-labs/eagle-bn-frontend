@@ -149,32 +149,6 @@ export class UpdateRequest extends React.Component {
 									<datalist id='cityData'>{this.getCities('country')}</datalist>
 								</div>
 							</div>
-							<div className='col'>
-								<div className='input-group mb-3'>
-									<div className='input-group-prepend'>
-										<span className='input-group-text text-secondary bg-white label-input'>
-											<FontAwesomeIcon icon={faCalendar} className='mr-3' />
-											Return date
-										</span>
-									</div>
-									<input
-										type='date'
-										className='form-control'
-										placeholder='Return time'
-										aria-label='Return time'
-										min={this.depart || new Date().toISOString().split('T')[0]}
-										name='returnTime'
-										title='Return Time(optional)'
-										onChange={this.handleInputChange}
-										value={
-											this.state.returnTime &&
-											(this.state.returnTime.match('T')
-												? this.state.returnTime.split('T')[0]
-												: this.state.returnTime.split(' ')[0])
-										}
-									></input>
-								</div>
-							</div>
 						</div>
 
 						{/* mapp */}
@@ -256,6 +230,32 @@ export class UpdateRequest extends React.Component {
 													value={e.reason}
 													required
 												></textarea>
+											</div>
+										</div>
+										<div className='col pl-0 ml-0'>
+											<div className='input-group mb-3'>
+												<div className='input-group-prepend'>
+													<span className='input-group-text text-secondary bg-white label-input'>
+														<FontAwesomeIcon icon={faCalendar} className='mr-3' />
+														Return date
+													</span>
+												</div>
+												<input
+													type='date'
+													className='form-control'
+													placeholder='Return time'
+													aria-label='Return time'
+													min={this.depart || new Date().toISOString().split('T')[0]}
+													name='returnTime'
+													title='Return Time(optional)'
+													onChange={this.handleInputChange}
+													value={
+														this.state.returnTime &&
+														(this.state.returnTime.match('T')
+															? this.state.returnTime.split('T')[0]
+															: this.state.returnTime.split(' ')[0])
+													}
+												></input>
 											</div>
 										</div>
 									</>

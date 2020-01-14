@@ -6,6 +6,8 @@ import DestinationForm from '../Components/destination.form';
 import RequestForm from '../Components/request.form';
 import sendTripRequest from '../../Redux/Actions/trip.request.action';
 import formData from '../../helper/trip.request.form.data';
+import { faCalendar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class TripRequest extends React.Component {
 	constructor(props) {
@@ -19,6 +21,10 @@ class TripRequest extends React.Component {
 		this.addDestination = this.addDestination.bind(this);
 		this.handleValueChange = this.handleValueChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+	}
+	onInput(event) {
+		event.preventDefault();
+		this.setState({ country: event.target.value });
 	}
 	addDestination(event) {
 		event.preventDefault();
@@ -64,6 +70,7 @@ class TripRequest extends React.Component {
 
 	handleSubmit(event) {
 		this.depart = event.target.id.match('departureTime') ? event.target.value : '';
+
 		event.preventDefault();
 		const data = formData(this.state.values);
 		const dateError = this.checkDates(this.state.values, this.state.numberOfTrips);
@@ -87,7 +94,26 @@ class TripRequest extends React.Component {
 						<RequestForm handleInput={this.handleValueChange} values={values} dep={this.depart} />
 						{this.showDestinationsForm()}
 						<br></br>
-
+						<div className='col pl-0'>
+							<div className='input-group mb-3'>
+								<div className='input-group-prepend'>
+									<span className='input-group-text text-secondary bg-white label-input'>
+										<FontAwesomeIcon icon={faCalendar} className='mr-3' />
+										Return date
+									</span>
+								</div>
+								<input
+									type='date'
+									min={this.depart || new Date().toISOString().split('T')[0]}
+									className='form-control'
+									placeholder='Return time'
+									aria-label='Return time'
+									id='returnTime'
+									title='Return Time(optional)'
+									onChange={this.props.handleInput}
+								></input>
+							</div>
+						</div>
 						<div className='row'>
 							<button
 								className='btn btn-primary col-xs-3 rounded-0 ml-2'

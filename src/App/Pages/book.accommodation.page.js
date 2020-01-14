@@ -21,6 +21,7 @@ export class CreateBooking extends React.Component {
 		this.props.getAccommodation(id);
 	}
 	handleInput = e => {
+		this.start = e.target.id === 'start' ? e.target.value : '';
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
@@ -134,6 +135,8 @@ export class CreateBooking extends React.Component {
 										<input
 											type='date'
 											name='start'
+											id='start'
+											min={new Date().toISOString().split('T')[0]}
 											className='form-control'
 											onChange={this.handleInput}
 											placeholder='Starting date'
@@ -152,6 +155,7 @@ export class CreateBooking extends React.Component {
 										<input
 											type='date'
 											name='end'
+											min={this.start || new Date().toISOString().split('T')[0]}
 											className='form-control'
 											onChange={this.handleInput}
 											placeholder='Ending date'
