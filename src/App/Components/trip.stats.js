@@ -13,8 +13,6 @@ class Statistics extends React.Component {
 
 	render() {
 		const { payload } = this.props;
-		console.log(payload);
-
 		return (
 			<div className='row'>
 				<div class='col-md-3'>
@@ -26,7 +24,7 @@ class Statistics extends React.Component {
 							</span>
 						</div>
 						<div class='flex-fill p2 text-center'>
-							<b class='font-weight-bold'>Last day Trips</b>
+							<b class='font-weight-bold'>All Trips</b>
 							<h1>{payload && payload.data.allTrips}</h1>
 						</div>
 					</div>

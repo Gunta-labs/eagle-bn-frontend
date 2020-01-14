@@ -21,7 +21,7 @@ export class CreateBooking extends React.Component {
 		this.props.getAccommodation(id);
 	}
 	handleInput = e => {
-		this.start = e.target.id.match('start') ? e.target.value : '';
+		this.start = e.target.id === 'start' ? e.target.value : '';
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
