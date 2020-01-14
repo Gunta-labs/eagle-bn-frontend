@@ -12,9 +12,11 @@ import {
 	faMapMarker,
 	faDollarSign,
 	faHotel,
+	faList,
 } from '@fortawesome/free-solid-svg-icons';
 import { getCurrencies, currencies } from '../../helper/currencies';
 import { singleAccomodation } from '../../Redux/Actions/singleAccomodations.action';
+import { Multiselect } from 'multiselect-react-dropdown';
 
 export class UpdateAccommodation extends React.Component {
 	constructor(props) {
@@ -30,6 +32,28 @@ export class UpdateAccommodation extends React.Component {
 			amenities: '',
 			imageNumber: '',
 			currency: '',
+			servicesList: [
+				{ name: 'sauna', id: 1 },
+				{ name: 'theater', id: 2 },
+				{ name: 'printer', id: 3 },
+				{ name: 'room service', id: 4 },
+				{ name: 'photocopy', id: 5 },
+				{ name: 'kids paradize club', id: 6 },
+				{ name: 'swimming pool', id: 7 },
+				{ name: 'fitness', id: 8 },
+				{ name: 'tenis', id: 9 },
+			],
+			amenitiesList: [
+				{ name: 'free wifi', id: 1 },
+				{ name: 'laundry', id: 2 },
+				{ name: 'business center', id: 3 },
+				{ name: 'fax', id: 4 },
+				{ name: 'concierge desk', id: 5 },
+				{ name: 'TV', id: 6 },
+			],
+			selectedServices: [{}],
+			selectedAmenities: [{}],
+			error: null,
 		};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
@@ -58,10 +82,12 @@ export class UpdateAccommodation extends React.Component {
 		this.props.get(id);
 		const accomodation = await singleAccomodation(id);
 		this.setState(accomodation.payload);
+		this.selectOptions();
+		this.onSelect = this.onSelect.bind(this);
+		this.onRemove = this.onRemove.bind(this);
 	}
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.initialize();
 		const { update } = this.props;
 		const form = new FormData();
 		const {
@@ -96,17 +122,61 @@ export class UpdateAccommodation extends React.Component {
 		}
 		const token = localStorage.getItem('barefoot_token');
 		const { id } = this.props.match.params;
-		this.props.initialize();
-		update(form, token, id);
+		if (!services) this.setState({ error: 'Please select at least one service' });
+		else if (!amenities) this.setState({ error: 'Please select at least one amenity' });
+		else {
+			this.setState({ error: null });
+			this.props.initialize();
+			update(form, token, id);
+		}
 	};
-
+	onRemove(listName, removedItem, nameField) {
+		const newItems = this.state[listName].filter(item => item.id !== removedItem.id);
+		let data = '';
+		this.setState({
+			[listName]: newItems,
+		});
+		newItems.forEach(element => {
+			if (element.name) data += element.name + '';
+		});
+		this.setState({ [nameField]: data });
+	}
+	onSelect(listName, selectedItem, nameField) {
+		let data = '';
+		const newList = this.state[listName];
+		if (!newList.find(item => item.id === selectedItem.id)) newList.push(selectedItem);
+		this.setState({
+			[listName]: newList,
+		});
+		newList.forEach(element => {
+			if (element.name) data += element.name + ',';
+		});
+		this.setState({ [nameField]: data });
+	}
+	selectOptions() {
+		const serviceList = this.state.services.split(',');
+		const selectedServices = [];
+		serviceList.forEach(element => {
+			const item = this.state.servicesList.find(e => element.includes(e.name));
+			if (item) selectedServices.push(item);
+		});
+		const amenityList = this.state.amenities.split(',');
+		const selectedAmenities = [];
+		amenityList.forEach(element => {
+			const item = this.state.amenitiesList.find(e => e.name === element);
+			if (item) selectedAmenities.push(item);
+		});
+		this.setState({
+			selectedAmenities,
+			selectedServices,
+		});
+	}
 	render() {
 		document.title = 'Barefoot || update accommodation';
 		const { payload, pending, error } = this.props.UpdateAccomodation;
 		const currencyList = getCurrencies().map(element => (
 			<option value={element}>{currencies[element]}</option>
 		));
-
 		return (
 			<div className='d-flex'>
 				<Header active_menu={1} showSideNav={true} />
@@ -117,12 +187,17 @@ export class UpdateAccommodation extends React.Component {
 						<div className='col-md-12 col-lg-12 bg-sm-white'>
 							<form className='row' onSubmit={this.handleSubmit}>
 								<div className='col-md-6 col-lg-6'>
-									{error && <p className='alert alert-warning'>you have no permissions</p>}
+									{(error || this.state.error) && (
+										<p className='alert alert-warning'>
+											{' '}
+											{this.state.error || 'you have no permissions'}
+										</p>
+									)}
 									{payload && <p className='alert alert-success'>Update successfully</p>}
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faHotel} />
+											<span className='input-group-text text-secondary bg-white label-input'>
+												<FontAwesomeIcon icon={faHotel} className='mx-2' /> Name
 											</span>
 										</div>
 										<input
@@ -132,30 +207,29 @@ export class UpdateAccommodation extends React.Component {
 											onChange={this.handleInputChange}
 											placeholder='Accommodation name'
 											value={this.state.name}
-											pattern='.{4,}'
-											onInvalid='name should have a minimum of 4 characters'
+											pattern='.{2,}'
+											onInvalid='name should have a minimum of 2 characters'
 										/>
 									</div>
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faDoorOpen} />
+											<span className='input-group-text text-secondary bg-white label-input'>
+												<FontAwesomeIcon icon={faDoorOpen} className='mx-2' /> Rooms number
 											</span>
 										</div>
 										<input
-											type='text'
+											type='number'
 											name='availableSpace'
 											className='form-control'
 											onChange={this.handleInputChange}
-											placeholder='Available space, ex: 5 rooms'
+											placeholder='Available space, ex: 5'
 											value={this.state.availableSpace}
-											pattern='.{5,}'
 										/>
 									</div>
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faMoneyBill} />
+											<span className='input-group-text text-secondary bg-white label-input'>
+												<FontAwesomeIcon icon={faMoneyBill} className='mx-2' /> Cost / room
 											</span>
 										</div>
 										<input
@@ -165,7 +239,6 @@ export class UpdateAccommodation extends React.Component {
 											onChange={this.handleInputChange}
 											placeholder='Space cost'
 											value={this.state.cost}
-											pattern='[0-9]{1,}'
 										/>
 										<div className='input-group-prepend ml-2'>
 											<span className='input-group-text text-secondary bg-white'>
@@ -186,8 +259,8 @@ export class UpdateAccommodation extends React.Component {
 									</div>
 									<div className='input-group mb-3'>
 										<div className='input-group-prepend'>
-											<span className='input-group-text text-secondary bg-white'>
-												<FontAwesomeIcon icon={faMapMarker} />
+											<span className='input-group-text text-secondary bg-white label-input'>
+												<FontAwesomeIcon icon={faMapMarker} className='mx-2' /> Address
 											</span>
 										</div>
 										<input
@@ -200,18 +273,35 @@ export class UpdateAccommodation extends React.Component {
 											pattern='.{5,}'
 										/>
 									</div>
-
-									<div className='form-group'>
-										<textarea
-											className='form-control'
-											placeholder='Services'
-											rows='3'
-											id='comment'
-											name='services'
-											onChange={this.handleInputChange}
-											value={this.state.services}
-											pattern='.{5,}'
-										></textarea>
+									<div className='mb-3 d-flex' style={{ display: 'table' }}>
+										<div className='input-group-prepend'>
+											<span
+												className='input-group-text text-secondary bg-white label-input'
+												style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+											>
+												<FontAwesomeIcon icon={faList} className='mx-2' /> Services
+											</span>
+										</div>
+										<Multiselect
+											options={this.state.servicesList}
+											selectedValues={this.state.selectedServices}
+											onSelect={(o, s) => this.onSelect('selectedServices', s, 'services')}
+											onRemove={(o, s) => this.onRemove('selectedServices', s, 'services')}
+											displayValue='name'
+											placeholder='Select services'
+											style={{
+												multiselectContainer: {
+													backgroundColor: 'white',
+													borderTopLeftRadius: 0,
+													zIndex: 999999,
+												},
+												searchBox: {
+													borderTopLeftRadius: 0,
+													borderBottomLeftRadius: 0,
+												},
+											}}
+											className='flex-grow-1 rounded-0'
+										/>
 									</div>
 									<div className='custom-file'>
 										<input
@@ -251,17 +341,34 @@ export class UpdateAccommodation extends React.Component {
 											pattern='.{5,}'
 										></textarea>
 									</div>
-									<div className='form-group'>
-										<textarea
-											className='form-control mt-4'
-											placeholder='Amenities'
-											rows='5'
-											id='amenities'
-											name='amenities'
-											onChange={this.handleInputChange}
-											value={this.state.amenities}
-											pattern='.{5,}'
-										></textarea>
+									<div className=' my-4 d-flex' style={{ display: 'table' }}>
+										<div className='input-group-prepend'>
+											<span
+												className='input-group-text text-secondary bg-white label-input'
+												style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}
+											>
+												<FontAwesomeIcon icon={faList} className='mx-2' /> Amenities
+											</span>
+										</div>
+										<Multiselect
+											options={this.state.amenitiesList} // Options to display in the dropdown
+											selectedValues={this.state.selectedAmenities} // Preselected value to persist in dropdown
+											onSelect={(o, s) => this.onSelect('selectedAmenities', s, 'amenities')} // Function will trigger on select event
+											onRemove={(o, s) => this.onRemove('selectedAmenities', s, 'amenities')} // Function will trigger on remove event
+											displayValue='name' // Property name to display in the dropdown options
+											placeholder='Select amenities'
+											style={{
+												multiselectContainer: {
+													backgroundColor: 'white',
+													borderTopLeftRadius: 0,
+												},
+												searchBox: {
+													borderTopLeftRadius: 0,
+													borderBottomLeftRadius: 0,
+												},
+											}}
+											className='flex-grow-1 rounded-0'
+										/>
 									</div>
 									<button
 										className='btn btn-primary btn-block my-3 mt-4'

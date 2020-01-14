@@ -5,6 +5,8 @@ import store from '../Redux/store';
 import constant from '../Redux/constants';
 import { toast } from 'react-toastify';
 import user from './helper';
+import { Redirect } from 'react-router-dom';
+import mentions from './mention.helper';
 
 export const initializeSocketIo = token => {
 	const socket = socketClient(url, { query: { token } });
@@ -29,7 +31,8 @@ export const initializeSocketIo = token => {
 			notification: data,
 		});
 	});
-	socket.on('new_message', data => {
+	socket.on('new_message', payload => {
+		const data = Object.entries(payload)[0][1][0];
 		const Msg = ({ closeToast }) => (
 			<div
 				className='alert alert-dismissible'
@@ -41,7 +44,7 @@ export const initializeSocketIo = token => {
 					});
 				}}
 			>
-				<strong className='text-primary font-weight-bolder'> {data.authorName} </strong>
+				<strong className='text-primary font-weight-bolder'> {data.author.fullname} </strong>
 				<br />
 				{data.message.slice(0, 20)}
 				<button type='button' className='close'>
@@ -49,9 +52,30 @@ export const initializeSocketIo = token => {
 				</button>
 			</div>
 		);
-		if (data.authorId !== user().userId) {
-			toast(<Msg />);
+		if (user().userId !== data.authorId) {
+			store.dispatch({ type: constant.CHAT_NEW_MESSAGE, payload });
+			if (mentions(user(), data)) {
+				toast(Msg);
+			}
 		}
-		store.dispatch({ type: constant.CHAT_NEW_MESSAGE });
+	});
+	socket.on('new_comment', data => {
+		const Msg = ({ closeToast }) => (
+			<div
+				className='alert alert-dismissible'
+				onClick={e => (window.location = `/requests/${data.modelId}`)}
+			>
+				{'New comment from ' + data.description}
+				<button type='button' className='close'>
+					<span> {closeToast} </span>
+				</button>
+			</div>
+		);
+		toast(Msg);
+		store.dispatch({
+			type: constant.NEW_NOTIFCATION,
+			notification: data,
+		});
+		store.dispatch({ type: constant.NEW_COMMENT, payload: data.data });
 	});
 };
