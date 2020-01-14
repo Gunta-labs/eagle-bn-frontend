@@ -105,7 +105,6 @@ function Request(props) {
 									className={request.status === 'pending' ? 'text-primary' : 'text-muted'}
 								/>
 							</Link>
-							<FontAwesomeIcon icon={faTrash} className='text-danger' />
 						</div>
 					</div>
 				</div>

@@ -57,11 +57,12 @@ export class GetAllAccomodations extends React.Component {
 		event.preventDefault();
 		const { value } = event.target;
 		this.setState({ filterValue: value });
+		console.log(this.props.error);
 	}
 	render() {
 		document.title = 'Barefoot || accommodations';
-		const { data } = this.props.accomodation;
-		const { inputType, filterText, hide } = this.state;
+		const { data, msg } = this.props.accomodation;
+		const { inputType, filterText, hide, filter } = this.state;
 		return (
 			<div>
 				<Header />
@@ -84,23 +85,60 @@ export class GetAllAccomodations extends React.Component {
 									>
 										<option defaultValue='all'>all</option>
 										<option value='name'>name</option>
-										<option value='isAvailable=true'>availables</option>
-										<option value='isAvailable=false'>unavailables</option>
+										<option value='isAvailable=true'>available</option>
+										<option value='isAvailable=false'>unavailable</option>
 										<option value='address'>address</option>
-										<option value='costGreaterOr'>cost is greater than</option>
-										<option value='costLessOr'>cost is less than</option>
+										<option value='amenitie'>amenities</option>
 										<option value='services'>services</option>
 									</select>
 								</div>
-								<input
-									id='filterVal'
-									hidden={hide}
-									type={inputType}
-									className='form-control bg-transparent border border-top-0 border-right-0 border-left-0 text-white'
-									style={{ height: '50px', width: '300px', marginLeft: '10px' }}
-									placeholder={filterText}
-									onChange={this.handleText}
-								/>
+								{filter !== 'services' && filter !== 'amenitie' && (
+									<input
+										id='filterVal'
+										hidden={hide}
+										type={inputType}
+										className='form-control bg-transparent border border-top-0 border-right-0 border-left-0 text-white'
+										style={{ height: '50px', width: '300px', marginLeft: '10px' }}
+										placeholder={filterText}
+										onChange={this.handleText}
+									/>
+								)}
+								{filter === 'services' && (
+									<select
+										type='select'
+										hidden={hide}
+										className='form-control bg-transparent border border-top-0 border-right-0 border-left-0 text-white ml-2'
+										id='service'
+										onChange={this.handleText}
+									>
+										<option defaultValue=' '>select services</option>
+										<option value='sauna'>sauna</option>
+										<option value='theater'>theater</option>
+										<option value='room'>room services</option>
+										<option value='photocopy'>photocopy</option>
+										<option value='kids'>kids paradise club</option>
+										<option value='swimming pool'>swimming pool</option>
+										<option value='tenis'>tenis</option>
+										<option value='volley ball'>volley ball</option>
+									</select>
+								)}
+								{filter === 'amenitie' && (
+									<select
+										type='select'
+										hidden={hide}
+										className='form-control bg-transparent border border-top-0 border-right-0 border-left-0 text-white ml-2'
+										id='amenitie'
+										onChange={this.handleText}
+									>
+										<option defaultValue=' '>select amenities</option>
+										<option value='wifi'>wifi</option>
+										<option value='tv'>tv</option>
+										<option value='laundry'>laundry</option>
+										<option value='fax'>fax</option>
+										<option value='bussness'>center</option>
+										<option value='concierge'>concierge desk</option>
+									</select>
+								)}
 								<div hidden={hide}>
 									<button
 										id='search'
@@ -120,6 +158,11 @@ export class GetAllAccomodations extends React.Component {
 				<div className='p-3 px-5 mb-5'>
 					<h5 className='title mb-3 text-primary'> Accomodations </h5>
 					<span className='draw draw-dark'></span>
+					<h1>
+						<span className='title mb-3 text-secondary d-flex justify-content-center align-items-center'>
+							{!data && 'No accommodation(s) found'}
+						</span>
+					</h1>
 					<div className='row mt-4'>{data && <Accomodations data={data} />}</div>
 				</div>
 			</div>
