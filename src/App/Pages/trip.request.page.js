@@ -147,16 +147,17 @@ class TripRequest extends React.Component {
 								></input>
 							</div>
 						</div>
-						<div className='row'>
-							<button
+						<div className='row mt-5'>
+							<input
+								type='button'
 								className='btn btn-primary col-xs-3 rounded-0 ml-2'
 								id='add-trip'
 								onClick={this.addDestination}
-							>
-								Add more Destinations
-							</button>
+								value='Add more Destinations'
+							/>
 							<input
 								type='submit'
+								id='submitReq'
 								className='btn btn-link col-xs-3 border rounded-0 ml-2'
 								value='Submit request'
 							/>

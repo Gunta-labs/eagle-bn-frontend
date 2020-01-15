@@ -65,7 +65,7 @@ describe('Make Trip Request Page [testing component]', () => {
 		const form = wrapper.find('form');
 		const event = { preventDefault: jest.fn() };
 		const value = { target: { id: 'just-id', value: 'just a value' } };
-		form.find('button').simulate('click', value);
+		form.find('#submitReq').simulate('click', value);
 		form.simulate('submit', event);
 		expect(axios.calledOnce);
 		axios.post.restore();

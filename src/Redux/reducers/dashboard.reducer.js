@@ -31,9 +31,9 @@ const UserProfileReducer = (state = initialState, action) => {
 		case 'update_fail':
 			return {
 				...state,
-				error: action.payload,
+				error: action.error,
 				alert: 'alert alert-warning',
-				status: 'Account profile. Update faillure',
+				status: 'Account profile. Update faillure. ' + action.error.msg,
 			};
 		default:
 			return state;

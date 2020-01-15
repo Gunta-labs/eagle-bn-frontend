@@ -18,7 +18,7 @@ export class UserProfile extends React.Component {
 			id: '',
 			fullname: '',
 			email: '',
-			phone: '',
+			phone: undefined,
 			role: 1,
 			gender: '',
 			address: ' ',
@@ -28,6 +28,8 @@ export class UserProfile extends React.Component {
 			line_manager: ' ',
 			avatar: '',
 			uploadedPic: '',
+			password: '',
+			confirmPassword: '',
 		};
 		this.handleInput = this.handleInput.bind(this);
 		this.handleEdit = this.handleEdit.bind(this);
@@ -95,6 +97,8 @@ export class UserProfile extends React.Component {
 			department,
 			line_manager,
 			avatar,
+			password,
+			confirmPassword,
 		} = this.state;
 		this.setState({ error: '' });
 		const userDataForm = new FormData();
@@ -109,10 +113,10 @@ export class UserProfile extends React.Component {
 		userDataForm.append('department', department);
 		userDataForm.append('line_manager', line_manager);
 		userDataForm.append('avatar', avatar);
-		if (fullname === '') return this.setState({ error: 'Fullname is required' });
-		if (gender === '') return this.setState({ error: 'Select gender' });
-		if (phone === '' || phone === null || phone.length < 10)
-			return this.setState({ error: 'Invalid phone number' });
+		userDataForm.append('password', password);
+		userDataForm.append('confirmPassword', confirmPassword);
+		if (phone && phone.length < 10)
+			return this.setState({ error: 'check phone number. At least 10 gidits' });
 		UdateUserInfo(userDataForm);
 	}
 	render() {
@@ -132,6 +136,8 @@ export class UserProfile extends React.Component {
 			isReadOnly,
 			uploadedPic,
 			error,
+			password,
+			confirmPassword,
 		} = this.state;
 		return (
 			<div className='user-container container'>
@@ -176,7 +182,7 @@ export class UserProfile extends React.Component {
 										aria-describedby='lid'
 										id='id'
 										onChange={this.handleInput}
-										value={id}
+										value={id || null}
 										readOnly={true}
 									/>
 								</div>
@@ -220,7 +226,7 @@ export class UserProfile extends React.Component {
 										</span>
 									</div>
 									<input
-										type='telephone'
+										type='number'
 										className='form-control'
 										aria-describedby='tel'
 										id='phone'
@@ -328,6 +334,40 @@ export class UserProfile extends React.Component {
 										readOnly={true}
 									/>
 								</div>
+								<div className='input-group mb-3' hidden={isReadOnly}>
+									<div className='input-group-prepend'>
+										<span className='input-group-text inputlabel' id='cp'>
+											Password
+										</span>
+									</div>
+									<input
+										type='password'
+										className='form-control'
+										aria-describedby='cp'
+										id='password'
+										onChange={this.handleInput}
+										value={password !== 'null' ? password : ''}
+										readOnly={isReadOnly}
+									/>
+								</div>
+								{password && (
+									<div className='input-group mb-3' hidden={isReadOnly}>
+										<div className='input-group-prepend'>
+											<span className='input-group-text inputlabel' id='cop'>
+												Comfirm password
+											</span>
+										</div>
+										<input
+											type='password'
+											className='form-control'
+											aria-describedby='cop'
+											id='confirmPassword'
+											onChange={this.handleInput}
+											value={confirmPassword !== 'null' ? confirmPassword : ''}
+											readOnly={isReadOnly}
+										/>
+									</div>
+								)}
 								<div className='input-group mb-3'>
 									<div className='input-group-prepend'>
 										<span className='input-group-text inputlabel'>Upload picture</span>

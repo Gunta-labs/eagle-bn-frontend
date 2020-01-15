@@ -67,7 +67,7 @@ describe('Dashbord data rupdate actions', () => {
 
 		await store.dispatch(await updateUserProfile(payload));
 		const actions = store.getActions();
-		expect(actions[0].type).toEqual('Update fail');
+		expect(actions[0].type).toEqual('update_fail');
 	});
 	it('dispatches profile and return data', async () => {
 		mockAxios.patch.mockResolvedValue({
