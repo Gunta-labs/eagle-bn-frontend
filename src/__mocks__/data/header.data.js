@@ -1,7 +1,7 @@
 import axios from 'axios';
 const data = {
 	id: 3,
-	modelId: 5,
+	modelId: '5,4',
 	modelName: 'Requests',
 	type: 'new_request',
 	isRead: false,
@@ -11,7 +11,7 @@ const data = {
 };
 const data1 = {
 	id: 3,
-	modelId: 5,
+	modelId: '5,7',
 	modelName: 'Requests',
 	type: 'new_comment',
 	isRead: false,
@@ -21,7 +21,7 @@ const data1 = {
 };
 const data2 = {
 	id: 3,
-	modelId: 5,
+	modelId: '5,7',
 	modelName: 'Requests',
 	type: 'request_approved',
 	isRead: false,
@@ -31,7 +31,7 @@ const data2 = {
 };
 const data3 = {
 	id: 3,
-	modelId: 5,
+	modelId: '5,7',
 	modelName: 'Requests',
 	type: 'request_rejected',
 	isRead: false,
@@ -41,7 +41,7 @@ const data3 = {
 };
 const data4 = {
 	id: 3,
-	modelId: 5,
+	modelId: '5,7',
 	modelName: 'Requests',
 	type: 'other',
 	isRead: true,

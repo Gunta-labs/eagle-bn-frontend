@@ -12,6 +12,7 @@ import dateHelper from '../../helper/date.helper';
 import ReactTooltip from 'react-tooltip';
 
 export class Notification extends React.Component {
+	parentId = 0;
 	componentDidMount() {
 		this.props.getAll(token);
 	}
@@ -30,20 +31,34 @@ export class Notification extends React.Component {
 		}
 	}
 	SetAsRead(notificationId, link, isread) {
+		if (this.parentId !== 0) {
+			let reply = document.getElementById(`reply-${this.parentId}`);
+			if (reply) {
+				reply.style.display = 'block';
+			}
+		}
 		if (!isread) {
 			this.props.markOne(token, notificationId, link);
 		} else {
 			window.location = link;
 		}
+		this.props.closeNotification();
 	}
 	SetAllAsRead() {
 		this.props.markAll(token);
+	}
+
+	splitId(name, link) {
+		let ids = link.split(',');
+		this.parentId = parseInt(ids[2]) || 0;
+		if (name !== 'Comments') return `/requests/${parseInt(ids)}`;
+		else return `/requests/${parseInt(ids[0])}#${parseInt(ids[1])}`;
 	}
 	getNotificationsDetail(data) {
 		if (data) {
 			return data.map((notification, i) => {
 				return (
-					<div style={{ cursor: 'pointer' }}>
+					<div style={{ cursor: 'pointer' }} key={i}>
 						<ReactTooltip place='top' type='dark' effect='float' id='markOne'>
 							<span>Mark as read</span>
 						</ReactTooltip>
@@ -55,9 +70,9 @@ export class Notification extends React.Component {
 							onClick={e =>
 								this.SetAsRead(
 									notification.id,
-									`/requests/${notification.modelId}`,
+									this.splitId(notification.modelName, notification.modelId),
 									notification.isRead,
-									e,
+									this.parentId,
 								)
 							}
 						>
@@ -82,7 +97,11 @@ export class Notification extends React.Component {
 							<div className='d-flex justify-content-between pt-1 pl-2 pr-1 '>
 								<label
 									className='text-secondary  mr-2 pr-1'
-									style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+									style={{
+										overflow: 'hidden',
+										textOverflow: 'ellipsis',
+										whiteSpace: 'nowrap',
+									}}
 								>
 									{notification.description || notification.type}
 								</label>

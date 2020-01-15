@@ -5,8 +5,12 @@ import store from '../Redux/store';
 import constant from '../Redux/constants';
 import { toast } from 'react-toastify';
 import user from './helper';
-import { Redirect } from 'react-router-dom';
 import mentions from './mention.helper';
+
+const splitId = link => {
+	let ids = link.split(',');
+	return `/requests/${parseInt(ids[0])}#${parseInt(ids[1])}`;
+};
 
 export const initializeSocketIo = token => {
 	const socket = socketClient(url, { query: { token } });
@@ -63,7 +67,7 @@ export const initializeSocketIo = token => {
 		const Msg = ({ closeToast }) => (
 			<div
 				className='alert alert-dismissible'
-				onClick={e => (window.location = `/requests/${data.modelId}`)}
+				onClick={e => (window.location = splitId(data.modelId))}
 			>
 				{'New comment from ' + data.description}
 				<button type='button' className='close'>
