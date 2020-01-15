@@ -62,7 +62,7 @@ export class CreateBooking extends React.Component {
 		const startingDate = new Date(start);
 		const endingDate = new Date(end);
 
-		if (startingDate < new Date()) {
+		if (startingDate <= new Date()) {
 			this.setState({ error: { data: { msg: 'The starting date should be greater than today' } } });
 			return false;
 		} else if (startingDate > endingDate) {

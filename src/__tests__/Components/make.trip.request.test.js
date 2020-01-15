@@ -48,6 +48,11 @@ describe('Make Trip Request Page [testing component]', () => {
 		form.simulate('submit', event);
 		form.find('input[id="departureTime-0"]').simulate('change', value3);
 		form.simulate('submit', event);
+		wrapper.find('#add-trip').simulate('click');
+		wrapper
+			.find('.delete-trip')
+			.first()
+			.simulate('click');
 		expect(axios.calledOnce);
 		axios.post.restore();
 		done();
