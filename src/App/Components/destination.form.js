@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCalendar, faMapMarker, faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faMapMarker, faGlobe, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import locations from '../../helper/country.helper';
 export default class DestinationForm extends React.Component {
@@ -9,6 +9,15 @@ export default class DestinationForm extends React.Component {
 	onInput(event) {
 		event.preventDefault();
 		this.setState({ country: event.target.value });
+	}
+	addDate(date) {
+		if (date) {
+			var tomorrow = new Date(date);
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			console.log(tomorrow);
+			return tomorrow.toISOString().split('T')[0];
+		}
+		return undefined;
 	}
 	render() {
 		const countryList = locations.getAllCountry().map(element => {
@@ -25,7 +34,19 @@ export default class DestinationForm extends React.Component {
 		return (
 			<div>
 				<br />
-				<div className='text-primary'>{`Destination ${this.props.id + 1}`}</div> <br />
+				<div className='text-primary'>
+					{`Destination ${this.props.id + 1}`}{' '}
+					{this.props.id !== 0 && (
+						<FontAwesomeIcon
+							icon={faTrash}
+							onClick={e => {
+								this.props.deleteTrip(e);
+							}}
+							className='mx-4 delete-trip'
+						/>
+					)}
+				</div>{' '}
+				<br />
 				<div className='row'>
 					<div className='col'>
 						<div className='input-group mb-3'>
@@ -76,18 +97,24 @@ export default class DestinationForm extends React.Component {
 							<div className='input-group-prepend'>
 								<span className='input-group-text text-secondary bg-white label-input'>
 									<FontAwesomeIcon icon={faCalendar} className='mr-3' />
-									Departure date
+									Travel date
 								</span>
 							</div>
 							<input
 								type='date'
-								min={new Date().toISOString().split('T')[0]}
+								min={
+									this.props.addDate(this.props.values[`departureTime-${this.props.id - 1}`]) ||
+									new Date().toISOString().split('T')[0]
+								}
 								className='form-control'
 								placeholder='Departure time'
 								aria-label='Departure time'
 								id={`departureTime-${this.props.id}`}
 								onChange={this.props.handleInput}
 								value={this.props.values[`departureTime-${this.props.id}`]}
+								onKeyPress={e => {
+									if (e.key === 'Enter') e.preventDefault();
+								}}
 								required
 							></input>
 						</div>
