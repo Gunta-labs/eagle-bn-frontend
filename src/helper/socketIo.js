@@ -37,6 +37,7 @@ export const initializeSocketIo = token => {
 	});
 	socket.on('new_message', payload => {
 		const data = Object.entries(payload)[0][1][0];
+		const active = data.receiverId ? data.authorId : -1;
 		const Msg = ({ closeToast }) => (
 			<div
 				className='alert alert-dismissible'
@@ -44,7 +45,7 @@ export const initializeSocketIo = token => {
 					e.preventDefault();
 					store.dispatch({
 						type: constant.CHAT_ACTIVE,
-						payload: data.receiverId ? data.authorId : -1,
+						payload: active,
 					});
 				}}
 			>
@@ -58,7 +59,8 @@ export const initializeSocketIo = token => {
 		);
 		if (user().userId !== data.authorId) {
 			store.dispatch({ type: constant.CHAT_NEW_MESSAGE, payload });
-			if (mentions(user(), data)) {
+			const { activeChat, showChatModel } = store.getState().ChatReducer;
+			if (mentions(user(), data) && (activeChat !== active || showChatModel !== 2)) {
 				toast(Msg);
 			}
 		}

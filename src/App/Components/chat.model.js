@@ -10,11 +10,11 @@ const timeAgo = new TimeAgo('en-US');
 
 class ChatModel extends React.Component {
 	componentDidUpdate() {
-		const messages = document.getElementsByClassName('chat-model-m')[0];
+		const messages = document.getElementsByClassName('chat-model-m-i')[0];
 		messages.scrollTop = messages.scrollHeight;
 	}
 	componentDidMount() {
-		const messages = document.getElementsByClassName('chat-model-m')[0];
+		const messages = document.getElementsByClassName('chat-model-m-i')[0];
 		messages.scrollTop = messages.scrollHeight;
 	}
 	parseMessage(msg) {
@@ -38,7 +38,7 @@ class ChatModel extends React.Component {
 		}
 		const { userId } = userData();
 		return (
-			<div className='chat-model-m'>
+			<div className='chat-model-m-i'>
 				<div className='p-3'>
 					{(chat || [])
 						.sort((a, b) => (a.id > b.id ? 1 : -1))
@@ -55,9 +55,9 @@ class ChatModel extends React.Component {
 										</Link>
 									)}
 								</div>
-								<small className='d-block mt-3'>
+								<small className='d-flex mt-3 justify-content-end'>
 									{user.id === -1 && e.authorId !== userId ? (
-										<span>
+										<span className='mr-1'>
 											{(user_ = users.find(ex => ex.id === e.authorId)).avatar && (
 												<img
 													style={{ maxWidth: '20px' }}
@@ -66,7 +66,7 @@ class ChatModel extends React.Component {
 													alt='avatar'
 												/>
 											)}
-											{`${e.author.fullname || ''}  `}
+											{e.author.fullname || ''}
 										</span>
 									) : (
 										''
