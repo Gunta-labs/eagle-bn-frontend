@@ -125,12 +125,9 @@ export class RequestList extends React.Component {
 					<Header active_menu={1} showSideNav={true} />
 					<div className='row mainContainer'>
 						<div className='row w-100'>
-							<Link to='/request/create' className='btn btn-primary mr-5 request-button'>
-								Create a new request
-							</Link>{' '}
 							<input
 								id='search_modal'
-								className='btn btn-primary ml-auto request-button mr-4'
+								className='btn btn-primary request-button'
 								onClick={this.searchModal}
 								type='submit'
 								value='Filter Request'
@@ -181,10 +178,10 @@ export class RequestList extends React.Component {
 										</select>
 									</div>
 									<div className='d-flex'>
-										<div className='form-group pl-3 pr-3'>
+										<div className='form-group pl-1 pr-3'>
 											<label htmlFor='from'>From</label>
 											<input
-												className='form-control'
+												className='form-control responsive'
 												id='from'
 												onChange={this.handleClick}
 												name='from'
@@ -195,7 +192,7 @@ export class RequestList extends React.Component {
 										<div className='form-group'>
 											<label htmlFor='to'>To</label>
 											<input
-												className='form-control'
+												className='form-control responsive'
 												id='to'
 												onChange={this.handleClick}
 												name='to'
@@ -205,10 +202,10 @@ export class RequestList extends React.Component {
 										</div>
 									</div>
 									<div className='d-flex'>
-										<div className='form-group pl-3 pr-3'>
+										<div className='form-group pl-1 pr-3'>
 											<label htmlFor='departure'>Departure time</label>
 											<input
-												className='form-control'
+												className='form-control responsive'
 												onChange={this.handleClick}
 												id='departure'
 												name='departureTime'
@@ -219,7 +216,7 @@ export class RequestList extends React.Component {
 										<div className='form-group'>
 											<label htmlFor='return'>return time</label>
 											<input
-												className='form-control'
+												className='form-control responsive'
 												id='return'
 												onChange={this.handleClick}
 												name='returnTime'
@@ -232,7 +229,7 @@ export class RequestList extends React.Component {
 										type='submit'
 										value='Search'
 										id='search-btn'
-										className='btn  btn-primary mr-auto'
+										className='btn  btn-primary mr-auto responsive mt-4 mb-4 ml-1'
 									/>
 								</form>
 							</div>

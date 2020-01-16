@@ -31,7 +31,7 @@ export const updateUserProfile = payload => async dispatch => {
 		});
 	} catch (error) {
 		dispatch({
-			type: 'Update fail',
+			type: 'update_fail',
 			error: error.response ? error.response.data : { error: error.message },
 		});
 	}

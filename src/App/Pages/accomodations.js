@@ -41,7 +41,7 @@ export class GetAllAccomodations extends React.Component {
 				filterText: 'Enter the cost',
 			});
 		} else if (value === 'isAvailable=true' || value === 'isAvailable=false' || value === 'all') {
-			this.setState({ hide: true, inputType: 'text' });
+			this.setState({ hide: true, inputType: 'text', filter: value });
 			this.props.getAccomodationsByFilter(value);
 		} else {
 			this.setState({
@@ -51,7 +51,6 @@ export class GetAllAccomodations extends React.Component {
 				filterText: `Enter the ${value}`,
 			});
 		}
-		this.componentDidMount();
 	}
 	handleText(event) {
 		event.preventDefault();
@@ -60,7 +59,7 @@ export class GetAllAccomodations extends React.Component {
 	}
 	render() {
 		document.title = 'Barefoot || accommodations';
-		const { data, msg } = this.props.accomodation;
+		const { data } = this.props.accomodation;
 		const { inputType, filterText, hide, filter } = this.state;
 		return (
 			<div>

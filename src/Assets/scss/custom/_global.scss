@@ -136,6 +136,7 @@ label {
 	height: 40px;
 	padding-bottom: 0px;
 	margin-top: 90px;
+	width: 200px;
 }
 
 .more {
@@ -161,7 +162,7 @@ label {
 	}
 
 	.request-button {
-		margin-left: 265px;
+		margin-left: 280px;
 	}
 
 	.pagination {
@@ -187,7 +188,13 @@ label {
 	}
 
 	.request-button {
-		margin-left: 2.5rem;
+		margin-left: 3.3rem;
+		width:80%;
+	}
+	.responsive {
+		margin-left: -5px;
+		width: 165px;
+
 	}
 
 	.signup {
@@ -406,6 +413,8 @@ label {
 
 .bookingList {
 	margin-top: 100px;
+	margin-left: 10px;
+	
 }
 
 .blurPanel {
