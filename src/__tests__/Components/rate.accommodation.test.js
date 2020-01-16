@@ -127,6 +127,7 @@ describe('Verify User page', () => {
 			.last()
 			.simulate('click');
 		expect(axios.calledOnce);
+		wrapper.find(BookingList).setState({ currentDetail: Data.data, showModal: true });
 		try {
 			expect((await axios.patch.getCall(0).returnValue).msg).toEqual('successfully rated');
 		} catch (err) {

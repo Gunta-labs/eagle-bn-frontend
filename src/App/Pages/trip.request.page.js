@@ -81,13 +81,14 @@ class TripRequest extends React.Component {
 	}
 	checkDests(id, values) {
 		for (let i = id; i < this.state.numberOfTrips; i++) {
-			values[`city-${i}`] = values[`city-${i + 1}`];
+			if (values[`city-${i + 1}`]) values[`city-${i}`] = values[`city-${i + 1}`];
 			delete values[`city-${i + 1}`];
-			values[`country-${i}`] = values[`country-${i + 1}`];
+			if (values[`country-${i + 1}`]) values[`country-${i}`] = values[`country-${i + 1}`];
 			delete values[`country-${i + 1}`];
-			values[`departureTime-${i}`] = values[`departureTime-${i + 1}`];
+			if (values[`departureTime-${i + 1}`])
+				values[`departureTime-${i}`] = values[`departureTime-${i + 1}`];
 			delete values[`departureTime-${i + 1}`];
-			values[`reason-${i}`] = values[`reason-${i + 1}`];
+			if (values[`reason-${i + 1}`]) values[`reason-${i}`] = values[`reason-${i + 1}`];
 			delete values[`reason-${i + 1}`];
 		}
 		this.setState({ values });
