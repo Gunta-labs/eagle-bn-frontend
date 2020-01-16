@@ -8,11 +8,13 @@ import Booking from '../Components/Booking';
 import Header from '../Components/Header';
 import { Array } from 'es6-shim';
 import AccomImg from '../../Assets/images/acc.jpg';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faClock, faDoorOpen, faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Rater from 'react-rating';
 import { token } from '../../helper/helper';
 import { toast } from 'react-toastify';
+import getDate from '../../helper/date.helper';
+import getUser from '../../helper/helper';
 
 const mapStateToProps = state => ({
 	payload: state.Booking.payload,
@@ -56,6 +58,7 @@ export class BookingList extends React.Component {
 		search_error_message: null,
 		currentBooking: null,
 		feedback: '',
+		currentDetail: null,
 	};
 	handleSubmit = e => {
 		e.preventDefault();
@@ -73,16 +76,26 @@ export class BookingList extends React.Component {
 		const start = (page - 1) * 6;
 		return data
 			.slice(start, page * 6)
-			.map((req, i) => <Booking booking={req} handleClick={this.rate} key={i} />);
+			.map((req, i) => (
+				<Booking booking={req} handleClick={this.rate} viewDetails={this.viewDetails} key={i} />
+			));
 	}
 	setPage(current, data) {
 		this.setState({ currentPage: current });
 		this.getPagination(data);
 	}
 	rate = e => {
+		window.scroll(0, 0);
 		this.setState({
 			showModal: true,
 			currentBooking: e,
+			currentDetail: null,
+		});
+	};
+	viewDetails = e => {
+		window.scroll(0, 0);
+		this.setState({
+			currentDetail: e,
 		});
 	};
 	getPagination(data) {
@@ -116,7 +129,17 @@ export class BookingList extends React.Component {
 		if (nextProps.ratingPayload) {
 			toast.success('Rating recorded successfully');
 			nextProps.resetRating();
-			return { showModal: false, currentBooking: null, feedback: '' };
+			let booking = null;
+			if (prevState.currentBooking) {
+				booking = prevState.currentBooking;
+				booking.Rating = nextProps.ratingPayload;
+			}
+			return {
+				showModal: false,
+				currentBooking: null,
+				currentDetail: booking,
+				feedback: '',
+			};
 		} else return null;
 	}
 	closeRating = e => {
@@ -126,6 +149,7 @@ export class BookingList extends React.Component {
 			showModal: false,
 			currentBooking: null,
 			feedback: '',
+			currentDetail: null,
 		});
 	};
 	render() {
@@ -133,13 +157,15 @@ export class BookingList extends React.Component {
 		const data = payload && payload.data ? payload.data : [];
 		const errorOrEmpty = error || (!pending && data.length === 0);
 		const current = this.state.currentPage;
-		const { showModal } = this.state;
+		const { showModal, currentDetail } = this.state;
+		let currentBooking = currentDetail;
+		const isHost = getUser() && (getUser().role === 'TAdmin' || getUser().role === 'host');
 		return (
 			<>
 				<div>
 					<Header active_menu={3} showSideNav={true} />
 					<div
-						className={`blurPanel ${showModal ? 'visible' : 'invisible'} `}
+						className={`blurPanel ${showModal || currentBooking ? 'visible' : 'invisible'} `}
 						onClick={this.closeRating}
 					></div>
 					<div className='row mainContainer bookingList'>
@@ -210,6 +236,110 @@ export class BookingList extends React.Component {
 											</button>
 										</div>
 									</form>
+								</div>
+							</div>
+						)}
+						{currentBooking && (
+							<div className='form-rating d-flex flex-wrap align-content-center justify-content-center col-12'>
+								<div
+									className='rate-modal shadow-sm rounded'
+									style={{ background: '#fff', height: 'fit-content', width: 50 + 'vh' }}
+								>
+									<div className=' '>
+										<div className='p-0'>
+											<img
+												src={
+													currentBooking.Accommodation.AccommodationImages.length === 0
+														? AccomImg
+														: currentBooking.Accommodation.AccommodationImages[0].imageurl
+												}
+												alt='accomodation'
+												className='card-img'
+											/>
+										</div>
+										<div className='d-flex flex-column card-footer text-center p-0'>
+											<span className='bg-white mt-n3 shadow-sm mx-5'>
+												{currentBooking.Accommodation.name}
+											</span>
+											<div className='d-flex justify-content-between ml-1 mr-1 mt-2'>
+												<p className='mb-0 mt-0 ml-2'>
+													<FontAwesomeIcon icon={faClock} className='mr-2 text-primary' />
+													<label className='text-primary font-weight-bold label small-margin-top'>
+														Start :
+													</label>
+													<label className='text-secondary ml-2 small-margin-top' id='origin'>
+														{' '}
+														{getDate(new Date(currentBooking.start))}
+													</label>
+												</p>
+												<p className='mb-0 mt-0 mr-2'>
+													<FontAwesomeIcon icon={faClock} className='mr-2 text-primary' />
+													<label className='text-primary font-weight-bold label small-margin-top'>
+														End :
+													</label>
+													<label className='text-secondary ml-2 small-margin-top' id='origin'>
+														{' '}
+														{getDate(new Date(currentBooking.end))}
+													</label>
+												</p>
+											</div>{' '}
+											<div className='d-flex justify-content-between ml-1 mr-1 mt-2'>
+												<p className='mb-0 mt-0 ml-2'>
+													<FontAwesomeIcon icon={faDoorOpen} className='mr-2 text-primary' />
+													<label className='text-primary font-weight-bold label small-margin-top'>
+														Booked space :
+													</label>
+													<label className='text-secondary ml-2 small-margin-top' id='origin'>
+														{' '}
+														{currentBooking.numberOfSpace} room(s)
+													</label>
+												</p>
+											</div>{' '}
+											<div className='d-flex justify-content-between card-foot mt-2'>
+												<p className='mb-0 mt-0 ml-2'>
+													<FontAwesomeIcon icon={faStar} className='mr-2 text-primary' />
+													<label className='text-primary font-weight-bold label small-margin-top'>
+														Rating :
+													</label>
+												</p>
+												<Rater
+													fullSymbol={
+														<FontAwesomeIcon
+															icon={faStar}
+															className='mx-2'
+															style={{ color: '#ffd700' }}
+														/>
+													}
+													emptySymbol={
+														<FontAwesomeIcon
+															icon={faStar}
+															className='mx-2'
+															style={{ color: '#C0C0C0' }}
+														/>
+													}
+													onClick={e => {
+														currentDetail.rating = e;
+														this.rate(currentDetail);
+													}}
+													id='singleBooking'
+													initialRating={currentBooking.Rating ? currentBooking.Rating.rating : 0}
+													readonly={new Date(currentBooking.start) > new Date() || isHost}
+												/>
+											</div>
+											<div className='d-flex justify-content-between ml-1 mr-1 mt-2'>
+												<p className='mb-0 mt-0 ml-2'>
+													<FontAwesomeIcon icon={faComment} className='mr-2 text-primary' />
+													<label className='text-primary font-weight-bold label small-margin-top'>
+														Feedback :
+													</label>
+													<label className='text-secondary ml-2 small-margin-top' id='origin'>
+														{' '}
+														{currentBooking.Rating ? currentBooking.Rating.feedback : 'no feedback'}
+													</label>
+												</p>
+											</div>{' '}
+										</div>
+									</div>
 								</div>
 							</div>
 						)}

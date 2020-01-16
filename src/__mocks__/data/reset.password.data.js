@@ -10,21 +10,51 @@ export default {
 		changeHandler: jest.fn(),
 		handleChangeS: jest.fn(),
 		handleChangeF: jest.fn(),
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	success: {
 		ResetPasswordReducer: { requestResetStatus: 'success', resetPasswordStatus: 'success' },
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	not_match: {
 		ResetPasswordReducer: { requestResetStatus: 'success', resetPasswordStatus: 'unmatch' },
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	failed: {
 		ResetPasswordReducer: { requestResetStatus: 'failed', resetPasswordStatus: 'failed' },
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	error: {
 		ResetPasswordReducer: { requestResetStatus: 'error', resetPasswordStatus: 'error' },
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	pending: {
 		ResetPasswordReducer: { requestResetStatus: 'pending', resetPasswordStatus: 'pending' },
+		Notification: {
+			payload: [],
+			error: null,
+			pending: null,
+		},
 	},
 	rrpMockSuccess: (payload = null) => {
 		const data = {

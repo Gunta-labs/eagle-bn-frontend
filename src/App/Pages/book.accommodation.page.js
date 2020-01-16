@@ -31,6 +31,15 @@ export class CreateBooking extends React.Component {
 			window.location.href = '/bookings';
 		}
 	}
+	addDate(date) {
+		if (date) {
+			var tomorrow = new Date(date);
+			tomorrow.setDate(tomorrow.getDate() + 1);
+			console.log(tomorrow);
+			return tomorrow.toISOString().split('T')[0];
+		}
+		return undefined;
+	}
 	handleSubmit = e => {
 		const accommodation = this.props.SingleAccomodations.data;
 		e.preventDefault();
@@ -155,7 +164,7 @@ export class CreateBooking extends React.Component {
 										<input
 											type='date'
 											name='end'
-											min={this.start || new Date().toISOString().split('T')[0]}
+											min={this.addDate(this.start) || new Date().toISOString().split('T')[0]}
 											className='form-control'
 											onChange={this.handleInput}
 											placeholder='Ending date'

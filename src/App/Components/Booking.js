@@ -17,7 +17,12 @@ class Booking extends React.Component {
 		const readOnly = new Date(bk.start) > new Date() || isHost;
 		return (
 			<div className='col-md-3 mb-4 col-sm-6' key={this.props.booking}>
-				<div className='card '>
+				<div
+					className='card '
+					onClick={e => {
+						this.props.viewDetails(this.props.booking);
+					}}
+				>
 					<div className='card-body p-0'>
 						<img
 							src={

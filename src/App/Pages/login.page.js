@@ -7,6 +7,7 @@ import authentication, { socialLog } from '../../Redux/Actions/login.actions';
 import Header from '../Components/Header';
 import SocialLogin from '../Components/social.login';
 import { Redirect } from 'react-router-dom';
+//import { initializeSocketIo } from '../../helper/socketIo';
 
 export class Login extends React.Component {
 	state = {
@@ -45,7 +46,6 @@ export class Login extends React.Component {
 			if (values.token) {
 				localStorage.setItem('barefoot_token', values.token);
 				token = values.token;
-				//this.props.socialLog();
 				socialLogged = true;
 			}
 		}
@@ -104,6 +104,9 @@ export class Login extends React.Component {
 			</div>
 		);
 		const display = !isLoggedIn && !socialLogged ? loginDisplay : <Redirect to='/'></Redirect>;
+		if (isLoggedIn || socialLogged) {
+			window.location = '/';
+		}
 		return display;
 	}
 }

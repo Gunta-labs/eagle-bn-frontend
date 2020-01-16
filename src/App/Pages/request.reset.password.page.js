@@ -55,6 +55,7 @@ class RequestResetPassword extends Component {
 		return (
 			<div className='d-flex flex-wrap align-content-center justify-content-center w-100 mainContainer'>
 				<div className='container'>
+					<Header />
 					<div className='row'>
 						<div className='col-md-6 col-lg-6 mx-auto text-center'>
 							<p className='text-secondary'> Reset Password Request </p>
